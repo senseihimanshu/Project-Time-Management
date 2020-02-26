@@ -5,23 +5,27 @@ class Employee{
   constructor(){
     this.model=mongoose.model('Employee',employeeschema);
   }
-  
+   //getting the employee data as per criteria  
     async get(criteria={},columns={}){
-       return this.model.find(criteria,columns);
+       return this.model.findOne(criteria,columns);
    }
+   //saves the data of newly created employee
     async save(employeeObj){
       console.log(employeeObj, 'new employee created!');
       const employee = await this.model.create(employeeObj);
        return employee;
     }
-    async update(criteria={},updatedObj){
-       return this.model.update(criteria,updatedObj)
+    //update the employee data as per criteria and show updatedEmployeeObj
+    async update(criteria={},updatedEmployeeObj){
+       return this.model.updateOne(criteria,updatedEmployeeObj);
     }
+    //delete the employee data as per criteria
     async delete(criteria={}){
       return this.model.deleteOne(criteria);
     }
-    async log(columns={}){
-      return this.model.find(columns);
+    //getting the data of all the employees
+    async log(criteria={},columns={}){
+      return this.model.find(criteria,columns);
     }
 }
 
