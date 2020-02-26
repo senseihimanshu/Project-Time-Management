@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+//Third Party Components
+import { MDBBootstrapModule, CheckboxModule, WavesModule, ButtonsModule, InputsModule, IconsModule, CardsModule } from 'angular-bootstrap-md';
 
 //Components
 import { AppComponent } from './app.component';
@@ -9,14 +13,18 @@ import { LoginComponent } from './main/login/login.component';
 
 @NgModule({
   declarations: [
-    //Custom Components
     AppComponent,
     HeaderComponent,
     MainComponent,
     LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule, 
+    //Third Party
+    MDBBootstrapModule.forRoot(),
+    CheckboxModule, WavesModule, ButtonsModule, InputsModule, IconsModule, CardsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
