@@ -1,0 +1,18 @@
+@import "../../variables.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10vh;
+  background-color: $color-tirtiary-lighter;
+  
+  &__logo-container {
+    background: url("../../assets/images/Cyber-Group_logos-02.png");
+    width: 30%;
+    min-height: inherit;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+  }
+}
