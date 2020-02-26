@@ -1,5 +1,13 @@
-const employee = require('./employee');
+
+const employeeDb=require('./employeeModel');
+const leaveDb = require('./leaveModel');
+const  projectDb=require('./projectModel');
+
+
 
 module.exports={
-	employee : employee
-}
+    employee: employeeDb,
+    leave: leaveDb,
+    project: projectDb,
+ 
+};
