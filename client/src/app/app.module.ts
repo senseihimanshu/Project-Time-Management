@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
+import { EmployeeFormComponent } from './main/employee-form/employee-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    EmployeeFormComponent
   ],
   imports: [
     BrowserModule,
