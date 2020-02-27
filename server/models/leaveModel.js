@@ -1,19 +1,19 @@
 const mongoose=require('mongoose');
 const schema=require('../schemas');
 const leaveschema=mongoose.Schema(schema);
-class Employee{
+class Leave{
   constructor(){
     this.model=mongoose.model('Leave',leaveschema);
   }
   
-
+     
       async get(criteria){
-        return this.model.find();
+        return this.model.find(criteria);
     }
       async save(employeeObj){
-        console.log(employeeObj, 'Here man!');
-        const employee = await this.model.create(employeeObj);
-          return employee;
+        console.log(employeeObj, 'new leave is on demand!');
+        const leave = await this.model.create(leaveObj);
+          return leave;
          
      }
       async update(criteria={},updatedObj){
@@ -22,7 +22,7 @@ class Employee{
       async delete(criteria){
         return this.model.deleteOne(criteria);
      }
-     async log(criteria){
+     async log(){
           return this.model.find();
      }
 }
