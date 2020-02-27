@@ -7,7 +7,7 @@ module.exports={
     
     name:{
         type:String,
-        default:null
+        required:true
   },
     designation:{
          type:String,
@@ -22,7 +22,9 @@ module.exports={
     },
     phoneNo:{
       type:String,
-      default:null
+      default:null,
+      minlength: 8,
+      maxlength: 12
     },
    address:{
          city:{

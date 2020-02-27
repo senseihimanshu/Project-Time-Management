@@ -1,3 +1,4 @@
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,6 +23,9 @@ const routes: Routes = [
         data: {
           allowedRoles: ['manager','clevel']
         }
+      },
+      {
+        path:'admindashboard', component:AdmindashboardComponent
       },
       {
         path: 'employee',

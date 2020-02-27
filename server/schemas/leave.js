@@ -7,7 +7,8 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports={
    leaveType:{
        type:String,
-       enum:["Earned leave","Casual leave","Sick leave"]
+       enum:["Earned leave","Casual leave","Sick leave"],
+       required:true
    },
    startDate:{
         type:Date

@@ -31,6 +31,6 @@ module.exports={
     status:{
         type:String,
         enum:['Completed','Discarded','In progress'],
-        default:null
+        required:true
     }
 }
