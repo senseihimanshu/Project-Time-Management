@@ -3,63 +3,61 @@ const mongoose = require('mongoose');
 const project=require('./project-details');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-module.exports={
-    
-    name:{
-        type:String,
-        default:null
+module.exports = {
+  empId: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 3,
+    maxlength: 20
   },
-    designation:{
-         type:String,
-         default:'consultant 1',
-
-      enum:['consultant 1','consultant 2','associate 1','associate 2']
-
-    },
-    role:[{
-      type:String,
-      default:'Employee',
-      enum:['Project Manager','C-level Manager','Employee','Admin']
-    }],
-    joining_date:{
-      type:Date,
-      default:Date.now
-    },
-    phoneNo:{
-      type:String,
-      default:null
-    },
-   address:{
-         city:{
-           type:String,
-            default:null
-           },
-          state:{
-            type:String,
-            default:null
-           },
-          pincode:{
-           type:String,
-            default:null
-          }
-    },
-    email:{
-      type:String,
-      required:true,
-      unique:true
-    },
-    password:{
-        type:String,
-        required:true
-    },
-    projectId:[{
-        type:ObjectId,
-        ref:"project",
-        default:null
-    }]
-
-    
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 5,
+    maxlength: 50
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 4,
+    maxlength: 1024
+  },
+  name: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 30
+  },
+  designation: [
+    {
+      type: String,
+      enum: ["ADMIN", "CLEVEL", "PROJECTMANAGER", "EMPLOYEE"]
+    }
+  ],
+  joining: {
+    type: Date,
+    default: Date.now()
+  },
+  phone: {
+    type: String,
+    minlength: 8,
+    maxlength: 20
+  },
+  address: {
+    type: String,
+    minlength: 10,
+    maxlength: 100
+  },
+  role:[{
+    type:String,
+    default:'Employee',
+    enum:['Project Manager','C-level Manager','Employee','Admin']
+  }],
+  projectId:[{
+    type:ObjectId,
+    ref:"project",
+    default:null
+}]
 }
-
-
-  

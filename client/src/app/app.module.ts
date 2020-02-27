@@ -1,21 +1,23 @@
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SendHttpRequestService } from './services/send-http-request.service';
 //import { AuthorizationService } from './services/authorization.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-
 
 //Third Party Components
-import { MDBBootstrapModule, CheckboxModule, WavesModule, ButtonsModule, InputsModule, IconsModule, CardsModule } from 'angular-bootstrap-md';
-
-//Components
+import {
+  MDBBootstrapModule,
+  CheckboxModule,
+  WavesModule,
+  ButtonsModule,
+  InputsModule,
+  IconsModule,
+  CardsModule
+} from "angular-bootstrap-md";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
-//import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
@@ -24,6 +26,34 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
+import { EmployeeService } from "./services/employee.service";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule, Routes } from "@angular/router";
+
+const routes: Routes = [
+  // { path: "", component: WelcomePageComponent, pathMatch: 'full' },
+  { path: "login", component: LoginComponent },
+  // { path: 'home', component: HomeComponent },
+  {
+    path: "employeeform",
+    children: [
+      {
+        path: "create/:type",
+        component: EmployeeFormComponent
+      },
+      {
+        path: "update/:type",
+        component: EmployeeFormComponent
+      },
+      {
+        path: ":empId",
+        component: EmployeeFormComponent
+      }
+    ]
+  }
+];
+
 
 @NgModule({
   declarations: [
@@ -31,6 +61,8 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
     HeaderComponent,
     MainComponent,
     LoginComponent,
+    EmployeeFormComponent,
+
     HomeComponent,
     TimesheetComponent,
     ReviewComponent,
@@ -42,14 +74,26 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes),
+    //Third Party
+    MDBBootstrapModule.forRoot(),
+    CheckboxModule,
+    WavesModule,
+    ButtonsModule,
+    InputsModule,
+    IconsModule,
+    CardsModule,
     FormsModule, 
     HttpClientModule,
    // JwtModule.forRoot({}),
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule, WavesModule, ButtonsModule, InputsModule, IconsModule, CardsModule, AppRoutingModule,
+
   ],
-  providers:[SendHttpRequestService],
+  providers:[],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
