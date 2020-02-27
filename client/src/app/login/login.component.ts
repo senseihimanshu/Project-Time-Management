@@ -49,16 +49,16 @@ export class LoginComponent implements AfterViewInit{
           else{
             const role=decodeToken.data.role[0];
             console.log(role);
-            if(role=='employee'){
+            if(role=='Employee'){
                 this.router.navigate(['/employee']);
             }
-            else if (role=='admin'){
+            else if (role=='Admin'){
               this.router.navigate(['/admin']);
             }
-            else if( role=='C-level manager'){
+            else if( role=='C-level Manager'){
               this.router.navigate(['/clevel']);
             }
-            else if(role=='Project manager'){
+            else if(role=='Project Manager'){
               this.router.navigate(['/manager']);
             }
             else 
