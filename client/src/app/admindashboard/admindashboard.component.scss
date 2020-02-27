@@ -1,11 +1,11 @@
 .background_dashboard{
-    height: 100vh;
+    height: 95vh;
     background:#9a9184;
    
 }
-.table{
-    margin-top: 5rem;
-}
+// .table{
+//     margin-top: 5rem;
+// }
 .deletebutton{
     display: flex;
     align-items: center;
@@ -14,4 +14,11 @@
 }
 .show{
     margin-left: 43%!important;
+}
+.empTable{
+    width: 100vw;
+    color: black;
+    font-size: large;
+    font-weight: 800;
+    padding-left: 10px;
 }

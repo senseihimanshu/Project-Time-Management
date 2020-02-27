@@ -24,7 +24,7 @@ class Employee {
   async index(req, res) {
     const employeeList = await model.employee.log({},{"name":1,
                                                            "designation":1,
-                                                             "age":1});
+                                                             "age":1,"email":1});
     res.send(employeeList);
   }
 
