@@ -8,14 +8,14 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthorizationGuard } from './authorization.guard';
+//import { AuthorizationGuard } from './authorization.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivateChild: [AuthorizationGuard],
+    //canActivateChild: [AuthorizationGuard],
     children: [
       {
         path: 'manager',

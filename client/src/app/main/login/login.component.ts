@@ -1,4 +1,4 @@
-import { SendHttpRequestService } from '../../send-http-request.service';
+import { SendHttpRequestService } from '../../services/send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -27,8 +27,9 @@ export class LoginComponent implements AfterViewInit{
     console.log(userObj);
     this.sendReq.logMeIn(userObj).subscribe((res)=> {
       console.log(res);
+      //debugger
       if(res != null){
-        window.localStorage.setItem('Authorization', `Bearer ${res.body.payload['x-auth-token']}`);
+        window.localStorage.setItem('Authorization', res.jwtToken);
         console.log(res.body);
         this._router.navigate(['/home']);
       }
