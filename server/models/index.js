@@ -1,7 +1,7 @@
 
-const employeeDb=require('./employeeModel');
-const leaveDb = require('./leaveModel');
-const  projectDb=require('./projectModel');
+const employeeDb=require('./employee');
+const leaveDb = require('./leave');
+const  projectDb=require('./project');
 
 
 

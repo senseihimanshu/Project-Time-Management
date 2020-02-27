@@ -7,24 +7,21 @@ class Leave{
   }
   
      
-      async get(criteria){
+      async get(criteria={}){
         return this.model.find(criteria);
     }
       async save(employeeObj){
         console.log(employeeObj, 'new leave is on demand!');
         const leave = await this.model.create(leaveObj);
           return leave;
-         
-     }
-      async update(criteria={},updatedObj){
-         return this.model.update(criteria,updatedObj)
       }
-      async delete(criteria){
+      
+      async delete(criteria={}){
         return this.model.deleteOne(criteria);
      }
-     async log(){
-          return this.model.find();
+     async log(criteria={}){
+          return this.model.find(criteria);
      }
 }
 
-module.exports=new Employee();
+module.exports=new Leave();
