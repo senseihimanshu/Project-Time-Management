@@ -25,13 +25,11 @@ export class SendHttpRequestService {
     return JSON.parse(jsonPayload);
   };
 
-  
-  header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
+  //header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
   logMeIn(obj): Observable<any>{
-    return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
-      tap(_ => this.log("Log In")),
-      catchError(this.handleError<any>('Some Error Occurred'))
-    );
+    console.log(obj);
+    //debugger
+    return this.http.post("http://localhost:3000/login", obj, {responseType: 'json'});
   }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

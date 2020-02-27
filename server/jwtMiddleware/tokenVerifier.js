@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-module.exports=(req, res, next)=> {
+module.exports=(req, res)=> {
     const jwtPrivateKey = "thisisjwtsecretkey";
     var i  = 'CyberGroup India Pvt. Ltd.';          // Issuer 
     var s  = 'User Auth';                           // Subject 
@@ -22,5 +22,4 @@ module.exports=(req, res, next)=> {
     catch(err){
      return false;
     }
-      next();
     }

@@ -1,8 +1,10 @@
-import { AuthorizationService } from './services/authorization.service';
+import { SendHttpRequestService } from './services/send-http-request.service';
+//import { AuthorizationService } from './services/authorization.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 //Third Party Components
@@ -13,7 +15,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
-import { JwtModule } from '@auth0/angular-jwt';
+//import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
@@ -42,12 +44,12 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
     ReactiveFormsModule,
     FormsModule, 
     HttpClientModule,
-    JwtModule.forRoot({}),
+   // JwtModule.forRoot({}),
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule, WavesModule, ButtonsModule, InputsModule, IconsModule, CardsModule, AppRoutingModule,
   ],
-  providers: [AuthorizationService],
+  providers:[SendHttpRequestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

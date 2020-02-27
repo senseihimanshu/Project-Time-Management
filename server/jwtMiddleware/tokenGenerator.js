@@ -5,7 +5,8 @@ module.exports = (payload) => {
     var i  = 'CyberGroup India Pvt. Ltd.';          // Issuer 
     var s  = 'User Auth';                           // Subject 
     var a  = 'someone@cygrp.com';                   // Audience
-    const actualPayload = payload[0];
+    const actualPayload = payload;
+    console.log(actualPayload);
           //SIGNING OPTIONS
     var signOptions = {
     issuer:  i,
@@ -16,6 +17,7 @@ module.exports = (payload) => {
     };
 try{
     var token = jwt.sign({data:actualPayload}, jwtPrivateKey,signOptions);
+    console.log(token);
     return token;
    }
 catch(e){
