@@ -16,6 +16,11 @@ module.exports={
       enum:['consultant 1','consultant 2','associate 1','associate 2']
 
     },
+    role:[{
+      type:String,
+      default:'Employee',
+      enum:['Project Manager','C-level Manager','Employee','Admin']
+    }],
     joining_date:{
       type:Date,
       default:Date.now
