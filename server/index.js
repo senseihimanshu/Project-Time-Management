@@ -24,6 +24,8 @@ if (!config.get("jwtPrivateKey")) {
 app.use(cors());
 app.use(express.json());
 
+require("./routes/route.js")(app);
+
 //Adding Routes
 app.use("/api/employee", employeeRoutes);
 

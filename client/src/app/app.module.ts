@@ -14,9 +14,10 @@ import {
   IconsModule,
   CardsModule
 } from "angular-bootstrap-md";
-
-
-//import { JwtModule } from '@auth0/angular-jwt';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { MainComponent } from './main/main.component';
+import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
@@ -25,12 +26,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
-
-//Components
-import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./header/header.component";
-import { MainComponent } from "./main/main.component";
-import { LoginComponent } from "./main/login/login.component";
 import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
 import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const project=require('./project-details');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-const employeeSchema = new mongoose.Schema({
+module.exports = {
   empId: {
     type: String,
     required: true,
@@ -60,18 +60,4 @@ const employeeSchema = new mongoose.Schema({
     ref:"project",
     default:null
 }]
-});
-
-employeeSchema.methods.isUnique = async function(empId, email) {
-  const employeeWithEmpId = await Employee.findOne({ empId });
-  const employeeWithEmail = await Employee.findOne({ email });
-
-  if (employeeWithEmpId)
-    return { status: false, message: "EmployeeId already exists" };
-  if (employeeWithEmail)
-    return { status: false, message: "Email already exists" };
-
-  return { status: true };
-};
-
-module.exports = employeeSchema;
+}

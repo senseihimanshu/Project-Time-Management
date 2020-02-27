@@ -1,4 +1,4 @@
-import { LoginComponent } from "./main/login/login.component";
+import { LoginComponent } from "./login/login.component";
 //import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
 import { AdminComponent } from "./admin/admin.component";
