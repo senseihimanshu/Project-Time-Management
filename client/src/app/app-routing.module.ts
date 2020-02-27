@@ -13,8 +13,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+      path:'admindashboard', component:AdmindashboardComponent,
+    
+    // path: '',
+    // component: HomeComponent,
     //canActivateChild: [AuthorizationGuard],
     children: [
       {
@@ -24,9 +26,7 @@ const routes: Routes = [
           allowedRoles: ['manager','clevel']
         }
       },
-      {
-        path:'admindashboard', component:AdmindashboardComponent
-      },
+    
       {
         path: 'employee',
         component: TimesheetComponent,
@@ -41,13 +41,13 @@ const routes: Routes = [
           allowedRoles: ['clevel']
         }
       },
-      {
-        path: 'admin',
-        component: AdminComponent ,
-        data: {
-          allowedRoles: ['admin']
-        }
-      },
+      // {
+      //   path: 'admin',
+      //   component: AdminComponent ,
+      //   data: {
+      //     allowedRoles: ['admin']
+      //   }
+      // },
       {
         path: 'accessdenied',
         component: AccessDeniedComponent,
