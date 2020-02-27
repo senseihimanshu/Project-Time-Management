@@ -1,5 +1,7 @@
-const employees = require('./employees')
+const login=require('./loginController');
+const employees = require('./employees');
 
-module.exports = {
+module.exports =
+{    login : login,
      employees : employees
 }

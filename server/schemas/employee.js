@@ -12,7 +12,9 @@ module.exports={
     designation:{
          type:String,
          default:'consultant 1',
+
       enum:['consultant 1','consultant 2','associate 1','associate 2']
+
     },
     joining_date:{
       type:Date,
