@@ -1,11 +1,88 @@
-<div class="card mt-4">
-    <h4 class="card-header">Review timesheets</h4>
-    <div class="card-body">
-        <p>This page can be accessed <u>only by project managers and C-level employees</u>.</p>
-        <!-- <p class="mb-1">All users from secure (admin only) api end point:</p> -->
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <!-- <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul> -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"> </script>
+  <title>Admin Dashboard</title>
+</head>
+
+<body>
+  <!--Header starts from here-->
+  <!-- <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto"> </ul>
+      <button type="button"
+        class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+        (click)="tabularData()">Show Details
+      </button>
+      <form class="form-inline my-2 my-lg-0">
+        <button type="button"
+          class="btn btn-outline-warning btn-warning text-center text-white font-weight-bold m-2 btnsstyle"
+          (click)="deletionbyid()">Delete employee
+        </button>
+        <button type="button"
+          class="btn btn-outline-warning btn-success text-center text-white font-weight-bold m-2 btnsstyle"
+          (click)="updatedetails()">Update Details
+        </button>
+      </form>
     </div>
-</div>]
+  </nav>
+  </header> -->
+  <nav class="navbar navbar-expand-md bg-light navbar-light p-3">
+    <a class="navbar-brand" href="#"><b>Review Timesheet</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <button type="button"
+            class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold btnsstyle mr-2"
+            (click)="reviews()">Show Details
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <body>
+    <section class="background_dashboard">
+      <table class="empTable">
+        <tr>
+          <th>Employee-id:</th>
+          <th>Project-id:</th>
+          <th>Billable:</th>
+          <th>Hours:</th>
+          <th>Status:</th>
+        </tr>
+        <tbody class="mt-5" *ngFor="let employee of usersArray">
+          <tr>
+            <td>
+              {{employee.empId}}
+            </td>
+            <td>
+              {{employee.pId}}
+            </td>
+            <td>
+              {{employee.billable}}
+            </td>
+            <td>
+              {{employee.workingHours}}
+            </td>
+            <td>
+              {{employee.status}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+  </body>

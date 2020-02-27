@@ -16,7 +16,10 @@ const routes: Routes = [
   {
       path:'admindashboard', component:AdmindashboardComponent,
   },
-    
+  {
+    path:"review",
+    component: ReviewComponent
+  },
     // path: '',
     // component: HomeComponent,
     //canActivateChild: [AuthorizationGuard],
@@ -99,7 +102,8 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: ""
-  }
+  },
+  
 ];
 
 @NgModule({
