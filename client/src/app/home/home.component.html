@@ -1,0 +1,13 @@
+<div class="card mt-4">
+    <h4 class="card-header">Home</h4>
+    <div class="card-body">
+        <p>Welcome !!</p>
+        <!-- <p>Your role is: <strong>{{currentUser.role}}</strong>.</p> -->
+        <p>This page can be accessed by <u>all authenticated users</u>.</p>
+        
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <!-- <ul *ngIf="userFromApi">
+            <li>{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
+        </ul> -->
+    </div>
+</div>
