@@ -1,3 +1,4 @@
+import { LoginComponent } from './main/login/login.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,14 +21,14 @@ const routes: Routes = [
         path: 'manager',
         component: ReviewComponent,
         data: {
-          allowedRoles: ['manager','clevel']
+          allowedRoles: ['manager']
         }
       },
       {
         path: 'employee',
         component: TimesheetComponent,
         data: {
-          allowedRoles: ['employee', 'manager']
+          allowedRoles: ['employee']
         }
       },
       {
@@ -49,10 +50,10 @@ const routes: Routes = [
         component: AccessDeniedComponent,
         data: {}
       },
-      // {
-      //   path: 'login',
-      //   component: LoginComponent
-      // },  
+      {
+        path: 'login',
+        component: LoginComponent
+      },  
       {
         path: '**',
         redirectTo: ''

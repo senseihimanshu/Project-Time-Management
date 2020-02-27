@@ -8,11 +8,11 @@ export class AuthorizationService {
 
   constructor(private jwtHelperService: JwtHelperService) {}
 
-  isAuthorized(allowedRoles: string[]): boolean {
+  isAuthorized(): boolean {
     // check if the list of allowed roles is empty, if empty, authorize the user to access the page
-    if (allowedRoles == null || allowedRoles.length === 0) {
-      return true;
-    }
+    // if (allowedRoles == null || allowedRoles.length === 0) {
+    //   return true;
+    // }
 
     // get token from local storage or state management
     const token = localStorage.getItem('token');
@@ -21,16 +21,14 @@ export class AuthorizationService {
     const decodeToken = this.jwtHelperService.decodeToken(token);
 
     // check if it was decoded successfully, if not the token is not valid, deny access
-    if (!decodeToken) {
+    if (!decodeToken||!this.jwtHelperService.isTokenExpired(token)) {
       console.log('Invalid token');
       return false;
     }
+    else
+      return true;
 
     // check if the user roles is in the list of allowed roles, return true if allowed and false if not allowed
-    return allowedRoles.includes(decodeToken['role']);
+    //return allowedRoles.includes(decodeToken['role']);
   }
 }
-
-
-
- 
