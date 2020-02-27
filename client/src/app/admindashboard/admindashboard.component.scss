@@ -8,9 +8,10 @@ tbody:nth-child(odd) {background:#80808054}
 .table{
     margin-top: 5rem;
 }
-// .navbar-collapse{
-//     margin-left: 45%;
-// }
+.fixed-top{
+    position:fixed;
+    top:auto;
+}
 .deletebutton{
     display: flex;
     align-items: center;

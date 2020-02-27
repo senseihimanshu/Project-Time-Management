@@ -3,8 +3,7 @@ const schema = require("../schemas")
 
 class Employee {
   constructor() {
-    //
-    console.log("controllers me hu");
+    
   }
 
   async create(req, res) {
@@ -24,7 +23,7 @@ class Employee {
   async index(req, res) {
     const employeeList = await model.employee.log({},{"name":1,
                                                            "designation":1,
-                                                             "age":1,"email":1});
+                                                             "role":1,"email":1,"phone":1});
     res.send(employeeList);
   }
 

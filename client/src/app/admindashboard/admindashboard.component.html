@@ -73,6 +73,7 @@
     <th>Name:</th>
     <th>Email:</th>
     <th>Designation:</th>
+    <th>Role:</th>
   </tr>
 <tbody class="mt-5" *ngFor = "let employee of usersArray">
 <tr>
@@ -85,6 +86,10 @@
 <td>
            {{employee.designation}}
 </td>
+<td>
+           {{employee.role}}
+</td>
+
 </tr>
 </tbody>
 </table>

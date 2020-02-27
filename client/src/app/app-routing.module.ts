@@ -1,3 +1,4 @@
+import { EmployeeFormComponent } from './main/employee-form/employee-form.component';
 import { LoginComponent } from "./login/login.component";
 //import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
@@ -100,11 +101,30 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: "employeeform",
+    children: [
+      {
+        path: "create/:type",
+        component: EmployeeFormComponent
+      },
+      {
+        path: "update/:type",
+        component: EmployeeFormComponent
+      },
+      {
+        path: ":empId",
+        component: EmployeeFormComponent
+      }
+    ]
+  },
+  {
     path: "**",
     redirectTo: ""
   },
   
 ];
+
+
 
 @NgModule({
   declarations: [],
