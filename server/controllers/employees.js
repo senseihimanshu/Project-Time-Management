@@ -1,4 +1,6 @@
 const model = require("../models");
+const schema = require("../schemas")
+
 class Employee {
   constructor() {
     //
@@ -7,18 +9,22 @@ class Employee {
 
   async create(req, res) {
     let employeeObj = {
-      name: req.body.fname,
+      name: req.body.name,
       phoneNo: req.body.phoneNo,
       email: req.body.email,
       designation: req.body.designation,
-      password: req.body.password
+      password: req.body.password,
+      address:req.body.address
+     
     };
     const employee = await model.employee.save(employeeObj);
     res.send(employee);
   }
 
   async index(req, res) {
-    const employeeList = await model.employee.get();
+    const employeeList = await model.employee.log({},{"name":1,
+                                                           "designation":1,
+                                                             "age":1});
     res.send(employeeList);
   }
 
@@ -63,6 +69,7 @@ async update(req, res) {
   }
 
   async delete(req, res) {
+    console.log("running")
     const employee = await model.employee.delete({ _id: req.params.id });
     res.send(employee);
   }
