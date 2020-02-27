@@ -21,6 +21,7 @@ import { ReviewComponent } from './review/review.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     ReviewComponent,
     DashboardComponent,
     AdminComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    AdmindashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+ <form class="text-center border border-light p-5 loginForm">
+            <p class="h4 mb-4">Sign In</p>
+      
+            <input
+              type="email"
+              id="defaultLoginFormEmail"
+              class="form-control mb-4"
+              placeholder="E-mail"
+            />
+      
+            <input
+              type="password"
+              id="defaultLoginFormPassword"
+              class="form-control mb-4"
+              placeholder="Password"
+
+            />
+      
+            <div class="d-flex justify-content-around">
+              <div>
+                <a href="">Forgot password?</a>
+              </div>
+            </div>
+      
+            <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="loginFunction()">
+              Sign in
+            </button>
+      
+          </form>
