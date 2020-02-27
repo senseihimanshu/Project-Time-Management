@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SendHttpRequestService } from './services/send-http-request.service';
+//import { AuthorizationService } from './services/authorization.service';
 
 //Third Party Components
 import {
@@ -12,6 +14,17 @@ import {
   IconsModule,
   CardsModule
 } from "angular-bootstrap-md";
+
+
+//import { JwtModule } from '@auth0/angular-jwt';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { TimesheetComponent } from './timesheet/timesheet.component';
+import { ReviewComponent } from './review/review.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminComponent } from './admin/admin.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 
 //Components
 import { AppComponent } from "./app.component";
@@ -46,6 +59,7 @@ const routes: Routes = [
   }
 ];
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +67,14 @@ const routes: Routes = [
     MainComponent,
     LoginComponent,
     EmployeeFormComponent,
+
+    HomeComponent,
+    TimesheetComponent,
+    ReviewComponent,
+    DashboardComponent,
+    AdminComponent,
+    AccessDeniedComponent,
+    AdmindashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -67,9 +89,16 @@ const routes: Routes = [
     ButtonsModule,
     InputsModule,
     IconsModule,
-    CardsModule
+    CardsModule,
+    FormsModule, 
+    HttpClientModule,
+   // JwtModule.forRoot({}),
+    //Third Party
+    MDBBootstrapModule.forRoot(),
+    CheckboxModule, WavesModule, ButtonsModule, InputsModule, IconsModule, CardsModule, AppRoutingModule,
+
   ],
-  providers: [],
+  providers:[],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

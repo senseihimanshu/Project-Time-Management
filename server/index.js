@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const config = require("config");
+const database=require('./database/config');
 
 //User Imports
 const employeeRoutes = require("./routes/employee");
@@ -14,10 +15,10 @@ if (!config.get("jwtPrivateKey")) {
 }
 
 //Mongoose Connection
-mongoose
-  .connect("mongodb://localhost/projectPortal", { useNewUrlParser: true })
-  .then(() => console.log("MongoDb connected"))
-  .catch(err => console.error("Error occured while connecting to db", err));
+// mongoose
+//   .connect("mongodb://localhost/projectPortal", { useNewUrlParser: true })
+//   .then(() => console.log("MongoDb connected"))
+//   .catch(err => console.error("Error occured while connecting to db", err));
 
 //Using Middlewares
 app.use(cors());
