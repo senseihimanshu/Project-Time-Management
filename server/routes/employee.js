@@ -3,10 +3,11 @@ const router = express.Router();
 const Employee = require("../models/employee");
 
 router.get("/", async (req, res) => {
+    console.log(req.query);
   const employee = await Employee.findOne({ empId: req.query.empId });
-
+  console.log(employee);
   if (!employee) {
-    res.status(404).send({
+    return res.status(404).send({
       success: false,
       payload: {
         employee,
@@ -37,6 +38,8 @@ router.post("/", async (req, res) => {
     address
   });
   newEmployee.password = `${empId}${name}`;
+
+  console.log(req.body);
 
   const resultAfterIsUnique = await newEmployee.isUnique(empId, email);
   if (!resultAfterIsUnique.status) {

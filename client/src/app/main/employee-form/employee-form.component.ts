@@ -1,68 +1,53 @@
-import { Component, Type } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { EmployeeService } from "src/app/services/employee.service";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss"],
-  template: `
-    <div class="app-employee-form">
-      <form class="text-center border border-light p-5">
-        <p class="h4 mb-4">Employee Form</p>
-
-        <input
-          type="text"
-          id="defaultContactFormName"
-          class="form-control mb-4"
-          placeholder="EmployeeId"
-          *ngIf="formType === 'create'"
-        />
-
-        <input
-          type="text"
-          id="defaultContactFormName"
-          class="form-control mb-4"
-          placeholder="Name"
-        />
-
-        <input
-          type="email"
-          id="defaultContactFormEmail"
-          class="form-control mb-4"
-          placeholder="E-mail"
-        />
-
-        <label>Designation</label>
-        <select class="browser-default custom-select mb-4">
-          <option value="" disabled>Choose option</option>
-          <option value="1" selected>Employee</option>
-          <option value="2">Project Manager</option>
-          <option value="3">C Level</option>
-          <option value="4">Admin</option>
-        </select>
-
-        <div class="md-form">
-          <input type="date" id="input" class="form-control" mdbInput />
-          <label for="input">Joining date</label>
-        </div>
-
-        <div class="md-form">
-          <input type="number" id="input" class="form-control" mdbInput />
-          <label for="input">Phone</label>
-        </div>
-
-        <div class="form-group">
-          <textarea
-            class="form-control rounded-0"
-            id="exampleFormControlTextarea2"
-            rows="3"
-            placeholder="Address"
-          ></textarea>
-        </div>
-
-        <button mdbBtn color="info" block="true" type="submit">{{formType? 'Add Employee': 'Update Employee'}}</button>
-      </form>
-    </div>
-  `
+  templateUrl: './employee-form.component.html' 
 })
-export class EmployeeFormComponent {
-    formType: string;
+export class EmployeeFormComponent implements OnInit {
+  formType: string;
+  employee: any;
+
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): any {
+    console.log("ngOnInit");
+    this.route.params
+      .pipe(
+        switchMap((params: Params) => {
+          console.log(params);
+          this.formType = params.type;
+            // debugger;
+          console.log(this.formType);
+
+          if (!params.empId) {
+            return this.employeeService.getEmployee(null);
+          }
+          this.formType = "get";
+          console.log(this.formType);
+          return this.employeeService.getEmployee(params.empId);
+        })
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        console.log(response.payload.employee);
+        return (this.employee = response.payload.employee);
+      });
+  }
+
+  employeeCreateOrUpdate(obj, formType): any {
+    this.employeeService
+      .employeeCreateOrUpdate(obj, formType)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
+  }
 }
