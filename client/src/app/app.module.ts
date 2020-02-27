@@ -14,7 +14,7 @@ import { MDBBootstrapModule, CheckboxModule, WavesModule, ButtonsModule, InputsM
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
-import { LoginComponent } from './main/login/login.component';
+import { LoginComponent } from './login/login.component';
 //import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';

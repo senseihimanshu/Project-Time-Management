@@ -1,4 +1,4 @@
-import { SendHttpRequestService } from '../../services/send-http-request.service';
+import { SendHttpRequestService } from '../services/send-http-request.service';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
