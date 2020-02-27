@@ -39,7 +39,7 @@ module.exports={
         enum:["Approved","Declined","Pending"]
     },
     totalHoursWeek:{
-        type:Number,
+         type:Number,
         default:0
     }
 
