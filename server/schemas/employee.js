@@ -33,7 +33,7 @@ module.exports = {
   designation: [
     {
       type: String,
-      enum: ["ADMIN", "CLEVEL", "PROJECTMANAGER", "EMPLOYEE"]
+      enum: ["Associate", "Consultant 2", "Consultant 1", "Intern"]
     }
   ],
   joining: {
