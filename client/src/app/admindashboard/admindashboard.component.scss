@@ -3,9 +3,14 @@
     background:#9a9184;
    
 }
-// .table{
-//     margin-top: 5rem;
-// }
+
+.table{
+    margin-top: 5rem;
+}
+.fixed-top{
+    position:fixed;
+    top:auto;
+}
 .deletebutton{
     display: flex;
     align-items: center;
