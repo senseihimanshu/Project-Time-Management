@@ -2,6 +2,6 @@ const login=require('./loginController');
 const employees = require('./employees');
 
 module.exports =
-{    login : login
+{    login : login,
     employees : employees
 }
