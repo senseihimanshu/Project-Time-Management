@@ -32,14 +32,15 @@ module.exports={
         days:[{type:String,
                 enum:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         }],
-        hours:[{type:double}]
+        hours:[{type:Number}]
     },
     status:{
         type:String,
         enum:["Approved","Declined","Pending"]
     },
     totalHoursWeek:{
-        type:double
+        type:Number,
+        default:0
     }
 
 
