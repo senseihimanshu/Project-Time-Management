@@ -1,10 +1,10 @@
-@import "../../variables.scss";
-
-.background_dashboard {
-  height: 95vh;
-  background: $color-primary;
+.background_dashboard{
+    height: 93vh;
+   // background:#9a9184;
+   
 }
-
+tbody:nth-child(even) {background:white}
+tbody:nth-child(odd) {background:#80808054}
 .table {
   margin-top: 5rem;
 }
@@ -21,14 +21,31 @@
 .show {
   margin-left: 43% !important;
 }
-.empTable {
-  width: 100%;
-  color: black;
-  font-size: large;
-  font-weight: 800;
-  padding-left: 10px;
+.empTable{
+    width: 100vw;
+    color: black;
+    font-size: large;
+    font-weight: 800;
+    padding-left: 5rem;
 }
-
-.button-operations {
-//   margin: 0 4rem 0 0 !important;
+td{
+    font-family: Lato-Regular;
+    font-size: 15px;
+    color:black;
+    line-height: 1.4;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+th{
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.4;
+    background-color: #6c7ae0;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-right: 10px;
+    text-align: center;
 }
