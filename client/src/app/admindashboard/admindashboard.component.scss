@@ -1,29 +1,34 @@
-.background_dashboard{
-    height: 95vh;
-    background:#9a9184;
-   
+@import "../../variables.scss";
+
+.background_dashboard {
+  height: 95vh;
+  background: $color-primary;
 }
 
-.table{
-    margin-top: 5rem;
+.table {
+  margin-top: 5rem;
 }
-.fixed-top{
-    position:fixed;
-    top:auto;
+.fixed-top {
+  position: fixed;
+  top: auto;
 }
-.deletebutton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
+.deletebutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
-.show{
-    margin-left: 43%!important;
+.show {
+  margin-left: 43% !important;
 }
-.empTable{
-    width: 100vw;
-    color: black;
-    font-size: large;
-    font-weight: 800;
-    padding-left: 10px;
+.empTable {
+  width: 100%;
+  color: black;
+  font-size: large;
+  font-weight: 800;
+  padding-left: 10px;
+}
+
+.button-operations {
+//   margin: 0 4rem 0 0 !important;
 }

@@ -5,7 +5,7 @@ import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-employee-form",
-  styleUrls: ["./employee-form.component.scss"],
+  styleUrls: ["./employee-form.component.scss", '../main.component.scss'],
   templateUrl: './employee-form.component.html' 
 })
 export class EmployeeFormComponent implements OnInit {
