@@ -50,3 +50,14 @@ th{
     padding-right: 10px;
     text-align: center;
 }
+.app-main[_ngcontent-meo-c1] {
+    padding: 0 8.4rem;
+     min-height: 8vh!important;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
