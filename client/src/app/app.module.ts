@@ -31,29 +31,6 @@ import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
-const routes: Routes = [
-  // { path: "", component: WelcomePageComponent, pathMatch: 'full' },
-  { path: "login", component: LoginComponent },
-  // { path: 'home', component: HomeComponent },
-  {
-    path: "employeeform",
-    children: [
-      {
-        path: "create/:type",
-        component: EmployeeFormComponent
-      },
-      {
-        path: "update/:type",
-        component: EmployeeFormComponent
-      },
-      {
-        path: ":empId",
-        component: EmployeeFormComponent
-      }
-    ]
-  }
-];
-
 
 @NgModule({
   declarations: [
@@ -76,7 +53,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+   
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule,

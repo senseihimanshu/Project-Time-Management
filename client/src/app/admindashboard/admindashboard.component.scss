@@ -11,6 +11,14 @@ tbody:nth-child(odd) {background:#80808054}
 // .navbar-collapse{
 //     margin-left: 45%;
 // }
+
+.table{
+    margin-top: 5rem;
+}
+.fixed-top{
+    position:fixed;
+    top:auto;
+}
 .deletebutton{
     display: flex;
     align-items: center;
