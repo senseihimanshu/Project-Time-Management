@@ -7,4 +7,8 @@ module.exports= (app) => {
     app.put("/employees/:id",controller.employees.update) ;
 	app.delete("/employees/:id",controller.employees.delete);
 	app.post("/login", controller.login.checkUserAuthentication);
+	app.post("/api/employee", controller.employees.create);
+	app.put("/api/employee", controller.employees.update);
+	app.get("/api/employee", controller.employees.show);
+
 }
