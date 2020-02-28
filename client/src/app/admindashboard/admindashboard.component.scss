@@ -5,18 +5,21 @@
 }
 tbody:nth-child(even) {background:white}
 tbody:nth-child(odd) {background:#80808054}
-.table{
-    margin-top: 5rem;
+.table {
+  margin-top: 5rem;
 }
-.fixed-top{
-    position:fixed;
-    top:auto;
+.fixed-top {
+  position: fixed;
+  top: auto;
 }
-.deletebutton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
+.deletebutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.show {
+  margin-left: 43% !important;
 }
 .empTable{
     width: 100vw;

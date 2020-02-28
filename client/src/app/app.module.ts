@@ -12,7 +12,8 @@ import {
   ButtonsModule,
   InputsModule,
   IconsModule,
-  CardsModule
+  CardsModule,
+  TableModule
 } from "angular-bootstrap-md";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -64,6 +65,7 @@ import { RouterModule, Routes } from "@angular/router";
     CardsModule,
     FormsModule, 
     HttpClientModule,
+    TableModule,
    // JwtModule.forRoot({}),
     //Third Party
     MDBBootstrapModule.forRoot(),
