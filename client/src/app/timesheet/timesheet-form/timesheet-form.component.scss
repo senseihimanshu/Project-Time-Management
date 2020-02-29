@@ -1,0 +1,15 @@
+.error{
+    color: red;
+    font-size: 1.4rem;
+}
+
+.disabled{
+    pointer-events: all !important;
+    cursor: not-allowed;
+}
+
+input[name="noOfHours"]{
+    &:focus{
+        outline: none;
+    }
+}
