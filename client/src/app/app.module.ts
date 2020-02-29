@@ -31,6 +31,7 @@ import { EmployeeFormComponent } from "./main/employee-form/employee-form.compon
 import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
+import { TimesheetModule } from './timesheet/timesheet.module';
 
 
 @NgModule({
@@ -42,7 +43,6 @@ import { RouterModule, Routes } from "@angular/router";
     EmployeeFormComponent,
 
     HomeComponent,
-    TimesheetComponent,
     ReviewComponent,
     DashboardComponent,
     AdminComponent,
@@ -54,6 +54,7 @@ import { RouterModule, Routes } from "@angular/router";
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    TimesheetModule,
    
     //Third Party
     MDBBootstrapModule.forRoot(),
