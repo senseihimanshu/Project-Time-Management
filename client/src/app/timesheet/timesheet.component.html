@@ -1,3 +1,4 @@
 <div class="timesheet">
-    <app-timesheet-form></app-timesheet-form>
+    <div class="heading">Timesheet Form</div>
+    <app-timesheet-form [timesheet]="timesheet" (submit)="submitToApi($event)"></app-timesheet-form>
 </div>

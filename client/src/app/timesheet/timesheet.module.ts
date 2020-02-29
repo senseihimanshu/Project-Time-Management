@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
     ],
     imports: [
         FormsModule,
-        CommonModule
+        CommonModule,
     ],
     exports: [
         TimesheetComponent
