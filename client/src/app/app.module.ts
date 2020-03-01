@@ -33,6 +33,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { TimesheetModule } from './timesheet/timesheet.module';
+import { ClevelDashboardModule } from './main/clevel-dashboard/clevel-dashboard.module';
+import { ClevelDashboardComponent } from './main/clevel-dashboard/clevel-dashboard.component';
 
 
 
@@ -58,7 +60,7 @@ import { TimesheetModule } from './timesheet/timesheet.module';
     FormsModule,
     HttpClientModule,
     TimesheetModule,
-   
+    ClevelDashboardModule,
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
