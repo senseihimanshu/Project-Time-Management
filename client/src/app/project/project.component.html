@@ -1,0 +1,70 @@
+<!--Header starts from here-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#"><b>Projects dashboard</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <button type="button"
+      class="btn btn-outline-warning text-center text-white font-weight-bold m-2 btnsstyle"
+      (click)="tabularData()">Show Details
+    </button>
+    <form class="form-inline my-2 my-lg-0">
+      <button type="button"
+        class="btn btn-outline-warning text-center text-white font-weight-bold m-2 btnsstyle"
+        [routerLink]="['/projectform/create', 'create']" >Create New Project
+      </button>
+      <button type="button"
+        class="btn btn-outline-warning text-center text-white font-weight-bold m-2 btnsstyle"
+        [routerLink]="['/projectform/update', 'update']">Update Project
+      </button>
+    </form>
+  </div>
+</nav>
+<section class="background_dashboard mt-5">
+    njfgjdgcf
+    
+<table class="projectTable">
+  <tr>
+    <th>Client</th>
+    <th>Project</th>
+    <th>Project Manager</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <!-- <th>Project members</th> -->
+    <th>Status</th>
+
+  </tr>
+<tbody class="mt-5" *ngFor = "let project of projectsArray">
+<tr>
+<td>
+        {{project.clientName}}
+</td>
+<td>
+        {{project.projectName}}
+</td>
+<td>
+        {{project.projectManager}}
+</td>
+<td>
+        {{project.startDate}}
+</td>
+<td>
+        {{project.endDate}}
+</td>
+<!-- <td>
+        {{project.empID}}
+</td> -->
+<td>
+        {{project.status}}
+</td>
+
+</tr>
+</tbody>
+</table>
+
+</section>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>

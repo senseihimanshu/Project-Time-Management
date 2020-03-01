@@ -1,0 +1,27 @@
+.background_dashboard{
+    height: 95vh;
+    background:#9a9184;
+}
+.table{
+    margin-top: 5rem;
+}
+.fixed-top{
+    position:fixed;
+    top:auto;
+}
+.deletebutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.show{
+    margin-left: 43%!important;
+}
+.projectTable{
+    width: 100vw;
+    color: black;
+    font-size: large;
+    font-weight: 800;
+    padding-left: 10px;
+}
