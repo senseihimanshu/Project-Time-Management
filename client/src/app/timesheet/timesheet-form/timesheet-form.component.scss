@@ -1,3 +1,27 @@
+.hide{
+    visibility: hidden;
+}
+
+.input-wrapper-parent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+    width: 40%;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+input{
+    text-align: right;
+}
+
 .error{
     color: red;
     font-size: 1.4rem;
@@ -6,10 +30,16 @@
 .disabled{
     pointer-events: all !important;
     cursor: not-allowed;
+    border: none;
 }
 
 input[name="noOfHours"]{
     &:focus{
         outline: none;
     }
+}
+
+button{
+    padding: 1rem 2rem;
+    margin: 0 auto;
 }

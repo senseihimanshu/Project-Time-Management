@@ -6,7 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timesheet.component.scss']
 })
 export class TimesheetComponent implements OnInit {
+  timesheet: any;
+
   constructor(){}
 
   ngOnInit(): void{}
+
+  submitToApi(event){
+    console.log(event);
+  }
 }

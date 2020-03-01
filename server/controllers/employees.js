@@ -101,33 +101,6 @@ class Employee {
     });
   }
 
-  //   async update(req, res) {
-  //     try {
-  //       let employeeUpdatedObj = {
-  //         name: req.body.name,
-  //         email: req.body.email,
-  //         phone: req.body.phone,
-  //         address: {
-  //           city: req.body.address.city,
-  //           state: req.body.address.state,
-  //           country: req.body.address.country,
-  //           pincode: req.body.address.pincode
-  //         },
-  //         designation: req.body.designation,
-  //         age: req.body.age,
-  //         technologies: req.body.technologies
-  //       };
-  //       const updatedEmployee = await model.employee.update(
-  //         { _id: req.params.id },
-  //         employeeUpdatedObj
-  //       );
-  //       console.log("UPDATED");
-  //       res.send("UPDATED");
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
-
   async update(req, res) {
     const {
       empId,

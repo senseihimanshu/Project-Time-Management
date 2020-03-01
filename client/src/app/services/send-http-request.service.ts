@@ -24,6 +24,13 @@ export class SendHttpRequestService {
     }).join(''));
     return JSON.parse(jsonPayload);
   };
+  showEmployees(): Observable<any>{
+    return this.http.get("http://localhost:3000/employees").pipe(
+      tap(_ => this.log("Log In")),
+      catchError(this.handleError<any>('Some Error Occurred'))
+    );
+  }
+
 
   //header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
   logMeIn(obj): Observable<any>{

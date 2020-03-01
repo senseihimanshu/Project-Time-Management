@@ -1,31 +1,32 @@
 const mongoose=require('mongoose');
 const schema=require('../schemas');
 const timesheetschema=mongoose.Schema(schema);
-class Employee{
+
+class Timesheet{
   constructor(){
-    this.model=mongoose.model('Employee',timesheetschema);
+    this.model = mongoose.model('Timesheet',timesheetschema);
   }
-   //getting the employee data as per criteria  
+   //getting the timesheet data as per criteria  
     async get(criteria={},columns={}){
        return this.model.find(criteria,columns);
    }
-   //saves the data of newly created employee
+   //saves the data of newly created timesheet entry
     async save(timesheetObj){
-      console.log(timesheetObj, 'new employee created!');
+      console.log(timesheetObj, 'new timesheet created!');
       const timesheet = await this.model.create(timesheetObj);
        return timesheet;
     }
-    //delete the employee data as per criteria
+    //delete the timesheet data as per criteria
     async delete(criteria={}){
       return this.model.deleteOne(criteria);
     }
-    //getting the data of all the employees
+    //getting the data of all the timesheets
     async log(columns={}){
       return this.model.find(columns);
     }
 }
 
-module.exports=new Employee();
+module.exports = new Timesheet();
 
 
 
