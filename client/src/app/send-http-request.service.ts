@@ -38,12 +38,21 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
+
+    showProjects(): Observable<any>{
+    return this.http.get("http://localhost:3000/projects", {headers:this.header_token}).pipe(
+      tap(_ => this.log("Projects data")),
+      catchError(this.handleError<any>('Some Error Occurred'))
+    );
+  }
+
   logMeIn(obj): Observable<any>{
     return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
       tap(_ => this.log("Log In")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
+  
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
