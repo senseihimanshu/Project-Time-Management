@@ -1,0 +1,109 @@
+<div class="container bootstrap snippet">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <img alt=""  title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
+            </div>
+            <div class="col-md-6">
+                <h1><strong>My Information</strong></h1><br>
+                <div class="table-responsive">
+                <table class="table table-condensed table-responsive table-user-information">
+                    <tbody>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-asterisk text-primary"  *ngFor = "let employee of usersArray"></span>
+                                    Employee ID:                                           
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                             {{employee.empId}}
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-user  text-primary"></span>    
+                                    Name:                                            
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{employee.name}}  
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-cloud text-primary"></span>  
+                                    Designation:                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{employee.designation}}
+                            </td>
+                        </tr>
+    
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                    Role:                                            
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{employee.role}} 
+                            </td>
+                        </tr>
+    
+    
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                    Phone:                                          
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{employee.phoneNo}}
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                    Email                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{employee.email}} 
+                            </td>
+                        </tr>
+                        <!-- <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                    created                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                20 jul 20014
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                    Modified                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                 20 jul 20014 20:00:00
+                            </td>
+                        </tr>                                     -->
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>                                      

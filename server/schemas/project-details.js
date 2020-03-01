@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 const employee=require('./employee');
 module.exports={
-   
+   pId:{
+       type:String,
+       default:null
+   },
    projectName:{
       type:String,
       default:null

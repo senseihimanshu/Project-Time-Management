@@ -30,6 +30,7 @@ import { EmployeeFormComponent } from "./main/employee-form/employee-form.compon
 import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
+import { MyprofileComponent } from './myprofile/myprofile.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { RouterModule, Routes } from "@angular/router";
     DashboardComponent,
     AdminComponent,
     AccessDeniedComponent,
-    AdmindashboardComponent
+    AdmindashboardComponent,
+    MyprofileComponent
   ],
   imports: [
     BrowserModule,

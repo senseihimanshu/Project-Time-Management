@@ -5,7 +5,7 @@ const project=require('./project-details');
 
 module.exports={
     
-    empId:{
+    empObjId:{
         type:ObjectId,
         ref:"employee",
         default:null
@@ -15,7 +15,15 @@ module.exports={
         ref:"project",
         default:null
     },
-    
+    startDate:
+    {
+        type:Date,
+        default:null
+    },
+    endDate:{
+        type:Date,
+        default:Date.now()
+    },
     taskType:{
          type:String,
          enum:["Offshore","Onsite","Earned leave","Casual leave","Sick leave"]
@@ -27,22 +35,21 @@ module.exports={
         type:String,
         default:"CyberGroup"
     },
-    workingHours:{
-        date:[{type:Date}],
-        days:[{type:String,
-                enum:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-        }],
+    week:[{
+        startDate:[{type:Date}],
+        endDate:[{type:Date}],
         hours:[{type:Number}]
-    },
+    }],
     status:{
         type:String,
         enum:["Approved","Declined","Pending"],
         required:true
     },
-    totalHoursWeek:{
-         type:Number,
+    customerName:{
+        type:String,
         default:null
     }
+
 
 
 
