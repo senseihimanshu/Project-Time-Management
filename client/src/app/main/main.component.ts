@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
     template: `
         <div class="app-main">
             <!-- <app-login></app-login> -->
-            <app-employee-form></app-employee-form>
+            <!-- <app-employee-form></app-employee-form> -->
+            <!-- <app-admindashboard></app-admindashboard> -->
         </div>
     `
 })

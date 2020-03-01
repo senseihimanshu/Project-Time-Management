@@ -12,7 +12,8 @@ import {
   ButtonsModule,
   InputsModule,
   IconsModule,
-  CardsModule
+  CardsModule,
+  TableModule
 } from "angular-bootstrap-md";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,6 +32,8 @@ import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { TimesheetModule } from './timesheet/timesheet.module';
+
 
 
 @NgModule({
@@ -42,7 +45,6 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     EmployeeFormComponent,
 
     HomeComponent,
-    TimesheetComponent,
     ReviewComponent,
     DashboardComponent,
     AdminComponent,
@@ -55,6 +57,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    TimesheetModule,
    
     //Third Party
     MDBBootstrapModule.forRoot(),
@@ -66,6 +69,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     CardsModule,
     FormsModule, 
     HttpClientModule,
+    TableModule,
    // JwtModule.forRoot({}),
     //Third Party
     MDBBootstrapModule.forRoot(),

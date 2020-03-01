@@ -1,59 +1,73 @@
-
-<title>Admin Dashboard</title>
-<!--Header starts from here-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <button type="button"
-      class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-      (click)="tabularData()">Show Details
-    </button>
-    <form class="form-inline my-2 my-lg-0">
-      <button type="button"
-        class="btn btn-outline-warning btn-warning text-center text-white font-weight-bold m-2 btnsstyle"
-        (click)="deletionbyid()">Delete employee
+  <div class="header">
+    <div class="header__logo-container"></div>
+    <div class="btn-group d-flex">
+      <button
+        type="button"
+        mdbBtn
+        class="button-operations"
+        color="primary"
+        mdbWavesEffect
+        [routerLink]="['/employeeform/create', 'create']"
+      >
+        Create Employee
       </button>
-      <button type="button"
-        class="btn btn-outline-warning btn-success text-center text-white font-weight-bold m-2 btnsstyle"
-        (click)="updatedetails()">Update Details
+      <button
+        type="button"
+        mdbBtn
+        color="success"
+        class="button-operations"
+        mdbWavesEffect
+        [routerLink]="['/employeeform/update', 'update']"
+      >
+        Update Employee
       </button>
-    </form>
+      <button
+        type="button"
+        mdbBtn
+        color="secondary"
+        class="button-operations"
+        (click)="tabularData()"
+        mdbWavesEffect
+      >
+        Show Details
+      </button>
+      <button
+        type="button"
+        mdbBtn
+        color="danger"
+        mdbWavesEffect
+      >
+        Delete Employee
+      </button>
+    </div>
   </div>
-</nav>
-<section class="background_dashboard mt-5">
- Deepak Yadav
-    
-<table class="empTable">
-  <tr>
-    <th>Name:</th>
-    <th>Email:</th>
-    <th>Designation:</th>
-    <th>Role:</th>
-  </tr>
-<tbody class="mt-5" *ngFor = "let employee of usersArray">
-<tr>
-<td>
-           {{employee.name}}
-</td>
-<td>
-           {{employee.email}}
-</td>
-<td>
-           {{employee.designation}}
-</td>
-<td>
-           {{employee.role}}
-</td>
-
-</tr>
-</tbody>
-</table>
-
-</section>
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <section class="background_dashboard">
+    <table class="empTable">
+      <tr>
+        <th>Employee Id:</th>
+        <th>Name:</th>
+        <th>Email:</th>
+        <th>Designation:</th>
+        <th>Role:</th>
+      </tr>
+      <tbody class="mt-5" *ngFor="let employee of usersArray">
+        <tr>
+          <td>
+            {{ employee.empId }}
+          </td>
+          <td>
+            {{ employee.name }}
+          </td>
+          <td>
+            {{ employee.email }}
+          </td>
+          <td>
+            {{ employee.designation }}
+          </td>
+          <td>
+            {{ employee.role }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>

@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SendHttpRequestService } from './../send-http-request.service';
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.scss']
 })
 export class ReviewComponent implements OnInit {
-  loading = false;
-  //  users: User[] = [];
-
-  //  constructor(private userService: UserService) { }
-
+  constructor(private _service:SendHttpRequestService) {
+  }
+  usersArray: any;
+  reviews() {
+   let obj=this._service.showReviews().subscribe(res => {
+     this.usersArray=res;
+     console.log(res);
+   });
+   console.log(obj);
+   }
     ngOnInit() {
-        this.loading = true;
-        // this.userService.getAll().pipe(first()).subscribe(users => {
-        //     this.loading = false;
-        //     this.users = users;
-        // });
     }
 
 }

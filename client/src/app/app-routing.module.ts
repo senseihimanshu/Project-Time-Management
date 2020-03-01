@@ -18,8 +18,52 @@ const routes: Routes = [
   {
       path:'admindashboard', component:AdmindashboardComponent,
   },
+  {
+    path:"review",
+    component: ReviewComponent
+  },
+    // path: '',
+    // component: HomeComponent,
+    //canActivateChild: [AuthorizationGuard],
+    // children: [
+    //   {
+    //     path: 'manager',
+    //     component: ReviewComponent,
+    //     data: {
+    //       allowedRoles: ['manager','clevel']
+    //     }
+    //   },
     
-  
+    //   {
+    //     path: 'employee',
+    //     component: TimesheetComponent,
+    //     data: {
+    //       allowedRoles: ['employee', 'manager']
+    //     }
+    //   },
+    //   {
+    //     path: 'clevel',
+    //     component: DashboardComponent,
+    //     data: {
+    //       allowedRoles: ['clevel']
+    //     }
+    //   },
+     
+    //   {
+    //     path: 'accessdenied',
+    //     component: AccessDeniedComponent,
+    //     data: {}
+    //   },
+    //   // {
+    //   //   path: 'login',
+    //   //   component: LoginComponent
+    //   // },  
+    //   {
+    //     path: '**',
+    //     redirectTo: ''
+    //   }
+    // ]
+
    { path: "",
     component: LoginComponent
   },
@@ -82,7 +126,8 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: ""
-  }
+  },
+  
 ];
 
 

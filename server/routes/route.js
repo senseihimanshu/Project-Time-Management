@@ -9,4 +9,9 @@ module.exports= (app) => {
 	app.post("/login", controller.login.checkUserAuthentication);
 	app.get("./timesheet",controller.timesheet.index);
 	app.post("./timesheet",controller.timesheet.create);
+	app.post("/api/employee", controller.employees.create);
+	app.put("/api/employee", controller.employees.update);
+	app.get("/api/employee", controller.employees.show);
+	//Timesheet Routes
+	app.post('/api/timesheet', controller.timesheet.create)
 }

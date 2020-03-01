@@ -17,18 +17,13 @@ export class MyprofileComponent implements OnInit {
     private route: ActivatedRoute) {  }
     
   ngOnInit(): any {
-    
-    return this._service.getEmployee(params.empId);
-  })
-)
-.subscribe((response: any) => {
-  console.log(response);
-  console.log(response.payload.employee);
-  return (this.employee = response.payload.employee);
-});
-}
 
-
-  }
-
+   // return this._service.getEmployee(params.empId);
+  }//)
+//)
+// .subscribe((response: any) => {
+//   console.log(response);
+//   console.log(response.payload.employee);
+//   return (this.employee = response.payload.employee);
+// });
 }

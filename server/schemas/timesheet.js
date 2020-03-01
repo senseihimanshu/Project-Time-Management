@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 var ObjectId = mongoose.Schema.Types.ObjectId;
-const employee=require('./employee');
-const project=require('./project-details');
+const employee = require("./employee");
+const project = require("./project-details");
 
 module.exports={
     
@@ -40,8 +40,18 @@ module.exports={
         endDate:[{type:Date}],
         hours:[{type:Number}]
     }],
+    noOfHours: {
+        type: Number,
+        min: 0,
+        max: 40
+      },
+      description: {
+          type: String,
+          maxlength: 100
+      },
     status:{
         type:String,
+        default:"Pending",
         enum:["Approved","Declined","Pending"],
         required:true
     },

@@ -1,17 +1,7 @@
 const mongoose=require('mongoose');
-const schema=require('../schemas');
-const employeeschema=mongoose.Schema(schema.employee);
-employeeschema.methods.isUnique = async function(empId, email) {
-  const employeeWithEmpId = await Employee.findOne({ empId });
-  const employeeWithEmail = await Employee.findOne({ email });
+const { employee }=require('../schemas');
+const employeeschema=mongoose.Schema(employee);
 
-  if (employeeWithEmpId)
-    return { status: false, message: "EmployeeId already exists" };
-  if (employeeWithEmail)
-    return { status: false, message: "Email already exists" };
-
-  return { status: true };
-};
 class Employee{
   constructor(){
     console.log(this.model, 'Inside models/employee costructor');
@@ -19,11 +9,14 @@ class Employee{
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
-      console.log(criteria);
-       return await this.model.findOne(criteria,columns);
+      console.log(criteria, columns);
+      const findDocument = await this.model.findOne(criteria,columns);
+      console.log(findDocument, 'findDocument'); 
+      return findDocument;
    }
    //saves the data of newly created employee
     async save(employeeObj){
+      console.log("routes me hu")
       console.log(employeeObj, 'new employee created!');
       const employee = await this.model.create(employeeObj);
        return employee;
@@ -42,4 +35,7 @@ class Employee{
     }
 }
 
-module.exports=new Employee();
+const employeeObj = new Employee();
+
+
+module.exports = employeeObj;

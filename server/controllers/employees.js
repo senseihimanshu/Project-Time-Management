@@ -1,74 +1,164 @@
 const model = require("../models");
-const schema = require("../schemas")
+const schema = require("../schemas");
+
+const isUnique = async function(empId, email) {
+  const employeeWithEmpId = await model.employee.get({ empId });
+  const employeeWithEmail = await model.employee.get({ email });
+
+  if (employeeWithEmpId)
+    return { status: false, message: "EmployeeId already exists" };
+  if (employeeWithEmail)
+    return { status: false, message: "Email already exists" };
+
+  return { status: true };
+};
 
 class Employee {
-  constructor() {
-    
-  }
+  constructor() {}
 
   async create(req, res) {
-    let employeeObj = {
-      name: req.body.name,
-      phoneNo: req.body.phoneNo,
-      email: req.body.email,
-      designation: req.body.designation,
-      password: req.body.password,
-      address:req.body.address
-     
+    console.log(req.body);
+    const {
+      empId,
+      email,
+      name,
+      designation,
+      joining,
+      phone,
+      address
+    } = req.body;
+
+    const newEmployee = {
+      empId,
+      email,
+      name,
+      designation,
+      joining,
+      phone,
+      address
     };
-    const employee = await model.employee.save(employeeObj);
-    res.send(employee);
+    newEmployee.password = `${empId}${name}`;
+
+    console.log(req.body);
+
+    const resultAfterIsUnique = await isUnique(empId, email);
+    if (!resultAfterIsUnique.status) {
+      return res.status(401).send({
+        success: false,
+        payload: {
+          message: resultAfterIsUnique.message
+        }
+      });
+    }
+
+    try {
+      await model.employee.save(newEmployee).then(() => {
+        res.status(201).send({
+          success: true,
+          payload: {
+            message: "Employee created successfully"
+          }
+        });
+      });
+    } catch (err) {
+      res.status(400).send({
+        success: false,
+        payload: {
+          message: err.message
+        }
+      });
+    }
   }
 
   async index(req, res) {
-    const employeeList = await model.employee.log({},{"name":1,
-                                                           "designation":1,
-                                                             "role":1,"email":1,"phone":1});
+    const employeeList = await model.employee.log(
+      {},
+      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
+    );
     res.send(employeeList);
   }
 
   async show(req, res) {
-    const employeeList = await model.employee.get({ _id: req.params.id });
-    res.send(employeeList);
+    console.log(req.query);
+    const employee = await model.employee.get({ empId: req.query.empId });
+    console.log(employee);
+    if (!employee) {
+      return res.status(404).send({
+        success: false,
+        payload: {
+          employee,
+          message: "Employee does not exist"
+        }
+      });
+    }
+
+    res.send({
+      success: true,
+      payload: {
+        employee,
+        message: "Employee retrieved successfully"
+      }
+    });
   }
 
-//   async update(req, res) {
-//     try {
-//       let employeeUpdatedObj = {
-//         name: req.body.name,
-//         email: req.body.email,
-//         phone: req.body.phone,
-//         address: {
-//           city: req.body.address.city,
-//           state: req.body.address.state,
-//           country: req.body.address.country,
-//           pincode: req.body.address.pincode
-//         },
-//         designation: req.body.designation,
-//         age: req.body.age,
-//         technologies: req.body.technologies
-//       };
-//       const updatedEmployee = await model.employee.update(
-//         { _id: req.params.id },
-//         employeeUpdatedObj
-//       );
-//       console.log("UPDATED");
-//       res.send("UPDATED");
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   }
+  async update(req, res) {
+    const {
+      empId,
+      email,
+      name,
+      designation,
+      joining,
+      phone,
+      address,
+      password
+    } = req.body;
 
-async update(req, res) {
-    const employee = await model.employee.update(
-      { _id: req.params.id },
-      { $set: { email: req.body.email } }
-    );
-    res.send(employee);
+    const employeeToUpdate = await model.employee.get({ empId });
+    const patchedEmployee = {
+      email: email || employeeToUpdate.email,
+      name: name || employeeToUpdate.name,
+      designation: designation || employeeToUpdate.designation,
+      joining: joining || employeeToUpdate.joining,
+      phone: phone || employeeToUpdate.phone,
+      address: address || employeeToUpdate.address,
+      password: password || employeeToUpdate.password
+    };
+
+    // const newEmployee = new Employee(patchedEmployee);
+
+    if (email) {
+      const resultAfterIsUnique = await isUnique(null, email);
+      if (!resultAfterIsUnique.status) {
+        return res.status(401).send({
+          success: false,
+          payload: {
+            message: resultAfterIsUnique.message
+          }
+        });
+      }
+    }
+
+    try {
+      await model.employee.update(patchedEmployee).then(() => {
+        res.status(200).send({
+          success: true,
+          payload: {
+            message: "Employee updated successfully"
+          }
+        });
+      });
+    } catch (err) {
+      res.status(400).send({
+        success: false,
+        payload: {
+          message: err.message
+        }
+      });
+    }
   }
 
   async delete(req, res) {
-    console.log("running")
+    console.log("running");
     const employee = await model.employee.delete({ _id: req.params.id });
     res.send(employee);
   }

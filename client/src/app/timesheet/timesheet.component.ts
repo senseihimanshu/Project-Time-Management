@@ -6,18 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timesheet.component.scss']
 })
 export class TimesheetComponent implements OnInit {
+  timesheet: any;
 
-  constructor() { }
-  loading = false;
-  //  users: User[] = [];
+  constructor(){}
 
-  //  constructor(private userService: UserService) { }
+  ngOnInit(): void{}
 
-    ngOnInit() {
-        this.loading = true;
-        // this.userService.getAll().pipe(first()).subscribe(users => {
-        //     this.loading = false;
-        //     this.users = users;
-        // });
-    }
+  submitToApi(event){
+    console.log(event);
+  }
 }
