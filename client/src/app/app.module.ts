@@ -32,13 +32,13 @@ import { EmployeeFormComponent } from "./main/employee-form/employee-form.compon
 import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
+import { MyprofileComponent } from './myprofile/myprofile.component';
 import { TimesheetModule } from './timesheet/timesheet.module';
 import { ProjectComponent } from './project/project.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatInputModule} from '@angular/material';
-
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import {MatFormFieldModule, MatInputModule} from '@angular/material';
     AccessDeniedComponent,
     AdmindashboardComponent,
     ProjectComponent,
-    ProjectFormComponent
+    ProjectFormComponent,
+    MyprofileComponent
   ],
   imports: [
     MatSelectModule,

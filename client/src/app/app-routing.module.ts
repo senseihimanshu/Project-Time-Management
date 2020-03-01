@@ -1,5 +1,6 @@
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectComponent } from './project/project.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 import { EmployeeFormComponent } from './main/employee-form/employee-form.component';
 import { LoginComponent } from "./login/login.component";
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
@@ -23,7 +24,7 @@ const routes: Routes = [
     path:"review",
     component: ReviewComponent
   },
-  { path: "",
+   { path: "",
     component: LoginComponent
   },
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
       {
         path: ":empId",
         component: EmployeeFormComponent
+      },
+      {
+        path:"profile",
+        component : MyprofileComponent
       }
     ]
   },
