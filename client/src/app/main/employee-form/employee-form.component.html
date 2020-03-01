@@ -1,14 +1,14 @@
 <div class="app-main">
   <div class="app-employee-form">
-    <form class="text-center border border-light p-5">
+    <form class="text-center border border-light p-5" #form="ngForm" (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm)">
       <div
         class="h4 mb-4 d-flex justify-content-between font-weight-bold"
         style="font-size: 2rem;"
       >
         {{
-          formType === "get"
+          typeOfForm === "get"
             ? "Employee Data for " + employee?.empId
-            : formType === "create"
+            : typeOfForm === "create"
             ? "Create Employee"
             : "Update Employee"
         }}
@@ -31,11 +31,12 @@
           id="empId"
           class="form-control mb-4"
           placeholder="EmployeeId"
-          *ngIf="formType !== 'update'"
+          *ngIf="typeOfForm !== 'update'"
           [(ngModel)]="employee && employee.empId"
           name="empId"
-          [disabled]="formType === 'get'"
-          #empIdInput
+          required
+          [disabled]="typeOfForm === 'get'"
+          #empIdInput="ngModel"
         />
       </div>
 
@@ -49,8 +50,8 @@
           placeholder="Email"
           [(ngModel)]="employee && employee.email"
           name="email"
-          [disabled]="formType === 'get'"
-          #emailInput
+          [disabled]="typeOfForm === 'get'"
+          #emailInput="ngModel"
         />
       </div>
 
@@ -64,8 +65,8 @@
           placeholder="Employee Name"
           [(ngModel)]="employee && employee.name"
           name="name"
-          [disabled]="formType === 'get'"
-          #empNameInput
+          [disabled]="typeOfForm === 'get'"
+          #empNameInput="ngModel"
         />
       </div>
 
@@ -79,8 +80,8 @@
           placeholder="Address"
           [(ngModel)]="employee && employee.address"
           name="address"
-          [disabled]="formType === 'get'"
-          #addressInput
+          [disabled]="typeOfForm === 'get'"
+          #addressInput="ngModel"
         />
       </div>
 
@@ -94,8 +95,8 @@
           placeholder="Phone"
           [(ngModel)]="employee && employee.phone"
           name="phone"
-          [disabled]="formType === 'get'"
-          #phoneInput
+          [disabled]="typeOfForm === 'get'"
+          #phoneInput="ngModel"
         />
       </div>
 
@@ -109,8 +110,8 @@
           placeholder="Joining"
           [(ngModel)]="employee && employee.joining"
           name="joining"
-          [disabled]="formType === 'get'"
-          #joiningInput
+          [disabled]="typeOfForm === 'get'"
+          #joiningInput="ngModel"
         />
       </div>
 
@@ -121,139 +122,45 @@
           class="browser-default custom-select mb-4"
           name="designation"
           [(ngModel)]="employee && employee.designation[0]"
-          [disabled]="formType === 'get'"
-          #designationInput
+          [disabled]="typeOfForm === 'get'"
+          #designationInput="ngModel"
+        >
+          <option value="" disabled>Choose option</option>
+          <option value="Associate" selected>Associate</option>
+          <option value="Consultant 2">Consultant 2</option>
+          <option value="Consultant 1">Consultant 1</option>
+          <option value="Intern">Intern</option>
+        </select>
+      </div>
+
+      <div class="h4 mb-4">
+        <label for="role">Role</label>
+
+        <select
+          class="browser-default custom-select mb-4"
+          name="role"
+          [(ngModel)]="employee && employee.role[0]"
+          [disabled]="typeOfForm === 'get'"
+          #roleInput="ngModel"
         >
           <option value="" disabled>Choose option</option>
           <option value="Employee" selected>Employee</option>
           <option value="Project Manager">Project Manager</option>
           <option value="C Level">C Level</option>
-          <option value="Admin">Admin</option>
         </select>
       </div>
 
-      <div class="button-parent" *ngIf="formType !== 'get'">
+      <div class="button-parent" *ngIf="typeOfForm !== 'get'">
         <button
           mdbBtn
           color="info"
           block="true"
           type="submit"
-          (click)="
-            employeeCreateOrUpdate({
-              empId: empIdInput && empIdInput.value,
-              name: empNameInput && empNameInput.value,
-              email: emailInput && emailInput.value,
-              designation: designationInput && designationInput.value,
-              date: dateInputInput && dateInput.value,
-              phoneInput: phoneInput && phoneInput.value,
-              address: addressIdInput && addressInput.value,
-              joining: joiningInput && joiningInput.value
-            })
-          "
         >
-          {{ formType === "create" ? "Add Employee" : "Update Employee" }}
+          {{ typeOfForm === "create" ? "Add Employee" : "Update Employee" }}
         </button>
       </div>
-
-      <!-- <input
-        type="text"
-        id="defaultContactFormName"
-        class="form-control mb-4"
-        placeholder="EmployeeId"
-        *ngIf="formType === 'create'"
-        [(ngModel)]="employee.empId"
-        #empIdInput
-      />
-
-      <input
-        type="text"
-        id="defaultContactFormName"
-        class="form-control mb-4"
-        placeholder="Name"
-        name="Name"
-        [(ngModel)]="employee.name"
-        #nameInput
-      />
-
-      <input
-        type="email"
-        id="defaultContactFormEmail"
-        class="form-control mb-4"
-        placeholder="E-mail"
-        [(ngModel)]="employee.email"
-        #emailInput
-      />
-
-      <label>Designation</label>
-      <select
-        class="browser-default custom-select mb-4"
-        [(ngModel)]="employee.designation"
-        #designationInput
-      >
-        <option value="" disabled>Choose option</option>
-        <option value="Employee" selected>Employee</option>
-        <option value="Project Manager">Project Manager</option>
-        <option value="C Level">C Level</option>
-        <option value="Admin">Admin</option>
-      </select>
-
-      <div class="md-form">
-        <input
-          type="date"
-          id="input"
-          class="form-control"
-          mdbInput
-          [(ngModel)]="employee.joining"
-          #dateInput
-        />
-        <label for="input">Joining date</label>
-      </div>
-
-      <div class="md-form">
-        <input
-          type="number"
-          id="input"
-          class="form-control"
-          mdbInput
-          [(ngModel)]="employee.phone"
-          #phoneInput
-        />
-        <label for="input">Phone</label>
-      </div>
-
-      <div class="form-group">
-        <textarea
-          class="form-control rounded-0"
-          id="exampleFormControlTextarea2"
-          rows="3"
-          placeholder="Address"
-          [(ngModel)]="employee.address"
-          #addressInput
-        ></textarea>
-      </div>
-      <div class="button-parent">
-        <button
-          mdbBtn
-          color="info"
-          block="true"
-          type="submit"
-          (click)="
-            employeeCreateOrUpdate({
-              empId: empIdInputx.value,
-              name: nameInput.value,
-              email: emailInput.value,
-              designation: designationInput.value,
-              date: dateInput.value,
-              phoneInput: phoneInput.value,
-              address: addressInput.value
-            })
-          "
-        >
-          Hello
-          {{ formType }}-->
-      <!-- {{ (formType === "create") ? "Add Employee" : "Update Employee" }} -->
-      <!-- </button> -->
-      <!-- </div>  -->
     </form>
+    {{ form.value | json }}
   </div>
 </div>

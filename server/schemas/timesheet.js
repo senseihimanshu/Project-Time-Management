@@ -6,48 +6,44 @@ const project = require("./project-details");
 module.exports = {
   empObjectId: {
     type: ObjectId,
-    ref: "employee"
+    ref: "employee",
+    required: true
   },
   projectObjectId: {
     type: ObjectId,
     ref: "project",
-    default: null
+    required: true
   },
   taskType: {
     type: String,
     enum: ["offshore", "onsite", "earned-leave", "casual-leave", "sick-leave"]
   },
   billable: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   companyName: {
-    type: String
+    type: String,
+    default: null
   },
-  workingHours: {
-    date: [{ type: Date }],
-    days: [
-      {
-        type: String,
-        enum: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ]
-      }
-    ],
-    hours: [{ type: Number }]
+  startDate: {
+      type: Date
+  },
+  endDate: {
+    type: Date
+  },
+  noOfHours: {
+    type: Number,
+    min: 0,
+    max: 40
+  },
+  description: {
+      type: String,
+      maxlength: 100
   },
   status: {
     type: String,
-    enum: ["Approved", "Declined", "Pending"],
-    required: true
-  },
-  totalHoursWeek: {
-    type: Number,
-    default: null
+    default: 'pending',
+    enum: ["approved", "declined", "pending"]
   }
 };
