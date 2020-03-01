@@ -8,7 +8,7 @@ class employee {
     try {
       console.log(model.employee);
       let user = await model.employee.get({ email: req.body.email, password: req.body.password },
-      { role: 1, name: 1, _id: 1 }
+      { role: 1, name: 1, _id: 1,empId:1 }
     );
     console.log(user);
     if (user != null || user != []) {
