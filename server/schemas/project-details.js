@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 var ObjectId = mongoose.Schema.Types.ObjectId;
-const employee = require("./employee");
+
 module.exports = {
   projectName: {
     type: String,
@@ -22,8 +22,7 @@ module.exports = {
     type: String,
     default: null
   },
-  empObjectIdArray: [{ type: ObjectId,
-                    ref: "employee" }],
+  empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
   status: {
     type: String,
     enum: ["completed", "discarded", "in-progress"],

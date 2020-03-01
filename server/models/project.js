@@ -1,9 +1,11 @@
 const mongoose=require('mongoose');
 const schema=require('../schemas');
-const projectschema=mongoose.Schema(schema);
+const projectschema = mongoose.Schema(schema.project);
+
 class Project{
   constructor(){
     this.model=mongoose.model('Project',projectschema);
+    console.log(projectschema, 'Inside models/projects.js');
   }
   
      //get the projects of company as per criteria
@@ -13,10 +15,11 @@ class Project{
     //save the newly created project 
       async save(projectObj){
         console.log(projectObj, ' created new project!');
-        const project = await this.model.create(projectObj);
-          return project;
-         
-     }
+        const newProject = await this.model.create(projectObj);
+        console.log(newProject);
+            return newProject;
+
+      }
      //update the details of project as per criteria
       async update(criteria={},updatedProjectObj){
          return this.model.update(criteria,updatedProjectObj)
