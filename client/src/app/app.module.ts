@@ -38,7 +38,7 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatFormFieldModule, MatInputModule, MatToolbarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -61,6 +61,7 @@ import {MatFormFieldModule, MatInputModule} from '@angular/material';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    MatToolbarModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,

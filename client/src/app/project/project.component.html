@@ -1,31 +1,32 @@
 <!--Header starts from here-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#"><b>Projects dashboard</b></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <button type="button"
-      class="btn btn-outline-warning text-center text-white font-weight-bold m-2 btnsstyle"
-      (click)="tabularData()">Show Details
-    </button>
-    <form class="form-inline my-2 my-lg-0">
-      <button type="button"
-        class="btn btn-outline-warning text-center text-white font-weight-bold m-2 btnsstyle"
-        [routerLink]="['/projectform/create', 'create']" >Create New Project
-      </button>
-      <button type="button"
-        class="btn btn-outline-warning text-center text-white font-weight-bold m-2 btnsstyle"
-        [routerLink]="['/projectform/update', 'update']">Update Project
-      </button>
-    </form>
+<mat-toolbar color="primary" class="navbar">
+  <div>
+    Admin Dashboard
   </div>
-</nav>
-<section class="background_dashboard mt-5">
-    njfgjdgcf
-    
+  <div>
+    <span>My Profile</span>
+    <span>Employees</span>
+    <span routerLink="/projects">Projects</span>
+  </div>
+</mat-toolbar>
+
+<button type="button"
+class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+(click)="tabularData()">Show Details
+</button>
+
+<button type="button"
+class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+[routerLink]="['/projectform/create', 'create']">Add new project
+</button>
+
+<button type="button"
+class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+[routerLink]="['/projectform/update', 'update']">Update project details
+</button>
+
+<section class="background_dashboard">
 <table class="projectTable">
   <tr>
     <th>Client</th>

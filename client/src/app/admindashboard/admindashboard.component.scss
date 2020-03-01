@@ -43,10 +43,10 @@ th{
     font-family: Lato-Bold;
     font-size: 18px;
     color: #fff;
-    line-height: 1.4;
-    background-color: #6c7ae0;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    line-height: 1;
+    background-color: #09103a73;
+    padding-top: 12px;
+    padding-bottom: 10px;
     padding-right: 10px;
     text-align: center;
 }
@@ -60,4 +60,15 @@ th{
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
+}
+
+.navbar{
+    justify-content: space-between;
+    height: 4rem;
+    background-color: black;
+}
+
+span{
+    padding-right: 2.5rem;
+    cursor: pointer;
 }
