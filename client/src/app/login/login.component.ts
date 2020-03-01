@@ -12,7 +12,6 @@ export class LoginComponent implements AfterViewInit{
   
   constructor(
     private sendReq: SendHttpRequestService,
-    private _router: Router,
     // private jwtHelperService: JwtHelperService,
     private router: Router) { }
 

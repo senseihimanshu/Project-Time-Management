@@ -1,3 +1,4 @@
+import { MyprofileComponent } from './myprofile/myprofile.component';
 import { EmployeeFormComponent } from './main/employee-form/employee-form.component';
 import { LoginComponent } from "./login/login.component";
 //import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
@@ -62,6 +63,7 @@ const routes: Routes = [
     //     redirectTo: ''
     //   }
     // ]
+
    { path: "",
     component: LoginComponent
   },
@@ -114,6 +116,10 @@ const routes: Routes = [
       {
         path: ":empId",
         component: EmployeeFormComponent
+      },
+      {
+        path:"profile",
+        component : MyprofileComponent
       }
     ]
   },

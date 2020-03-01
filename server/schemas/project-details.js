@@ -22,7 +22,8 @@ module.exports = {
     type: String,
     default: null
   },
-  empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
+  empObjectIdArray: [{ type: ObjectId,
+                    ref: "employee" }],
   status: {
     type: String,
     enum: ["completed", "discarded", "in-progress"],

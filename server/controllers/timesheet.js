@@ -28,6 +28,25 @@ class Timesheet{
             }
         });
     }
+    async index(req, res) {
+        const timesheetList = await model.timesheet.log({},{"empId":1,
+                                                               "pId":1,
+                                                                "startDate":1,"endDate":1, "taskType":1,"billable":1,"customerName":1,"companyName":1,"workingHours":1,"status":1,"totalHoursWeek":1});
+        res.send(timesheetList);
+      }
+    
+      async show(req, res) {
+        const timesheetList = await model.timesheet.get({ empId: req.params.id },{"empId":1,
+        "pId":1,"startDate":1,"endDate":1, "taskType":1,"billable":1,"customerName":1,"companyName":1,"workingHours":1,"status":1,"totalHoursWeek":1});
+        res.send(timesheetList);
+      }
+      async show(req, res) {
+        const timesheetList = await model.timesheet.get({ empId: req.params.id },{"empId":1,
+        "pId":1,"startDate":1,"endDate":1, "taskType":1,"billable":1,"customerName":1,"companyName":1,"workingHours":1,"status":1,"totalHoursWeek":1});
+        res.send(timesheetList);
+      }
+      
+    
 }
 
 module.exports = new Timesheet();
