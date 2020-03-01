@@ -1,9 +1,10 @@
 const mongoose=require('mongoose');
 const schema=require('../schemas');
 const timesheetschema=mongoose.Schema(schema);
-class Employee{
+
+class Timesheet{
   constructor(){
-    this.model=mongoose.model('Employee',timesheetschema);
+    this.model = mongoose.model('Timesheet',timesheetschema);
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
@@ -11,7 +12,7 @@ class Employee{
    }
    //saves the data of newly created employee
     async save(timesheetObj){
-      console.log(timesheetObj, 'new employee created!');
+      console.log(timesheetObj, 'new timesheet created!');
       const timesheet = await this.model.create(timesheetObj);
        return timesheet;
     }
@@ -25,7 +26,7 @@ class Employee{
     }
 }
 
-module.exports=new Employee();
+module.exports = new Timesheet();
 
 
 

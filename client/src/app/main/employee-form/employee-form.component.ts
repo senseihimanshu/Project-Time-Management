@@ -2,14 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-employee-form",
-  styleUrls: ["./employee-form.component.scss", '../main.component.scss'],
-  templateUrl: './employee-form.component.html' 
+  styleUrls: ["./employee-form.component.scss", "../main.component.scss"],
+  templateUrl: "./employee-form.component.html"
 })
 export class EmployeeFormComponent implements OnInit {
-  formType: string;
+  typeOfForm: string;
   employee: any;
 
   constructor(
@@ -20,19 +21,28 @@ export class EmployeeFormComponent implements OnInit {
 
   ngOnInit(): any {
     console.log("ngOnInit");
+
+    // this.route.params.pipe(switchMap((params: Params) => {
+    //   console.log(params);
+    //   this.typeOfForm = params.type;
+    //   if(this.typeOfForm !== 'get'){
+
+    //   }
+    // }));
+
     this.route.params
       .pipe(
         switchMap((params: Params) => {
           console.log(params);
-          this.formType = params.type;
-            // debugger;
-          console.log(this.formType);
+          this.typeOfForm = params.type;
+          // debugger;
+          console.log(this.typeOfForm);
 
           if (!params.empId) {
-            return this.employeeService.getEmployee(null);
+            return new Observable<any>();
           }
-          this.formType = "get";
-          console.log(this.formType);
+          this.typeOfForm = "get";
+          console.log(this.typeOfForm);
           return this.employeeService.getEmployee(params.empId);
         })
       )
@@ -43,9 +53,10 @@ export class EmployeeFormComponent implements OnInit {
       });
   }
 
-  employeeCreateOrUpdate(obj, formType): any {
+  employeeCreateOrUpdate(obj, typeOfForm): any {
+    console.log(obj, typeOfForm);
     this.employeeService
-      .employeeCreateOrUpdate(obj, formType)
+      .employeeCreateOrUpdate(obj, typeOfForm)
       .subscribe((res: any) => {
         console.log(res);
       });
