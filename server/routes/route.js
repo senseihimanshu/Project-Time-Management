@@ -17,6 +17,7 @@ module.exports= (app) => {
 	app.post("/api/employee", controller.employees.create);
 	app.put("/api/employee", controller.employees.update);
 	app.get("/api/employee", controller.employees.show);
+	app.delete("/api/employee", controller.employees.delete);
 	//Timesheet Routes
 	app.post('/api/timesheet', controller.timesheet.create)
 

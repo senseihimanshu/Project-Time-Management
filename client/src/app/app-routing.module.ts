@@ -62,13 +62,13 @@ const routes: Routes = [
     path: "employeeform",
     children: [
       {
-        path: "create/:type",
+        path: ":type",
         component: EmployeeFormComponent
       },
-      {
-        path: "update/:type",
-        component: EmployeeFormComponent
-      },
+      // {
+      //   path: "update/:type",
+      //   component: EmployeeFormComponent
+      // },
       {
         path: ":empId",
         component: EmployeeFormComponent

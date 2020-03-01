@@ -116,6 +116,7 @@ class Employee {
     } = req.body;
 
     const employeeToUpdate = await model.employee.get({ empId });
+    console.log(empId);
     const patchedEmployee = {
       email: email || employeeToUpdate.email,
       name: name || employeeToUpdate.name,
@@ -126,19 +127,8 @@ class Employee {
       password: password || employeeToUpdate.password
     };
 
+    console.log(patchedEmployee);
     // const newEmployee = new Employee(patchedEmployee);
-
-    if (email) {
-      const resultAfterIsUnique = await isUnique(null, email);
-      if (!resultAfterIsUnique.status) {
-        return res.status(401).send({
-          success: false,
-          payload: {
-            message: resultAfterIsUnique.message
-          }
-        });
-      }
-    }
 
     try {
       await model.employee.update(patchedEmployee).then(() => {
@@ -160,9 +150,24 @@ class Employee {
   }
 
   async delete(req, res) {
-    console.log("running");
-    const employee = await model.employee.delete({ _id: req.params.id });
-    res.send(employee);
+    console.log(req.query.empId);
+    const employee = await model.employee.delete({ empId: req.query.empId });
+    console.log(employee);
+    // if(!employee){
+    //   res.send({
+    //     success: false,
+    //     payload: {
+    //       message: 'Employee cannot be deleted as not found'
+    //     }
+    //   });
+    // }
+    res.send({
+      success: true,
+      payload: {
+        employee,
+        message: 'Employee Deleted Successfully'
+      }
+    });
   }
 }
 module.exports = new Employee();
