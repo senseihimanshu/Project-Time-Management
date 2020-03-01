@@ -39,16 +39,40 @@
       >
         Delete Employee
       </button>
+  <mat-toolbar color="primary" class="navbar">
+    <div>
+      Admin Dashboard
     </div>
-  </div>
+    <div>
+      <span>My Profile</span>
+      <span>Employees</span>
+      <span routerLink="/projects">Projects</span>
+    </div>
+  </mat-toolbar>
+  
+<button type="button"
+class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+(click)="tabularData()">Show Details
+</button>
+
+<button type="button"
+class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+[routerLink]="['/employeeform/create', 'create']">Add new employee
+</button>
+
+<button type="button"
+class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+[routerLink]="['/employeeform/update', 'update']">Update employee details
+</button>
+
   <section class="background_dashboard">
     <table class="empTable">
       <tr>
-        <th>Employee Id:</th>
-        <th>Name:</th>
-        <th>Email:</th>
-        <th>Designation:</th>
-        <th>Role:</th>
+        <th>Employee Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>Role</th>
       </tr>
       <tbody class="mt-5" *ngFor="let employee of usersArray">
         <tr>
