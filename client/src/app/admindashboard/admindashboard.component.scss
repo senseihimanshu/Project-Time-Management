@@ -33,27 +33,23 @@ tbody:nth-child(odd) {
 .show {
   margin-left: 43% !important;
 }
-
-.empTable {
-  width: 100vw;
-  color: black;
-  font-size: large;
-  font-weight: 800;
-  padding-left: 5rem;
+.empTable{
+    width: 100vw;
+    color: black;
+    font-size: large;
+    font-weight: 800;
+    padding-left: 5rem;
 }
-
-td {
-  font-family: Lato-Regular;
-  font-size: 17px;
-  color: black;
-  line-height: 1.4;
-  text-align: center;
-  padding-top: 18px;
-  padding-bottom: 10px;
-  padding-right: 10px;
-  font-weight: 400;
+td{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color:black;
+    line-height: 1.4;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    padding-right: 10px;
 }
-
 th {
   font-family: Lato-Bold;
   font-size: 18px;
@@ -92,4 +88,15 @@ th {
   background: linear-gradient(180deg, #ff8a00, #e52e71);
   border-radius: 30px;
   box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
+}
+
+.navbar{
+    justify-content: space-between;
+    height: 4rem;
+    background-color: black;
+}
+
+span{
+    padding-right: 2.5rem;
+    cursor: pointer;
 }

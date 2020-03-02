@@ -29,6 +29,7 @@ export class EmployeeFormComponent implements OnInit {
 
     //   }
     // }));
+    this.route.params.subscribe((data: Params) => { console.log(data) });
 
     this.route.params
       .pipe(

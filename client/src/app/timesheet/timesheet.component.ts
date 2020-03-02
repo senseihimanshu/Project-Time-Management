@@ -1,4 +1,6 @@
+import { MyprofileComponent } from './../myprofile/myprofile.component';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-timesheet',

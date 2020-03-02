@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+// import { MatSelectModule } from "@angular/material/select";
 import { SendHttpRequestService } from "./services/send-http-request.service";
 //import { AuthorizationService } from './services/authorization.service';
 
@@ -33,6 +34,18 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
 import { TimesheetModule } from "./timesheet/timesheet.module";
+import { ClevelDashboardModule } from "./main/clevel-dashboard/clevel-dashboard.module";
+import { ClevelDashboardComponent } from "./main/clevel-dashboard/clevel-dashboard.component";
+
+import { ProjectComponent } from "./project/project.component";
+import { ProjectFormComponent } from "./project-form/project-form.component";
+//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+// import {
+//   MatFormFieldModule,
+//   MatInputModule,
+//   MatToolbarModule
+// } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -47,15 +60,21 @@ import { TimesheetModule } from "./timesheet/timesheet.module";
     AdminComponent,
     AccessDeniedComponent,
     AdmindashboardComponent,
+    ProjectComponent,
+    ProjectFormComponent,
     MyprofileComponent
   ],
   imports: [
+    // MatSelectModule,
+    // MatFormFieldModule,
+    // MatInputModule,
+    // MatToolbarModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     TimesheetModule,
-
+    ClevelDashboardModule,
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
@@ -67,6 +86,7 @@ import { TimesheetModule } from "./timesheet/timesheet.module";
     FormsModule,
     HttpClientModule,
     TableModule,
+    // NgMultiSelectDropDownModule.forRoot(),
     // JwtModule.forRoot({}),
     //Third Party
     MDBBootstrapModule.forRoot(),
@@ -76,7 +96,8 @@ import { TimesheetModule } from "./timesheet/timesheet.module";
     InputsModule,
     IconsModule,
     CardsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

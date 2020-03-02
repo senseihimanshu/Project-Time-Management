@@ -1,5 +1,6 @@
 import { SendHttpRequestService } from './../send-http-request.service';
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admindashboard',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmindashboardComponent implements OnInit {
 
-  constructor(private _service:SendHttpRequestService) {
+  constructor(private _service:SendHttpRequestService,private router: Router) {
    }
    usersArray: any;
    tabularData() {
@@ -17,6 +18,10 @@ export class AdmindashboardComponent implements OnInit {
       console.log(res);
     });
     console.log(obj);
+    }
+
+    takeToProjects(){
+      this.router.navigate(['/projects']);
     }
   
     ngOnInit() {
