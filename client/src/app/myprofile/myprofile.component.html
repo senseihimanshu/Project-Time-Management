@@ -9,15 +9,14 @@
     </div>
 </mat-toolbar>
     
-
 <div class="container bootstrap snippet">
     <div class="panel-body inf-content">
-        <div class="row">
-            <div class="col-md-4">
-                <img alt=""  title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
+        <div class="row mt-5">
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <img alt=""  title="" class="img-circle img-fluid ml-auto isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
             </div>
-            <div class="col-md-6">
-                <h1><strong> My Information</strong></h1><br>
+            <div class="">
+                <h1 class="font-weight-bold head-design">My Information</h1>
                 <div class="table-responsive">
                 <table class="table table-condensed table-responsive table-user-information">
                     <tbody>
@@ -29,29 +28,29 @@
                                                                           
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                              {{employee?.empId}}
                             </td>
                         </tr>
                         <tr>    
                             <td>
                                 <strong>
-                                    <span class="glyphicon glyphicon-user  text-primary"></span>    
+                                    <span class="glyphicon glyphicon-user  "></span>    
                                     Name                                           
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                                 {{employee?.name}}  
                             </td>
                         </tr>
                         <tr>        
                             <td>
                                 <strong>
-                                    <span class="glyphicon glyphicon-cloud text-primary"></span>  
+                                    <span class="glyphicon glyphicon-cloud "></span>  
                                 Designation                                                
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                                 {{employee?.designation}}
                             </td>
                         </tr>
@@ -59,11 +58,11 @@
                         <tr>        
                             <td>
                                 <strong>
-                                    <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                    <span class="glyphicon glyphicon-bookmark "></span> 
                                     Role                                          
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                                 {{employee?.role}} 
                             </td>
                         </tr>
@@ -72,33 +71,33 @@
                         <tr>        
                             <td>
                                 <strong>
-                                    <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                    <span class="glyphicon glyphicon-eye-open "></span> 
                                     Phone                                         
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                                 {{employee?.phoneNo}}
                             </td>
                         </tr>
                         <tr>        
                             <td>
                                 <strong>
-                                    <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                    <span class="glyphicon glyphicon-envelope "></span> 
                                     Email                                                
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                                 {{employee?.email}} 
                             </td>
                         </tr>
                         <tr>        
                             <td>
                                 <strong>
-                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                    <span class="glyphicon glyphicon-calendar "></span>
                                     Joining Date                                              
                                 </strong>
                             </td>
-                            <td class="text-primary">
+                            <td class="">
                                 {{employee?.joining | date}}
                             </td>
                         </tr>

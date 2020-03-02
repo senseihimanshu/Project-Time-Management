@@ -1,0 +1,12 @@
+.table-row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  
+
+    td{
+        width: 4rem;
+        font-weight: 500;
+        font-family: 'Lato', sans-serif;
+    }
+}

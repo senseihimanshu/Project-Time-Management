@@ -5,7 +5,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   selector: "table-row",
   styleUrls: ["./tablerow.component.scss", "../admindashboard.component.scss"],
   template: `
-    <tr>
+    <div class="table-row">
       <td>
         {{ employee.empId }}
       </td>
@@ -37,7 +37,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
       <td>
         <button class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></button>
       </td>
-    </tr>
+    </div>
   `
 })
 export class TableRowComponent {

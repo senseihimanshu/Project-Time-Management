@@ -35,7 +35,7 @@ export class EmployeeFormComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          console.log(params);
+          //console.log(params);
           
           // debugger;
           console.log(this.typeOfForm);
@@ -59,7 +59,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
-    console.log(obj, typeOfForm);
+   console.log(obj, typeOfForm);
     this.employeeService
       .employeeCreateOrUpdate(obj, typeOfForm)
       .subscribe((res: any) => {
