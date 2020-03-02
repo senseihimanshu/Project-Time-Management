@@ -1,3 +1,10 @@
+strong{
+    width: 5rem;
+}
+strong::after{
+    content: ':';
+}
+
 .inf-content{
     border:1px solid #DDDDDD;
     -webkit-border-radius:10px;

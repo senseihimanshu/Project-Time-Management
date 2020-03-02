@@ -11,9 +11,11 @@ class Project {
         projectName: req.body.projectName,
         projectManager: req.body.projectMananger,
         clientName: req.body.clientName,
-        status: req.body.status
-        //  startDate:req.body.startDate,
-        //endDate:req.body.endDate
+        status: req.body.status,
+        startDate:req.body.startDate,
+        endDate:req.body.endDate,
+       // empObjectIdArray=req.body.empObjectIdArray,
+        status:req.body.status
       };
       console.log(projectObj, 'before save');
       const project = await model.project.save(projectObj);
