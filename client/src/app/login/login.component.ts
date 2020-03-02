@@ -62,7 +62,7 @@ export class LoginComponent implements AfterViewInit{
             else if (role=='Admin'||role=='admin'){
               this.router.navigate(['/admin']);
             }
-            else if( role=='C-level Manager'||role=='c-level manager'){
+            else if( role=='C Level Manager'){
               this.router.navigate(['/clevel']);
             }
             else if(role=='Project Manager'||role=='project manager'){

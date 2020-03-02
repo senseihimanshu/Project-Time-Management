@@ -1,5 +1,33 @@
-<div class="header">
-  <div class="header__logo-container"></div>
+
+  <div class="header">
+    <div class="header__logo-container"></div>
+    <div class="btn-group d-flex">
+      <button
+        type="button"
+        mdbBtn
+        class="button-operations"
+        color="primary"
+        mdbWavesEffect
+        [routerLink]="['/employeeform', 'create']"
+      >
+        Create Employee
+      </button>
+      <button
+        type="button"
+        mdbBtn
+        color="success"
+        class="button-operations"
+        mdbWavesEffect
+        [routerLink]="['/employeeform', 'update']"
+      >
+        Update Employee
+      </button>
+      <button type="button" mdbBtn color="secondary" class="button-operations" (click)="tabularData()" mdbWavesEffect>
+        Show Details
+      </button>
+      <button type="button" mdbBtn color="danger" mdbWavesEffect>
+        Delete Employee
+      </button>
   <mat-toolbar color="primary" class="navbar">
     <div>
       Admin Dashboard

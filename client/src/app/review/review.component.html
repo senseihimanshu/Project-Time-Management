@@ -5,7 +5,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"> </script>
-  <title>Admin Dashboard</title>
+  <title>Review Dashboard</title>
 </head>
 
 <body>
@@ -38,19 +38,21 @@
   </header> -->
   <nav class="navbar navbar-expand-md bg-light navbar-light p-3">
     <a class="navbar-brand" href="#"><b>Review Timesheet</b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <button type="button"
-            class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold btnsstyle mr-2"
-            (click)="reviews()">Show Details
+    <div class="header">
+        <div class="header__logo-container"></div>
+        <div class="btn-group d-flex">
+            <button
+            type="button"
+            mdbBtn
+            color="warning"
+            class="button-operations btnsstyle"
+            (click)="reviews()"
+            mdbWavesEffect
+          >
+            Show Details
           </button>
-        </li>
-      </ul>
-    </div>
+          </div>
+          </div>
   </nav>
 
   <body>

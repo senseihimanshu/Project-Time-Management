@@ -25,7 +25,8 @@ class Employee {
       designation,
       joining,
       phone,
-      address
+      address,
+      role
     } = req.body;
 
     const newEmployee = {
@@ -35,7 +36,8 @@ class Employee {
       designation,
       joining,
       phone,
-      address
+      address,
+      role
     };
     newEmployee.password = `${empId}${name}`;
 
@@ -71,11 +73,13 @@ class Employee {
   }
 
   async index(req, res) {
+   // console.log("dikhaa rha huu");
     const employeeList = await model.employee.log(
       {},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
     );
     res.send(employeeList);
+    console.log(employeeList);
   }
 
   async show(req, res) {
