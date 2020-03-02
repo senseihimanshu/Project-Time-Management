@@ -95,6 +95,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'timesheet',
+    component: TimesheetComponent
+  },
+  { 
     path: "**",
     component: NotFoundComponent
   }

@@ -6,8 +6,8 @@
 
 body {
     /* make the body full height*/
-    height: 100vh;
     /* set our custom font */
+    height: 85vh !important;
     font-family: 'Roboto',
         sans-serif;
     display: flex;
@@ -21,8 +21,6 @@ body {
 
 #form_wrapper {
     width: 1000px;
-    height: 500px;
-    /* this will help us center it*/
     margin: auto;
     background-color: #ffffff;
     border-radius: 50px;
@@ -72,10 +70,10 @@ span {
 
 .input_container,
 #input_submit {
-    height: 60px;
+    height: 50px;
     /* make the borders more round */
     border-radius: 30px;
-    width: 100%;
+    width: 90%;
 }
 
 .input_field {
