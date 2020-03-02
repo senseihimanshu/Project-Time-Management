@@ -34,11 +34,11 @@ tbody:nth-child(odd) {
   margin-left: 43% !important;
 }
 .empTable{
-    width: 100vw;
+    // width: 100vw;
     color: black;
     font-size: large;
     font-weight: 800;
-    padding-left: 5rem;
+    // padding-left: 5rem;
 }
 
 td{
@@ -125,3 +125,15 @@ span{
 .delete i {
     color: red;
 }
+.logout
+{
+  float: right;
+}
+
+.test{
+  display: flex;
+  justify-content: space-between;
+  // width: 100%;
+  background-color: #09103a73;
+}
+

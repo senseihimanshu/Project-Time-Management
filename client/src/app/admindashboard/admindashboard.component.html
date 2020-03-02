@@ -10,36 +10,36 @@
   </mat-toolbar>
     
     <button type="button"
-    class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
+    class="btn btn-outline-warning text-center text-yellow font-weight-bold m-2 btnsstyle"
     (click)="tabularData()">Show Details
     </button>
     
     <button type="button"
-    class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-    [routerLink]="['/employeeform', 'create']">Add new employee
+    class="btn btn-outline-warning text-center text-yellow font-weight-bold m-2 btnsstyle"
+    [routerLink]="['/employeeform', 'create']">Add New Employee
     </button>
      <button type="button"
-    class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-    (click)="logout()">log out
+    class="btn btn-outline-warning logout text-center text-yellow font-weight-bold m-2 btnsstyle"
+    (click)="logout()">Log Out
     </button> 
 
   <section class="background_dashboard">
-    <table class="empTable">
-      <tr>
-        <th>Employee Id</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Designation</th>
-        <th>Role</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tbody class="mt-5">
-        <tr *ngFor="let employee of usersArray">
+    <div class="empTable">
+      <div class="test">
+        <div>Employee Id</div>
+        <div>Name</div>
+        <div>Email</div>
+        <div>Designation</div>
+        <div>Role</div>
+        <div>View</div>
+        <div>Update</div>
+        <div>Delete</div>
+      </div>
+      <div class="mt-5">
+        <div *ngFor="let employee of usersArray">
           <table-row [employee]="employee" (deleteEmp)="deleteEmployee($event)"></table-row>
-        </tr>
-      </tbody>
-    </table>
+        </div>
+      </div>
+    </div>
   </section>
 
