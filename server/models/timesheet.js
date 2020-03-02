@@ -8,6 +8,7 @@ class Timesheet{
   }
    //getting the timesheet data as per criteria  
     async get(criteria={},columns={}){
+      console.log("timesheet dikhauga")
        return this.model.find(criteria,columns);
    }
    //saves the data of newly created timesheet entry
