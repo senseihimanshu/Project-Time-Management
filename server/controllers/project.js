@@ -8,17 +8,49 @@ class Project {
   async create(req, res) {
     try {
       let projectObj = {
+        projectId: req.body.projectId,
         projectName: req.body.projectName,
         projectManager: req.body.projectMananger,
         clientName: req.body.clientName,
         status: req.body.status,
-        startDate:req.body.startDate,
-        endDate:req.body.endDate,
-       // empObjectIdArray=req.body.empObjectIdArray,
-        status:req.body.status
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        empObjectIdArray: req.body.empIdArray,
+        status: req.body.status
       };
-      console.log(projectObj, 'before save');
-      const project = await model.project.save(projectObj);
+      console.log(projectObj, "before save");
+      const empObjectIdArray = [];
+      const projectObjectIdArray = [];
+      const empObjectIdPromise = async () => {
+        await Promise.all(
+          projectObj.empObjectIdArray.map(async empId => {
+            const { _id, projectId } = await model.employee.get(
+              { empId },
+              { projectId }
+            );
+
+            const newProject = await model.project.save(projectObj);
+            console.log(newProject);
+            
+            projectObjectIdArray.push(newProject);
+
+            const projectId = await model.project.get({ projectId: projectObj.projectId })._id;
+
+            await model.employee.updateOne(
+              { empId },
+              { projectId: [...projects, projectId] }
+            );
+            empObjectIdArray.push(projectId);
+          })
+        );
+      };
+
+      await empObjectIdPromise();
+
+      const project = await model.project.save({
+        ...projectObj,
+        empObjectIdArray
+      });
       console.log("running", project);
       return res.status("200").send(project);
       //here is a problem
