@@ -21,11 +21,8 @@ export class AdmindashboardComponent implements OnInit {
     console.log(obj);
     }
 
-    takeToProjects(){
-      this.router.navigate(['/projects']);
-    }
-  
     ngOnInit() {
+    this.tabularData()
     }
 
     deleteEmployee(empId: any){
