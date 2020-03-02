@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 export class EmployeeFormComponent implements OnInit {
   typeOfForm: string;
   employee: any;
+  message: string;
 
   constructor(
     private employeeService: EmployeeService,
@@ -57,12 +58,23 @@ export class EmployeeFormComponent implements OnInit {
       });
   }
 
-  employeeCreateOrUpdate(obj, typeOfForm): any {
+  employeeCreateOrUpdate(obj, typeOfForm, form): any {
     console.log(obj, typeOfForm);
     this.employeeService
       .employeeCreateOrUpdate(obj, typeOfForm)
       .subscribe((res: any) => {
-        console.log(res);
+        console.log(res.payload.message)
+        this.message = res.payload.message;
+        setTimeout(() => {
+          this.message = null;
+        }, 3000);
+        form.reset();
+      }, (err) => {
+        console.log(err);
+        this.message = err.error.payload.message;
+        setTimeout(() => {
+          this.message = null;
+        }, 3000);
       });
   }
 }
