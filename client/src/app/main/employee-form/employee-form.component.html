@@ -3,7 +3,8 @@
     <form
       class="text-center border border-light p-5"
       #form="ngForm"
-      (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm)"
+      (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
+      
     >
       <div
         class="h4 mb-4 d-flex justify-content-between font-weight-bold"
@@ -157,6 +158,7 @@
         <button mdbBtn color="info" block="true" type="submit">
           {{ typeOfForm === "create" ? "Add Employee" : "Update Employee" }}
         </button>
+        <div class="message">{{ this.message }}</div>
       </div>
     </form>
     {{ form.value | json }}
