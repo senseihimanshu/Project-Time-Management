@@ -6,27 +6,34 @@ class Project {
   }
 
   async create(req, res) {
-    try {
+      console.log("hgdjshxjkashdkjas",req.body);
       let projectObj = {
         projectName: req.body.projectName,
-        projectManager: req.body.projectMananger,
+        projectManager: req.body.projectManager,
         clientName: req.body.clientName,
         status: req.body.status,
         startDate:req.body.startDate,
         endDate:req.body.endDate,
-       // empObjectIdArray=req.body.empObjectIdArray,
-        status:req.body.status
-      };
-      console.log(projectObj, 'before save');
-      const project = await model.project.save(projectObj);
-      console.log("running", project);
-      return res.status("200").send(project);
-      //here is a problem
-    } catch (error) {
-      console.log(error);
+       //empObjectIdArray=req.body.empObjectIdArray,
+      }
+      try {
+        const project = await model.project.save(projectObj).then(() => {
+          res.status(200).send({
+            success: true,
+            payload: {
+              message: "Project created successfully"
+            }
+          });
+        });
+      } catch (err) {
+        res.status(400).send({
+          success: false,
+          payload: {
+            message: err.message
+          }
+        });
+      }
     }
-  }
-
   async index(req, res) {
     const projectList = await model.project.log({});
     res.send(projectList);

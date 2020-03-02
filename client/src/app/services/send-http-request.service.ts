@@ -25,7 +25,7 @@ export class SendHttpRequestService {
     return JSON.parse(jsonPayload);
   };
   showEmployees(): Observable<any>{
-    return this.http.get("http://localhost:3000/api/employee").pipe(
+    return this.http.get("http://localhost:3000/api/employees").pipe(
       tap(_ => this.log("Log In")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );

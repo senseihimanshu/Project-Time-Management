@@ -33,8 +33,10 @@ export class ProjectFormComponent implements OnInit {
           this.formType = params.type;
             // debugger;
           console.log(this.formType);
+          console.log("employees dhundu");
 
           if (!params.empId) {
+            console.log("here");
             return this.employeeService.getEmployee(null);
           }
           this.formType = "get";
@@ -49,11 +51,12 @@ export class ProjectFormComponent implements OnInit {
       });
   }
 
-  employeeCreateOrUpdate(obj, formType): any {
-    this.employeeService
-      .employeeCreateOrUpdate(obj, formType)
-      .subscribe((res: any) => {
-        console.log(res);
-      });
-  }
+  projectCreateOrUpdate(obj, formType, form): any {
+    console.log(obj, formType);
+     this.employeeService
+       .projectCreateOrUpdate(obj, formType)
+       .subscribe((res: any) => {
+         console.log(res.payload.message)
+       });
+   }
 }

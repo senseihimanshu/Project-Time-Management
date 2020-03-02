@@ -1,7 +1,7 @@
 const controller = require('../controllers');
 
 module.exports= (app) => {
-	app.post("/project",controller.project.create);
+	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
 	app.get("/project/:id",controller.project.show);
 	app.put("/project/:id",controller.project.update);

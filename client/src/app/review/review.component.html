@@ -9,85 +9,54 @@
 </head>
 
 <body>
-  <!--Header starts from here-->
-  <!-- <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto"> </ul>
-      <button type="button"
-        class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-        (click)="tabularData()">Show Details
-      </button>
-      <form class="form-inline my-2 my-lg-0">
-        <button type="button"
-          class="btn btn-outline-warning btn-warning text-center text-white font-weight-bold m-2 btnsstyle"
-          (click)="deletionbyid()">Delete employee
-        </button>
-        <button type="button"
-          class="btn btn-outline-warning btn-success text-center text-white font-weight-bold m-2 btnsstyle"
-          (click)="updatedetails()">Update Details
-        </button>
-      </form>
-    </div>
-  </nav>
-  </header> -->
   <nav class="navbar navbar-expand-md bg-light navbar-light p-3">
     <a class="navbar-brand" href="#"><b>Review Timesheet</b></a>
     <div class="header">
-        <div class="header__logo-container"></div>
-        <div class="btn-group d-flex">
-            <button
-            type="button"
-            mdbBtn
-            color="warning"
-            class="button-operations btnsstyle"
-            (click)="reviews()"
-            mdbWavesEffect
-          >
-            Show Details
-          </button>
-          </div>
-          </div>
+      <div class="header__logo-container"></div>
+      <div class="btn-group d-flex">
+        <button type="button" mdbBtn color="warning" class="button-operations btnsstyle" (click)="reviews()"
+          mdbWavesEffect>
+          Show Details
+        </button>
+      </div>
+    </div>
   </nav>
 
-  <body><section class="background_dashboard">
-    <table class="empTable">
-      <tr>
-        <th>Employee-id:</th>
-        <th>Project-id:</th>
-        <th>Billable:</th>
-        <th>Hours:</th>
-        <th>Status:</th>
-      </tr>
-      <tbody class="mt-5" *ngFor="let employee of usersArray">
+  <body>
+    <section class="background_dashboard">
+      <table class="empTable">
         <tr>
-          <td>
-            {{employee.empId}}
-          </td>
-          <td>
-            {{employee.projectId}}
-          </td>
-          <td>
-            {{employee.billable}}
-          </td>
-          <td>
-            {{employee.workingHours}}
-          </td>
-          <td>
-            {{employee.status}}
-          </td>
-          <td>
-            <a class="btn btn-primary" href="#" role="button"(click)="accept(this._id)">Accept</a>
-            <a class="btn btn-primary" href="#" role="button"(click)="reject(this._id)">Reject</a>
-          </td>
+          <th>Employee-id</th>
+          <th>Project-id</th>
+          <th>Billable</th>
+          <th>Hours</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
-      </tbody>
-    </table>
+        <tbody class="mt-5" *ngFor="let employee of usersArray">
+          <tr>
+            <td>
+              {{employee.empId}}
+            </td>
+            <td>
+              {{employee.projectId}}
+            </td>
+            <td>
+              {{employee.billable}}
+            </td>
+            <td>
+              {{employee.workingHours}}
+            </td>
+            <td>
+              {{employee.status}}
+            </td>
+            <td>
+              <a class="btn btn-primary" href="#" role="button" (click)="accept(this._id)">Accept</a>
+              <a class="btn btn-primary" href="#" role="button" (click)="reject(this._id)">Reject</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-  </section>
+    </section>
   </body>

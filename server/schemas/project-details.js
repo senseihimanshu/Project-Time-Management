@@ -16,16 +16,16 @@ module.exports = {
   },
   startDate: {
     type: String,
-    default: null
+    default: Date.now()
   },
   endDate: {
     type: String,
     default: null
   },
-  empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
+  //empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
   status: {
     type: String,
-    enum: ["completed", "discarded", "in-progress"],
+    enum: ["Completed", "discarded", "in-progress"],
     default: 'in-progress'
   }
 };
