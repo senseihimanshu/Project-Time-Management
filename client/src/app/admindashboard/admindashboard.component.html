@@ -1,42 +1,18 @@
   <div class="header">
     <div class="header__logo-container"></div>
     <div class="btn-group d-flex">
-      <button
-        type="button"
-        mdbBtn
-        class="button-operations"
-        color="primary"
-        mdbWavesEffect
-        [routerLink]="['/employeeform/create', 'create']"
-      >
+      <button type="button" mdbBtn class="button-operations" color="primary" mdbWavesEffect
+        [routerLink]="['/employeeform/create', 'create']">
         Create Employee
       </button>
-      <button
-        type="button"
-        mdbBtn
-        color="success"
-        class="button-operations"
-        mdbWavesEffect
-        [routerLink]="['/employeeform/update', 'update']"
-      >
+      <button type="button" mdbBtn color="success" class="button-operations" mdbWavesEffect
+        [routerLink]="['/employeeform/update', 'update']">
         Update Employee
       </button>
-      <button
-        type="button"
-        mdbBtn
-        color="secondary"
-        class="button-operations"
-        (click)="tabularData()"
-        mdbWavesEffect
-      >
+      <button type="button" mdbBtn color="secondary" class="button-operations" (click)="tabularData()" mdbWavesEffect>
         Show Details
       </button>
-      <button
-        type="button"
-        mdbBtn
-        color="danger"
-        mdbWavesEffect
-      >
+      <button type="button" mdbBtn color="danger" mdbWavesEffect>
         Delete Employee
       </button>
     </div>

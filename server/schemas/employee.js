@@ -53,7 +53,7 @@ module.exports = {
   role:[{
     type:String,
     default:'Employee',
-    enum:['Project Manager','C-level Manager','Employee','Admin']
+    enum:['Project Manager','C Level Manager','Employee','Admin']
   }],
   projectId:[{
     type:ObjectId,

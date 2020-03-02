@@ -1,47 +1,92 @@
-.background_dashboard{
-    height: 93vh;
-   // background:#9a9184;
-   
+.background_dashboard {
+  height: 85vh;
+  // background:#9a9184;
+
 }
-tbody:nth-child(even) {background:white}
-tbody:nth-child(odd) {background:#80808054}
-.table{
-    margin-top: 5rem;
+
+tbody:nth-child(even) {
+  background: white
 }
+
+tbody:nth-child(odd) {
+  background: #80808054
+}
+
+.table {
+  margin-top: 5rem;
+}
+
 // .navbar-collapse{
 //     margin-left: 45%;
 // }
-.deletebutton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
+.deletebutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
-.empTable{
-    width: 100vw;
-    color: black;
-    font-size: large;
-    font-weight: 800;
-    padding-left: 5rem;
+
+.empTable {
+  width: 100vw;
+  color: black;
+  font-size: large;
+  font-weight: 800;
+  padding-left: 5rem;
 }
-td{
-    font-family: Lato-Regular;
-    font-size: 15px;
-    color:black;
-    line-height: 1.4;
-    text-align: center;
-    padding-top: 18px;
-    padding-bottom: 10px;
-    padding-right: 10px;
+
+td {
+  font-family: Lato-Regular;
+  font-size: 15px;
+  color: black;
+  line-height: 1.4;
+  text-align: center;
+  padding-top: 18px;
+  padding-bottom: 10px;
+  padding-right: 10px;
 }
-th{
-    font-family: Lato-Bold;
-    font-size: 18px;
-    color: #fff;
-    line-height: 1.4;
-    background-color: #6c7ae0;
-    padding-top: 18px;
-    padding-bottom: 18px;
-    padding-right: 10px;
-    text-align: center;
+
+th {
+  font-family: Lato-Bold;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.4;
+  background-color: #6c7ae0;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.btnsstyle {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.app-main[_ngcontent-meo-c1] {
+  padding: 0 8.4rem;
+  min-height: 8vh !important;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.background_dashboard::-webkit-scrollbar {
+  width: 30px;
+  height: 5px;
+}
+
+.background_dashboard::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #201c29, #201c29 1px, #100e17 0, #100e17);
+}
+
+.background_dashboard::-webkit-scrollbar-thumb {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff8a00), to(#e52e71));
+  background: linear-gradient(180deg, #ff8a00, #e52e71);
+  border-radius: 30px;
+  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
 }

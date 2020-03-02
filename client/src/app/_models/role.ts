@@ -1,6 +1,6 @@
 export enum Role {
     Employee = 'Employee',
     Admin = 'Admin',
-    Clevel= 'C-level',
+    Clevel= 'C Level Manager',
     ProjectManager= 'Project Manager'
 }
