@@ -1,8 +1,8 @@
 .background_dashboard {
   height: 85vh;
-  // background:#9a9184;
-  overflow-x: auto;
-  overflow-y: auto;
+//   // background:#9a9184;
+//   overflow-x: auto;
+//   overflow-y: auto;
 }
 
 tbody:nth-child(even) {
@@ -40,6 +40,7 @@ tbody:nth-child(odd) {
     font-weight: 800;
     padding-left: 5rem;
 }
+
 td{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
@@ -50,16 +51,27 @@ td{
     padding-bottom: 10px;
     padding-right: 10px;
 }
-th {
-  font-family: Lato-Bold;
-  font-size: 18px;
-  color: #fff;
-  line-height: 1.4;
-  background-color: #6c7ae0;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  padding-right: 10px;
-  text-align: center;
+th{
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+    background-color: #09103a73;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+.app-main[_ngcontent-meo-c1] {
+    padding: 0 8.4rem;
+     min-height: 8vh!important;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
 }
 
 .app-main[_ngcontent-meo-c1] {
