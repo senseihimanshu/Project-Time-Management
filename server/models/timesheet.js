@@ -25,6 +25,9 @@ class Timesheet{
     async log(columns={}){
       return this.model.find(columns);
     }
+    async update(criteria={},updatedEmployeeObj){
+      return this.model.updateOne(criteria,updatedEmployeeObj);
+   }
 }
 
 module.exports = new Timesheet();
