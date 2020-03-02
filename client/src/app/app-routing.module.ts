@@ -1,3 +1,4 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ProjectComponent } from "./project/project.component";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
@@ -21,6 +22,10 @@ const routes: Routes = [
     path: "admindashboard",
     component: AdmindashboardComponent
   },
+      {
+        path: "myProfile",
+        component: MyprofileComponent
+      },
   {
     path: "review",
     component: ReviewComponent
@@ -69,10 +74,6 @@ const routes: Routes = [
       {
         path: ":type/:empId",
         component: EmployeeFormComponent
-      },
-      {
-        path: "profile",
-        component: MyprofileComponent
       }
     ]
   },

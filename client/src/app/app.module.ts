@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-// import { MatSelectModule } from "@angular/material/select";
+import { MatSelectModule } from "@angular/material/select";
 import { SendHttpRequestService } from "./services/send-http-request.service";
 //import { AuthorizationService } from './services/authorization.service';
 
@@ -64,11 +64,12 @@ import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component"
     AdmindashboardComponent,
     ProjectComponent,
     ProjectFormComponent,
-    // MyprofileComponent,
+    MyprofileComponent,
     NotFoundComponent,
     TableRowComponent
   ],
   imports: [
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
