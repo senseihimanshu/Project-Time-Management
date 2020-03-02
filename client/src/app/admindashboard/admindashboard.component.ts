@@ -34,4 +34,11 @@ export class AdmindashboardComponent implements OnInit {
         console.log(data);
       });
     }
+   logout(){
+    this._service.deletetoken();
+     
+        this.router.navigate(["/login"]);
+     
+  }
+  
 }

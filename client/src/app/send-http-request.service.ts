@@ -16,6 +16,7 @@ export class SendHttpRequestService {
     console.log(message);
   }
   header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
+
   // //Decode JWT and return the Payload in JSON Format
   jsonDecoder = (token) => {
     var base64Url = token.split('.')[1];
@@ -52,6 +53,9 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
+  deletetoken() {
+    localStorage.removeItem("Authorization");
+  }
   
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -66,6 +70,7 @@ export class SendHttpRequestService {
       return of(result as T);
       };
     }
+    
   }
 
 

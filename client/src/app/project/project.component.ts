@@ -14,13 +14,13 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
   }
 
-  // tabularData() {
-  //   let obj=this._service.showProjects().subscribe(res => {
-  //     this.projectsArray=res;
-  //     console.log(res);
-  //   });
-  //   console.log(obj);
-  //   }
+  tabularData() {
+     let obj=this._service.showProjects().subscribe(res => {
+       this.projectsArray=res;
+       console.log(res);
+     });
+    console.log(obj);
+     } 
 
 }
 
