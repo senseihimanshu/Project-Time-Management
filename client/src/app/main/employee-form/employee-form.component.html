@@ -1,13 +1,14 @@
 <div class="app-main">
   <div class="app-employee-form">
     <form
-      class="text-center border border-light p-5"
+      class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body"
       #form="ngForm"
       (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
       
     >
       <div
-        class="h4 mb-4 d-flex justify-content-between font-weight-bold"
+        class="h4 mb-4
+         d-flex justify-content-between font-weight-bold"
         style="font-size: 2rem;"
       >
         {{
@@ -24,17 +25,17 @@
           mdbWavesEffect
           [routerLink]="['/admin']"
         >
-          X (Close)
+          Close X
         </button>
       </div>
 
-      <div class="h4 mb-4">
-        <label for="empId">Employee ID</label>
-
+      <div class="h4 mb-4
+      ">
+        <label for="empId">Employee ID: </label>&nbsp;
         <input
           type="text"
           id="empId"
-          class="form-control mb-4"
+          class="form-control "
           placeholder="EmployeeId"
           [(ngModel)]="employee && employee.empId"
           name="empId"
@@ -44,13 +45,14 @@
         />
       </div>
 
-      <div class="h4 mb-4">
-        <label for="email">Email Id</label>
+      <div class="h4 mb-4
+      ">
+        <label for="email">Email Id: </label>
 
         <input
           type="text"
           id="email"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Email"
           [(ngModel)]="employee && employee.email"
           name="email"
@@ -59,13 +61,14 @@
         />
       </div>
 
-      <div class="h4 mb-4">
-        <label for="emp_name">Name</label>
+      <div class="h4 mb-4
+      ">
+        <label for="emp_name">Name: </label>
 
         <input
           type="text"
           id="emp_name"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Employee Name"
           [(ngModel)]="employee && employee.name"
           name="name"
@@ -74,13 +77,14 @@
         />
       </div>
 
-      <div class="h4 mb-4">
-        <label for="address">Address</label>
+      <div class="h4 mb-4
+      ">
+        <label for="address">Address: </label>
 
         <input
           type="text"
           id="address"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Address"
           [(ngModel)]="employee && employee.address"
           name="address"
@@ -90,12 +94,12 @@
       </div>
 
       <div class="h4 mb-4">
-        <label for="phone">Phone</label>
+        <label for="phone">Phone: </label>
 
         <input
           type="text"
           id="phone"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Phone"
           [(ngModel)]="employee && employee.phone"
           name="phone"
@@ -105,12 +109,12 @@
       </div>
 
       <div class="h4 mb-4">
-        <label for="joining">Joining</label>
+        <label for="joining">Joining: </label>
 
         <input
           type="date"
           id="joining"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Joining"
           [(ngModel)]="employee && employee.joining"
           name="joining"
@@ -120,10 +124,10 @@
       </div>
 
       <div class="h4 mb-4">
-        <label for="designation">Designation</label>
+        <label for="designation">Designation: </label>
 
         <select
-          class="browser-default custom-select mb-4"
+          class="browser-default custom-select"
           name="designation"
           [(ngModel)]="employee && employee.designation[0]"
           [disabled]="typeOfForm === 'get'"
@@ -137,11 +141,13 @@
         </select>
       </div>
 
-      <div class="h4 mb-4">
-        <label for="role">Role</label>
+      <div class="h4 mb-4
+      ">
+        <label for="role">Role: </label>
 
         <select
-          class="browser-default custom-select mb-4"
+          class="browser-default custom-select mb-4
+          "
           name="role"
           [(ngModel)]="employee && employee.role[0]"
           [disabled]="typeOfForm === 'get'"
@@ -155,12 +161,12 @@
       </div>
 
       <div class="button-parent" *ngIf="typeOfForm !== 'get'">
-        <button mdbBtn color="info" block="true" type="submit">
+        <button mdbBtn type="button" color="info" block="true" size="lg" type="submit"  mdbWavesEffect>
           {{ typeOfForm === "create" ? "Add Employee" : "Update Employee" }}
         </button>
         <div class="message">{{ this.message }}</div>
       </div>
     </form>
-    {{ form.value | json }}
+    <!-- {{ form.value | json }} -->
   </div>
 </div>
