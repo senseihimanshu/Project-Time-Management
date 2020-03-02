@@ -1,3 +1,4 @@
+
   <div class="header">
     <div class="header__logo-container"></div>
     <div class="btn-group d-flex">
@@ -37,22 +38,41 @@
       <span routerLink="/projects">Projects</span>
     </div>
   </mat-toolbar>
-  
-<button type="button"
-class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-(click)="tabularData()">Show Details
-</button>
-
-<button type="button"
-class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-[routerLink]="['/employeeform/create', 'create']">Add new employee
-</button>
-
-<button type="button"
-class="btn btn-outline-warning btn-danger text-center text-white font-weight-bold m-2 btnsstyle"
-[routerLink]="['/employeeform/update', 'update']">Update employee details
-</button>
-
+  <div class="btn-group d-flex">
+    <button
+      type="button"
+      mdbBtn
+      class="button-operations"
+      color="primary"
+      mdbWavesEffect
+      [routerLink]="['/employeeform', 'create']"
+    >
+      Create Employee
+    </button>
+    <!-- <button
+      type="button"
+      mdbBtn
+      color="success"
+      class="button-operations"
+      mdbWavesEffect
+      [routerLink]="['/employeeform', 'update']"
+    >
+      Update Employee
+    </button> -->
+    <button
+      type="button"
+      mdbBtn
+      color="secondary"
+      class="button-operations"
+      (click)="tabularData()"
+      mdbWavesEffect
+    >
+      Show Details
+    </button>
+    <!-- <button type="button" mdbBtn color="danger" mdbWavesEffect>
+      Delete Employee
+    </button> -->
+  </div>
   <section class="background_dashboard">
     <table class="empTable">
       <tr>
@@ -61,25 +81,15 @@ class="btn btn-outline-warning btn-danger text-center text-white font-weight-bol
         <th>Email</th>
         <th>Designation</th>
         <th>Role</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-      <tbody class="mt-5" *ngFor="let employee of usersArray">
-        <tr>
-          <td>
-            {{ employee.empId }}
-          </td>
-          <td>
-            {{ employee.name }}
-          </td>
-          <td>
-            {{ employee.email }}
-          </td>
-          <td>
-            {{ employee.designation }}
-          </td>
-          <td>
-            {{ employee.role }}
-          </td>
+      <tbody class="mt-5">
+        <tr *ngFor="let employee of usersArray">
+          <table-row [employee]="employee" (deleteEmp)="deleteEmployee($event)"></table-row>
         </tr>
       </tbody>
     </table>
   </section>
+</div>

@@ -1,7 +1,7 @@
-import { ProjectFormComponent } from './project-form/project-form.component';
-import { ProjectComponent } from './project/project.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
-import { EmployeeFormComponent } from './main/employee-form/employee-form.component';
+import { ProjectFormComponent } from "./project-form/project-form.component";
+import { ProjectComponent } from "./project/project.component";
+import { MyprofileComponent } from "./myprofile/myprofile.component";
+import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
 import { LoginComponent } from "./login/login.component";
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
 import { AdminComponent } from "./admin/admin.component";
@@ -12,30 +12,27 @@ import { HomeComponent } from "./home/home.component";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
+import { NotFoundComponent } from "./404/notfound.component";
 //import { AuthorizationGuard } from './authorization.guard';
 
 const routes: Routes = [
   {
-      path:'admindashboard', 
-      component:AdmindashboardComponent,
+    path: "admindashboard",
+    component: AdmindashboardComponent
   },
   {
-    path:"review",
+    path: "review",
     component: ReviewComponent
   },
-   { path: "",
-    component: LoginComponent
-  },
+  { path: "", component: LoginComponent },
   {
     path: "manager",
     component: ReviewComponent
-    
   },
   {
     path: "projects",
     component: ProjectComponent
-    
   },
   {
     path: "employee",
@@ -65,17 +62,17 @@ const routes: Routes = [
         path: ":type",
         component: EmployeeFormComponent
       },
-      // {
-      //   path: "update/:type",
-      //   component: EmployeeFormComponent
-      // },
       {
-        path: ":empId",
+        path: "details/:empId",
         component: EmployeeFormComponent
       },
       {
-        path:"profile",
-        component : MyprofileComponent
+        path: ":type/:empId",
+        component: EmployeeFormComponent
+      },
+      {
+        path: "profile",
+        component: MyprofileComponent
       }
     ]
   },
@@ -98,12 +95,9 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: ""
-  },
-  
+    component: NotFoundComponent
+  }
 ];
-
-
 
 @NgModule({
   declarations: [],

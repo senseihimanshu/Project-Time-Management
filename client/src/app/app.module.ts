@@ -41,11 +41,13 @@ import { ProjectComponent } from "./project/project.component";
 import { ProjectFormComponent } from "./project-form/project-form.component";
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-// import {
-//   MatFormFieldModule,
-//   MatInputModule,
-//   MatToolbarModule
-// } from "@angular/material";
+import { NotFoundComponent } from "./404/notfound.component";
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatToolbarModule
+} from "@angular/material";
+import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 
 @NgModule({
   declarations: [
@@ -62,13 +64,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AdmindashboardComponent,
     ProjectComponent,
     ProjectFormComponent,
-    MyprofileComponent
+    // MyprofileComponent,
+    NotFoundComponent,
+    TableRowComponent
   ],
   imports: [
-    // MatSelectModule,
-    // MatFormFieldModule,
-    // MatInputModule,
-    // MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
