@@ -35,14 +35,17 @@ export class EmployeeFormComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => {
           console.log(params);
-          this.typeOfForm = params.type;
+          
           // debugger;
           console.log(this.typeOfForm);
-
+          this.typeOfForm = params.type;
+          if(!params.type){
+            this.typeOfForm = "get";
+          }
+          
           if (!params.empId) {
             return new Observable<any>();
           }
-          this.typeOfForm = "get";
           console.log(this.typeOfForm);
           return this.employeeService.getEmployee(params.empId);
         })

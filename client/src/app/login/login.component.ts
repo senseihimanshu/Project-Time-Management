@@ -9,7 +9,8 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements AfterViewInit{
-  
+  isMessage: Boolean = false;
+
   constructor(
     private sendReq: SendHttpRequestService,
     // private jwtHelperService: JwtHelperService,
@@ -39,11 +40,18 @@ export class LoginComponent implements AfterViewInit{
            // //Decode JWT and return the Payload in JSON Format
           const decodeToken= this.jsonDecoder(token);
           console.log(decodeToken);
-          console.log(decodeToken.data.role[0]);
+          // console.log(decodeToken.data.role[0]);
       
           // check if it was decoded successfully, if not the token is not valid, deny access
           if (!decodeToken) {
             console.log('Invalid token');
+          }
+          else if(!decodeToken.data){
+            console.log('Wrong Credentials');
+            this.isMessage = true;
+            setTimeout(() => {
+              this.isMessage = false;
+            }, 3000);
           }
           else{
             const role=decodeToken.data.role[0];

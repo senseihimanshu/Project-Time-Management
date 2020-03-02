@@ -39,4 +39,9 @@ export class EmployeeService {
     console.log(params);
     return this.http.get<any>(FEED_API, { ...this.httpOptions, params });
   }
+
+  deleteEmployee(empId: string): any{
+    const params = new HttpParams().set("empId", empId);
+    return this.http.delete<any>(FEED_API, { ...this.httpOptions, params });
+  }
 }

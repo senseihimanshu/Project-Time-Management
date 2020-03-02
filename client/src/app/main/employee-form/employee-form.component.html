@@ -1,6 +1,10 @@
 <div class="app-main">
   <div class="app-employee-form">
-    <form class="text-center border border-light p-5" #form="ngForm" (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm)">
+    <form
+      class="text-center border border-light p-5"
+      #form="ngForm"
+      (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm)"
+    >
       <div
         class="h4 mb-4 d-flex justify-content-between font-weight-bold"
         style="font-size: 2rem;"
@@ -31,11 +35,10 @@
           id="empId"
           class="form-control mb-4"
           placeholder="EmployeeId"
-          *ngIf="typeOfForm !== 'update'"
           [(ngModel)]="employee && employee.empId"
           name="empId"
           required
-          [disabled]="typeOfForm === 'get'"
+          [readonly]="!(typeOfForm === 'create')"
           #empIdInput="ngModel"
         />
       </div>
@@ -151,12 +154,7 @@
       </div>
 
       <div class="button-parent" *ngIf="typeOfForm !== 'get'">
-        <button
-          mdbBtn
-          color="info"
-          block="true"
-          type="submit"
-        >
+        <button mdbBtn color="info" block="true" type="submit">
           {{ typeOfForm === "create" ? "Add Employee" : "Update Employee" }}
         </button>
       </div>
