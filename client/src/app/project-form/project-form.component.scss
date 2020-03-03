@@ -1,0 +1,21 @@
+.app-main{
+    padding: 0.8rem 4rem;
+    margin: 0 auto;
+    // justify-content: center;
+    // align-items: center;
+}
+.message{
+    font-size: 2rem;
+    color: red;
+    transition: all .2s;
+}
+.form-body{
+    margin-left:16rem;
+    border-radius: 2rem;
+}
+.form-control,.custom-select
+{
+    display: block;
+    width:70%;
+    float:right;
+}

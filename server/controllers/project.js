@@ -8,6 +8,7 @@ class Project {
   async create(req, res) {
       console.log("hgdjshxjkashdkjas",req.body);
       let projectObj = {
+        projectId:req.body.projectId,
         projectName: req.body.projectName,
         projectManager: req.body.projectManager,
         clientName: req.body.clientName,
