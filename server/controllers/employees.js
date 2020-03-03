@@ -121,24 +121,27 @@ class Employee {
       projectId
     } = req.body;
 
+
     const employeeToUpdate = await model.employee.get({ empId });
-    console.log(empId);
+    console.log(empId, email);
     const patchedEmployee = {
-      email: email || employeeToUpdate.email,
-      name: name || employeeToUpdate.name,
-      designation: designation || employeeToUpdate.designation,
-      joining: joining || employeeToUpdate.joining,
-      phone: phone || employeeToUpdate.phone,
-      address: address || employeeToUpdate.address,
-      password: password || employeeToUpdate.password,
-      projectId:projectId || employeeToUpdate.projectId
+      email: employeeToUpdate.email !== email ? email : undefined,
+      name,
+      designation,
+      joining,
+      phone,
+      address,
+      password,
+      projectId
     };
 
     console.log(patchedEmployee);
-    // const newEmployee = new Employee(patchedEmployee);
+    
+    //discarding keys with undefined
+    Object.keys(patchedEmployee).forEach(key => patchedEmployee[key] === undefined && delete patchedEmployee[key])
 
     try {
-      await model.employee.update(patchedEmployee).then(() => {
+      await model.employee.update({ empId: empId }, patchedEmployee).then(() => {
         res.status(200).send({
           success: true,
           payload: {
