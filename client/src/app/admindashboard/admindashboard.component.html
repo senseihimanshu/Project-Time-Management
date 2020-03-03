@@ -51,6 +51,7 @@
             (deleteEmp)="deleteEmployee($event)"
           ></table-row>
         </tbody>
+        <h2 class="message" *ngIf="message">{{ message }}</h2>
       </table>
     </section>
   </div>

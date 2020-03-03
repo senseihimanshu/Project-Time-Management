@@ -1,5 +1,5 @@
 import { SendHttpRequestService } from './../send-http-request.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { EmployeeService } from '../services/employee.service';
 
@@ -8,7 +8,8 @@ import { EmployeeService } from '../services/employee.service';
   templateUrl: './admindashboard.component.html',
   styleUrls: ['./admindashboard.component.scss', '../main/main.component.scss']
 })
-export class AdmindashboardComponent implements OnInit {
+export class AdmindashboardComponent implements OnInit, OnChanges {
+  message: String;
 
   constructor(private _service:SendHttpRequestService,private router: Router, private employeeService: EmployeeService) {
    }
@@ -22,13 +23,21 @@ export class AdmindashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-    this.tabularData()
+      this.tabularData()
+    }
+
+    ngOnChanges(){
+      this.tabularData();
     }
 
     deleteEmployee(empId: any){
       console.log(empId);
-      this.employeeService.deleteEmployee(empId).subscribe((data) => {
-        console.log(data);
+      this.employeeService.deleteEmployee(empId).subscribe((res) => {
+        this.message = res.payload.message;
+        setTimeout(() => {
+          this.message = null;
+        }, 5000);
+        console.log(res);
       });
     }
    logout(){

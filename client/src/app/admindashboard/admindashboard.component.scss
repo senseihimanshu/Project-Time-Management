@@ -10,7 +10,7 @@ tbody:nth-child(even) {
 }
 
 tbody:nth-child(odd) {
-  background: #80808054
+  background: #efefef;
 }
 
 .table {
@@ -141,7 +141,7 @@ span{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: #09103a73;
+  background-color: #ffc107aa;
 }
 
 .test td{
@@ -159,4 +159,10 @@ span{
 
 .main{
   display: flex;
+}
+
+.message{
+  color: red;
+  text-align: center;
+  font-size: 4.2rem;
 }
