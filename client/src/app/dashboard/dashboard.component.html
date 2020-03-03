@@ -7,6 +7,47 @@
         <!-- <ul *ngIf="users">
             <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
         </ul> -->
-      
     </div>
 </div>
+
+        
+       
+    <div class="container-fluid">
+            <div class="row">
+               
+    
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                    <h2>Projects Status </h2>
+                    <canvas
+                      baseChart
+                      [chartType]="'pie'"
+                      [datasets]="projectpieChartData"
+                      [labels]="projectpieChartLabels"
+                      [options]="pieChartOptions"
+                      [legend]="true"
+                      [colors]="projectpieChartColor"
+                      (chartClick)="onChartClick($event)"
+                    >
+                  </canvas>
+                
+             </div>  
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                <h2>Timesheets Status </h2>
+                 <canvas
+                    baseChart
+                   [chartType]="'pie'"
+                   [datasets]="timesheetpieChartData"
+                   [labels]="timesheetpieChartLabels"
+                   [options]="pieChartOptions"
+                   [legend]="true"
+                   [colors]="timesheetpieChartColor"
+                   (chartClick)="onChartClick($event)"
+                 >
+             </canvas>
+            
+             </div>
+       <div>
+    </div>
+</div>
+         
+   
