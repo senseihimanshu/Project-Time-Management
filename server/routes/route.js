@@ -1,7 +1,7 @@
 const controller = require('../controllers');
 
 module.exports= (app) => {
-	app.post("/project",controller.project.create);
+	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
 	app.get("/project/:id",controller.project.show);
 	app.put("/project/:id",controller.project.update);
@@ -20,5 +20,5 @@ module.exports= (app) => {
 	app.delete("/api/employee", controller.employees.delete);
 	//Timesheet Routes
 	app.post('/api/timesheet', controller.timesheet.create)
-
+	app.put("/api/timesheet", controller.timesheet.update);
 }

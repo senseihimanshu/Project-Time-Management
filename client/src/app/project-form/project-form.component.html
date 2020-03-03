@@ -67,7 +67,7 @@
           [(ngModel)]="project && project.projectManager"
           name="manager"
           [disabled]="formType === 'get'"
-          #managerInput
+          #projectManagerInput
         />
       </div>
   
@@ -144,11 +144,11 @@
                 projectId: projectIdInput && projectIdInput.value,
                 projectName: projectNameInput && projectNameInput.value,
                 clientName: clientNameInput && clientNameInput.value,
-                manager: managerInput && managerInput.value,
-                startDate: startDateInputInput && startDateInput.value,
-                endDate: endDateInputInput && endDateInput.value,
+                projectManager: projectManagerInput && projectManagerInput.value,
+                startDate: startDateInput && startDateInput.value,
+                endDate: endDateInput && endDateInput.value,
                 status: statusInput && statusInput.value
-              })
+              },formType)
               "
           >
       {{ (formType === "create") ? "Add New Project" : "Update Project" }}
