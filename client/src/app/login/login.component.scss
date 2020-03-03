@@ -13,7 +13,7 @@ body {
     display: flex;
 }
 
-.message{
+.invalid-feedback{
     text-align: center;
     font-size: 1.6rem;
     color: #800000;
@@ -70,17 +70,17 @@ span {
 
 .input_container,
 #input_submit {
-    height: 50px;
+    height:60px;
     /* make the borders more round */
     border-radius: 30px;
-    width: 90%;
+    width: 100%;
 }
 
 .input_field {
     /* customize the input tag with lighter font and some padding*/
     color: var(--icon_color);
     background-color:#fafafa;
-    width: 90%;
+    width: 100%;
     border: none;
     font-size: 1.3rem;
     font-weight: 400;
