@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const config = require("config");
 const database=require('./database/config');
+const bodyParser=require('body-parser');
 
 //User Imports
 const employeeRoutes = require("./routes/employee");
@@ -21,9 +22,9 @@ if (!config.get("jwtPrivateKey")) {
 //   .catch(err => console.error("Error occured while connecting to db", err));
 
 //Using Middlewares
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
-
 require("./routes/route.js")(app);
 
 //Adding Routes

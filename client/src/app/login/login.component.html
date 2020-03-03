@@ -18,38 +18,62 @@
     </div>
     <div id="form_right">
       <h1>Member Login</h1>
+      <form [formGroup]="loginForm" class="login-container" (ngSubmit)="loginFunction()">
       <div class="input_container">
         <i class="fas fa-envelope"></i>
-        <input
+        <p [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
+          <input type="email" placeholder="Email" formControlName="email" id="field_email"
+          class="input_field"
+          #email>
+        </p>
+        <div *ngIf="isSubmitted && formControls.email.errors" class="help-block">
+          <div *ngIf="formControls.email.errors.required">Email is required</div>
+        </div>
+        <!-- <input
           placeholder="Email"
           type="email"
           name="Email"
           id="field_email"
           class="input_field"
           #email
-        />
-      </div>
+        />-->
+      </div> 
       <div class="input_container">
         <i class="fas fa-lock"></i>
-        <input
+        <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+          <input type="password" placeholder="Password" formControlName="password" id="field_password"
+          class="input_field"
+          #password>
+        </p>
+        <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+          <div *ngIf="formControls.password.errors.required">Password is required</div>
+        </div>
+
+        <!-- <input
           placeholder="Password"
           type="password"
           name="Password"
           id="field_password"
           class="input_field"
           #password
-        />
+        /> -->
       </div>
       <h2 class="message" [ngStyle]="{'visibility': (!isMessage? 'hidden' : 'visible')}">
         Invalid Credentials
       </h2>
-      <input
+      <p>
+        class="input_field"
+        <input type="submit" value="Login" id="input_submit"
+        class="input_field">
+      </p>
+    </form>
+      <!-- <input
         type="submit"
         value="Login"
         id="input_submit"
         class="input_field"
         (click)="loginFunction()"
-      />
+      /> -->
     </div>
   </div>
 </body>

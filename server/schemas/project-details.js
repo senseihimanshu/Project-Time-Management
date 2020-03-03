@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 module.exports = {
+  projectId:{
+    type:String,
+    required:true,
+  },
   projectName: {
     type: String,
     required: true
@@ -16,7 +20,7 @@ module.exports = {
   },
   startDate: {
     type: String,
-    default: null
+    default: Date.now()
   },
   endDate: {
     type: String,

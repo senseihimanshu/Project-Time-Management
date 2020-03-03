@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import {
   HttpClient,
@@ -7,7 +8,7 @@ import {
 } from "@angular/common/http";
 
 const FEED_API: string = "http://localhost:3000/api/employee";
-
+const PROJECT_API:string="http://localhost:3000/api/project"
 @Injectable({
   providedIn: "root"
 })
@@ -29,7 +30,14 @@ export class EmployeeService {
     if (type === "update")
       return this.http.put<any>(FEED_API, obj, this.httpOptions);
   }
+  projectCreateOrUpdate(obj: any, type: any):Observable <any> {
+    console.log(obj, type);
+    if (type === "create")
+      return this.http.post<any>(PROJECT_API, obj, this.httpOptions);
 
+    if (type === "update")
+      return this.http.put<any>(PROJECT_API, obj, this.httpOptions);
+  }
   getEmployee(empId: string): any {
     if (!empId) {
       return this.http.get<any>(FEED_API, { ...this.httpOptions });

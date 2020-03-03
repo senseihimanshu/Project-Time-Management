@@ -83,12 +83,13 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log(req.query);
+    console.log(req.query.empId);
     const employee = await model.employee.get({ empId: req.query.empId });
   //  const date = new Date(employee.joining);
   //   employee.joining=date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
     console.log(employee);
     if (!employee) {
+      console.log("Request is coming");
       return res.status(404).send({
         success: false,
         payload: {
@@ -116,7 +117,8 @@ class Employee {
       joining,
       phone,
       address,
-      password
+      password,
+      projectId
     } = req.body;
 
     const employeeToUpdate = await model.employee.get({ empId });
@@ -128,7 +130,8 @@ class Employee {
       joining: joining || employeeToUpdate.joining,
       phone: phone || employeeToUpdate.phone,
       address: address || employeeToUpdate.address,
-      password: password || employeeToUpdate.password
+      password: password || employeeToUpdate.password,
+      projectId:projectId || employeeToUpdate.projectId
     };
 
     console.log(patchedEmployee);

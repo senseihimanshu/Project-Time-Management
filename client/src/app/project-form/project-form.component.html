@@ -1,6 +1,9 @@
-<div class="app-employee-form">
-    <form class="text-center border border-light p-5">
-      <div class="h4 mb-4">
+<div class="app-main">
+  <div class="app-employee-form">
+    <form
+      class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body">
+      <div class="h4 mb-4  d-flex justify-content-between font-weight-bold"
+      style="font-size: 2rem;">
         {{
           formType === "get"
             ? "Project Data for " + project?.projectId
@@ -8,6 +11,15 @@
             ? "Create New Project"
             : "Update Project"
         }}
+        <button
+        type="button"
+        mdbBtn
+        color="danger"
+        mdbWavesEffect
+        [routerLink]="['/projects']"
+      >
+        Close X
+      </button>
       </div>
   
       <div class="h4 mb-4">
@@ -16,10 +28,9 @@
         <input
           type="text"
           id="projectId"
-          class="form-control mb-4"
-          placeholder="ProjectId"
-          *ngIf="formType !== 'update'"
-          [(ngModel)]="project && project.projectId"
+          class="form-control"
+          placeholder="Project Id"
+          [(ngModel)]="project&& project.projectId"
           name="projectId"
           [disabled]="formType === 'get'"
           #projectIdInput
@@ -32,7 +43,7 @@
         <input
           type="text"
           id="projectName"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Project Name"
           [(ngModel)]="project&& project.projectName"
           name="projectName"
@@ -47,7 +58,7 @@
         <input
           type="text"
           id="client_name"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Client Name"
           [(ngModel)]="project && project.clientName"
           name="client_name"
@@ -62,12 +73,12 @@
         <input
           type="text"
           id="manager"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Project Manager"
           [(ngModel)]="project && project.projectManager"
           name="manager"
           [disabled]="formType === 'get'"
-          #managerInput
+          #projectManagerInput
         />
       </div>
   
@@ -77,7 +88,7 @@
         <input
           type="date"
           id="start"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="Start Date"
           [(ngModel)]="project && project.startDate"
           name="date"
@@ -92,7 +103,7 @@
         <input
           type="date"
           id="end"
-          class="form-control mb-4"
+          class="form-control"
           placeholder="End Date"
           [(ngModel)]="project && project.endDate"
           name="date"
@@ -105,7 +116,7 @@
         <label for="status">Status:</label>
   
         <select
-          class="browser-default custom-select mb-4"
+          class="browser-default custom-select"
           name="status"
           [(ngModel)]="project && project.status[0]"
           [disabled]="formType === 'get'"
@@ -123,7 +134,7 @@
         <label for="members">Project Members:</label>
   
          <mat-select
-          class="browser-default custom-select mb-4"
+          class="browser-default custom-select"
           name="members"
           [disabled]="formType === 'get'"
           #membersInput
@@ -144,16 +155,18 @@
                 projectId: projectIdInput && projectIdInput.value,
                 projectName: projectNameInput && projectNameInput.value,
                 clientName: clientNameInput && clientNameInput.value,
-                manager: managerInput && managerInput.value,
-                startDate: startDateInputInput && startDateInput.value,
-                endDate: endDateInputInput && endDateInput.value,
+                projectManager: projectManagerInput && projectManagerInput.value,
+                startDate: startDateInput && startDateInput.value,
+                endDate: endDateInput && endDateInput.value,
                 status: statusInput && statusInput.value
-              })
+              },formType)
               "
           >
       {{ (formType === "create") ? "Add New Project" : "Update Project" }}
       </button>
+      <div class="message">{{ this.message }}</div>
       </div> 
   
     </form>
+  </div>
   </div>

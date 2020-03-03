@@ -25,7 +25,7 @@ export class SendHttpRequestService {
     return JSON.parse(jsonPayload);
   };
   showEmployees(): Observable<any>{
-    return this.http.get("http://localhost:3000/api/employee").pipe(
+    return this.http.get("http://localhost:3000/api/employees").pipe(
       tap(_ => this.log("Log In")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
@@ -34,8 +34,9 @@ export class SendHttpRequestService {
 
   //header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
   logMeIn(obj): Observable<any>{
+    
     console.log(obj);
-    //debugger
+    
     return this.http.post("http://localhost:3000/login", obj, {responseType: 'json'});
   }
   private handleError<T> (operation = 'operation', result?: T) {

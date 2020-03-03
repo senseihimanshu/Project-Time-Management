@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
 import { SendHttpRequestService } from "./services/send-http-request.service";
 //import { AuthorizationService } from './services/authorization.service';
-
+import { ChartsModule } from 'ng2-charts';
 //Third Party Components
 import {
   MDBBootstrapModule,
@@ -14,7 +14,8 @@ import {
   InputsModule,
   IconsModule,
   CardsModule,
-  TableModule
+  TableModule,
+ 
 } from "angular-bootstrap-md";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
@@ -79,6 +80,7 @@ import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component"
     HttpClientModule,
     TimesheetModule,
     ClevelDashboardModule,
+    ChartsModule,
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
