@@ -1,6 +1,9 @@
 import { SendHttpRequestService } from '../services/send-http-request.service';
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
+import { User } from  '../user';
+
 // import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -8,18 +11,23 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent implements AfterViewInit{
+export class LoginComponent implements OnInit{
   isMessage: Boolean = false;
 
   constructor(
     private sendReq: SendHttpRequestService,
     // private jwtHelperService: JwtHelperService,
-    private router: Router) { }
+    private router: Router,
+    private formBuilder: FormBuilder) { }
 
 
   @ViewChild('email', {static: false}) email: ElementRef;
   @ViewChild('password', {static: false}) password: ElementRef;
   res: any;
+  loginForm: FormGroup;
+  isSubmitted  =  false;
+
+  get formControls() { return this.loginForm.controls; }
 
   loginFunction() { 
     let userObj = {
@@ -28,6 +36,7 @@ export class LoginComponent implements AfterViewInit{
     }
   
     console.log(userObj);
+    
     this.sendReq.logMeIn(userObj).subscribe((res)=> {
       console.log(res);
       //debugger
@@ -84,9 +93,14 @@ export class LoginComponent implements AfterViewInit{
     return JSON.parse(jsonPayload);
   };
 
-  ngAfterViewInit(){
-
+  
+    ngOnInit() {
+      this.loginForm  =  this.formBuilder.group({
+          email: ['', Validators.required],
+          password: ['', Validators.required]
+      });
   }
+
 
 }
 

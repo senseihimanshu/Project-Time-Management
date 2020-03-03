@@ -34,8 +34,9 @@ export class SendHttpRequestService {
 
   //header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
   logMeIn(obj): Observable<any>{
+    
     console.log(obj);
-    //debugger
+    
     return this.http.post("http://localhost:3000/login", obj, {responseType: 'json'});
   }
   private handleError<T> (operation = 'operation', result?: T) {
