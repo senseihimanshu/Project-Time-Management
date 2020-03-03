@@ -4,14 +4,15 @@ const employeeschema=mongoose.Schema(employee);
 
 class Employee{
   constructor(){
-    console.log(this.model, 'Inside models/employee costructor');
+    // console.log(this.model, 'Inside models/employee costructor');
     this.model=mongoose.model('Employee',employeeschema);
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
+      //debugger
       console.log(criteria, columns);
-      const findDocument = await this.model.findOne(criteria,columns);
-      console.log(findDocument, 'findDocument'); 
+      const findDocument=await this.model.findOne(criteria,columns);
+      // console.log(findDocument, 'findDocument'); 
       return findDocument;
    }
    //saves the data of newly created employee
