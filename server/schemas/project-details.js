@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 module.exports = {
+  projectId:{
+    type:String,
+    required:true,
+  },
   projectName: {
     type: String,
     required: true
@@ -22,10 +26,10 @@ module.exports = {
     type: String,
     default: null
   },
-  //empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
+  empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
   status: {
     type: String,
-    enum: ["Completed", "discarded", "in-progress"],
-    default: 'in-progress'
+    enum: ["Completed", "discarded", "In Progress"],
+    default: 'In Progress'
   }
 };
