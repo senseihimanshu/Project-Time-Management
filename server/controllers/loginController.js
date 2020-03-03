@@ -11,7 +11,7 @@ class employee {
       console.log(user);
       if(user==null){
         console.log("False", user);
-        res.status(401).send({auth:false,message:"Invalid Credentials:token not generated",userobj:user});
+        res.status(401).send({auth:false,message:"Invalid Credentials",userobj:user});
       }
       else{
         console.log("True", user);

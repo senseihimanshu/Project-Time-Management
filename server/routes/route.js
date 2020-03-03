@@ -1,13 +1,17 @@
 const controller = require('../controllers');
 
 module.exports= (app) => {
-	//Project Routes
+	//Project
 	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
 	app.get("/project/:id",controller.project.show);
-	app.put("/api/project",controller.project.update);
+	app.put("/project/:id",controller.project.update);
 	app.delete("/project/:id",controller.project.delete);
-	
+	app.post("/employees",controller.employees.create) ;
+	app.get("/employees",controller.employees.index) 
+	app.get("/employees/:id",controller.employees.show) 
+    app.put("/employees/:id",controller.employees.update) ;
+	app.delete("/employees/:id",controller.employees.delete);
 	app.post("/login", controller.login.checkUserAuthentication);
 	app.get("./timesheet",controller.timesheet.index);
 	app.post("./timesheet",controller.timesheet.create);
