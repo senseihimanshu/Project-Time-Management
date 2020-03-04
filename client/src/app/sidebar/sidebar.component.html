@@ -12,14 +12,13 @@
             <span *ngIf="menu.type === 'header'">{{menu.title}}</span>
             <a *ngIf="menu.type !== 'header'"  (click)='toggle(menu)'>
               <i class="{{menu.icon}}"></i>
-              <span (click)='redirect(menu.title)'>{{menu.title}}</span>
+              <span>{{menu.title}}</span>
               <span *ngIf="menu.badge" class="badge badge-pill" [ngClass]="menu.badge.class">{{menu.badge.text}}</span>
             </a>
             <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">
               <ul>
                 <li *ngFor="let submenu of menu.submenus">
-                  <a> {{submenu.title}}
-                    <span *ngIf="submenu.badge" class="badge badge-pill" [ngClass]="submenu.badge.class">{{submenu.badge.text}}</span>
+                  <a (click)='routeLink(submenu.title)'> {{submenu.title}}
                   </a>
                 </li>
               </ul>

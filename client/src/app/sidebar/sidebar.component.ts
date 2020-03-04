@@ -1,9 +1,12 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
 // import { MenusService } from './menus.service';
-
+import { SendHttpRequestService } from './../send-http-request.service';
+import { RouterLink } from '@angular/router';
+import { EmployeeService } from '../services/employee.service';
+import { Routes, RouterModule } from "@angular/router";
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -18,13 +21,29 @@ import { SidebarService } from './sidebar.service';
 })
 export class SidebarComponent implements OnInit {
   menus = [];
-  constructor(public sidebarservice: SidebarService, private router:Router) {
+  constructor(public sidebarservice: SidebarService, private employeeService: EmployeeService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.menus = sidebarservice.getMenuList();
    }
-
+   
+   routeLink(title){
+     if(title=='Add New Employee')
+    //this.router.navigate(this.routerLink);
+   this.router.navigate(['/employeeform/create']);
+   if(title=='Show All Employees')
+   this.router.navigate(['/admindashboard']);
+   if(title=='Add New Project')
+   this.router.navigate(['/projectform/create']);
+   if(title=='Show All Projects')
+   this.router.navigate(['/projects']);
+  //  if(title=='Show All Employees')
+  //  this.router.navigate(['/employeeform/update']);
+   if(title=='Show All Timesheets')
+   this.router.navigate(['/employeeform/update']);
+  }
   ngOnInit() {
   }
-
   redirect(title){
 
     if(title=='Add New Employee')

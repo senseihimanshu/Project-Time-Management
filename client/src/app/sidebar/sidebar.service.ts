@@ -1,5 +1,5 @@
+import { Routes } from '@angular/router';
 import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +56,6 @@ export class SidebarService {
     
   ];
   constructor() { }
-
   toggle() {
     this.toggled = ! this.toggled;
   }
@@ -80,4 +79,5 @@ export class SidebarService {
   set hasBackgroundImage(hasBackgroundImage) {
     this._hasBackgroundImage = hasBackgroundImage;
   }
+
 }
