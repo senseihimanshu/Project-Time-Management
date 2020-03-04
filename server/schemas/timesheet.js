@@ -7,20 +7,20 @@ module.exports = {
   empObjId: {
     type: ObjectId,
     ref: "employee",
-    required: true
+   // required: true
   },
 
   startDate: {
     type: Date,
-    required: true
+    //required: true
   },
   endDate: {
     type: Date,
-    required: true
+    //required: true
   },
   billable: {
     type: Boolean,
-    required: true
+    //required: true
   },
   companyName: {
     type: String,
@@ -31,7 +31,7 @@ module.exports = {
       pId: {
         type: ObjectId,
         ref: "project",
-        required: true
+        //required: true
       },
       date: { type: Date, required: true },
       hours: { type: Number, required: true },
@@ -41,7 +41,7 @@ module.exports = {
       },
       leaveType: {
         type: String,
-        enum: ["Holiday", "Earned leave", "Casual leave", "Sick leave"]
+        enum: ["Holiday", "Earned leave", "Casual leave", "Sick leave","none"]
       }
     }
   ],
@@ -53,7 +53,7 @@ module.exports = {
     type: String,
     default: "Pending",
     enum: ["Approved", "Declined", "Pending"],
-    required: true
+   // required: true
   },
   customerName: {
     type: String,
