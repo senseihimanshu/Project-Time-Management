@@ -1,9 +1,55 @@
 <div class="timesheet">
   <div class="heading">Timesheet Form</div>
-  <!-- <app-myprofile></app-myprofile> -->
-  <!-- <app-myprofile></app-myprofile> -->
   <app-timesheet-form
     [timesheet]="timesheet"
     (submit)="submitToApi($event)"
   ></app-timesheet-form>
+
+  <div class="timesheet_wrapper">
+    <!-- <div class="add-timesheet-icon">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </div> -->
+    <div class="timesheet-entry">
+      <div class="timesheet-entry__dates">
+        <div class="timesheet-entry__dates--start_date">
+          <label for="start_date">Start Date :</label><input type="date" id="start_date" />
+        </div>
+        <div class="timesheet-entry__dates--end_date">
+          <label for="end_date">End Date :</label> <input type="date" id="end_date" />
+        </div>
+      </div>
+      
+      <div class="timesheet-entry__content">
+        <table class="timesheet-entry__content--table">
+          <tr>
+            <th></th>
+            <td>Billable</td>
+            <td class="day">Mon</td>
+            <td class="day">Tue</td>
+            <td class="day">Wed</td>
+            <td class="day">Thurs</td>
+            <td class="day">Fri</td>
+          </tr>
+          <tr>
+            <th>Project</th>
+            <td><input type="checkbox" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+          </tr>
+          <tr>
+            <th>Leave</th>
+            <td></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

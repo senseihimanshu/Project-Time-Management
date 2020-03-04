@@ -67,14 +67,14 @@ export class EmployeeFormComponent implements OnInit {
         this.message = res.payload.message;
         setTimeout(() => {
           this.message = null;
-        }, 3000);
+        }, 5000);
         form.reset();
       }, (err) => {
         console.log(err);
         this.message = err.error.payload.message;
         setTimeout(() => {
           this.message = null;
-        }, 3000);
+        }, 5000);
       });
   }
 }
