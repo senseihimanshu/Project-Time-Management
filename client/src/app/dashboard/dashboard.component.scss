@@ -1,4 +1,25 @@
 
 h2{
     align-items:center ;
+    font-weight: bolder;
 }
+
+.navbar{
+    justify-content: space-between;
+    height: 4rem;
+    background-color: black;
+}
+
+span{
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.container-fluid{
+    position: absolute;
+    top: 8rem;
+    left: 25rem;
+    width: 80%;
+    height: 60%;
+    padding: 2rem;
+} 

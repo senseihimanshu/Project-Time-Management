@@ -1,17 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
+import { EmployeeService } from "../services/employee.service";
+import { SendHttpRequestService } from "./../send-http-request.service";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnChanges {
+
+menus: any = [
+    {
+      title: "Timesheets",
+      icon: "fa fa-calendar",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Create New Timesheet"
+        },
+        {
+          title: "Show All Timesheets"
+        },
+        {
+          title: "Review All Timesheets"
+        }
+      ]
+    }
+  ];
+
   loading = false;
   //  users: User[] = [];
 
-    constructor(private httpService: HttpClient) { }
+    constructor(private httpService: HttpClient,
+      private _service: SendHttpRequestService,
+    private router: Router,
+    private employeeService: EmployeeService) { }
     pieChartOptions = {
       responsive: true
     }
@@ -80,6 +108,17 @@ onChartClick(event) {
          }
      );
    }
+
+   ngOnChanges(){
+
+  }
+
+  logout() {
+    this._service.deletetoken();
+
+    this.router.navigate(["/login"]);
+  }
+
 }
 
 
