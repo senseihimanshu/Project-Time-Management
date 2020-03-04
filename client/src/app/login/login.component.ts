@@ -72,7 +72,7 @@ return this.myform.controls;
             this.isMessage = true;
             setTimeout(() => {
               this.isMessage = false;
-            }, 3000);
+            }, 5000);
           }
           else{
             const role=decodeToken.data.role[0];
@@ -93,6 +93,12 @@ return this.myform.controls;
               this.router.navigate(['/accessdenied']);
           }
         }      
+    },  (err) => {
+      console.log(err);
+        this.isMessage = true;
+        setTimeout(() => {
+          this.isMessage = false;
+        }, 3000);
     });
   }
   

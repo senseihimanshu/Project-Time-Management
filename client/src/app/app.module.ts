@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
 import { SendHttpRequestService } from "./services/send-http-request.service";
 //import { AuthorizationService } from './services/authorization.service';
-import { ChartsModule } from 'ng2-charts'
+import { ChartsModule } from 'ng2-charts';
 //Third Party Components
 import {
   MDBBootstrapModule,

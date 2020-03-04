@@ -1,16 +1,7 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    /* make the body full height*/
-    /* set our custom font */
-    height: 85vh !important;
-    font-family: 'Roboto',
-        sans-serif;
-    display: flex;
+i{
+    font-size: 3rem;
+    position: relative;
+    top: -4px;
 }
 
 .invalid-feedback{
@@ -20,7 +11,9 @@ body {
 }
 
 #form_wrapper {
-    width: 1000px;
+    position: relative;
+    top: 8rem;
+    // width: 1000px;
     margin: auto;
     background-color: #ffffff;
     border-radius: 50px;
@@ -131,4 +124,10 @@ i {
 .has-error input[type="password"] {
     border-color: rgb(216, 12, 12);
     color: rgb(230, 14, 14);
+}
+
+.message{
+    font-size: 2rem;
+    color: red;
+    text-align: center;
 }

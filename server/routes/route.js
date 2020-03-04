@@ -1,6 +1,7 @@
 const controller = require('../controllers');
 
 module.exports= (app) => {
+	//Project
 	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
 	app.get("/project/:id",controller.project.show);

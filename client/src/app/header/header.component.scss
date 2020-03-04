@@ -5,7 +5,11 @@
   align-items: center;
   justify-content: space-between;
   min-height: 8vh;
-  background-color:#bcbccb40;
+  // background-color:#bcbccb40;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
   
   &__logo-container {
     background: url("../../assets/images/Cyber-Group_logos-02.png");
@@ -14,5 +18,10 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position-y: 50%;
+  }
+
+  &:after{
+    content: '';
+    display: block;
   }
 }

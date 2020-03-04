@@ -5,7 +5,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   selector: "table-row",
   styleUrls: ["./tablerow.component.scss", "../admindashboard.component.scss"],
   template: `
-    <div class="table-row">
+    <tr class="table-row">
       <td>
         {{ employee.empId }}
       </td>
@@ -16,28 +16,24 @@ import { EmployeeService } from 'src/app/services/employee.service';
         {{ employee.email }}
       </td>
       <td>
-        {{ employee.designation }}
-      </td>
-      <td>
         {{ employee.role }}
       </td>
       <td>
-        <button
-          class="show"
+        <a
           [routerLink]="['/employeeform/details', employee.empId]"
         >
           <i class="fas fa-eye"></i>
-        </button>
+        </a>
       </td>
       <td>
-        <button class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
+        <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
           <i class="fas fa-pencil-alt"></i>
-        </button>
+        </a>
       </td>
       <td>
-        <button class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></button>
+        <a class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></a>
       </td>
-    </div>
+    </tr>
   `
 })
 export class TableRowComponent {
