@@ -7,27 +7,20 @@ module.exports = {
   empObjId: {
     type: ObjectId,
     ref: "employee",
-    default: null
+    required: true
   },
-  pId: {
-    type: ObjectId,
-    ref: "project",
-    default: null
-  },
+
   startDate: {
     type: Date,
-    default: null
+    required: true
   },
   endDate: {
     type: Date,
-    default: Date.now()
-  },
-  taskType: {
-    type: String,
-    enum: ["Offshore", "Onsite", "Earned leave", "Casual leave", "Sick leave"]
+    required: true
   },
   billable: {
-    type: Boolean
+    type: Boolean,
+    required: true
   },
   companyName: {
     type: String,
@@ -35,19 +28,26 @@ module.exports = {
   },
   week: [
     {
-      startDate: [{ type: Date }],
-      endDate: [{ type: Date }],
-      hours: [{ type: Number }]
+      pId: {
+        type: ObjectId,
+        ref: "project",
+        required: true
+      },
+      date: { type: Date, required: true },
+      hours: { type: Number, required: true },
+      taskType: {
+        type: String,
+        enum: ["Offshore", "Onsite"]
+      },
+      leaveType: {
+        type: String,
+        enum: ["Holiday", "Earned leave", "Casual leave", "Sick leave"]
+      }
     }
   ],
-  noOfHours: {
-    type: Number,
-    min: 0,
-    max: 40
-  },
-  description: {
-    type: String,
-    maxlength: 100
+  hoursPerWeek: {
+    type: Number
+    //required:true
   },
   status: {
     type: String,
