@@ -1,17 +1,6 @@
-<head>
-  <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400"
-    rel="stylesheet"
-  />
-</head>
-
-<body>
+<div>
+<app-header></app-header>
+  
   <form [formGroup]="myform" >
   <div id="form_wrapper">
     <div id="form_left">
@@ -58,9 +47,9 @@
         <div *ngIf="f.password.errors.required">Password is required</div>
         <div *ngIf="f.password.errors.minlength">Password must be atleast 4 characters</div>
       </div>
-      <!-- <h2 class="message" [ngStyle]="{'visibility': (!isMessage? 'hidden' : 'visible')}">
+      <h2 class="message" [ngStyle]="{'visibility': (!isMessage? 'hidden' : 'visible')}">
         Invalid Credentials
-      </h2> -->
+      </h2>
   <div class="form-group">
           <input
         type="submit"
@@ -73,4 +62,4 @@
     </div>
   </div>
   </form>
-</body>
+</div>
