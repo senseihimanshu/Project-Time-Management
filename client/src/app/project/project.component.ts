@@ -1,6 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -8,7 +8,7 @@ import { SendHttpRequestService } from './../send-http-request.service';
 })
 export class ProjectComponent implements OnInit {
 
-  constructor(private _service:SendHttpRequestService) { }
+  constructor(private _service:SendHttpRequestService,private router: Router) { }
 
   projectsArray: any;
   tabularData() {
@@ -21,11 +21,11 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this.tabularData();
   }
-
-
-  
-
- 
-
+  logout(){
+    this._service.deletetoken();
+     
+        this.router.navigate(["/login"]);
+     
+  }
 }
 

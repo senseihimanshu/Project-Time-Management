@@ -16,11 +16,11 @@ module.exports = {
   },
   startDate: {
     type: Date,
-    default: null
+    required: true
   },
   endDate: {
     type: Date,
-    default: Date.now()
+    required: true
   },
   taskType: {
     type: String,
@@ -41,9 +41,7 @@ module.exports = {
     }
   ],
   noOfHours: {
-    type: Number,
-    min: 0,
-    max: 40
+    type: Number
   },
   description: {
     type: String,
