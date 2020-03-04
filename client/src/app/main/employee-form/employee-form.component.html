@@ -4,6 +4,7 @@
       class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body"
       #form="ngForm"
       (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
+      novalidate
     >
       <div
         class="h4 mb-4
@@ -30,8 +31,8 @@
 
       <div class="h4 mb-4
       ">
-        <label for="empId">Employee ID: </label>&nbsp;
-        <input
+        <label for="empId">Employee ID: </label>
+       <input
           type="text"
           id="empId"
           class="form-control "
@@ -40,9 +41,13 @@
           name="empId"
           required
           [readonly]="!(typeOfForm === 'create')"
-          #empIdInput="ngModel"
+          #empId="ngModel"
         />
+        <div class="error" [ngClass]="{hidden: !(empId.errors.required && empId.touched)}">
+          Choose a EmpId
+        </div>
       </div>
+      
 
       <div class="h4 mb-4
       ">
@@ -56,10 +61,13 @@
           [(ngModel)]="employee && employee.email"
           name="email"
           [disabled]="typeOfForm === 'get'"
-          #emailInput="ngModel"
+          #email="ngModel"
         />
+        <div class="error" [ngClass]="{hide: !(email.errors?.required && email.touched)}">
+          Email is required
+        </div>
       </div>
-
+   
       <div class="h4 mb-4
       ">
         <label for="emp_name">Name: </label>
@@ -70,12 +78,15 @@
           class="form-control"
           placeholder="Employee Name"
           [(ngModel)]="employee && employee.name"
-          name="name"
+          name="empName"
           [disabled]="typeOfForm === 'get'"
-          #empNameInput="ngModel"
+          #empName="ngModel"
         />
+        <div class="error" [ngClass]="{hide: !(empName.errors?.required )}">
+          Choose Employee Name
+        </div>
       </div>
-
+     
       <div class="h4 mb-4
       ">
         <label for="address">Address: </label>
@@ -150,15 +161,18 @@
           name="role"
           [(ngModel)]="employee && employee.role[0]"
           [disabled]="typeOfForm === 'get'"
-          #roleInput="ngModel"
+          #role="ngModel"
         >
           <option value="" disabled>Choose option</option>
           <option value="Employee" selected>Employee</option>
           <option value="Project Manager">Project Manager</option>
           <option value="C Level Manager">C Level Manager</option>
         </select>
+        <div class="error" [ngClass]="{hide: !(role.errors?.required)}">
+          Choose a role
+        </div>
       </div>
-
+     
       <div class="button-parent" *ngIf="typeOfForm !== 'get'">
         <button mdbBtn type="button" color="info" block="true" size="lg" type="submit"  mdbWavesEffect>
           {{ typeOfForm === "create" ? "Add Employee" : "Update Employee" }}
@@ -168,4 +182,6 @@
     </form>
     <!-- {{ form.value | json }} -->
   </div>
+
 </div>
+

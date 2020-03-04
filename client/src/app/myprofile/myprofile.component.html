@@ -4,14 +4,20 @@
     </div>
     <div>
       <span routerLink="/myProfile">My Profile</span>
-      <span routerLink="/admin">Employees</span>
-      <span routerLink="/projects">Projects</span>
+      <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+    >
+      <i class="fa fa-power-off"></i>
+    </button>
     </div>
 </mat-toolbar>
-    
+<div class="main">
+<app-sidebar></app-sidebar>
 <div class="container bootstrap snippet">
     <div class="panel-body inf-content">
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="col-md-4 col-lg-4 col-sm-12">
                 <img alt=""  title="" class="img-circle img-fluid ml-auto isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
             </div>
@@ -114,19 +120,10 @@
                         </tr>                                     -->
                     </tbody>
                 </table>
-                <button
-                type="button"
-                mdbBtn
-                color="primary"
-                class="btnstyle text-dark font-weight-bold"
-                mdbWavesEffect
-                [routerLink]="['/admindashboard']"
-              >
-                Back
-              </button>
+                
                 </div>
             </div>
         </div>
     </div>
     </div>                                      
-    
+</div>
