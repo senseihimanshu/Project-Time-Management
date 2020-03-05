@@ -1,3 +1,4 @@
+import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { TableRowComponent } from './admindashboard/tablerow/tablerow.component';
 import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';

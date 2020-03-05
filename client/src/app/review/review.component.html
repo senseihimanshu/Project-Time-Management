@@ -1,62 +1,46 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"> </script>
-  <title>Review Dashboard</title>
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-md bg-light navbar-light p-3">
-    <a class="navbar-brand" href="#"><b>Review Timesheet</b></a>
-    <div class="header">
-      <div class="header__logo-container"></div>
-      <div class="btn-group d-flex">
-        <button type="button" mdbBtn color="warning" class="button-operations btnsstyle" (click)="reviews()"
-          mdbWavesEffect>
-          Show Details
-        </button>
-      </div>
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      Review Dashboard
     </div>
-  </nav>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
 
-  <body>
+      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+        (click)="logout()">
+        <i class="fa fa-power-off"></i>
+      </button>
+    </div>
+  </mat-toolbar>
+  <div class="main">
+    <app-sidebar [menus]="menus"></app-sidebar>
     <section class="background_dashboard">
-      <table class="empTable">
-        <tr>
-          <th>Employee-id</th>
-          <th>Project-id</th>
-          <th>Billable</th>
-          <th>Hours</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
+      <table class="empTable table responstable">
+        <thead class="test" style="z-index: 100000000;" >
+          <td>Employee Id</td>
+          <td>Project Id</td>
+          <td>Client</td>
+          <td>Billable</td>
+          <td>Date</td>
+          <td>Hours</td>
+          <!-- <th>Project members</th> -->
+          <td>Status</td>
+          <!-- <th>Actions</th> -->
+        </thead>
+        <!-- <tbody class="mt-5" *ngFor="let project of projectsArray">
+          <project-row
+            [project]="project"
+            (deleteEmp)="deleteEmployee($event)"
+          ></project-row>
+        </tbody> -->
         <tbody class="mt-5" *ngFor="let employee of usersArray">
-          <tr>
-            <td>
-              {{employee.empId}}
-            </td>
-            <td>
-              {{employee.projectId}}
-            </td>
-            <td>
-              {{employee.billable}}
-            </td>
-            <td>
-              {{employee.workingHours}}
-            </td>
-            <td>
-              {{employee.status}}
-            </td>
-            <td>
-              <a class="btn btn-primary" href="#" role="button" (click)="accept(this._id)">Accept</a>
-              <a class="btn btn-primary" href="#" role="button" (click)="reject(this._id)">Reject</a>
-            </td>
-          </tr>
-        </tbody>
+          <review-row
+            [employee]="employee"
+            (deleteEmp)="deleteEmployee($event)"
+          ></review-row>
+          </tbody>
+        <h2 class="message" *ngIf="message">{{ message }}</h2>
       </table>
-
     </section>
-  </body>
+  </div>
+</div>
