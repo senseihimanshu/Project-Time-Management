@@ -18,16 +18,77 @@ class Timesheet{
     };
 
     const newTimesheet = await model.timesheet.save(timesheetObj);
-   // console.log(newTimesheet);
    res.send(newTimesheet);
-
-    // if(await model.project.get({ projectId: projectObj.projectId })) return res.status(400).send({
-    //   success: false,
-    //   payload: {
-    //     message: 'Project Id already exists'
-    //   }
-    // }); 
 }
+
+async show(req, res) {
+  const empObjId= req.query.empObjId;
+  var timesheet=[];
+  if(empObjId){
+  timesheet = await model.timesheet.get({empObjId}); }
+
+  else{timesheet= await model.timesheet.get() }
+
+  if (!timesheet) {
+    console.log("Not available");
+    return res.status(404).send({
+      success: false,
+      payload: {
+        timesheet,
+        message: "Timesheet does not exist"
+      }
+    });
+  }
+  else{
+  res.send({
+    success: true,
+    payload: {
+      timesheet,
+      message: "Timesheet retrieved successfully"
+    }
+  }); 
+}
+}
+
+async index(req, res) {
+  const timesheet = await model.timesheet.get();
+
+  if (!timesheet) {
+    console.log("No timesheets available");
+    return res.status(404).send({
+      success: false,
+      payload: {
+        timesheet,
+        message: "Timesheets does not exist"
+      }
+    });
+  }
+  else{
+  res.send({
+    success: true,
+    payload: {
+      timesheet,
+      message: "All Timesheets retrieved successfully"
+    }
+  }); 
+}
+}
+
+async update(req, res) {
+ const col={...req.body.week};
+ console.log(col);
+  const timesheet = await model.timesheet.update(
+    { _id: req.query.id } ,
+    { $push: {"week": col} }
+  );
+  res.send({
+    success: true,
+    payload: {
+      timesheet
+    }
+  });
+}
+
 }
 
 module.exports = new Timesheet();

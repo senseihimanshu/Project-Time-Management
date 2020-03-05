@@ -12,5 +12,9 @@ module.exports = {
     projectId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
-    }
+    },
+    timesheetId:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'timesheet'
+    }]
 };
