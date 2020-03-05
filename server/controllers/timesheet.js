@@ -14,15 +14,20 @@ class Timesheet {
       week:req.body.week,
     };
 
+    //Creating a new timesheet
     const newTimesheet = await model.timesheet.save(timesheetObj);
     console.log(newTimesheet['week']);
 
+    //Adding timesheets of employees to projectManager
     await Promise.all(newTimesheet['week'].map(async (week) => {
       console.log(week['projectId']);
       const projectManager = (await model.project.get({ _id: week["projectId"] }, { projectManager: 1 })).projectManager;
       console.log(projectManager);
       await model.projectManager.update({ _id: projectManager }, { $push: { timesheetIds: newTimesheet } });
     }));
+
+    //Adding timesheet to employee collection
+    await model.employee.update({ _id: timesheetObj.empObjId }, { $push: { timesheet: newTimesheet } });
 
     console.log('Reached Here @timesheet.js/line26');
 
