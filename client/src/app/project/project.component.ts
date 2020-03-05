@@ -8,6 +8,51 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./project.component.scss','../main/main.component.scss']
 })
 export class ProjectComponent implements OnInit,OnChanges {
+  menus: any = [
+    {
+      title: "Employees",
+      icon: "fa fa-users",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Employee"
+        },
+        {
+          title: "Show All Employees"
+        }
+      ]
+    },
+    {
+      title: "Projects",
+      icon: "fa fa-book",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Project"
+        },
+        {
+          title: "Show All Projects"
+        }
+      ]
+    },
+    {
+      title: "Timesheets",
+      icon: "fa fa-calendar",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Show All Timesheets"
+        }
+      ]
+    }
+  ];
+
   message: String;
   constructor(private _service:SendHttpRequestService,private router: Router, private employeeService: EmployeeService) { }
 

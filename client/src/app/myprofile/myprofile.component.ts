@@ -9,6 +9,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myprofile.component.scss']
 })
 export class MyprofileComponent implements OnInit {
+  menus: any = [
+    {
+      title: "Employees",
+      icon: "fa fa-users",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Employee"
+        },
+        {
+          title: "Show All Employees"
+        }
+      ]
+    },
+    {
+      title: "Projects",
+      icon: "fa fa-book",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Project"
+        },
+        {
+          title: "Show All Projects"
+        }
+      ]
+    },
+    {
+      title: "Timesheets",
+      icon: "fa fa-calendar",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Show All Timesheets"
+        }
+      ]
+    }
+  ];
+
   employee: any;
 
 

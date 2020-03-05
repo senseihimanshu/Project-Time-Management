@@ -1,7 +1,7 @@
-constmongoose = require("mongoose");
-varObjectId = mongoose.Schema.Types.ObjectId;
-constemployee = require("./employee");
-constproject = require("./project-details");
+const mongoose = require("mongoose");
+var ObjectId = mongoose.Schema.Types.ObjectId;
+const employee = require("./employee");
+const project = require("./project-details");
  
 module.exports = {
 empObjId: {

@@ -1,9 +1,9 @@
     
 .background_dashboard {
-    // height: 85vh;
-   // // background:#9a9184;
-   // overflow-x: auto;
-   // overflow-y: auto;
+    height: 85vh;
+   // background:#9a9184;
+   overflow-x: auto;
+   overflow-y: auto;
    }
    tbody:nth-child(even) {
     background: white
@@ -11,11 +11,24 @@
    tbody:nth-child(odd) {
     background: #efefef;
    }
+//    tbody:first-child{
+//     margin-top: 10rem!important;
+// }
+// .category_table > tbody > tr:first-child > td {
+//     margin-top: 5rem!important;;
+// }
    .table {
     max-width: 100%;
     // margin-top: 2rem;
     overflow: scroll;
    }
+   thead{
+       position: relative;
+    //    margin-bottom: 4rem;
+   }
+//    tbody{
+//        margin-top: 10%;
+//    }
    .fixed-top {
     position: fixed;
     top: auto;
