@@ -1,67 +1,45 @@
-<!--Header starts from here-->
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      Projects Dashboard
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
 
-<mat-toolbar color="primary" class="navbar"style="z-index: 100000000;">
-  <div>
-     Project Dashboard
+      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+        (click)="logout()">
+        <i class="fa fa-power-off"></i>
+      </button>
+    </div>
+  </mat-toolbar>
+  <div class="main">
+    <app-sidebar></app-sidebar>
+    <section class="background_dashboard">
+      <table class="empTable table responstable">
+        <thead class="test">
+          <td>Client</td>
+          <td>Project</td>
+          <td>Project Manager</td>
+          <td>Start Date</td>
+          <td>End Date</td>
+          <!-- <th>Project members</th> -->
+          <td>Status</td>
+          <!-- <th>Actions</th> -->
+        </thead>
+        <!-- <tbody class="mt-5" *ngFor="let project of projectsArray">
+          <project-row
+            [project]="project"
+            (deleteEmp)="deleteEmployee($event)"
+          ></project-row>
+        </tbody> -->
+        <tbody class="mt-5" *ngFor="let project of projectsArray">
+          <project-row
+            [project]="project"
+            (deleteEmp)="deleteEmployee($event)"
+          ></project-row>
+          </tbody>
+        <h2 class="message" *ngIf="message">{{ message }}</h2>
+      </table>
+    </section>
   </div>
-  <div>
-    <span routerLink="/myProfile">My Profile</span>
-    
-  <button
-    type="button"
-    class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-    (click)="logout()"
-  >
-    <i class="fa fa-power-off"></i>
-  </button>
-  </div>
-</mat-toolbar>
-<div class="main">
-  <app-sidebar></app-sidebar></div>
-
-<section class="background_dashboar">
-  <table class="projectTable">
-    <tr>
-      <th>Client</th>
-      <th>Project</th>
-      <th>Project Manager</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <!-- <th>Project members</th> -->
-      <th>Status</th>
-      <!-- <th>Actions</th> -->
-
-    </tr>
-    <tbody class="mt-5" *ngFor="let project of projectsArray">
-      <tr>
-        <td>
-          {{project.clientName}}
-        </td>
-        <td>
-          {{project.projectName}}
-        </td>
-        <td>
-          {{project.projectManager}}
-        </td>
-        <td>
-          {{project.startDate}}
-        </td>
-        <td>
-          {{project.endDate}}
-        </td>
-        <!-- <td>
-        {{project.empID}}
-</td> -->
-        <td>
-          {{project.status}}
-        </td>
-        <!-- <td>
-          <a class="btn btn-primary m-2" href="#" role="button" (click)="accept(this._id)">Accept</a>
-          <a class="btn btn-primary" href="#" role="button" (click)="reject(this._id)">Reject</a>
-        </td> -->
-      </tr>
-    </tbody>
-  </table>
-</section>
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</div>

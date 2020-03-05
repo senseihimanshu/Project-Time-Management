@@ -29,8 +29,8 @@ module.exports = {
   empObjectIdArray: [{ type: ObjectId, ref: "employee" }],
   status: {
     type: String,
-    enum: ["completed", "discarded", "in-progress"],
-    default: 'in-progress'
+    enum: ["Completed", "discarded", "In Progress"],
+    default: 'In Progress'
   }
 };
 

@@ -23,9 +23,8 @@ class Project {
         message: 'Project Id already exists'
       }
     });
-
     const empObjectIdArray = [];
-
+ 
     const generateProjectPromise = async () => {
       await Promise.all(
         projectObj.empObjectIdArray.map(async empId => {
@@ -61,7 +60,7 @@ class Project {
 
     await employeesUpdatePromise();
 
-    const projectManagerId = (await model.employee.find({ empId: projectObj.projectManager }))._id;
+    const projectManagerId = (await model.employee.get({ empId: projectObj.projectManager }))._id;
     model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
 
     res.status(201).send({
