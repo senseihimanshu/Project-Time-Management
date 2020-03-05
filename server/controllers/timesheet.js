@@ -31,49 +31,40 @@ async show(req, res) {
 
   if (!timesheet) {
     console.log("Not available");
-    return res.status(404).send({
-      success: false,
-      payload: {
-        timesheet,
-        message: "Timesheet does not exist"
-      }
-    });
+    return res.status(404).send(timesheet);
   }
   else{
-  res.send({
-    success: true,
-    payload: {
-      timesheet,
-      message: "Timesheet retrieved successfully"
-    }
-  }); 
+  res.send(timesheet); 
 }
 }
 
+// async index(req, res) {
+//   const timesheet = await model.timesheet.get();
+
+//   if (!timesheet) {
+//     console.log("No timesheets available");
+//     return res.status(404).send({
+//       success: false,
+//      timesheet:timesheet,
+//         message: "Timesheets does not exist"
+//     });
+//   }
+//   else{
+//   res.send({
+//     success: true,
+    
+// timesheet:timesheet,
+//       message: "All Timesheets retrieved successfully"
+    
+//   }); 
+// }
+// }
 async index(req, res) {
-  const timesheet = await model.timesheet.get();
-
-  if (!timesheet) {
-    console.log("No timesheets available");
-    return res.status(404).send({
-      success: false,
-      payload: {
-        timesheet,
-        message: "Timesheets does not exist"
-      }
-    });
-  }
-  else{
-  res.send({
-    success: true,
-    payload: {
-      timesheet,
-      message: "All Timesheets retrieved successfully"
-    }
-  }); 
-}
-}
-
+  // console.log("dikhaa rha huu");
+   const timesheetList = await model.timesheet.get();
+   res.send(timesheetList);
+  // console.log(employeeList);
+ }
 async update(req, res) {
  const col={...req.body.week};
  console.log(col);

@@ -1,3 +1,4 @@
+import { TimesheetComponent } from './timesheet/timesheet.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -23,7 +24,6 @@ import { MainComponent } from "./main/main.component";
 import { LoginComponent } from "./login/login.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HomeComponent } from "./home/home.component";
-import { TimesheetComponent } from "./timesheet/timesheet.component";
 import { ReviewComponent } from "./review/review.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
@@ -33,12 +33,10 @@ import { EmployeeService } from "./services/employee.service";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
-import { TimesheetModule } from "./timesheet/timesheet.module";
 import { ClevelDashboardModule } from "./main/clevel-dashboard/clevel-dashboard.module";
 import { ClevelDashboardComponent } from "./main/clevel-dashboard/clevel-dashboard.component";
 import { PerfectScrollbarModule }          from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
 import { ProjectComponent } from "./project/project.component";
 import { ProjectFormComponent } from "./project-form/project-form.component";
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -52,7 +50,6 @@ import {
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
-import { ProjectrowComponent } from './projectrow/projectrow.component';
 import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
 
 
@@ -76,6 +73,7 @@ import { EmployeedashboardComponent } from './employeedashboard/employeedashboar
     SidebarComponent,
     ProjectRowComponent,
     EmployeedashboardComponent,
+    TimesheetComponent,
   ],
   imports: [PerfectScrollbarModule ,
     //PerfectScrollbarConfigInterface,
@@ -87,7 +85,6 @@ import { EmployeedashboardComponent } from './employeedashboard/employeedashboar
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    TimesheetModule,
     ClevelDashboardModule,
     ChartsModule,
     //Third Party

@@ -1,61 +1,12 @@
-.heading{
-    font-size: 2.8rem;
-    text-decoration: underline;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.timesheet_wrapper{
-    display: flex;
-    justify-content: space-around;
-    width: 65%;
-  //  background: linear-gradient(to bottom right,rgba(#000, 0.8), rgba(#fff, 0.8)), url(../../assets/images/Cyber-Group_logos-02.png);
-    
-  // background: rgb(131,58,180);
-  //  background: linear-gradient(149deg, rgba(131,58,180,0.6) 0%, rgba(253,29,29,0.6) 50%, rgba(252,176,69,0.6) 100%), url(../../assets/images/Cyber-Group_logos-02.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    color:black;
-    margin: 0 auto;
-    .add-timesheet-icon{
-        font-size: 4rem;
+@media all and (min-width: 768px) {
+    tr  {
+      td {
+        vertical-align: middle !important;
+      }
+      span {
+        &:not([class]) {
+          padding: 1rem 1rem;
+        }
+      }
     }
-}
-
-.timesheet-entry{
-    flex: 1;
-    font-size: 2rem;
-    // display: flex;
-
-    &__dates{
-        text-align: center;
-        border: 1px solid grey;
-
-        & > *{
-            padding: 1.2rem 0;
-            label{
-                width: 14rem;
-            }
-        }
-    }
-
-    &__content{
-        &--table{
-            margin: 0 auto;
-        }
-
-        &--table > tr > *{
-            width: 17rem;
-            padding: 2rem 0;
-        }
-
-        &--table > tr > td{
-            text-align: center;
-        }
-    }
-}
-
-input{
-    text-align: center;
-}
+  }

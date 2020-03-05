@@ -12,9 +12,7 @@ export class SendHttpRequestService {
 
   constructor( private http: HttpClient) { }
 
-  private log(message: string) {
-    console.log(message);
-  }
+ 
   // //Decode JWT and return the Payload in JSON Format
   jsonDecoder = (token) => {
     var base64Url = token.split('.')[1];
@@ -51,6 +49,9 @@ export class SendHttpRequestService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
       };
+    }
+    private log(message: string) {
+      console.log(message);
     }
   }
 
