@@ -52,7 +52,7 @@ import {
 } from "@angular/material";
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ProjectrowComponent } from './projectrow/projectrow.component';
+import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 
 
 @NgModule({
@@ -74,7 +74,7 @@ import { ProjectrowComponent } from './projectrow/projectrow.component';
     NotFoundComponent,
     TableRowComponent,
     SidebarComponent,
-    ProjectrowComponent,
+    ProjectRowComponent
   ],
   imports: [PerfectScrollbarModule ,
     //PerfectScrollbarConfigInterface,

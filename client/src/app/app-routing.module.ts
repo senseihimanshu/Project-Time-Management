@@ -17,8 +17,11 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
 import { NotFoundComponent } from "./404/notfound.component";
 //import { AuthorizationGuard } from './authorization.guard';
-
+import { from } from 'rxjs';
 const routes: Routes = [
+  {
+    path: "", redirectTo: "login", pathMatch: "full"
+  },
   {
     path: "admindashboard",
     component: AdmindashboardComponent
