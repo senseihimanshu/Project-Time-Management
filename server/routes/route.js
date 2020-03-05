@@ -13,7 +13,7 @@ module.exports= (app) => {
     app.put("/employees/:id",controller.employees.update) ;
 	app.delete("/employees/:id",controller.employees.delete);
 	app.post("/login", controller.login.checkUserAuthentication);
-	// app.get("./timesheet",controller.timesheet.index);
+	app.get("/timesheet",controller.timesheet.show);
 	// app.post("./timesheet",controller.timesheet.create);
 	app.post("/api/employee", controller.employees.create);
 	app.put("/api/employee", controller.employees.update);
@@ -21,7 +21,7 @@ module.exports= (app) => {
 	app.delete("/api/employee", controller.employees.delete);
 	//Timesheet Routes
 	app.post('/timesheet', controller.timesheet.create)
-	// app.put("/api/timesheet", controller.timesheet.update);
+	app.patch("/timesheet", controller.timesheet.update);
 }
 
 

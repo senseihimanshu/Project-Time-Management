@@ -23,10 +23,10 @@ class Timesheet{
       return this.model.deleteOne(criteria);
     }
     //getting the data of all the timesheets
-    async log(columns={}){
-      console.log('viewed all timesheets');
-      return this.model.find(columns);
-    }
+    // async index(columns={}){
+    //   console.log('viewed all timesheets');
+    //   return this.model.find(columns);
+    // }
     async update(criteria={},updatedEmployeeObj){
       console.log('timesheet updated');
       return this.model.updateOne(criteria,updatedEmployeeObj);
