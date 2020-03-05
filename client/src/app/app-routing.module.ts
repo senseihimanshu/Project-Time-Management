@@ -1,5 +1,6 @@
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { TableRowComponent } from './admindashboard/tablerow/tablerow.component';
+import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProjectFormComponent } from "./project-form/project-form.component";
@@ -8,7 +9,6 @@ import { MyprofileComponent } from "./myprofile/myprofile.component";
 import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
 import { LoginComponent } from "./login/login.component";
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
-import { AdminComponent } from "./admin/admin.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { TimesheetComponent } from "./timesheet/timesheet.component";
 import { ReviewComponent } from "./review/review.component";
@@ -51,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: "employee",
-    component: TimesheetComponent
+    component: EmployeedashboardComponent
   },
   {
     path: "clevel",

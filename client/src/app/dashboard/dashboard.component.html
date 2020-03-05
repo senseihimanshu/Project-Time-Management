@@ -1,22 +1,28 @@
-<div class="card mt-4">
-    <h4 class="card-header">Company Dashboard</h4>
-    <!-- <div class="card-body">
-        <p>This page can be accessed <u>only by C-level employees</u>.</p>
-        <p class="mb-1">All users from secure (admin only) api end point:</p>
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div> -->
-        <!-- <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul> -->
-    <!-- </div> -->
-</div>
-
+<div class="wrapper">
+    <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+      <div>
+        Company Dashboard
+      </div>
+      <div>
+        <span routerLink="/myProfile">My Profile</span>
         
-       
-    <div class="container-fluid">
+      <button
+        type="button"
+        class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+        (click)="logout()"
+        >
+        <i class="fa fa-power-off"></i>
+      </button>
+      </div>
+    </mat-toolbar>
+    <div class="main">
+      <app-sidebar [menus]="menus"></app-sidebar>
+
+    <div class="container-fluid ">
             <div class="row">
                
     
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                <div class="col-md-6 projectchart">
                     <h2>Projects Status </h2>
                     <canvas
                       baseChart
@@ -31,7 +37,7 @@
                   </canvas>
                 
              </div>  
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+              <div class="col-md-6 timesheetchart">
                 <h2>Timesheets Status </h2>
                  <canvas
                     baseChart
@@ -48,6 +54,7 @@
              </div>
        <div>
     </div>
+</div>
 </div>
          
    

@@ -26,7 +26,6 @@ import { HomeComponent } from "./home/home.component";
 import { TimesheetComponent } from "./timesheet/timesheet.component";
 import { ReviewComponent } from "./review/review.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { AdminComponent } from "./admin/admin.component";
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
 import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
 import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
@@ -53,6 +52,8 @@ import {
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
+import { ProjectrowComponent } from './projectrow/projectrow.component';
+import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
 
 
 @NgModule({
@@ -65,7 +66,6 @@ import { ProjectRowComponent } from './project/projectrow/projectrow.component';
     HomeComponent,
     ReviewComponent,
     DashboardComponent,
-    AdminComponent,
     AccessDeniedComponent,
     AdmindashboardComponent,
     ProjectComponent,
@@ -74,7 +74,8 @@ import { ProjectRowComponent } from './project/projectrow/projectrow.component';
     NotFoundComponent,
     TableRowComponent,
     SidebarComponent,
-    ProjectRowComponent
+    ProjectRowComponent,
+    EmployeedashboardComponent,
   ],
   imports: [PerfectScrollbarModule ,
     //PerfectScrollbarConfigInterface,

@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute, Params } from "@angular/router";
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
 // import { MenusService } from './menus.service';
@@ -20,11 +20,12 @@ import { Routes, RouterModule } from "@angular/router";
   ]
 })
 export class SidebarComponent implements OnInit {
+  @Input()
   menus = [];
   constructor(public sidebarservice: SidebarService, private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute) {
-    this.menus = sidebarservice.getMenuList();
+    // this.menus = sidebarservice.getMenuList();
    }
    
    routeLink(title){

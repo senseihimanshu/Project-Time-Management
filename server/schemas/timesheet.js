@@ -1,60 +1,63 @@
-const mongoose = require("mongoose");
-var ObjectId = mongoose.Schema.Types.ObjectId;
-const employee = require("./employee");
-const project = require("./project-details");
-
+constmongoose = require("mongoose");
+varObjectId = mongoose.Schema.Types.ObjectId;
+constemployee = require("./employee");
+constproject = require("./project-details");
+ 
 module.exports = {
-  empObjId: {
-    type: ObjectId,
-    ref: "employee",
-    default: null
+empObjId: {
+type:ObjectId,
+ref:"employee",
+// required: true
   },
-  pId: {
-    type: ObjectId,
-    ref: "project",
-    default: null
+ 
+startDate: {
+type:Date,
+//required: true
   },
-  startDate: {
-    type: Date,
-    required: true
+endDate: {
+type:Date,
+//required: true
   },
-  endDate: {
-    type: Date,
-    required: true
+billable: {
+type:Boolean,
+//required: true
   },
-  taskType: {
-    type: String,
-    enum: ["Offshore", "Onsite", "Earned leave", "Casual leave", "Sick leave"]
+companyName: {
+type:String,
+default:"CyberGroup"
   },
-  billable: {
-    type: Boolean
-  },
-  companyName: {
-    type: String,
-    default: "CyberGroup"
-  },
-  week: [
+week: [
     {
-      startDate: [{ type: Date }],
-      endDate: [{ type: Date }],
-      hours: [{ type: Number }]
+pId: {
+type:ObjectId,
+ref:"project",
+//required: true
+      },
+date: { type:Date, required:true },
+hours: { type:Number, required:true },
+taskType: {
+type:String,
+enum: ["Offshore", "Onsite"]
+      },
+leaveType: {
+type:String,
+enum: ["Holiday", "Earned leave", "Casual leave", "Sick leave","none"]
+      }
     }
   ],
-  noOfHours: {
-    type: Number
+hoursPerWeek: {
+type:Number
+//required:true
   },
-  description: {
-    type: String,
-    maxlength: 100
+status: {
+type:String,
+default:"Pending",
+enum: ["Approved", "Declined", "Pending"],
+// required: true
   },
-  status: {
-    type: String,
-    default: "Pending",
-    enum: ["Approved", "Declined", "Pending"],
-    required: true
-  },
-  customerName: {
-    type: String,
-    default: null
+customerName: {
+type:String,
+default:null
   }
 };
+
