@@ -1,7 +1,9 @@
-.project-row{
+.review-row{
     display: flex;
     justify-content: space-between;
     width: 100%;
+  
+
     td{
         width: 16rem;
         font-weight: 500;
@@ -9,9 +11,7 @@
         word-wrap: break-word;
     }
 }
-// .marginSet{
-//   margin-top: 8px;
-// }
+
 .responstable {
     margin: 1em 0;
     width: 100%;
