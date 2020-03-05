@@ -1,55 +1,66 @@
-<div class="timesheet">
-  <div class="heading">Create Timesheet</div>
- <!-- <app-timesheet-form
-    [timesheet]="timesheet"
-    (submit)="submitToApi($event)"
-  ></app-timesheet-form> -->
-
-  <div class="timesheet_wrapper">
-     <!-- <div class="add-timesheet-icon">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </div>  -->
-    <div class="timesheet-entry">
-      <div class="timesheet-entry__dates">
-        <div class="timesheet-entry__dates--start_date">
-          <label for="start_date">Start Date :</label><input type="date" id="start_date" />
-        </div>
-        <div class="timesheet-entry__dates--end_date">
-          <label for="end_date">End Date :</label> <input type="date" id="end_date" />
-        </div>
-      </div>
-      
-      <div class="timesheet-entry__content">
-        <table class="timesheet-entry__content--table">
+<!-- Editable table -->
+<div class="card">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="add()">
+            <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
+          </a>
+        </span>
+        <table class="table table-bordered table-responsive-md table-striped text-center">
           <tr>
-            <th></th>
-            <td>Billable</td>
-            <td class="day">Mon</td>
-            <td class="day">Tue</td>
-            <td class="day">Wed</td>
-            <td class="day">Thurs</td>
-            <td class="day">Fri</td>
+            <th class="text-center">empId</th>
+            <th class="text-center">Project</th>
+            <th class="text-center">Client Name </th>
+            <th class="text-center">Location</th>
+            <th class="text-center">Start Date</th>
+            <th class="text-center">End Date</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Hours</th>
+            <th class="text-center">Billable</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Remove</th>
           </tr>
-          <tr>
-            <th>Project</th>
-            <td><input type="checkbox" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-          </tr>
-          <tr>
-            <th>Leave</th>
-            <td></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
-            <td><input type="number" min="0" max="24" step="0.05" value="0.00" /></td>
+          <tr *ngFor="let timesheet of timesheetList; let id = index">
+            <td>
+              <span (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)" contenteditable="true">{{timesheet.empObjId}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)">{{timesheet.week.pId}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)">{{timesheet.customerName}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'companyName', $event)" (blur)="updateList(id, 'companyName', $event)">{{timesheet.week[0].taskType}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'country', $event)" (blur)="updateList(id, 'country', $event)">{{timesheet.startDate |date}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.endDate |date}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.week.date |date}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.week.hours}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.billable}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.status}}</span>
+            </td>
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
+              </span>
+            </td>
           </tr>
         </table>
       </div>
     </div>
   </div>
-</div>
+  <!-- Editable table -->

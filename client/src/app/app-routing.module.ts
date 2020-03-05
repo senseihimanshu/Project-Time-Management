@@ -1,3 +1,4 @@
+import { TimesheetComponent } from './timesheet/timesheet.component';
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { TableRowComponent } from './admindashboard/tablerow/tablerow.component';
@@ -11,7 +12,6 @@ import { EmployeeFormComponent } from "./main/employee-form/employee-form.compon
 import { LoginComponent } from "./login/login.component";
 import { AccessDeniedComponent } from "./access-denied/access-denied.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { TimesheetComponent } from "./timesheet/timesheet.component";
 import { ReviewComponent } from "./review/review.component";
 import { HomeComponent } from "./home/home.component";
 import { NgModule } from "@angular/core";
@@ -24,6 +24,10 @@ import { from } from 'rxjs';
 const routes: Routes = [
   {
     path: "", redirectTo: "login", pathMatch: "full"
+  },
+  {
+    path:"timesheet",
+    component:TimesheetComponent
   },
   {
     path: "admindashboard",
@@ -104,10 +108,6 @@ const routes: Routes = [
         component: ProjectFormComponent
       }
     ]
-  },
-  {
-    path: 'timesheet',
-    component: TimesheetComponent
   },
   {
     path: "**",
