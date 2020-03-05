@@ -23,28 +23,13 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   <td>
     {{project.status}}
   </td>
-      <td>
-        <a
-          [routerLink]="['/employeeform/details', employee.empId]"
-        >
-          <i class="fas fa-eye"></i>
-        </a>
-      </td>
-      <td>
-        <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
-          <i class="fas fa-pencil-alt"></i>
-        </a>
-      </td>
-      <td>
-        <a class="delete" (click)="deleteEmployee(project.empId)"><i class="fas fa-trash"></i></a>
-      </td>
     </tr>
   `
 })
 export class ProjectRowComponent {
 
   @Input()
-  employee: any;
+  project: any;
 
   @Output()
   deleteEmp: EventEmitter<any> = new EventEmitter();

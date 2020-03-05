@@ -26,12 +26,18 @@
           <td>Status</td>
           <!-- <th>Actions</th> -->
         </thead>
+        <!-- <tbody class="mt-5" *ngFor="let project of projectsArray">
+          <project-row
+            [project]="project"
+            (deleteEmp)="deleteEmployee($event)"
+          ></project-row>
+        </tbody> -->
         <tbody class="mt-5" *ngFor="let project of projectsArray">
           <project-row
             [project]="project"
             (deleteEmp)="deleteEmployee($event)"
           ></project-row>
-        </tbody>
+          </tbody>
         <h2 class="message" *ngIf="message">{{ message }}</h2>
       </table>
     </section>

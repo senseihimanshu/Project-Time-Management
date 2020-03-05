@@ -1,3 +1,5 @@
+import { ProjectRowComponent } from './project/projectrow/projectrow.component';
+import { TableRowComponent } from './admindashboard/tablerow/tablerow.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProjectFormComponent } from "./project-form/project-form.component";

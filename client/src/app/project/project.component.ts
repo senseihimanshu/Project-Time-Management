@@ -16,15 +16,16 @@ export class ProjectComponent implements OnInit,OnChanges {
     let obj=this._service.showProjects().subscribe(res => {
       this.projectsArray=res;
       console.log(res);
+      console.log(this.projectsArray);
     });
    console.log(obj);
     } 
   ngOnInit() {
-    this.tabularData();
+    this.tabularData()
   }
   
   ngOnChanges(){
-    this.tabularData();
+    this.tabularData()
   }
 
 //   deleteEmployee(empId: any){
