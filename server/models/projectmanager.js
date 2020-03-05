@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const schema = require("../schemas");
 const projectManagerSchema = new mongoose.Schema(schema.projectManager);
 
-class Project {
+class projectManager {
   constructor() {
     this.model = mongoose.model("ProjectManger", projectManagerSchema);
   }
@@ -15,7 +15,7 @@ class Project {
     return newProject;
   }
   async update(criteria = {}, updatedProjectObj) {
-    return this.model.update(criteria, updatedProjectObj);
+    return this.model.updateOne(criteria, updatedProjectObj);
   }
   async delete(criteria = {}) {
     return this.model.deleteOne(criteria);
@@ -25,4 +25,4 @@ class Project {
   }
 }
 
-module.exports = new Project();
+module.exports = new projectManager();
