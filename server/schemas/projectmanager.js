@@ -5,7 +5,7 @@ module.exports = {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'employee' 
     },
-    employeeId: [{
+    employeeIds: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'employee' 
     }],
@@ -13,7 +13,7 @@ module.exports = {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'project'
     },
-    timesheetId:[{
+    timesheetIds:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'timesheet'
     }]

@@ -1,24 +1,32 @@
 const model = require('../models');
 
-class Timesheet{
+class Timesheet {
   constructor() {}
 
   async create(req, res) {
-    //console.log("Create timesheet req.body",req.body);
     let timesheetObj = {
       empObjId: req.body.empObjId,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       billable: req.body.billable,
       companyName: req.body.companyName,
-      status: 'Pending',
       customerName: req.body.customerName,
       week:req.body.week,
-    //  hoursPerWeek:`hoursPerWeek`+req.body.hours
     };
 
     const newTimesheet = await model.timesheet.save(timesheetObj);
-   res.send(newTimesheet);
+    console.log(newTimesheet['week']);
+
+    await Promise.all(newTimesheet['week'].map(async (week) => {
+      console.log(week['projectId']);
+      const projectManager = (await model.project.get({ _id: week["projectId"] }, { projectManager: 1 })).projectManager;
+      console.log(projectManager);
+      await model.projectManager.update({ _id: projectManager }, { $push: { timesheetIds: newTimesheet } });
+    }));
+
+    console.log('Reached Here @timesheet.js/line26');
+
+    res.send(newTimesheet);
 }
 
 async show(req, res) {
