@@ -9,14 +9,14 @@
     display: flex;
     justify-content: space-around;
     width: 65%;
-    // background: linear-gradient(to bottom right,rgba(#000, 0.8), rgba(#fff, 0.8)), url(../../assets/images/Cyber-Group_logos-02.png);
+  //  background: linear-gradient(to bottom right,rgba(#000, 0.8), rgba(#fff, 0.8)), url(../../assets/images/Cyber-Group_logos-02.png);
     
-    background: rgb(131,58,180);
-    background: linear-gradient(149deg, rgba(131,58,180,0.6) 0%, rgba(253,29,29,0.6) 50%, rgba(252,176,69,0.6) 100%), url(../../assets/images/Cyber-Group_logos-02.png);
+  // background: rgb(131,58,180);
+  //  background: linear-gradient(149deg, rgba(131,58,180,0.6) 0%, rgba(253,29,29,0.6) 50%, rgba(252,176,69,0.6) 100%), url(../../assets/images/Cyber-Group_logos-02.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    color: white;
+    color:black;
     margin: 0 auto;
     .add-timesheet-icon{
         font-size: 4rem;
