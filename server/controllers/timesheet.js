@@ -41,8 +41,10 @@ async show(req, res) {
   if(empObjId){
   timesheet = await model.timesheet.get({empObjId}); }
 
-  else{timesheet= await model.timesheet.get() }
 
+  else{timesheet= await model.timesheet.get() }
+  console.log(timesheet);
+  
   if (!timesheet) {
     console.log("Not available");
     return res.status(404).send(timesheet);
@@ -76,6 +78,7 @@ async show(req, res) {
 async index(req, res) {
   // console.log("dikhaa rha huu");
    const timesheetList = await model.timesheet.get();
+   console.log(timesheetList);
    res.send(timesheetList);
   // console.log(employeeList);
  }
