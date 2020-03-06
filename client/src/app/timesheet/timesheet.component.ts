@@ -1,25 +1,23 @@
-import { TimesheetService } from './../services/timesheet.service';
-import { Component, OnInit } from '@angular/core';
-
+import { TimesheetService } from "./../services/timesheet.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'table-editable',
-  templateUrl: './timesheet.component.html',
-  styleUrls: ['./timesheet.component.scss']
+  selector: "table-editable",
+  templateUrl: "./timesheet.component.html",
+  styleUrls: ["./timesheet.component.scss"]
 })
-export class TimesheetComponent implements OnInit{
-  constructor(private _service: TimesheetService) { }
-    editField: string;
-    timesheetList:any ;
-   
-       tabularData() {
-        let obj=this._service.getTimesheet().subscribe(res => {
-          this.timesheetList=res;
-          console.log(res);
-          console.log(this.timesheetList);
-      
-        });
-        var curr = new Date(); // get current date
+export class TimesheetComponent implements OnInit {
+  constructor(private _service: TimesheetService) {}
+  editField: string;
+  timesheetList: any;
+
+  tabularData() {
+    let obj = this._service.getTimesheet().subscribe(res => {
+      this.timesheetList = res;
+      console.log(res);
+      console.log(this.timesheetList);
+    });
+      var curr = new Date(); // get current date
         console.log(curr,"todays date");
         var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
         var last = first + 4; // last day is the first day + 6
@@ -32,13 +30,12 @@ export class TimesheetComponent implements OnInit{
         lastday;
         "Sat, 12 Mar 2011 12:25:40 GMT";
         console.log("daaayyyyssss", firstday, lastday, secondday);
-        console.log(obj);
-        } 
-      ngOnInit()
-      {  this.tabularData();
-   }
+    console.log(obj);
+  }
+  ngOnInit() {
+    this.tabularData();
+  }
 
-   
   //   updateList(id: number, property: string, event: any) {
   //     const editField = event.target.textContent;
   //  //   this.personList[id][property] = editField;
@@ -49,15 +46,15 @@ export class TimesheetComponent implements OnInit{
   //   //  this.personList.splice(id, 1);
   //   }
 
-    // add() {
-    //   if (this.awaitingPersonList.length > 0) {
-    //     const person = this.awaitingPersonList[0];
-    //  //   this.personList.push(person);
-    //     this.awaitingPersonList.splice(0, 1);
-    //   }
-    // }
+  // add() {
+  //   if (this.awaitingPersonList.length > 0) {
+  //     const person = this.awaitingPersonList[0];
+  //  //   this.personList.push(person);
+  //     this.awaitingPersonList.splice(0, 1);
+  //   }
+  // }
 
-    // changeValue(id: number, property: string, event: any) {
-    //   this.editField = event.target.textContent;
-    // }
+  // changeValue(id: number, property: string, event: any) {
+  //   this.editField = event.target.textContent;
+  // }
 }

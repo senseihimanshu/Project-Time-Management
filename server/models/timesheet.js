@@ -8,8 +8,13 @@ class Timesheet{
   }
    //getting the timesheet data as per criteria  
     async get(criteria={},columns={}){
-      console.log("timesheet viewed")
-       return await this.model.find(criteria,columns);
+      console.log("timesheet viewed");
+      const timesheetArray = await this.model.find(criteria,columns).populate({
+          path: 'week.projectId',
+          model: 'Project'
+      });
+      console.log(timesheetArray);
+      return timesheetArray;
    }
    //saves the data of newly created timesheet entry
     async save(timesheetObj){
