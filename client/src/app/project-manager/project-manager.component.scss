@@ -1,0 +1,149 @@
+//CTRL+C && CTRL+Z
+.background_dashboard {
+    height: 85vh;
+   // background:#9a9184;
+   overflow-x: auto;
+   overflow-y: auto;
+   }
+   tbody:nth-child(even) {
+    background: white
+   }
+   tbody:nth-child(odd) {
+    background: #efefef;
+   }
+   .table {
+    max-width: 100%;
+    // margin-top: 2rem;
+    overflow: scroll;
+   }
+   .fixed-top {
+    position: fixed;
+    top: auto;
+   }
+   .deletebutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+   }
+   .show {
+    margin-left: 43% !important;
+   }
+   .empTable{
+    // width: 100vw;
+    color: black;
+    font-size: large;
+    font-weight: 800;
+    // padding-left: 5rem;
+   }
+   td{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color:black;
+    line-height: 1.4;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+   }
+   th{
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+    background-color: #09103a73;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    text-align: center;
+   }
+   .app-main[_ngcontent-meo-c1] {
+    padding: 0 8.4rem;
+    min-height: 8vh!important;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+   }
+   .app-main[_ngcontent-meo-c1] {
+    padding: 0 8.4rem;
+    min-height: 8vh !important;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+   }
+   .background_dashboard{
+    width: 100%;
+    overflow: scroll;
+    z-index: 1;
+   }
+   // .background_dashboard::-webkit-scrollbar {
+   // width: 30px;
+   // height: 5px;
+   // }
+   // .background_dashboard::-webkit-scrollbar-track {
+   // background: linear-gradient(90deg, #201c29, #201c29 1px, #100e17 0, #100e17);
+   // }
+   // .background_dashboard::-webkit-scrollbar-thumb {
+   // background: -webkit-gradient(linear, left top, left bottom, from(#ff8a00), to(#e52e71));
+   // background: linear-gradient(180deg, #ff8a00, #e52e71);
+   // border-radius: 30px;
+   // box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
+   // }
+   .navbar{
+    justify-content: space-between;
+    height: 4rem;
+    background-color: black;
+   }
+   span{
+    padding-right: 2.5rem;
+    cursor: pointer;
+   }
+   .show i{
+    color: pink;
+   }
+   .edit i{
+    color: grey;
+   }
+   .delete i {
+    color: red;
+   }
+   .logout
+   {
+    float: right;
+   }
+   .test{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #ffc107aa;
+   }
+   .test td{
+    width: 16rem;
+    font-weight: 500;
+    font-family: "Lato", sans-serif;
+    word-wrap: break-word;
+    font-weight: bold;
+   }
+   .wrapper{
+    display: flex;
+    flex-direction: column;
+   }
+   .main{
+    display: flex;
+   }
+   .message{
+    color: red;
+    text-align: center;
+    font-size: 4.2rem;
+   }
+   
+   
+   
