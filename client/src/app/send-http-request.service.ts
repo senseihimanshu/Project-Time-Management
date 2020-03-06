@@ -39,8 +39,8 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  rejectRequest(obj:any): Observable<any>{
-    return this.http.put("http://localhost:3000/timesheet",obj, {headers:this.header_token}).pipe(
+  reviewRequest(obj:any): Observable<any>{
+    return this.http.put("http://localhost:3000/review",obj, {headers:this.header_token}).pipe(
       tap(_ => this.log("Log In")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
@@ -52,6 +52,7 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
+  
 
   logMeIn(obj): Observable<any>{
     return this.http.post("http://localhost:8080/login", obj, {responseType: 'text'}).pipe(
@@ -59,12 +60,12 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  // showReviews(): Observable<any>{
-  //   return this.http.get("http://localhost:3000/", {headers:this.header_token}).pipe(
-  //     tap(_ => this.log("Reviews")),
-  //     catchError(this.handleError<any>('Some Error Occurred'))
-  //   );
-  // }
+  showReviews(): Observable<any>{
+    return this.http.get("http://localhost:3000/timesheet", {headers:this.header_token}).pipe(
+      tap(_ => this.log("Reviews")),
+      catchError(this.handleError<any>('Some Error Occurred'))
+    );
+  }
 
   deletetoken() {
     localStorage.removeItem("Authorization");

@@ -12,7 +12,7 @@ module.exports = {
   },
   projectManager: {
     type: ObjectId,
-    ref: "projectmanagers",
+    ref: 'projectmanagers',
     required: true
   },
   clientName: {

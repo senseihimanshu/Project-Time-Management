@@ -23,6 +23,9 @@ module.exports= (app) => {
 	app.post('/api/timesheet', controller.timesheet.create)
 	app.patch("/api/timesheet", controller.timesheet.update);
 	app.get('/api/projectmanager', controller.projectManager.get);
+	//review
+	// app.put("/review",controller.review.update);
+	app.put("/review",controller.timesheet.modify);
 }
 
 

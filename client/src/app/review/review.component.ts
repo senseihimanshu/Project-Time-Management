@@ -57,53 +57,42 @@ export class ReviewComponent implements OnInit,OnChanges {
   usersArray: any;
   reviews() {
     // let obj = this._service.showReviews().subscribe(res => {
-      this.usersArray = [{
-        "empId":"123",
-        "projectId":"123",
-        "customerName":"Cyber",
-       "billable":true,
-       "date":"14-03-2019",
-       "hours":"14",
-       "status":"pending"
-      },{
-        "empId":"123",
-        "projectId":"123",
-        "customerName":"Cyber",
-       "billable":true,
-       "date":"14-03-2019",
-       "hours":"14",
-       "status":"pending"
-      }];
-      console.log(this.usersArray);
-    }
-
-  accept(data) {
-    let obj = {
-      _id: data,
-      status: "Approved"
-    };
-    this.sendReq(obj);
-  }
-  reject(data) {
-    let obj = {
-      _id: data,
-      status: "Rejected"
-    };
-    this.sendReq(obj);
-  }
-
-  sendReq(data) {
-    let obj = this._service.rejectRequest(data).subscribe(res => {
-      this.usersArray = res;
-      console.log(res);
-    });
-  }
-  ngOnInit() {
+      // this.usersArray = [{
+      //   "empId":"123",
+      //   "projectId":"123",
+      //   "customerName":"Cyber",
+      //  "billable":true,
+      //  "date":"14-03-2019",
+      //  "hours":"14",
+      //  "status":"pending"
+      // },{
+      //   "empId":"123",
+      //   "projectId":"123",
+      //   "customerName":"Cyber",
+      //  "billable":true,
+      //  "date":"14-03-2019",
+      //  "hours":"14",
+      //  "status":"pending"
+      // }];
+      // console.log(this.usersArray);
+      let obj=this._service.showReviews().subscribe(res => {
+        this.usersArray=res;
+        console.log(res);
+        console.log(this.usersArray);
+      });
+     console.log(obj);
+      } 
+   
+  
+  ngOnInit(){
     this.reviews()
   }
+  
   ngOnChanges(){
     this.reviews()
   }
+
+ 
   logout(){
     this._service.deletetoken();
      

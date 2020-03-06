@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { SendHttpRequestService } from "./../../services/send-http-request.service";
+import {SendHttpRequestService } from "./../../send-http-request.service";
 @Component({
   selector: "review-row",
   styleUrls: ["./reviewrow.component.scss", "../review.component.scss"],
@@ -25,17 +25,15 @@ import { SendHttpRequestService } from "./../../services/send-http-request.servi
       </td>
       <td>
       <a
-          class="btn btn-primary"
-          href="#"
+          class="btn btn-primary text-white"
           role="button"
-          (click)="accept(this._id)"
+          (click)="accept(employee._id)"
           >Accept</a
         >
         <a
-          class="btn btn-primary ml-1"
-          href="#"
+          class="btn btn-primary ml-1 text-white" 
           role="button"
-          (click)="reject(this._id)"
+          (click)="reject(employee._id)"
           >Reject</a
         >
       </td>
@@ -43,6 +41,8 @@ import { SendHttpRequestService } from "./../../services/send-http-request.servi
   `
 })
 export class ReviewRowComponent {
+  constructor(private _service:SendHttpRequestService)
+  {}
   @Input()
   employee: any;
 
@@ -51,5 +51,32 @@ export class ReviewRowComponent {
 
   deleteEmployee(empId: string) {
     this.deleteEmp.emit(empId);
+  }
+  usersArray:any;
+  accept(data) {
+    console.log(data);
+    let obj = {
+      _id: data,
+      status: "Approved"
+    };
+    console.log(obj._id,"status");
+    console.log("Kar rha hu accept");
+    console.log(obj._id);
+    this.sendReq(obj);
+  }
+      
+  reject(data) {
+    let obj = {
+      _id: data,
+      status: "Declined"
+    };
+    console.log(obj,"status data");
+    this.sendReq(obj);
+  }
+  sendReq(data) {
+    let obj = this._service.reviewRequest(data).subscribe(res => {
+      this.usersArray = res;
+      console.log(res);
+    });
   }
 }
