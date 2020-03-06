@@ -9,7 +9,7 @@ import {SendHttpRequestService } from "./../../send-http-request.service";
         {{ employee.empId }}
       </td>
       <td>
-        {{ employee.projectId }}
+        {{ employee.week.projectId }}
       </td>
       <td>
         {{ employee.customerName }}
@@ -18,10 +18,10 @@ import {SendHttpRequestService } from "./../../send-http-request.service";
         {{ employee.billable }}
       </td>
       <td>
-        {{ employee.date }}
+        {{ employee.startDate | date }}
       </td>
       <td>
-        {{ employee.hours }}
+        {{ employee.week[0].hours }}
       </td>
       <td>
       <a
