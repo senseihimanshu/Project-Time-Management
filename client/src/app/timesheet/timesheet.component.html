@@ -20,47 +20,49 @@
             <th class="text-center">Hours</th>
             <th class="text-center">Billable</th>
             <th class="text-center">Status</th>
-            <th class="text-center">Remove</th>
           </tr>
-          <tr *ngFor="let timesheet of timesheetList; let id = index">
+            <!-- <th class="text-center">Remove</th> -->
+       
+          <tr *ngFor="let timesheet of timesheetList; let id=index;">
             <td>
-              <span (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)" contenteditable="true">{{timesheet.empObjId}}</span>
+              <span>{{timesheet.empObjId}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)">{{timesheet.week.projectId}}</span>
+              <span>{{timesheet.week[id].pId}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)">{{timesheet.customerName}}</span>
+              <span>{{timesheet.customerName}}</span>
+            </td>
+
+            <td>
+              <span>{{timesheet.week[id].taskType}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'companyName', $event)" (blur)="updateList(id, 'companyName', $event)">{{timesheet.week[0].taskType}}</span>
+              <span>{{timesheet.startDate |date}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'country', $event)" (blur)="updateList(id, 'country', $event)">{{timesheet.startDate |date}}</span>
+              <span>{{timesheet.endDate |date}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.endDate |date}}</span>
+              <span>{{timesheet.week[id].date |date}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.week.date |date}}</span>
+              <span>{{timesheet.week[id].hours}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.week.hours}}</span>
+              <span>{{timesheet.billable}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.billable}}</span>
-            </td>
-            <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'city', $event)" (blur)="updateList(id, 'city', $event)">{{timesheet.status}}</span>
-            </td>
-            <td>
+              <span>{{timesheet.status}}</span>
+            </td> 
+          
+          </tr>
+          </table>
+            <!-- <td>
               <span class="table-remove">
                 <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
               </span>
-            </td>
-          </tr>
-        </table>
+            </td> -->
+         
       </div>
     </div>
-  </div>
-  <!-- Editable table -->
