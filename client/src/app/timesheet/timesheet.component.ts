@@ -19,7 +19,20 @@ export class TimesheetComponent implements OnInit{
           console.log(this.timesheetList);
           console.log(res.startDate)
         });
-       console.log(obj);
+        var curr = new Date(); // get current date
+        console.log(curr,"todays date");
+        var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
+        var last = first + 4; // last day is the first day + 6
+    
+        var firstday = new Date(curr.setDate(first)).toUTCString();
+        var lastday = new Date(curr.setDate(last)).toUTCString();
+        var secondday = new Date(curr.setDate(first + 1)).toUTCString();
+        firstday;
+        "Sun, 06 Mar 2011 12:25:40 GMT";
+        lastday;
+        "Sat, 12 Mar 2011 12:25:40 GMT";
+        console.log("daaayyyyssss", firstday, lastday, secondday);
+        console.log(obj);
         } 
       // { id: 1, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
       // { id: 2, name: 'Guerra Cortez', age: 45, companyName: 'Insectus', country: 'USA', city: 'San Francisco' },
