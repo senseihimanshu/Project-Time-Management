@@ -1,3 +1,4 @@
+// import { NewwComponent } from './neww/neww.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
     path: "sidebar",
     component: SidebarComponent
   },
+  // {
+  //   path: "newtimesheet",
+  //   component: NewwComponent
+  // },
       {
         path: "myProfile",
         component: MyprofileComponent

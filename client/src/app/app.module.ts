@@ -1,3 +1,5 @@
+// import { NewwComponent } from './neww/neww.component';
+// import { MbscModule } from '@mobiscroll/angular-lite';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -7,6 +9,7 @@ import { SendHttpRequestService } from "./services/send-http-request.service";
 //import { AuthorizationService } from './services/authorization.service';
 import { ChartsModule } from 'ng2-charts';
 //Third Party Components
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   MDBBootstrapModule,
   CheckboxModule,
@@ -57,6 +60,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
 
 @NgModule({
   declarations: [
+    // NewwComponent,
     AppComponent,
     HeaderComponent,
     MainComponent,
@@ -80,6 +84,8 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     ProjectManagerComponent
   ],
   imports: [PerfectScrollbarModule ,
+    NgbModule,
+    // MbscModule,
     //PerfectScrollbarConfigInterface,
     MatSelectModule,
     MatFormFieldModule,

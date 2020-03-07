@@ -1,15 +1,36 @@
 import { TimesheetService } from "./../services/timesheet.service";
 import { Component, OnInit } from "@angular/core";
 
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: "table-editable",
   templateUrl: "./timesheet.component.html",
   styleUrls: ["./timesheet.component.scss"]
 })
 export class TimesheetComponent implements OnInit {
-  constructor(private _service: TimesheetService) {}
+  constructor(private _service: TimesheetService,private modalService: NgbModal) {}
   editField: string;
   timesheetList: any;
+  closeResult: string;
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 
   tabularData() {
     let obj = this._service.getTimesheet().subscribe(res => {
@@ -35,26 +56,4 @@ export class TimesheetComponent implements OnInit {
   ngOnInit() {
     this.tabularData();
   }
-
-  //   updateList(id: number, property: string, event: any) {
-  //     const editField = event.target.textContent;
-  //  //   this.personList[id][property] = editField;
-  //   }
-
-  //   remove(id: any) {
-  //   //  this.awaitingPersonList.push(this.personList[id]);
-  //   //  this.personList.splice(id, 1);
-  //   }
-
-  // add() {
-  //   if (this.awaitingPersonList.length > 0) {
-  //     const person = this.awaitingPersonList[0];
-  //  //   this.personList.push(person);
-  //     this.awaitingPersonList.splice(0, 1);
-  //   }
-  // }
-
-  // changeValue(id: number, property: string, event: any) {
-  //   this.editField = event.target.textContent;
-  // }
 }
