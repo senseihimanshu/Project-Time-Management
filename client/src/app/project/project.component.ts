@@ -73,7 +73,8 @@ export class ProjectComponent implements OnInit,OnChanges {
   ngOnChanges(){
     this.tabularData()
   }
-
+ 
+ 
 //   deleteEmployee(empId: any){
 //     console.log(empId);
 //     this.employeeService.deleteEmployee(empId).subscribe((res) => {

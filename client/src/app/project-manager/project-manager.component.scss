@@ -1,4 +1,4 @@
-    
+//CTRL+C && CTRL+Z
 .background_dashboard {
     height: 85vh;
    // background:#9a9184;
@@ -11,24 +11,11 @@
    tbody:nth-child(odd) {
     background: #efefef;
    }
-//    tbody:first-child{
-//     margin-top: 10rem!important;
-// }
-// .category_table > tbody > tr:first-child > td {
-//     margin-top: 5rem!important;;
-// }
    .table {
     max-width: 100%;
     // margin-top: 2rem;
     overflow: scroll;
    }
-   thead{
-       position: relative;
-    //    margin-bottom: 4rem;
-   }
-//    tbody{
-//        margin-top: 10%;
-//    }
    .fixed-top {
     position: fixed;
     top: auto;
@@ -57,7 +44,7 @@
     text-align: center;
     padding-top: 18px;
     padding-bottom: 10px;
-    padding-right: 20px;
+    padding-right: 10px;
    }
    th{
     font-family: Lato-Bold;
@@ -139,7 +126,7 @@
     background-color: #ffc107aa;
    }
    .test td{
-    width: 15rem;
+    width: 16rem;
     font-weight: 500;
     font-family: "Lato", sans-serif;
     word-wrap: break-word;

@@ -21,6 +21,7 @@ import { AdmindashboardComponent } from "./admindashboard/admindashboard.compone
 import { NotFoundComponent } from "./404/notfound.component";
 //import { AuthorizationGuard } from './authorization.guard';
 import { from } from 'rxjs';
+import { ProjectManagerComponent } from './project-manager/project-manager.component';
 const routes: Routes = [
   {
     path: "", redirectTo: "login", pathMatch: "full"
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: "manager",
     component: ReviewComponent
+  },
+  {
+    path: 'projectmanager',
+    component: ProjectManagerComponent
   },
   {
     path: "projects",
