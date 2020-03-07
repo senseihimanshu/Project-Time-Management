@@ -59,20 +59,24 @@ export class EmployeeFormComponent implements OnInit {
 
     //   }
     // }));
-    this.route.params.subscribe((data: Params) => { console.log(data) });
+    this.route.params.subscribe((data: Params) => {
+      console.log(data);
+    });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
           //console.log(params);
-          
+
           // debugger;
+          console.log(params,"parrrraammss");
           console.log(this.typeOfForm);
           this.typeOfForm = params.type;
-          if(!params.type){
+          console.log(this.typeOfForm,"form-type");
+          if (!params.type) {
             this.typeOfForm = "get";
           }
-          
+
           if (!params.empId) {
             return new Observable<any>();
           }
@@ -88,22 +92,23 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
-   console.log(obj, typeOfForm);
-    this.employeeService
-      .employeeCreateOrUpdate(obj, typeOfForm)
-      .subscribe((res: any) => {
-        console.log(res.payload.message)
+    console.log(obj, typeOfForm);
+    this.employeeService.employeeCreateOrUpdate(obj, typeOfForm).subscribe(
+      (res: any) => {
+        console.log(res.payload.message);
         this.message = res.payload.message;
         setTimeout(() => {
           this.message = null;
         }, 5000);
         form.reset();
-      }, (err) => {
+      },
+      err => {
         console.log(err);
         this.message = err.error.payload.message;
         setTimeout(() => {
           this.message = null;
         }, 5000);
-      });
+      }
+    );
   }
 }

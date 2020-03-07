@@ -23,7 +23,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   <td>
   <button
     class="show"
-    [routerLink]="['/employeeform/details', employee.empId]"
+    [routerLink]="['/employeeform/details', project._id]"
   >
     <i class="fas fa-eye"></i>
     
@@ -32,7 +32,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   <td>
   <button
     class="edit"
-    [routerLink]="['/employeeform', 'update', employee.empId]"
+    [routerLink]="['/employeeform', 'update', project.empId]"
   >
     <i class="fas fa-pencil-alt"></i>
   </button>

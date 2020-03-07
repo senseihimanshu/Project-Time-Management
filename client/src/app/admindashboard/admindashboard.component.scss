@@ -33,7 +33,7 @@ tbody:nth-child(odd) {
  // width: 100vw;
  color: black;
  font-size: large;
- font-weight: 800;
+//  font-weight: 800;
  // padding-left: 5rem;
 }
 td{
@@ -45,9 +45,10 @@ td{
  padding-top: 18px;
  padding-bottom: 10px;
  padding-right: 10px;
+ font-weight: 300;
 }
 th{
- font-family: Lato-Bold;
+ font-family: Roboto, "Helvetica Neue", sans-serif;
  font-size: 18px;
  color: #fff;
  line-height: 1;
@@ -56,6 +57,7 @@ th{
  padding-bottom: 10px;
  padding-right: 10px;
  text-align: center;
+ font-weight: 300;
 }
 .app-main[_ngcontent-meo-c1] {
  padding: 0 8.4rem;
@@ -84,19 +86,6 @@ th{
  overflow: scroll;
  z-index: 1;
 }
-// .background_dashboard::-webkit-scrollbar {
-// width: 30px;
-// height: 5px;
-// }
-// .background_dashboard::-webkit-scrollbar-track {
-// background: linear-gradient(90deg, #201c29, #201c29 1px, #100e17 0, #100e17);
-// }
-// .background_dashboard::-webkit-scrollbar-thumb {
-// background: -webkit-gradient(linear, left top, left bottom, from(#ff8a00), to(#e52e71));
-// background: linear-gradient(180deg, #ff8a00, #e52e71);
-// border-radius: 30px;
-// box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
-// }
 .navbar{
  justify-content: space-between;
  height: 4rem;
@@ -127,10 +116,9 @@ span{
 }
 .test td{
  width: 16rem;
- font-weight: 500;
- font-family: "Lato", sans-serif;
- word-wrap: break-word;
  font-weight: bold;
+ font-family: Roboto, "Helvetica Neue", sans-serif;
+ word-wrap: break-word;
 }
 .wrapper{
  display: flex;

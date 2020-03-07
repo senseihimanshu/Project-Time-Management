@@ -1,21 +1,120 @@
+
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      <span routerLink="/admin">Home</span>
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
+    <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+    >
+      <i class="fa fa-power-off"></i>
+    </button>
+    </div>
+  </mat-toolbar>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="date">Select the week</label>
+        <div class="input-group">
+          <input id="date" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div><label for="date">Start Date</label>
+    <span><input type="date" disabled/></span>
+      
+    <label for="date">End Date</label>
+    <span><input type="date" disabled/></span>
+  </div>
+    <!-- Editable table -->
+<div class="card">
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      
+      <table class="table table-bordered table-responsive-md table-striped text-center container-fluid table-responsive-stack">
+        <tr>
+          <th class="text-center">empId</th>
+          <th class="text-center">Project</th>
+          <th class="text-center">Client Name </th>
+          <th class="text-center">Task Type</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Hours</th>
+          <th class="text-center">Billable</th>
+          <th class="text-center">Status</th>
+        </tr>
+          <!-- <th class="text-center">Remove</th> -->
+     
+        <tr *ngFor="let timesheet of timesheetList; let id=index;">
+          <td>
+            <span>{{timesheet.empObjId}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.week[id].projectId.projectName}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.customerName}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.week[id].taskType}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.week[id].date |date}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.week[id].hours}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.billable}}</span>
+          </td>
+          <td>
+            <span>{{timesheet.status}}</span>
+          </td> 
+        </tr>
+        </table>
+
+    </div>
+  </div>
+</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<pre>{{closeResult}}</pre>
+
 <!-- Editable table -->
 <div class="card">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Timesheets</h3>
     <div class="card-body">
       <div id="table" class="table-editable">
         <span class="table-add float-right mb-3 mr-2">
-          <a class="text-success" (click)="add()">
-            <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
+          <a class="text-success" (click)="open(content)">
+            <mdb-icon fas icon="plus" size="2x"></mdb-icon>
           </a>
         </span>
-        <table class="table table-bordered table-responsive-md table-striped text-center">
+        
+        <table class="table table-bordered table-responsive-md table-striped text-center container-fluid table-responsive-stack">
           <tr>
             <th class="text-center">empId</th>
             <th class="text-center">Project</th>
             <th class="text-center">Client Name </th>
-            <th class="text-center">Location</th>
-            <th class="text-center">Start Date</th>
-            <th class="text-center">End Date</th>
+            <th class="text-center">Task Type</th>
             <th class="text-center">Date</th>
             <th class="text-center">Hours</th>
             <th class="text-center">Billable</th>
@@ -25,23 +124,16 @@
        
           <tr *ngFor="let timesheet of timesheetList; let id=index;">
             <td>
-              <span>{{timesheet.empObjId.name}}</span>
+              <span>{{timesheet.empObjId}}</span>
             </td>
             <td>
-              <span>{{timesheet.week[id].pId.projectName}}</span>
+              <span>{{timesheet.week[id].pId}}</span>
             </td>
             <td>
               <span>{{timesheet.customerName}}</span>
             </td>
-
             <td>
               <span>{{timesheet.week[id].taskType}}</span>
-            </td>
-            <td>
-              <span>{{timesheet.startDate |date}}</span>
-            </td>
-            <td>
-              <span>{{timesheet.endDate |date}}</span>
             </td>
             <td>
               <span>{{timesheet.week[id].date |date}}</span>
@@ -55,14 +147,10 @@
             <td>
               <span>{{timesheet.status}}</span>
             </td> 
-          
           </tr>
           </table>
-            <!-- <td>
-              <span class="table-remove">
-                <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
-              </span>
-            </td> -->
-         
+  
       </div>
     </div>
+</div>
+
