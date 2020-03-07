@@ -3,31 +3,34 @@
   //   .table-heading{
   //     background-color: rgb(235, 193, 55);
   //   }  
-  tr {
-    td {
-      vertical-align: middle !important;
-    }
+  // tr {
+  //   td {
+  //     vertical-align: middle !important;
+  //   }
 
-    span {
-      &:not([class]) {
-        padding: 1rem 1rem;
-      }
-    }
-      tr {
-        td {
-          vertical-align: middle !important;
-        }
+  //   span {
+  //     &:not([class]) {
+  //       padding: 1rem 1rem;
+  //     }
+  //   }
+  //     tr {
+  //       td {
+  //         vertical-align: middle !important;
+  //       }
 
-        span {
-          &:not([class]) {
-            padding: 1rem 1rem;
+  //       span {
+  //         &:not([class]) {
+  //           padding: 1rem 1rem;
 
-          }
-        }
-      }
+  //         }
+  //       }
+  //     }
 
-    }
-  
+  //   }
+//  .modal-wrapper
+//  {
+//    transform: translateY(70px);
+//  }
 .table-add
 {
   position: fixed;
@@ -121,7 +124,7 @@
 
       /*  IE9 FIX   */
       .table-responsive-stack td {
-        float: left\9;
+        float: left;
         width: 100%;
       }
     }}
