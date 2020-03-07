@@ -53,6 +53,15 @@ export class TimesheetComponent implements OnInit {
         console.log("daaayyyyssss", firstday, lastday, secondday);
     console.log(obj);
   }
+
+  findweek(){
+    var curr = new Date;
+    var firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
+    var lastday = new Date(curr.setDate(curr.getDate() - curr.getDay()+6));
+  
+  console.log(firstday,lastday);
+  }
+  
   ngOnInit() {
     this.tabularData();
   }
