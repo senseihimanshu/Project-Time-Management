@@ -1,28 +1,44 @@
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      <span routerLink="/admin">Home</span>
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
+    <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+    >
+      <i class="fa fa-power-off"></i>
+    </button>
+    </div>
+  </mat-toolbar>
 <!-- Editable table -->
 <div class="card">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
-    <div class="card-body">
-      <div id="table" class="table-editable">
-        <span class="table-add float-right mb-3 mr-2">
-          <a class="text-success" (click)="add()">
-            <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
-          </a>
-        </span>
-        <table class="table table-bordered table-responsive-md table-striped text-center">
-          <tr>
-            <th class="text-center">empId</th>
-            <th class="text-center">Project</th>
-            <th class="text-center">Client Name </th>
-            <th class="text-center">Location</th>
-            <th class="text-center">Start Date</th>
-            <th class="text-center">End Date</th>
-            <th class="text-center">Date</th>
-            <th class="text-center">Hours</th>
-            <th class="text-center">Billable</th>
-            <th class="text-center">Status</th>
-          </tr>
-            <!-- <th class="text-center">Remove</th> -->
-       
+  <h3 class="card-header text-center font-weight-bold text-dark py-4">Timesheets</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+        <a class="text-success" (click)="add()">
+          <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
+        </a>
+      </span>
+      <table class="table table-bordered table-responsive-md table-striped text-center container-fluid table-responsive-stack">
+        <tr>
+          <th class="text-center">Emp Name</th>
+          <th class="text-center">Project</th>
+          <th class="text-center">Client Name </th>
+          <th class="text-center">Location</th>
+          <th class="text-center">Start Date</th>
+          <th class="text-center">End Date</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Hours</th>
+          <th class="text-center">Billable</th>
+          <th class="text-center">Status</th>
+        </tr>
+        <!-- <th class="text-center">Remove</th> -->
+        <tbody>
           <tr *ngFor="let timesheet of timesheetList; let id=index;">
             <td>
               <span>{{timesheet.empObjId}}</span>
@@ -54,15 +70,16 @@
             </td>
             <td>
               <span>{{timesheet.status}}</span>
-            </td> 
-          
+            </td>
+
           </tr>
-          </table>
-            <!-- <td>
+          </tbody>
+      </table>
+      <!-- <td>
               <span class="table-remove">
                 <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
               </span>
             </td> -->
-         
-      </div>
+
     </div>
+  </div>
