@@ -9,21 +9,7 @@ import { SendHttpRequestService } from "./../send-http-request.service";
 })
 export class ReviewComponent implements OnInit, OnChanges {
   menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        },
-        {
-          title: "Show All Employees"
-        }
-      ]
-    },
+   
     {
       title: "Projects",
       icon: "fa fa-book",

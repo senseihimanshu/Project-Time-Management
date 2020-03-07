@@ -1,4 +1,17 @@
 @media all and (min-width: 768px) {
+
+//   .table-heading{
+//     background-color: rgb(235, 193, 55);
+//   }  
+  tr  {
+      td {
+        vertical-align: middle !important;
+      }
+      span {
+        &:not([class]) {
+          padding: 1rem 1rem;
+        }
+
   tr {
     td {
       vertical-align: middle !important;
@@ -7,6 +20,7 @@
     span {
       &:not([class]) {
         padding: 1rem 1rem;
+
       }
     }
   }
