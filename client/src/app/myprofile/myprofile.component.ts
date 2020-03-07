@@ -19,9 +19,6 @@ export class MyprofileComponent implements OnInit {
       submenus: [
         {
           title: "Add New Employee"
-        },
-        {
-          title: "Show All Employees"
         }
       ]
     },

@@ -19,9 +19,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
       submenus: [
         {
           title: "Add New Employee"
-        },
-        {
-          title: "Show All Employees"
         }
       ]
     },
