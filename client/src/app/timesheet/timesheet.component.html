@@ -15,7 +15,7 @@
     </button>
     </div>
   </mat-toolbar>
-
+</div>
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
@@ -188,11 +188,10 @@
     </div>
   </div>
 </div>
-  </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
   </div>
-</ng-template>
+
 
 <pre>{{closeResult}}</pre>
 
