@@ -1,22 +1,70 @@
+
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      <span routerLink="/admin">Home</span>
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
+    <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+    >
+      <i class="fa fa-power-off"></i>
+    </button>
+    </div>
+  </mat-toolbar>
+</div>
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form #form="ngForm" novalidate>
       <div class="form-group">
         <label for="date">Select the week</label>
         <div class="input-group">
-          <input id="date" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <input
+            id="date"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="selectedDate"
+            [ngModel]="selectedDate?.value"
+            (ngModelChange)="convertDate($event)"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+            #selectedDate="ngModel"
+          />
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            <button
+              class="btn btn-outline-secondary calendar"
+              (click)="dp.toggle()"
+              type="button"
+            ></button>
           </div>
         </div>
       </div>
+
+      <div>
+        <label for="date">Start Date</label>
+        <span><input type="text" name="startDate" [(ngModel)]="startDate" disabled/></span>
+        <!-- {{ selectedDate.value | json }} -->
+        <label for="date">End Date</label>
+        <span><input type="text" name="endDate" [(ngModel)]="endDate" disabled/></span>
+      </div>
+
+      {{ form.value | json }}
     </form>
+<<<<<<< HEAD
     <div><label for="date">Start Date</label>
     <span><input type="date" disabled/></span>
       
@@ -25,62 +73,72 @@
   </div>
 
   <button (click)="findweek(dp)">find</button>
+=======
+    
+>>>>>>> fb584245d01ec1cc11f9c97ce4203e68d737f8b1
     <!-- Editable table -->
-<div class="card">
-  <div class="card-body">
-    <div id="table" class="table-editable">
-      
-      <table class="table table-bordered table-responsive-md table-striped text-center">
-        <tr>
-          <th class="text-center">empId</th>
-          <th class="text-center">Project</th>
-          <th class="text-center">Client Name </th>
-          <th class="text-center">Task Type</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Hours</th>
-          <th class="text-center">Billable</th>
-          <th class="text-center">Status</th>
-        </tr>
-          <!-- <th class="text-center">Remove</th> -->
-     
-        <tr *ngFor="let timesheet of timesheetList; let id=index;">
-          <td>
-            <span>{{timesheet.empObjId}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.week[id].projectId.projectName}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.customerName}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.week[id].taskType}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.week[id].date |date}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.week[id].hours}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.billable}}</span>
-          </td>
-          <td>
-            <span>{{timesheet.status}}</span>
-          </td> 
-        </tr>
-        </table>
+    <div class="card">
+      <div class="card-body">
+        <div id="table" class="table-editable">
+          <table
+            class="table table-bordered table-responsive-md table-striped text-center"
+          >
+            <tr>
+              <th class="text-center">empId</th>
+              <th class="text-center">Project</th>
+              <th class="text-center">Client Name</th>
+              <th class="text-center">Task Type</th>
+              <th class="text-center">Date</th>
+              <th class="text-center">Hours</th>
+              <th class="text-center">Billable</th>
+              <th class="text-center">Status</th>
+            </tr>
+            <!-- <th class="text-center">Remove</th> -->
 
+            <tr *ngFor="let timesheet of timesheetList; let id = index">
+              <td>
+                <span>{{ timesheet.empObjId }}</span>
+              </td>
+              <td>
+                <!-- <span>{{timesheet.week[id].projectId.projectName}}</span> -->
+              </td>
+              <td>
+                <span>{{ timesheet.customerName }}</span>
+              </td>
+              <td>
+                <span>{{ timesheet.week[id].taskType }}</span>
+              </td>
+              <td>
+                <span>{{ timesheet.week[id].date | date }}</span>
+              </td>
+              <td>
+                <span>{{ timesheet.week[id].hours }}</span>
+              </td>
+              <td>
+                <span>{{ timesheet.billable }}</span>
+              </td>
+              <td>
+                <span>{{ timesheet.status }}</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-  </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Save
+    </button>
   </div>
 </ng-template>
 
-<pre>{{closeResult}}</pre>
+<pre>{{ closeResult }}</pre>
+
 
 <!-- Editable table -->
 <div class="card">
@@ -93,7 +151,10 @@
           </a>
         </span>
         
-        <table class="table table-bordered table-responsive-md table-striped text-center">
+
+<!--         <table class="table table-bordered table-responsive-md table-striped text-center">
+          <tr class="table-heading"> -->
+        <table class="table table-bordered table-responsive-md table-striped text-center container-fluid table-responsive-stack">
           <tr>
             <th class="text-center">empId</th>
             <th class="text-center">Project</th>

@@ -25,8 +25,9 @@ export class ProjectManagerComponent {
         },
         {
           title: "Review Timesheets",
-          route: "/review/timesheet"
+          route: "/review"
         }
+      
       ]
     }
   ];;
