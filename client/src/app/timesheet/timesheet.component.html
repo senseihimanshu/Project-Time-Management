@@ -1,3 +1,21 @@
+
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      <span routerLink="/admin">Home</span>
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
+    <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+    >
+      <i class="fa fa-power-off"></i>
+    </button>
+    </div>
+  </mat-toolbar>
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
@@ -28,7 +46,7 @@
   <div class="card-body">
     <div id="table" class="table-editable">
       
-      <table class="table table-bordered table-responsive-md table-striped text-center">
+      <table class="table table-bordered table-responsive-md table-striped text-center container-fluid table-responsive-stack">
         <tr>
           <th class="text-center">empId</th>
           <th class="text-center">Project</th>
@@ -91,7 +109,7 @@
           </a>
         </span>
         
-        <table class="table table-bordered table-responsive-md table-striped text-center">
+        <table class="table table-bordered table-responsive-md table-striped text-center container-fluid table-responsive-stack">
           <tr>
             <th class="text-center">empId</th>
             <th class="text-center">Project</th>
@@ -135,3 +153,4 @@
       </div>
     </div>
 </div>
+
