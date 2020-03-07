@@ -119,9 +119,10 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     IconsModule,
     CardsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
+  // entryComponents: [TimesheetComponent]
 })
 export class AppModule {}
