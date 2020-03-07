@@ -1,5 +1,8 @@
 @media all and (min-width: 768px) {
-    tr  {
+  .table-heading{
+    background-color: rgb(235, 193, 55);
+  }  
+  tr  {
       td {
         vertical-align: middle !important;
       }

@@ -23,7 +23,7 @@
         "@angular/router": "~8.2.14",
         "@auth0/angular-jwt": "^4.0.0",
         "@fortawesome/fontawesome-free": "^5.12.1",
-        "@ng-bootstrap/ng-bootstrap": "^5.2.2",
+        "@ng-bootstrap/ng-bootstrap": "^5.3.0",
         "@types/chart.js": "^2.9.14",
         "angular-bootstrap-md": "^8.10.0",
         "animate.css": "^3.7.2",
