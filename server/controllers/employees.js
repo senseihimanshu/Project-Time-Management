@@ -1,6 +1,37 @@
 const model = require("../models");
 const schema = require("../schemas");
+const nodemailer=require('nodemailer');
+require('dotenv').config();
+// node function which sends email to new user create
+ const node=async function(output,newEmployee){
+  let testAccount = await nodemailer.createTestAccount();
 
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+  service:'gmail',
+  auth:{
+    user:process.env.EMAIL,
+    pass:process.env.PASSWORD
+  }
+
+  });
+  // send mail with defined transport object
+  let info ={
+    from: '"balanideepanshu92@gmail.com"', // sender address
+    to:newEmployee.email, // list of receivers
+    subject: "Node Contact Request", // Subject line
+    text: "Hello world?", // plain text body
+    html: output // html body
+  }
+   transporter.sendMail(info,function(err,data){
+       if(err){
+         console.log("error occurs",err);
+       }
+       else{
+         console.log("email sent successfully");
+       }
+   });
+}
 const isUnique = async function(empId, email) {
   const employeeWithEmpId = await model.employee.get({ empId });
   const employeeWithEmail = await model.employee.get({ email });
@@ -70,6 +101,19 @@ class Employee {
         }
       });
     }
+    const output=`
+     <p>you have a new contact request</p>
+      <h3>your details</h3>
+      <ul>
+      <li>Name:${name}</li>
+      <li>Email:${email}</li>
+      <li>Designation:${designation}</li>
+      <li>Role:${role}</li>
+      <li>Phone:${phone}</li>
+      <li>Address:${address}</li>
+      <li>joining:${joining}</li>
+      `
+      node(output,newEmployee);
   }
 
   async index(req, res) {
