@@ -19,7 +19,36 @@ export class EmployeeFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  menus: any = [
+    {
+      title: "Projects",
+      icon: "fa fa-book",
+      active: false,
+      type: "dropdown",
+    
+      submenus: [
+       
+        {
+          title: "Show my Projects"
+        }
+      ]
+    },
+    {
+      title: "Timesheets",
+      icon: "fa fa-calendar",
+      active: false,
+      type: "dropdown",
 
+      submenus: [
+        {
+          title: "Show my   Timesheets"
+        },
+        {
+          title:"Create new Timesheet"
+        }
+      ]
+    }
+  ];
   ngOnInit(): any {
     console.log("ngOnInit");
 

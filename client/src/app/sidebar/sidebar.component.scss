@@ -81,14 +81,13 @@
         text-decoration: none;
       }
 
-      #close-sidebar {
+      .sidebar {
         cursor: pointer;
         font-size: 20px;
         transition: color .3s ease;
       }
     }
-
-
+  
     .sidebar-menu {
       padding-bottom: 10px;
       height: 100vh;

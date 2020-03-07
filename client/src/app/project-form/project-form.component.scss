@@ -35,7 +35,7 @@ h2{
     color:white;
     margin-top:-5rem;
     height:auto;
-   
+    
 }
 
 .form-control,.custom-select
@@ -66,4 +66,12 @@ span{
 @media (max-width:1228px){ navbar{ margin-right:110px; } }
 
 @media (max-width:1109px){ navbar{ margin-right:60px; } }
+
+@media (min-width: 992px){
+.col-lg-8 {
+    
+    flex: 0 0 66.6666666667%;
+    max-width: 71%;
+}
+}
 

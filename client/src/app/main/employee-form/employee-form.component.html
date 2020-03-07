@@ -1,187 +1,215 @@
-<div class="app-main">
-  <div class="app-employee-form">
-    <form
-      class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body"
-      #form="ngForm"
-      (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
-      novalidate
-    >
-      <div
-        class="h4 mb-4
-         d-flex justify-content-between font-weight-bold"
-        style="font-size: 2rem;"
-      >
-        {{
-          typeOfForm === "get"
-            ? "Employee Data for " + employee?.empId
-            : typeOfForm === "create"
-            ? "Create Employee"
-            : "Update Employee"
-        }}
-        <button
-          type="button"
-          mdbBtn
-          color="danger"
-          mdbWavesEffect
-          [routerLink]="['/admin']"
-        >
-          Close X
-        </button>
-      </div>
 
-      <div class="h4 mb-4
-      ">
-        <label for="empId">Employee ID: </label>
-       <input
-          type="text"
-          id="empId"
-          class="form-control "
-          placeholder="EmployeeId"
-          [(ngModel)]="employee && employee.empId"
-          name="empId"
-          required
-          [readonly]="!(typeOfForm === 'create')"
-          #empId="ngModel"
-        />
-        <div class="error" [ngClass]="{hidden: !(empId.errors.required && empId.touched)}">
-          Choose a EmpId
-        </div>
-      </div>
+
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      Company Dashboard
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
       
+    <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+      >
+      <i class="fa fa-power-off"></i>
+    </button>
+    </div>
+  </mat-toolbar>
 
-      <div class="h4 mb-4
-      ">
-        <label for="email">Email Id: </label>
-
-        <input
-          type="text"
-          id="email"
-          class="form-control"
-          placeholder="Email"
-          [(ngModel)]="employee && employee.email"
-          name="email"
-          [disabled]="typeOfForm === 'get'"
-          #email="ngModel"
-        />
-        <div class="error" [ngClass]="{hide: !(email.errors?.required && email.touched)}">
-          Email is required
-        </div>
-      </div>
-   
-      <div class="h4 mb-4
-      ">
-        <label for="name">Name: </label>
-
-        <input
-          type="text"
-          id="emp_name"
-          class="form-control"
-          placeholder="Employee Name"
-          [(ngModel)]="employee && employee.name"
-          name="name"
-          [disabled]="typeOfForm === 'get'"
-          #empName="ngModel"
-        />
-        <div class="error" [ngClass]="{hide: !(empName.errors?.required )}">
-          Choose Employee Name
-        </div>
-      </div>
-     
-      <div class="h4 mb-4
-      ">
-        <label for="address">Address: </label>
-
-        <input
-          type="text"
-          id="address"
-          class="form-control"
-          placeholder="Address"
-          [(ngModel)]="employee && employee.address"
-          name="address"
-          [disabled]="typeOfForm === 'get'"
-          #addressInput="ngModel"
-        />
-      </div>
-
-      <div class="h4 mb-4">
-        <label for="phone">Phone: </label>
-
-        <input
-          type="text"
-          id="phone"
-          class="form-control"
-          placeholder="Phone"
-          [(ngModel)]="employee && employee.phone"
-          name="phone"
-          [disabled]="typeOfForm === 'get'"
-          #phoneInput="ngModel"
-        />
-      </div>
-
-      <div class="h4 mb-4">
-        <label for="joining">Joining: </label>
-
-        <input
-          type="date"
-          id="joining"
-          class="form-control"
-          placeholder="Joining"
-          [(ngModel)]="employee && employee.joining"
-          name="joining"
-          [disabled]="typeOfForm === 'get'"
-          #joiningInput="ngModel"
-        />
-      </div>
-
-      <div class="h4 mb-4">
-        <label for="designation">Designation: </label>
-
-        <select
-          class="browser-default custom-select"
-          name="designation"
-          [(ngModel)]="employee && employee.designation[0]"
-          [disabled]="typeOfForm === 'get'"
-          #designationInput="ngModel"
+ 
+  <div class="main">
+    <app-sidebar [menus]="menus"></app-sidebar>
+    
+    <div class="app-employee-form">
+      <form
+        class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body"
+        #form="ngForm"
+        (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
+        novalidate
+      >
+        <div
+          class="h4 mb-4
+           d-flex justify-content-between font-weight-bold"
+          style="font-size: 2rem;"
         >
-          <option value="" disabled>Choose option</option>
-          <option value="Associate" selected>Associate</option>
-          <option value="Consultant 2">Consultant 2</option>
-          <option value="Consultant 1">Consultant 1</option>
-          <option value="Intern">Intern</option>
-        </select>
-      </div>
-
-      <div class="h4 mb-4
-      ">
-        <label for="role">Role: </label>
-
-        <select
-          class="browser-default custom-select mb-4
-          "
-          name="role"
-          [(ngModel)]="employee && employee.role[0]"
-          [disabled]="typeOfForm === 'get'"
-          #role="ngModel"
-        >
-          <option value="" disabled>Choose option</option>
-          <option value="Employee" selected>Employee</option>
-          <option value="Project Manager">Project Manager</option>
-          <option value="C Level Manager">C Level Manager</option>
-        </select>
-        <div class="error" [ngClass]="{hide: !(role.errors?.required)}">
-          Choose a role
+          {{
+            typeOfForm === "get"
+              ? "Employee Data for " + employee?.empId
+              : typeOfForm === "create"
+              ? "Create Employee"
+              : "Update Employee"
+          }}
+          
         </div>
-      </div>
+  
+        <div class="h4 mb-4
+        ">
+          <label for="empId">Employee ID: </label>
+         <input
+            type="text"
+            id="empId"
+            class="form-control "
+            placeholder="EmployeeId"
+            [(ngModel)]="employee && employee.empId"
+            name="empId"
+            required
+            [readonly]="!(typeOfForm === 'create')"
+            #empId="ngModel"
+          />
+          <!-- <div class="error" [ngClass]="{hidden: !(empId.errors.required && empId.touched)}">
+            Choose a EmpId
+          </div> -->
+        </div>
+        
+  
+        <div class="h4 mb-4
+        ">
+          <label for="email">Email Id: </label>
+  
+          <input
+            type="text"
+            id="email"
+            class="form-control"
+            placeholder="Email"
+            [(ngModel)]="employee && employee.email"
+            name="email"
+            [disabled]="typeOfForm === 'get'"
+            #email="ngModel"
+          />
+        
+        </div>
      
-      <div class="button-parent" *ngIf="typeOfForm !== 'get'">
-        <button mdbBtn type="button" color="info" block="true" size="lg" type="submit"  mdbWavesEffect>
+        <div class="h4 mb-4
+        ">
+          <label for="name">Name: </label>
+  
+          <input
+            type="text"
+            id="emp_name"
+            class="form-control"
+            placeholder="Employee Name"
+            [(ngModel)]="employee && employee.name"
+            name="name"
+            [disabled]="typeOfForm === 'get'"
+            #empName="ngModel"
+          />
+         
+        </div>
+       
+        <div class="h4 mb-4
+        ">
+          <label for="address">Address: </label>
+  
+          <input
+            type="text"
+            id="address"
+            class="form-control"
+            placeholder="Address"
+            [(ngModel)]="employee && employee.address"
+            name="address"
+            [disabled]="typeOfForm === 'get'"
+            #addressInput="ngModel"
+          />
+        </div>
+  
+        <div class="h4 mb-4">
+          <label for="phone">Phone: </label>
+  
+          <input
+            type="text"
+            id="phone"
+            class="form-control"
+            placeholder="Phone"
+            [(ngModel)]="employee && employee.phone"
+            name="phone"
+            [disabled]="typeOfForm === 'get'"
+            #phoneInput="ngModel"
+          />
+        </div>
+  
+        <div class="h4 mb-4">
+          <label for="joining">Joining: </label>
+  
+          <input
+            type="date"
+            id="joining"
+            class="form-control"
+            placeholder="Joining"
+            [(ngModel)]="employee && employee.joining"
+            name="joining"
+            [disabled]="typeOfForm === 'get'"
+            #joiningInput="ngModel"
+          />
+        </div>
+  
+        <div class="h4 mb-4">
+          <label for="designation">Designation: </label>
+  
+          <select
+            class="browser-default custom-select"
+            name="designation"
+            [(ngModel)]="employee && employee.designation[0]"
+            [disabled]="typeOfForm === 'get'"
+            #designationInput="ngModel"
+          >
+            <option value="" disabled>Choose option</option>
+            <option value="Associate" selected>Associate</option>
+            <option value="Consultant 2">Consultant 2</option>
+            <option value="Consultant 1">Consultant 1</option>
+            <option value="Intern">Intern</option>
+          </select>
+        </div>
+  
+        <div class="h4 mb-4
+        ">
+          <label for="role">Role: </label>
+  
+          <select
+            class="browser-default custom-select mb-4
+            "
+            name="role"
+            [(ngModel)]="employee && employee.role[0]"
+            [disabled]="typeOfForm === 'get'"
+            #role="ngModel"
+          >
+            <option value="" disabled>Choose option</option>
+            <option value="Employee" selected>Employee</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="C Level Manager">C Level Manager</option>
+          </select>
+         
+        </div>
+        <div class="button-parent" *ngIf="formType !== 'get'">
+          <button
+            mdbBtn
+            class=" btn btn-outline-warning logout text-center text-yellow m-4 btnsstyle"
+            mdbWavesEffect
+            
+           
+            type="submit"
+            
+            
+          >
           {{ typeOfForm === "create" ? "Add Employee" : "Update Employee" }}
-        </button>
-        <div class="message">{{ this.message }}</div>
-      </div>
-    </form>
-    <!-- {{ form.value | json }} -->
-  </div>
-
-</div>
-
+      </button>
+        
+          <button
+            type="button"
+            mdbBtn
+            class=" btn btn-outline-warning logout text-center text-yellow m-4 btnsstyle"
+            color="danger"
+            mdbWavesEffect
+            [routerLink]="['/admin']"
+          >
+            Cancel
+          </button>
+          <div class="message">{{ this.message }}</div>
+        </div>
+      </form>
+      <!-- {{ form.value | json }} -->
+    </div>
+  
+ </div> 
+  
