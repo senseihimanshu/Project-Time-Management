@@ -21,15 +21,32 @@ export class EmployeeFormComponent implements OnInit {
   ) {}
   menus: any = [
     {
+      title: "Employees",
+      icon: "fa fa-users",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Employee"
+        },
+        {
+          title: "Show All Employees"
+        }
+      ]
+    },
+    {
       title: "Projects",
       icon: "fa fa-book",
       active: false,
       type: "dropdown",
-    
+
       submenus: [
-       
         {
-          title: "Show my Projects"
+          title: "Add New Project"
+        },
+        {
+          title: "Show All Projects"
         }
       ]
     },
@@ -41,10 +58,7 @@ export class EmployeeFormComponent implements OnInit {
 
       submenus: [
         {
-          title: "Show my   Timesheets"
-        },
-        {
-          title:"Create new Timesheet"
+          title: "Show All Timesheets"
         }
       ]
     }
