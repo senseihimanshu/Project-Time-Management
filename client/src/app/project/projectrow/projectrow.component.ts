@@ -26,6 +26,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
     [routerLink]="['/employeeform/details', employee.empId]"
   >
     <i class="fas fa-eye"></i>
+    
   </button>
   </td>
   <td>
