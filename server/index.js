@@ -5,7 +5,8 @@ const cors = require("cors");
 const config = require("config");
 const database=require('./database/config');
 const bodyParser=require('body-parser');
-
+const nodemailer=require('nodemailer');
+const exphbs=require('express-handlebars');
 //User Imports
 const employeeRoutes = require("./routes/employee");
 
@@ -22,6 +23,9 @@ if (!config.get("jwtPrivateKey")) {
 //   .catch(err => console.error("Error occured while connecting to db", err));
 
 //Using Middlewares
+//view engine setup
+app.engine('handlebars',exphbs());
+app.set('view engine','handlebars');
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());

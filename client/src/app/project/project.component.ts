@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { EmployeeService } from '../services/employee.service';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',

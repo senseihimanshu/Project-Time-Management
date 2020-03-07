@@ -1,172 +1,214 @@
-<div class="app-main">
-  <div class="app-employee-form">
-    <form
-      class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body">
-      <div class="h4 mb-4  d-flex justify-content-between font-weight-bold"
-        style="font-size: 2rem;">
-        {{
-          formType === "get"
-            ? "Project Data for " + project?.projectId
-            : formType === "create"
-            ? "Create New Project"
-            : "Update Project"
-        }}
-        <button
-        type="button"
-        mdbBtn
-        color="danger"
-        mdbWavesEffect
-        [routerLink]="['/projects']"
-      >
-        Close X
-      </button>
-      </div>
-  
-      <div class="h4 mb-4">
-        <label for="projectId">Project ID:</label>
-  
-        <input
-          type="text"
-          id="projectId"
-          class="form-control"
-          placeholder="Project Id"
-          [(ngModel)]="project&& project.projectId"
-          name="projectId"
-          [disabled]="formType === 'get'"
-          #projectIdInput
-        />
-      </div>
-  
-      <div class="h4 mb-4">
-        <label for="projectName">Project Name:</label>
-  
-        <input
-          type="text"
-          id="projectName"
-          class="form-control"
-          placeholder="Project Name"
-          [(ngModel)]="project&& project.projectName"
-          name="projectName"
-          [disabled]="formType === 'get'"
-          #projectNameInput
-        />
-      </div>
-  
-      <div class="h4 mb-4">
-        <label for="client_name">Client Name:</label>
-  
-        <input
-          type="text"
-          id="client_name"
-          class="form-control"
-          placeholder="Client Name"
-          [(ngModel)]="project && project.clientName"
-          name="client_name"
-          [disabled]="formType === 'get'"
-          #clientNameInput
-        />
-      </div>
-  
-      <div class="h4 mb-4">
-        <label for="manager">Project Manager:</label>
-  
-        <input
-          type="text"
-          id="manager"
-          class="form-control"
-          placeholder="Project Manager"
-          [(ngModel)]="project && project.projectManager"
-          name="manager"
-          [disabled]="formType === 'get'"
-          #projectManagerInput
-        />
-      </div>
-  
-      <div class="h4 mb-4">
-        <label for="start">Start Date:</label>
-  
-        <input
-          type="date"
-          id="start"
-          class="form-control"
-          placeholder="Start Date"
-          [(ngModel)]="project && project.startDate"
-          name="date"
-          [disabled]="formType === 'get'"
-          #startDateInput
-        />
-      </div>
-      
-      <div class="h4 mb-4">
-        <label for="end">End Date:</label>
-  
-        <input
-          type="date"
-          id="end"
-          class="form-control"
-          placeholder="End Date"
-          [(ngModel)]="project && project.endDate"
-          name="date"
-          [disabled]="formType === 'get'"
-          #endDateInput
-        />
-      </div>
-  
-      <div class="h4 mb-4">
-        <label for="status">Status:</label>
-  
-        <select
-          class="browser-default custom-select"
-          name="status"
-          [(ngModel)]="project && project.status[0]"
-          [disabled]="formType === 'get'"
-          #statusInput
-        >
-          <option value="" disabled>Choose option</option>
-          <option value="In Progress" selected>In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="Closed">Closed</option>
-        </select>
-      </div>
 
+
+<div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div>
+      Company Dashboard
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
       
-      <div class="h4 mb-4">
-        <label for="members">Project Members:</label>
-  
-         <mat-select
-          class="browser-default custom-select"
-          name="members"
-          [disabled]="formType === 'get'"
-          #membersInput
-          [formControl]="emp" multiple>
-          <mat-option *ngFor="let emp of empList" [value]="emp">{{emp}}</mat-option>
-       </mat-select> 
-        
-      </div>
-  
-      <div class="button-parent" *ngIf="formType !== 'get'">
-          <button
-            mdbBtn
-            color="info"
-            block="true"
-            type="submit"
-            (click)="
-              projectCreateOrUpdate({
-                projectId: projectIdInput && projectIdInput.value,
-                projectName: projectNameInput && projectNameInput.value,
-                clientName: clientNameInput && clientNameInput.value,
-                projectManager: projectManagerInput && projectManagerInput.value,
-                startDate: startDateInput && startDateInput.value,
-                endDate: endDateInput && endDateInput.value,
-                status: statusInput && statusInput.value
-              },formType)
-              "
-          >
-      {{ (formType === "create") ? "Add New Project" : "Update Project" }}
-      </button>
-      <div class="message">{{ this.message }}</div>
-      </div> 
-  
-    </form>
+    <button
+      type="button"
+      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      (click)="logout()"
+      >
+      <i class="fa fa-power-off"></i>
+    </button>
+    </div>
+  </mat-toolbar>
+
+ 
+   <div class="app-main no-scrollbar-wrap">
+    <app-sidebar [menus]="menus"></app-sidebar>
+  <div class="no-scrollbar">
+   <div class="container-fluid ">
+    <div class="row">
+      <div class=" col-lg-6 col-md-6 col-xs-0 col-sm-0 ">
+      <div class="app-employee-form">
+         <form
+           class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body">
+           <div class="h5 mb-4  d-flex justify-content-between font-weight-bold"
+             style="font-size: 2rem;">
+             {{
+               formType === "get"
+                 ? "Project Data for " + project?.projectId
+                 : formType === "create"
+                 ? "Create New Project"
+                 : "Update Project"
+             }}
+             
+           </div>
+       
+           <div class="h5 mb-4">
+             <label for="projectId">Project ID:</label>
+       
+             <input
+               type="text"
+               id="projectId"
+               class="form-control"
+               placeholder="Project Id"
+               [(ngModel)]="project&& project.projectId"
+               name="projectId"
+               [disabled]="formType === 'get'"
+               #projectIdInput
+             />
+           </div>
+       
+           <div class="h5 mb-4">
+             <label for="projectName">Project Name:</label>
+       
+             <input
+               type="text"
+               id="projectName"
+               class="form-control"
+               placeholder="Project Name"
+               [(ngModel)]="project&& project.projectName"
+               name="projectName"
+               [disabled]="formType === 'get'"
+               #projectNameInput
+             />
+           </div>
+       
+           <div class="h5 mb-4">
+             <label for="client_name">Client Name:</label>
+       
+             <input
+               type="text"
+               id="client_name"
+               class="form-control"
+               placeholder="Client Name"
+               [(ngModel)]="project && project.clientName"
+               name="client_name"
+               [disabled]="formType === 'get'"
+               #clientNameInput
+             />
+           </div>
+       
+           <div class="h5 mb-4">
+             <label for="manager">Project Manager:</label>
+       
+             <input
+               type="text"
+               id="manager"
+               class="form-control"
+               placeholder="Project Manager"
+               [(ngModel)]="project && project.projectManager"
+               name="manager"
+               [disabled]="formType === 'get'"
+               #projectManagerInput
+             />
+           </div>
+       
+           <div class="h5 mb-4">
+             <label for="start">Start Date:</label>
+       
+             <input
+               type="date"
+               id="start"
+               class="form-control"
+               placeholder="Start Date"
+               [(ngModel)]="project && project.startDate"
+               name="date"
+               [disabled]="formType === 'get'"
+               #startDateInput
+             />
+           </div>
+           
+           <div class="h5 mb-4">
+             <label for="end">End Date:</label>
+       
+             <input
+               type="date"
+               id="end"
+               class="form-control"
+               placeholder="End Date"
+               [(ngModel)]="project && project.endDate"
+               name="date"
+               [disabled]="formType === 'get'"
+               #endDateInput
+             />
+           </div>
+       
+           <div class="h5 mb-4">
+             <label for="status">Status:</label>
+       
+             <select
+               class="browser-default custom-select"
+               name="status"
+               [(ngModel)]="project && project.status[0]"
+               [disabled]="formType === 'get'"
+               #statusInput
+             >
+               <option value="" disabled>Choose option</option>
+               <option value="In Progress" selected>In Progress</option>
+               <option value="Completed">Completed</option>
+               <option value="Closed">Closed</option>
+             </select>
+           </div>
+     
+           
+           <div class="h5 mb-4">
+             <label for="members">Project Members:</label>
+       
+              <mat-select
+               class="browser-default custom-select"
+               name="members"
+               [disabled]="formType === 'get'"
+               #membersInput
+               [formControl]="emp" multiple>
+               <mat-option *ngFor="let emp of empList" [value]="emp">{{emp}}</mat-option>
+            </mat-select> 
+             
+           </div>
+       
+           <div class="button-parent" *ngIf="formType !== 'get'">
+               <button
+                 mdbBtn
+                 class=" btn btn-outline-warning logout text-center text-yellow m-4 btnsstyle"
+                 mdbWavesEffect
+                 
+                
+                 type="submit"
+                 
+                 (click)="
+                   projectCreateOrUpdate({
+                     projectId: projectIdInput && projectIdInput.value,
+                     projectName: projectNameInput && projectNameInput.value,
+                     clientName: clientNameInput && clientNameInput.value,
+                     projectManager: projectManagerInput && projectManagerInput.value,
+                     startDate: startDateInput && startDateInput.value,
+                     endDate: endDateInput && endDateInput.value,
+                     status: statusInput && statusInput.value
+                   },formType)
+                   "
+               >
+           {{ (formType === "create") ? "Add New Project" : "Update Project" }}
+           </button>
+           <button
+             type="button"
+             mdbBtn
+             class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+             mdbWavesEffect
+             
+             [routerLink]="['/projects']"
+           >
+              Cancel
+           </button>
+           <div class="message">{{ this.message }}</div>
+           </div> 
+       
+         </form>
+       </div>
+     </div>
+     </div>
+     </div>
+       </div>
   </div>
-  </div>
+
+
+
+
+  
+  
+  
