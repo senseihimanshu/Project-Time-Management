@@ -52,6 +52,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
+import { ProjectManagerComponent } from './project-manager/project-manager.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
     EmployeedashboardComponent,
     TimesheetComponent,
     ReviewRowComponent,
+    ProjectManagerComponent
   ],
   imports: [PerfectScrollbarModule ,
     //PerfectScrollbarConfigInterface,
