@@ -162,20 +162,20 @@
           </select>
         </div>
   
-        <div class="h4 mb-4
-        ">
+        <div class="h4 mb-4">
           <label for="role">Role: </label>
   
           <select
-            class="browser-default custom-select mb-4
-            "
+            required
+            class="browser-default custom-select mb-4"  
             name="role"
             [(ngModel)]="employee && employee.role[0]"
             [disabled]="typeOfForm === 'get'"
             #role="ngModel"
+           
           >
-            <option value="" disabled>Choose option</option>
-            <option value="Employee" selected>Employee</option>
+            <option value="" hidden default selected >Choose option</option>
+            <option value="Employee" >Employee</option>
             <option value="Project Manager">Project Manager</option>
             <option value="C Level Manager">C Level Manager</option>
           </select>

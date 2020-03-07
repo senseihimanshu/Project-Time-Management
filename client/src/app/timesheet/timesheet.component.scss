@@ -108,20 +108,22 @@
       font-weight: bold;
     }
 
-    @media screen and (max-width: 768px) {
-      .table-responsive-stack tr {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        border-bottom: 3px solid #ccc;
-        display: block;
+@media screen and (max-width: 768px) {
+   .table-responsive-stack tr {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      border-bottom: 3px solid #ccc;
+      display:block;
+      
+   }
+   /*  IE9 FIX   */
+   .table-responsive-stack td {
+      float: left\9;
+      width:100%;
+   }
+}
+  
+  }
 
-      }
-
-      /*  IE9 FIX   */
-      .table-responsive-stack td {
-        float: left\9;
-        width: 100%;
-      }
-    }}
