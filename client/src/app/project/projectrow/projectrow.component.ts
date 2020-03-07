@@ -5,9 +5,6 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./projectrow.component.scss", "../project.component.scss"],
   template: `
     <tr class="project-row">
-    <td>
-    {{project.clientName}}
-  </td>
   <td>
     {{project.projectName}}
   </td>
@@ -23,7 +20,25 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   <td>
     {{project.status}}
   </td>
+  <td>
+  <button
+    class="show"
+    [routerLink]="['/employeeform/details', employee.empId]"
+  >
+    <i class="fas fa-eye"></i>
+  </button>
+  </td>
+  <td>
+  <button
+    class="edit"
+    [routerLink]="['/employeeform', 'update', employee.empId]"
+  >
+    <i class="fas fa-pencil-alt"></i>
+  </button>
+</td>
     </tr>
+  
+   
   `
 })
 export class ProjectRowComponent {
