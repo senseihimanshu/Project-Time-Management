@@ -30,8 +30,9 @@ class Project {
         projectObj.empObjectIdArray.map(async empId => {
           const { _id } = await model.employee.get(
             { empId }
+          
           );
-
+          console.log(_id);
           console.log(_id, 'Before Push in empObjectIdArray');
           empObjectIdArray.push(_id);
         })
@@ -46,7 +47,7 @@ class Project {
     console.log(empObjectIdArray);
 
     const newProjectId = (await generateProjectPromise())._id;
-
+console.log(newProjectId,"id mili");
     const employeesUpdatePromise = async () => {
       await Promise.all(
         empObjectIdArray.map(async empObjectId => {

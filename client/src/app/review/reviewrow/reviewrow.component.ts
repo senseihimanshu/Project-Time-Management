@@ -77,6 +77,7 @@ export class ReviewRowComponent {
     let obj = this._service.reviewRequest(data).subscribe(res => {
       this.usersArray = res;
       console.log(res);
+      alert(data.status);
     });
   }
 }
