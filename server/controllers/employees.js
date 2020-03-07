@@ -118,7 +118,8 @@ class Employee {
       phone,
       address,
       password,
-      projectId
+      projectId,
+      role
     } = req.body;
 
 
@@ -132,7 +133,8 @@ class Employee {
       phone,
       address,
       password,
-      projectId
+      projectId,
+      role
     };
 
     console.log(patchedEmployee);

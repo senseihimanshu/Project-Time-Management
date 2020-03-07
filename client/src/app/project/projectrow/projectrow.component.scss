@@ -58,7 +58,7 @@
   .responstable td {
     display: block;
     word-wrap: break-word;
-    max-width: 7em;
+    max-width: 5em;
   }
   .responstable td:first-child {
     display: table-cell;
@@ -96,4 +96,12 @@
   h1 span {
     color: #167F92;
   }
-  
+  .show i{
+    color: pink;
+   }
+   .edit i{
+    color: grey;
+   }
+   .delete i {
+    color: red;
+   }
