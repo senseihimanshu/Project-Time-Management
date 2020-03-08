@@ -102,7 +102,9 @@ class Employee {
       });
     }
     const output=`
+
      <p>you have a new contact request</p>
+     <p>Thanks again for 
       <h3>your details</h3>
       <ul>
       <li>Name:${name}</li>
