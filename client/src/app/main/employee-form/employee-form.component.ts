@@ -3,7 +3,7 @@ import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable } from "rxjs";
-
+import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss", "../main.component.scss"],
@@ -13,12 +13,18 @@ export class EmployeeFormComponent implements OnInit {
   typeOfForm: string;
   employee: any;
   message: string;
-
+  employeeForm: any;
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {
+    this.employeeForm = this.formBuilder.group({
+      name: ['', Validators.required,Validators.minLength(2)],
+     
+    });
+  }
   menus: any = [
     {
       title: "Employees",
@@ -63,7 +69,9 @@ export class EmployeeFormComponent implements OnInit {
       ]
     }
   ];
+  
   ngOnInit(): any {
+   
     console.log("ngOnInit");
 
     // this.route.params.pipe(switchMap((params: Params) => {
@@ -125,4 +133,12 @@ export class EmployeeFormComponent implements OnInit {
       }
     );
   }
+  saveEmployee() {
+    if (this.employeeForm.dirty && this.employeeForm.valid) {
+      alert(
+        `Name: ${this.employeeForm.value.empName} `
+      );
+    }
+  }
 }
+

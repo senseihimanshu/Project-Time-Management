@@ -87,7 +87,8 @@
            
         </div>
      
-        <div class="h4 mb-4" [class.has-error]="empName.invalid && empName.touched"
+        <div class="h4 mb-4 formGroup" [class.has-error]="empName.invalid && empName.touched"
+       
         >
           <label class="control-label"for="name">Name: </label>
   
@@ -97,14 +98,15 @@
             class="form-control"
             placeholder="Employee Name"
             [(ngModel)]="employee && employee.name"
-            name="name"
-            required maxlength="30" minlength="2"
+             name="name"
+            required 
+            maxlength="30" minlength="2"
            
             [disabled]="typeOfForm === 'get'"
             #empName="ngModel"
           />
-          <p class="help-block" *ngIf="empName.invalid && empName.touched">Name is required</p>
-        </div>
+          <p *ngIf="empName.touched && empName.invalid">Required</p>
+      </div>
        
         <div class="form-group h4 mb-4" [class.has-error]="addressInput.invalid && addressInput.touched"
         >
@@ -162,7 +164,26 @@
           />
           <p class="help-block" *ngIf="joiningInput.touched">joiningDate is required</p>
         </div>
+        <div class="form-group h4 mb-4" [class.has-error]="email.invalid && email.touched"
+        >
+          <label class="control-label"for="email">Project Id: </label>
   
+          <input
+            type="text"
+            id="projectId"
+            class="form-control"
+            placeholder="Project Id"
+            [(ngModel)]="employee && employee.projectId"
+            name="projectId"
+            required
+            minlength="2"
+            maxlength="5"
+            [disabled]="typeOfForm === 'get'"
+            #projectId="ngModel"
+          />
+         <p class="help-block" *ngIf="projectId.invalid && projectId.touched">projectId is required</p>
+           
+        </div>
         <div class="form-group h4 mb-4"[class.has-error]="designationInput.touched">
           <label for="designation"class="control-label">Designation: </label>
   
