@@ -9,6 +9,10 @@ import { EmployeeService } from "../services/employee.service";
   styleUrls: ["./admindashboard.component.scss", "../main/main.component.scss"]
 })
 export class AdmindashboardComponent implements OnInit, OnChanges {
+  name = 'Angular';
+  page = 1;
+  pageSize = 10;
+  items = [];
   menus: any = [
     {
       title: "Employees",
@@ -52,7 +56,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   ];
 
   message: String;
-
+ 
   constructor(
     private _service: SendHttpRequestService,
     private router: Router,
@@ -63,8 +67,10 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     let obj = this._service.showEmployees().subscribe(res => {
       this.usersArray = res;
       console.log(res);
+      console.log(this.usersArray.length,"vxchgsdbhxgb hdsbxb")
     });
     console.log(obj);
+   
   }
 
   ngOnInit() {
