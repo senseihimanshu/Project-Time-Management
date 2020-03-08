@@ -1,64 +1,66 @@
 <div>
-  <app-header></app-header>
-    
-    <form [formGroup]="myform" >
-    <div id="form_wrapper">
-      <div id="form_left">
-        <img src="../../assets/images/icon.png" alt="computer icon" />
-      </div>
-      <div id="form_right">
-        <h1>Member Login</h1>
-        <div class="input_container form-group was-validated"[class.has-errors]="emaiInput.touched">
-          <i class="fas fa-envelope"></i>
-          <input
-            placeholder="Email"
-            type="email"
-            required
-            minlength="8"
-            name="Email"
-            formControlName="email"
-           
-            [(ngModel)]="email"
-            id="field_email"
-            class="input_field"
-            #emailInput
-          />
-          <p  *ngIf="emailInput.touched">email is required</p>
-        </div>
-       
-        <div class="input_container form-group">
-          <i class="fas fa-lock"></i>
-          <input
-            placeholder="Password"
-            type="password"
-            required
-            minlength="4"
-            name="Password"
-            formControlName="password"
-            [ngClass]="{'is-invalid':submitted && f.password.errors}"
-            id="field_password"
-            class="input_field "
-            #password
-          />
-         
-        </div>
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-          <div *ngIf="f.password.errors.minlength">Password must be atleast 4 characters</div>
-        </div>
-        <h2 class="message" [ngStyle]="{'visibility': (!isMessage? 'hidden' : 'visible')}">
-          Invalid Credentials
-        </h2>
-    <div class="form-group">
-            <input
-          type="submit"
-          value="Login"
-          id="input_submit"
+<app-header></app-header>
+  
+  <form [formGroup]="myform" >
+  <div id="form_wrapper">
+    <div id="form_left">
+      <img src="../../assets/images/icon.png" alt="computer icon" />
+    </div>
+    <div id="form_right">
+      <h1>Member Login</h1>
+      <div class="input_container form-group">
+        <i class="fas fa-envelope"></i>
+        <input
+          placeholder="Email"
+          type="email"
+          required
+          minlength="8"
+          name="Email"
+          formControlName="email"
+          [ngClass]="{'is-invalid':submitted && f.email.errors}"
+          id="field_email"
           class="input_field"
-          (click)="loginFunction()"
+          #email
         />
-        </div>
+     
+      </div>
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">Email must be a valid Email Address</div>
+      </div>
+      <div class="input_container form-group">
+        <i class="fas fa-lock"></i>
+        <input
+          placeholder="Password"
+          type="password"
+          required
+          minlength="4"
+          name="Password"
+          formControlName="password"
+          [ngClass]="{'is-invalid':submitted && f.password.errors}"
+          id="field_password"
+          class="input_field "
+          #password
+        />
+       
+      </div>
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be atleast 4 characters</div>
+      </div>
+      <h2 class="message" [ngStyle]="{'visibility': (!isMessage? 'hidden' : 'visible')}">
+        Invalid Credentials
+      </h2>
+  <div class="form-group">
+          <input
+        type="submit"
+        value="Login"
+        id="input_submit"
+        class="input_field"
+        (click)="loginFunction()"
+      />
       </div>
     </div>
-    </form>
   </div>
+  </form>
+</div>

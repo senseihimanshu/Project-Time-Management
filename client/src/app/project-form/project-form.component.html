@@ -183,7 +183,7 @@
                matInput placeholder="members"
                [formControl]="emp" multiple>
                <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
-              
+
             </mat-select> 
             <div  *ngIf="membersInput.touched">members are required</div>
            </div>
