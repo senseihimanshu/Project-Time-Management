@@ -13,6 +13,18 @@ import { Router, RouterLink } from "@angular/router";
 export class DashboardComponent implements OnInit, OnChanges {
 
 menus: any = [
+  {
+    title: "Employees",
+    icon: "fa fa-users",
+    active: false,
+    type: "dropdown",
+
+    submenus: [
+      {
+        title: "Show All Employees"
+      }
+    ]
+  },
     {
       title: "Timesheets",
       icon: "fa fa-calendar",

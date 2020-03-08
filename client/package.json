@@ -25,6 +25,7 @@
         "@fortawesome/fontawesome-free": "^5.12.1",
         "@ng-bootstrap/ng-bootstrap": "^5.3.0",
         "@types/chart.js": "^2.9.14",
+        "@types/jquery": "^3.3.33",
         "angular-bootstrap-md": "^8.10.0",
         "animate.css": "^3.7.2",
         "chart.js": "^2.9.3",
