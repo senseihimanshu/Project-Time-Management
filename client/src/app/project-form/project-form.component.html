@@ -84,7 +84,21 @@
                #clientNameInput
              />
            </div>
-       
+           <!-- <div class="h5 mb-4">
+            <label for="members">Project Manager:</label>
+      
+             <mat-select
+              class="browser-default custom-select"
+              name="members"
+              [(ngModel)]="project && project.projectManager"
+              [disabled]="formType === 'get'"
+              #projectManagerInput
+              [formControl]="emp" multiple>
+              <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
+           </mat-select> 
+            
+          </div> -->
+    
            <div class="h5 mb-4">
              <label for="manager">Project Manager:</label>
        
@@ -147,21 +161,37 @@
              </select>
            </div>
      
-           
+<!--            
            <div class="h5 mb-4">
              <label for="members">Project Members:</label>
-       
+    
               <mat-select
                class="browser-default custom-select"
                name="members"
+               [(ngModel)]="project && project.empObjectIdArray"
                [disabled]="formType === 'get'"
                #membersInput
                [formControl]="emp" multiple>
                <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
             </mat-select> 
              
-           </div>
+           </div> -->
        
+           <div class="h5 mb-4">
+            <label for="manager">Project Members:</label>
+      
+            <input
+              type="text"
+              id="members"
+              class="form-control"
+              placeholder="Project Manager"
+              [(ngModel)]="project && project.empObjectIdArray"
+              name="members"
+              [disabled]="formType === 'get'"
+              #membersInput
+            />
+          </div>
+      
            <div class="button-parent" *ngIf="formType !== 'get'">
                <button
                  mdbBtn
@@ -179,7 +209,8 @@
                      projectManager: projectManagerInput && projectManagerInput.value,
                      startDate: startDateInput && startDateInput.value,
                      endDate: endDateInput && endDateInput.value,
-                     status: statusInput && statusInput.value
+                     status: statusInput && statusInput.value,
+                     empObjectIdArray: membersInput && membersInput.value 
                    },formType)
                    "
                >
