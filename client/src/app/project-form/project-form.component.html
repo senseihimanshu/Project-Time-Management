@@ -95,11 +95,26 @@
              />
              <p  *ngIf="clientNameInput.touched">clientName is required</p>
            </div>
+
+           <!-- <div class="h5 mb-4">
+            <label for="members">Project Manager:</label>
+      
+             <mat-select
+              class="browser-default custom-select"
+              name="members"
+              [(ngModel)]="project && project.projectManager"
+              [disabled]="formType === 'get'"
+              #projectManagerInput
+              [formControl]="emp" multiple>
+              <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
+           </mat-select> 
+            
+          </div> -->
            
            
            <div class="h5 mb-4 form-group was-validated"[class.has-error]="projectManagerInput">
              <label for="manager"class="control-label">Project Manager:</label>
-       
+
              <input
                type="text"
                id="manager"
@@ -168,14 +183,14 @@
              </select>
              <p  *ngIf="statusInput.touched">status is required</p>
            </div>
-     
-           
-           <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput.touched">
+    
+<!--            
+              <div class="h5 mb-4">
              <label class="control-label"for="members">Project Members:</label>
-       
               <mat-select
                class="browser-default custom-select"
                name="members"
+               [(ngModel)]="project && project.empObjectIdArray"
                [disabled]="formType === 'get'"
                [(ngModel)]="project && project.members[0]"
                #membersInput
@@ -183,11 +198,29 @@
                matInput placeholder="members"
                [formControl]="emp" multiple>
                <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
-              
+
             </mat-select> 
-            <div  *ngIf="membersInput.touched">members are required</div>
-           </div>
+             
+           </div> -->
+    
        
+       
+              <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput.touched">
+            <label for="manager">Project Members:</label>
+      
+            <input
+              type="text"
+              id="members"
+              class="form-control"
+              placeholder="Project Manager"
+              [(ngModel)]="project && project.empObjectIdArray"
+              name="members"
+              [disabled]="formType === 'get'"
+              #membersInput
+            />
+                <div  *ngIf="membersInput.touched">members are required</div>
+          </div>
+      
            <div class="button-parent" *ngIf="formType !== 'get'">
                <button
                  mdbBtn
@@ -205,7 +238,8 @@
                      projectManager: projectManagerInput && projectManagerInput.value,
                      startDate: startDateInput && startDateInput.value,
                      endDate: endDateInput && endDateInput.value,
-                     status: statusInput && statusInput.value
+                     status: statusInput && statusInput.value,
+                     empObjectIdArray: membersInput && membersInput.value 
                    },formType)
                    "
                >
