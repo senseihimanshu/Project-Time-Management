@@ -1,4 +1,92 @@
-<div class="wrapper">
+ <div class="wrapper">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+    <div routerLink="/admindashboard" class="dashboard">
+      Admin Dashboard
+    </div>
+    <div>
+      <span routerLink="/myProfile">My Profile</span>
+
+      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+        (click)="logout()">
+        <i class="fa fa-power-off"></i>
+      </button>
+    </div>
+  </mat-toolbar>
+  <div class="main">
+    <app-sidebar [menus]="menus"></app-sidebar>
+
+<div class="container out-div" style="z-index: 100000000;">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+        <th scope="col">Employee Id:</th>
+        <th scope="col">Name:</th>
+        <th scope="col">Email:</th>
+        <th scope="col">Designation:</th>
+        <th scope="col">Role:</th>
+        <th scope="col">View</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+			</tr>
+		</thead>
+		<tbody id="adminTable" *ngFor = "let employee of usersArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+			<tr>
+        <td>
+          {{ employee.empId }}
+        </td>
+        <td>
+          {{ employee.name }}
+        </td>
+        <td>
+          {{ employee.email }}
+        </td>
+        <td>
+          {{ employee.designation }}
+        </td>
+        <td>
+          {{ employee.role }}
+        </td>
+        <td>
+          <a class="" [routerLink]="['/employeeform/details', employee.empId]" >
+            <i class="fas fa-eye"></i>
+          </a>
+        </td>
+        <td>
+          <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
+            <i class="fas fa-pencil-alt"></i>
+          </a>
+        </td>
+        <td>
+          <a class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></a>
+        </td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="pagination-div"><ngb-pagination  [collectionSize]="usersArray.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+</div>
+</div>
+</div>
+ </div>
+
+ <!-- <div style="margin:20px;">
+	<table>
+	   <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+		 <td>{{item.Name}}</td>
+  
+  
+	   </tr>
+	</table>
+	<ngb-pagination [collectionSize]="items.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+  </div>  -->
+
+
+
+
+
+
+
+
+<!-- <div class="wrapper">
   <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
     <div routerLink="/admindashboard" class="dashboard">
       Admin Dashboard
@@ -42,7 +130,7 @@
             </th>
           </tr>
         </thead>
-        <!-- <table class="empTable">
+        <!- <table class="empTable">
         <tr>
           <th>Employee Id:</th>
           <th>Name:</th>
@@ -53,7 +141,7 @@
           <th>Update</th>
           <th>Delete</th>
         </tr> -->
-        <tbody class="mt-5" *ngFor="let employee of usersArray">  
+        <!-- <tbody class="mt-5" *ngFor="let employee of usersArray">  
           <tr *ngIf="employee.role != 'Admin'">
             <td>
               {{ employee.empId }}
@@ -88,7 +176,7 @@
       </table>
     </section>
   </div>
-</div>
+</div> -->
 
     <!-- 
     <section class="background_dashboard">
@@ -112,4 +200,4 @@
       </table>
     </section>
   </div>
-</div> -->
+</div> --> 
