@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+  HttpParams
+} from "@angular/common/http";
+
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
@@ -10,6 +16,13 @@ import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 export class SendHttpRequestService {
 
+  headers: HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json"
+  });
+  
+  httpOptions = {
+    headers: this.headers
+  };
   constructor( private http: HttpClient) { }
 
   private log(message: string) {
@@ -28,7 +41,19 @@ export class SendHttpRequestService {
   }
 
    showEmployees(): Observable<any>{
-    return this.http.get("http://localhost:3000/employees", {headers:this.header_token}).pipe(
+    const token = localStorage.getItem('Authorization');
+      
+    // //Decode JWT and return the Payload in JSON Format
+   const decodeToken= this.jsonDecoder(token);
+   console.log(decodeToken);
+         const empId=decodeToken.data.empId;
+       console.log(empId);
+      const params = new HttpParams().set("empId", empId);
+      console.log(params); 
+      if (!empId) {
+        return this.http.get<any>("http://localhost:3000/employees", { ...this.httpOptions });
+      }
+    return this.http.get<any>("http://localhost:3000/employees",{ ...this.httpOptions, params }).pipe(
       tap(_ => this.log("Log In")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );

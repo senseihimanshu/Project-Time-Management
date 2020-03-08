@@ -121,7 +121,7 @@ class Employee {
   async index(req, res) {
    // console.log("dikhaa rha huu");
     const employeeList = await model.employee.log(
-      {},
+      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
     );
     res.send(employeeList);
