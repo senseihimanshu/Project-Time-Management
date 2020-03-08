@@ -3,7 +3,7 @@ import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { FormControl } from '@angular/forms';
-
+import { SendHttpRequestService } from "../send-http-request.service";
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -16,9 +16,10 @@ export class ProjectFormComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
   emp = new FormControl();
-  empList: string[] = ['Abha', 'Kritika', 'Himanshu', 'Deepanshu', 'Deepak'];
+  empList: string[];
 
   constructor(
+    private _service: SendHttpRequestService,
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -69,7 +70,7 @@ export class ProjectFormComponent implements OnInit {
   
     loading = false;
   ngOnInit():any {
-  
+     this.getemployees();
     console.log("ngOnInit");
     this.route.params
       .pipe(
@@ -104,4 +105,12 @@ export class ProjectFormComponent implements OnInit {
          console.log(res.payload.message)
        });
    }
+   getemployees() {
+    let obj = this._service.showEmployees().subscribe(res => {
+      this.empList = res;
+      console.log(res);
+    });
+    console.log(obj);
+  }
+
 }
