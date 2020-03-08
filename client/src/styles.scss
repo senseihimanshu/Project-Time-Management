@@ -1,27 +1,55 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 *,
 *:after,
-*:before{
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-html{
-    font-size: 62.5%;
+html {
+  font-size: 62.5%;
 }
 
-body{
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-weight: 400;
-    line-height: 1.7;
-    color: $color-text-primary;
-    box-sizing: border-box;
+body {
+//   font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Open Sans', sans-serif;
+
+  font-weight: 400;
+  line-height: 1.7;
+  color: $color-text-primary;
+  box-sizing: border-box;
+
 }
 
 // html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 // html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.custom-card {
+  box-shadow: 2px 2px 2px 2px rgba(50, 50, 50, 0.1);
+  background: white;
+  padding: 10px;
+}
+
+.navbar-default {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  -webkit-box-shadow: 0 6px 6px -6px #ccc;
+  -moz-box-shadow: 0 6px 6px -6px #ccc;
+  box-shadow: 0 6px 6px -6px #ccc;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #95989a !important;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #212121 !important;
+}

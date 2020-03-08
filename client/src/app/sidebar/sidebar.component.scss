@@ -83,7 +83,7 @@
 
       .sidebar {
         cursor: pointer;
-        font-size: 20px;
+        font-size: 30px;
         transition: color .3s ease;
       }
     }
@@ -95,7 +95,7 @@
 
       .header-menu span {
         font-weight: bold;
-        font-size: 14px;
+        font-size: 30px;
         padding: 15px 20px 5px 20px;
         display: inline-block;
       }
@@ -115,7 +115,7 @@
 
           i {
             margin-right: 10px;
-            font-size: 12px;
+            font-size: 15px;
             width: 30px;
             height: 30px;
             line-height: 30px;
@@ -151,7 +151,7 @@
           background: 0 0;
           position: absolute;
           right: 15px;
-          top: 14px;
+          top: 12px;
           transition: transform .3s ease;
 
         }
@@ -166,7 +166,7 @@
 
           li {
             padding-left: 25px;
-            font-size: 13px;
+            font-size: 12px;
 
             a {
               &:before {
@@ -180,7 +180,7 @@
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
                 margin-right: 10px;
-                font-size: 8px;
+                font-size: 12px;
               }
 
 
@@ -309,18 +309,18 @@
 
 
 /*------------------------------default theme---------------------------------*/
-$bg-sidebar-wrapper : #1d1d1d;
-$border-color : #2b2b2b;
-$color:#bdbdbd;
-$header-menu-color :#6c7b88;
-$hover-color:#ffffff;
-$shadow-color:#131212;
-$bg-scrollbar :#636363;
+$bg-sidebar-wrapper : white;
+$border-color : #252323;
+$color:white;
+$header-menu-color :#0f0f0f;
+$hover-color:#161616;
+$shadow-color:#111010;
+$bg-scrollbar :#161616;
 
 // colors with backgound image
-$img-bg-sidebar-wrapper : rgba(29, 29, 29, 0.8);
-$img-border-color : rgba(255, 255, 255, 0.1);
-$img-shadow-color:rgba(0, 0, 0, 0.5);
+$img-bg-sidebar-wrapper : rgba(32, 32, 32, 0.8);
+$img-border-color : rgba(212, 231, 231, 0.349);
+$img-shadow-color:rgba(8, 8, 8, 0.582);
 
 
 
@@ -332,6 +332,7 @@ $img-shadow-color:rgba(0, 0, 0, 0.5);
   .sidebar-search,
   .sidebar-menu {
     border-top: 1px solid $border-color;
+    font-size:1.3rem !important;
   }
 
   .sidebar-search input.search-menu,
