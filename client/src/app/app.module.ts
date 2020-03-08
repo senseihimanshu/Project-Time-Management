@@ -49,7 +49,9 @@ import { NotFoundComponent } from "./404/notfound.component";
 import {
   MatFormFieldModule,
   MatInputModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule,
+  MatPaginatorModule
 } from "@angular/material";
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -92,6 +94,8 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,

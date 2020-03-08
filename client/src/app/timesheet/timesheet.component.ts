@@ -1,7 +1,11 @@
 import { TimesheetService } from "./../services/timesheet.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 
+//3rd party
+import {MatPaginator} from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+
 
 import * as moment from "moment";
 
