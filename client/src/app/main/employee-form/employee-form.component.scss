@@ -12,6 +12,9 @@
      font-weight: bolder;
  }
  
+p{
+    color:red;
+}
  .btn{
      width:40%;
      margin-left:20%;
@@ -22,11 +25,7 @@
      height: 4rem;
      background-color: black;
  }
- .message{
-     font-size: 2rem;
-     color: red;
-     transition: all .2s;
- }
+ 
 
 .app-main{
     padding: 0.8rem 4rem;
@@ -35,6 +34,9 @@ margin: 0 auto;}
     font-size: 2rem;
     color: red;
     transition: all 2s;
+}
+help-block{
+    color:red!important;
 }
 .form-body{
     margin-left:27rem;
