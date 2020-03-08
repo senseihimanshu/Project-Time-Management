@@ -44,11 +44,9 @@ class Timesheet {
       { $push: { projectId: newTimesheet } }
     );
     console.log("Reached Here @timesheet.js/line26");
-    console.log("dikhau", newTimesheet);
 
     res.send(newTimesheet);
   }
-  
 
   async show(req, res) {
     const empObjId = req.query.empObjId;
@@ -59,7 +57,7 @@ class Timesheet {
       timesheet = await model.timesheet.get();
     }
     console.log(timesheet);
-console.log(timesheet[0].week[0]);
+    console.log(timesheet[0].week[0]);
     if (!timesheet) {
       console.log("Not available");
       return res.status(404).send(timesheet);
@@ -97,7 +95,9 @@ console.log(timesheet[0].week[0]);
     res.send({
       success: true,
       payload: {
-        project
+        data: {
+          timesheet
+        }
       }
     });
   }
