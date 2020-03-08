@@ -40,22 +40,27 @@
              
            </div>
        
-           <div class="h5 mb-4">
-             <label for="projectId">Project ID:</label>
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="projectIdInput.touched">
+             <label class="control-label" for="projectId">Project ID:</label>
        
              <input
                type="text"
                id="projectId"
                class="form-control"
                placeholder="Project Id"
-               [(ngModel)]="project&& project.projectId"
+               [(ngModel)]="project && project.projectId"
                name="projectId"
                [disabled]="formType === 'get'"
-               #projectIdInput
+               #projectIdInput=ngModel
+               required
+               minlength="5"
+               maxlength="20"
              />
+             
+             <p  *ngIf="projectIdInput.touched">project Id is required</p>
            </div>
        
-           <div class="h5 mb-4">
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="projectNameInput.touched">
              <label for="projectName">Project Name:</label>
        
              <input
@@ -65,13 +70,15 @@
                placeholder="Project Name"
                [(ngModel)]="project&& project.projectName"
                name="projectName"
+               required
                [disabled]="formType === 'get'"
                #projectNameInput
              />
+             <p  *ngIf="projectNameInput.touched">projectName is required</p>
            </div>
        
-           <div class="h5 mb-4">
-             <label for="client_name">Client Name:</label>
+           <div class="h5 mb-4 was-validated form-group"[class.has-error]="clientNameInput.touched">
+             <label class="control-label" for="client_name">Client Name:</label>
        
              <input
                type="text"
@@ -80,10 +87,15 @@
                placeholder="Client Name"
                [(ngModel)]="project && project.clientName"
                name="client_name"
+               required
+               minlength="2"
+               maxlength="20"
                [disabled]="formType === 'get'"
                #clientNameInput
              />
+             <p  *ngIf="clientNameInput.touched">clientName is required</p>
            </div>
+
            <!-- <div class="h5 mb-4">
             <label for="members">Project Manager:</label>
       
@@ -98,10 +110,11 @@
            </mat-select> 
             
           </div> -->
-    
-           <div class="h5 mb-4">
-             <label for="manager">Project Manager:</label>
-       
+           
+           
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="projectManagerInput">
+             <label for="manager"class="control-label">Project Manager:</label>
+
              <input
                type="text"
                id="manager"
@@ -109,12 +122,16 @@
                placeholder="Project Manager"
                [(ngModel)]="project && project.projectManager"
                name="manager"
+               required
+               minlength="2"
+               maxlength="20"
                [disabled]="formType === 'get'"
                #projectManagerInput
              />
+             <p  *ngIf="projectManagerInput.touched">projectManager is required</p>
            </div>
        
-           <div class="h5 mb-4">
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="StartDateInput">
              <label for="start">Start Date:</label>
        
              <input
@@ -124,13 +141,15 @@
                placeholder="Start Date"
                [(ngModel)]="project && project.startDate"
                name="date"
+               required
                [disabled]="formType === 'get'"
                #startDateInput
              />
+             <p  *ngIf="startDateInput.touched">startDate is required</p>
            </div>
            
-           <div class="h5 mb-4">
-             <label for="end">End Date:</label>
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="endDateInput.touched">
+             <label class="control-label"for="end">End Date:</label>
        
              <input
                type="date"
@@ -138,19 +157,22 @@
                class="form-control"
                placeholder="End Date"
                [(ngModel)]="project && project.endDate"
+               required
                name="date"
                [disabled]="formType === 'get'"
                #endDateInput
              />
+             <p  *ngIf="endDateInput.touched">EndDate is required</p>
            </div>
        
-           <div class="h5 mb-4">
-             <label for="status">Status:</label>
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="statusInput.touched">
+             <label class="control-label"for="status">Status:</label>
        
              <select
                class="browser-default custom-select"
                name="status"
                [(ngModel)]="project && project.status[0]"
+               required
                [disabled]="formType === 'get'"
                #statusInput
              >
@@ -159,25 +181,31 @@
                <option value="Completed">Completed</option>
                <option value="Closed">Closed</option>
              </select>
+             <p  *ngIf="statusInput.touched">status is required</p>
            </div>
-     
-<!--            
-           <div class="h5 mb-4">
-             <label for="members">Project Members:</label>
     
+<!--            
+              <div class="h5 mb-4">
+             <label class="control-label"for="members">Project Members:</label>
               <mat-select
                class="browser-default custom-select"
                name="members"
                [(ngModel)]="project && project.empObjectIdArray"
                [disabled]="formType === 'get'"
+               [(ngModel)]="project && project.members[0]"
                #membersInput
+               required
+               matInput placeholder="members"
                [formControl]="emp" multiple>
                <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
+
             </mat-select> 
              
            </div> -->
+    
        
-           <div class="h5 mb-4">
+       
+              <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput.touched">
             <label for="manager">Project Members:</label>
       
             <input
@@ -190,6 +218,7 @@
               [disabled]="formType === 'get'"
               #membersInput
             />
+                <div  *ngIf="membersInput.touched">members are required</div>
           </div>
       
            <div class="button-parent" *ngIf="formType !== 'get'">

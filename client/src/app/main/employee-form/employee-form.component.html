@@ -44,7 +44,7 @@
           
         </div>
   
-        <div class="h4 mb-4
+        <div class="h4 mb-4 was-validated
         ">
           <label for="empId">Employee ID: </label>
          
@@ -66,7 +66,7 @@
         </div>  
         
   
-        <div class="form-group h4 mb-4" [class.has-error]="email.invalid && email.touched"
+        <div class="form-group h4 mb-4 was-validated" [class.has-error]="email.invalid && email.touched"
         >
           <label class="control-label"for="email">Email Id: </label>
   
@@ -83,11 +83,11 @@
             [disabled]="typeOfForm === 'get'"
             #email="ngModel"
           />
-         <p class="help-block" *ngIf="email.invalid && email.touched">Email is required</p>
+         <p  *ngIf="email.invalid && email.touched">Email is required</p>
            
         </div>
      
-        <div class="h4 mb-4 formGroup" [class.has-error]="empName.invalid && empName.touched"
+        <div class="h4 mb-4 formGroup was-validated" [class.has-error]="empName.invalid && empName.touched"
        
         >
           <label class="control-label"for="name">Name: </label>
@@ -105,10 +105,11 @@
             [disabled]="typeOfForm === 'get'"
             #empName="ngModel"
           />
-          <p *ngIf="empName.touched && empName.invalid">Required</p>
+         <p *ngIf="empName.touched && empName.invalid">Required</p>
+          
       </div>
        
-        <div class="form-group h4 mb-4" [class.has-error]="addressInput.invalid && addressInput.touched"
+        <div class="form-group h4 mb-4 was-validated" [class.has-error]="addressInput.invalid && addressInput.touched"
         >
           <label class="control-label"for="address">Address: </label>
   
@@ -126,10 +127,10 @@
             [disabled]="typeOfForm === 'get'"
             #addressInput="ngModel"
           />
-          <p class="help-block" *ngIf="addressInput.invalid && addressInput.touched">Address is required</p>
+          <p  *ngIf="addressInput.invalid && addressInput.touched">Address is required</p>
         </div>
   
-        <div class=" form-group h4 mb-4"[class.has-error]="phoneInput.invalid && phoneInput.touched">
+        <div class=" form-group h4 mb-4 was-validated"[class.has-error]="phoneInput.invalid && phoneInput.touched">
           <label for="phone"class="control-label">Phone: </label>
   
           <input
@@ -145,10 +146,10 @@
             [disabled]="typeOfForm === 'get'"
             #phoneInput="ngModel"
           />
-          <p class="help-block" *ngIf="phoneInput.invalid && phoneInput.touched">phoneNo is required</p>
+          <p  *ngIf="phoneInput.invalid && phoneInput.touched">phoneNo is required</p>
         </div>
   
-        <div class="form-group h4 mb-4"[class.has-error]="joiningInput.touched">
+        <div class="form-group h4 mb-4 was-validated"[class.has-error]="joiningInput.touched">
           <label class="control-label"for="joining">Joining: </label>
   
           <input
@@ -162,9 +163,9 @@
             [disabled]="typeOfForm === 'get'"
             #joiningInput="ngModel"
           />
-          <p class="help-block" *ngIf="joiningInput.touched">joiningDate is required</p>
+          <p  *ngIf="joiningInput.touched">joiningDate is required</p>
         </div>
-        <div class="form-group h4 mb-4" [class.has-error]="email.invalid && email.touched"
+        <div class="form-group h4 mb-4 was-validated" [class.has-error]="email.invalid && email.touched"
         >
           <label class="control-label"for="email">Project Id: </label>
   
@@ -181,10 +182,10 @@
             [disabled]="typeOfForm === 'get'"
             #projectId="ngModel"
           />
-         <p class="help-block" *ngIf="projectId.invalid && projectId.touched">projectId is required</p>
+         <p  *ngIf="projectId.invalid && projectId.touched">projectId is required</p>
            
         </div>
-        <div class="form-group h4 mb-4"[class.has-error]="designationInput.touched">
+        <div class="form-group h4 mb-4 was-validated"[class.has-error]="designationInput.touched">
           <label for="designation"class="control-label">Designation: </label>
   
           <select
@@ -201,10 +202,10 @@
             <option value="Consultant 1">Consultant 1</option>
             <option value="Intern">Intern</option>
           </select>
-          <p class="help-block" *ngIf="designationInput.touched">Designation is required</p>
+          <p  *ngIf="designationInput.touched">Designation is required</p>
         </div>
   
-        <div class="h4 mb-4 form-group"[class.has-error]="role.touched">
+        <div class="h4 mb-4 form-group was-validated"[class.has-error]="role.touched">
           <label for="role"class="control-label">Role: </label>
   
           <select
@@ -221,7 +222,7 @@
             <option value="Project Manager">Project Manager</option>
             <option value="C Level Manager">C Level Manager</option>
           </select>
-          <p class="help-block" *ngIf="role.touched">Role is required</p>
+          <p  *ngIf="role.touched">Role is required</p>
         </div>
         <div class="button-parent" *ngIf="formType !== 'get'">
           <button
