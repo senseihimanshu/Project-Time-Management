@@ -14,7 +14,7 @@
     background: #80808054
   }
   tbody{
-   
+    height: 80vh;
     overflow-x: auto;
     overflow-y: auto;
   }
@@ -124,7 +124,7 @@
     justify-content: space-between;
     height: 4rem;
     background-color: black;
-    width: 100vw;
+  //  width: 100vw;
     // position: fixed;
    }
    span{
