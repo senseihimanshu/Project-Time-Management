@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss", "../main.component.scss"],
@@ -15,10 +16,11 @@ export class EmployeeFormComponent implements OnInit {
   message: string;
   employeeForm: any;
   constructor(
+   
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
     this.employeeForm = this.formBuilder.group({
       name: ['', Validators.required,Validators.minLength(2)],
@@ -112,6 +114,7 @@ export class EmployeeFormComponent implements OnInit {
         return (this.employee = response.payload.employee);
       });
   }
+  
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
     console.log(obj, typeOfForm);
