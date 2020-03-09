@@ -1,6 +1,6 @@
 // import { NewwComponent } from './neww/neww.component';
 // import { MbscModule } from '@mobiscroll/angular-lite';
-import { TimesheetComponent } from './timesheet/timesheet.component';
+import { TimesheetComponent, TimesheetModal } from './timesheet/timesheet.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -51,7 +51,8 @@ import {
   MatInputModule,
   MatToolbarModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 } from "@angular/material";
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -84,7 +85,8 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     EmployeedashboardComponent,
     TimesheetComponent,
     ReviewRowComponent,
-    ProjectManagerComponent
+    ProjectManagerComponent,
+    TimesheetModal
   ],
   imports: [PerfectScrollbarModule ,
     NgbModule,
@@ -97,6 +99,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     MatTableModule,
     MatPaginatorModule,
     BrowserModule,
+    MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
@@ -126,6 +129,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
+entryComponents: [TimesheetModal],
   providers: [],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]
