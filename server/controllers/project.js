@@ -6,30 +6,30 @@ class Project {
   async create(req, res) {
     console.log("Create Project req.body", req.body);
     //It must expect array in future!
-    const empObj = await model.employee.get(
-      { name: req.body.empObjectIdArray },
-      { _id: 1 }
-    );
+    // const empObj = await model.employee.get(
+    //   { name: req.body.empObjectIdArray },
+    //   { _id: 1 }
+    // );
 
-    const projectManagerIdObj = await model.employee.get(
-      { name: req.body.projectManager },
-      { _id: 1 }
-    );
+    // const projectManagerIdObj = await model.employee.get(
+    //   {role:"Project Manager"},
+    //   { name: 1 }
+    // );
 
     let projectObj = {
       projectId: req.body.projectId,
       projectName: req.body.projectName,
-      projectManager: req.body.projectManager,
-      clientName: req.body.clientName,
+      projectManager: req.body.managers,
+      clientName: req.body.client_name,
       status: req.body.status,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      empObjectIdArray: empObj,
+      empObjectIdArray: req.body.members,
       status: req.body.status
     };
-    const empObjArr = [empObj._id];
-    projectObj.empObjectIdArray = empObjArr;
-    projectObj.projectManager = projectManagerIdObj._id;
+    // const empObjArr = [empObj._id];
+    // projectObj.empObjectIdArray = empObjArr;
+    // projectObj.projectManager = projectManagerIdObj._id;
     
     console.log(projectObj, 'Abha Rana');
     
@@ -78,8 +78,8 @@ class Project {
 
     await employeesUpdatePromise();
 
-    //  const projectManagerId = (await model.employee.get({ empId: projectObj.projectManager }))._id;
-    //  model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
+     const projectManagerId = (await model.employee.get({ _id: projectObj.projectManager }))._id;
+     model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
 
     res.status(201).send({
       success: true,
@@ -90,14 +90,18 @@ class Project {
   }
 
   async index(req, res) {
-    const projectList = await model.project.log({});
-    console.log("nmnmnm",projectList);
+   
+       const projectList = await model.project.log({});
+        console.log("nmnmnm",projectList);
+   
     res.send(projectList);
   }
 
   async show(req, res) {
     const projectList = await model.project.get({ _id: req.params.id });
     console.log("nmnmnm",projectList);
+    const projectManager=[projectManagerIdObj];
+    projectList.projectManager=projectManager;
     res.send(projectList);
   }
   async update(req, res) {
