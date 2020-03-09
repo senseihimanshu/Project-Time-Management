@@ -53,4 +53,8 @@ export class EmployeeService {
     const params = new HttpParams().set("empId", empId);
     return this.http.delete<any>(FEED_API, { ...this.httpOptions, params });
   }
+  deleteProject(id: string): any{
+    const params = new HttpParams().set("id", id);
+    return this.http.delete<any>(PROJECT_API, { ...this.httpOptions, params });
+  }
 }
