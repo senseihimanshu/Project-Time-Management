@@ -7,6 +7,7 @@ module.exports= (app) => {
 	app.get("/project/:id",controller.project.show);
 	app.put("/project/:id",controller.project.update);
 	app.delete("/api/project",controller.project.delete);
+	//Employees
 	app.post("/employees",controller.employees.create) ;
 	app.get("/employees",controller.employees.index) 
 	app.get("/employees/:id",controller.employees.show) 
