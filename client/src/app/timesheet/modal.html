@@ -1,0 +1,148 @@
+<div class="modal-wrapper">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm" novalidate>
+      <div class="form-group">
+        <label for="date">Select the week</label>
+        <div class="input-group">
+          <input
+            id="date"
+            class="form-control date-input"
+            placeholder="yyyy-mm-dd"
+            name="selectedDate"
+            [ngModel]="selectedDate?.value"
+            (ngModelChange)="convertDate($event)"
+            ngbDatepicker
+            [markDisabled]="isDisabled"
+            #dp="ngbDatepicker"
+            #selectedDate="ngModel"
+          />
+          <div class="input-group-append">
+            <button
+              style="font-size: 1.8rem;"
+              class="btn btn-outline-secondary fas fa-calendar"
+              (click)="dp.toggle()"
+              type="button"
+            ></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="disabled-inputs">
+        <label for="date">Start Date</label>
+        <span
+          ><input type="text" name="startDate" [(ngModel)]="startDate" disabled
+        /></span>
+        <!-- {{ selectedDate.value | json }} -->
+        <label for="date">End Date</label>
+        <span
+          ><input type="text" name="endDate" [(ngModel)]="endDate" disabled
+        /></span>
+      </div>
+    </form>
+    <!-- <div><label for="date">Start Date</label>
+  <span><input type="date" disabled/></span>
+    
+  <label for="date">End Date</label>
+  <span><input type="date" disabled/></span>
+</div>
+
+<button (click)="findweek(dp)">find</button> -->
+
+    <!-- Editable table -->
+    <div class="card">
+      <div class="card-body">
+        <div id="table" class="table-editable">
+          <table
+            class="table table-bordered table-responsive-md table-striped text-center"
+          >
+            <tr>
+              <th scope="col" class="text-center">Project</th>
+              <th scope="col" class="text-center">Client Name</th>
+              <th scope="col" class="text-center">Task Type</th>
+              <th scope="col" class="text-center">Date</th>
+              <th scope="col" class="text-center">Hours</th>
+              <th scope="col" class="text-center">Billable</th>
+              <th scope="col" class="text-center">Status</th>
+            </tr>
+
+            <tr *ngFor="let date of datesArray">
+              <td>
+                <span>
+                  <select name="project" id="project">
+                    <option value="-" selected>Himanshu</option>
+                    <option value="-">Himanshu</option>
+                    <option value="-">Himanshu</option>
+                    <option value="-">Himanshu</option>
+                  </select>
+                </span>
+              </td>
+              <td>
+                <select name="customer_name" id="customer_name">
+                  <option value="-"></option>
+                </select>
+              </td>
+              <td>
+                <select
+                  name="task-type"
+                  [ngModel]="timesheet?.taskType"
+                  required
+                  #taskType="ngModel"
+                >
+                  <option
+                    *ngFor="let taskType of taskTypes"
+                    [value]="taskType.key"
+                    [selected]="timesheet?.taskType === taskType.key"
+                    >{{ taskType.value }}</option
+                  >
+                </select>
+              </td>
+              <td>
+                <span>
+                  <input type="date" [ngModel]="date" disabled />
+                </span>
+              </td>
+              <td>
+                <span
+                  ><input type="number" min="0" max="100" name="" id=""
+                /></span>
+              </td>
+              <td>
+                <span>
+                  <input
+                    name="billable"
+                    type="checkbox"
+                    [ngModel]="timesheet?.billable || false"
+                  />
+                </span>
+              </td>
+              <td>
+                <span>-</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      aria-label="Close"
+      mat-button
+      mat-dialog-close
+    >
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Save
+    </button>
+  </div>
+</div>
