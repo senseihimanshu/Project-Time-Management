@@ -17,5 +17,6 @@ import { AuthGuardService } from "./../guards/auth-guard.service";
   imports: [FormsModule, CommonModule, NgbDate, NgModule],
   exports: [TimesheetComponent, TimesheetModal],
   providers: [ServicesService, AuthGuardService, RoleGuardService],
+
 })
 export class TimesheetModule {}
