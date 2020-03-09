@@ -4,7 +4,7 @@ const projectschema = mongoose.Schema(schema.project);
 
 class Project{
   constructor(){
-    this.model=mongoose.model('Project',projectschema);
+    this.model=mongoose.model('project',projectschema);
     console.log(projectschema, 'Inside models/projects.js');
   }
   
