@@ -87,6 +87,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     ReviewRowComponent,
     ProjectManagerComponent,
     TimesheetModal
+   
   ],
   imports: [PerfectScrollbarModule ,
     NgbModule,

@@ -4,7 +4,18 @@ class Project {
   constructor() {}
 
   async create(req, res) {
-    console.log("Create Project req.body",req.body);
+    console.log("Create Project req.body", req.body);
+    //It must expect array in future!
+    const empObj = await model.employee.get(
+      { name: req.body.empObjectIdArray },
+      { _id: 1 }
+    );
+
+    const projectManagerIdObj = await model.employee.get(
+      { name: req.body.projectManager },
+      { _id: 1 }
+    );
+
     let projectObj = {
       projectId: req.body.projectId,
       projectName: req.body.projectName,
@@ -13,32 +24,38 @@ class Project {
       status: req.body.status,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      empObjectIdArray: req.body.empIdArray,
+      empObjectIdArray: empObj,
       status: req.body.status
     };
-
-    if(await model.project.get({ projectId: projectObj.projectId })) return res.status(400).send({
-      success: false,
-      payload: {
-        message: 'Project Id already exists'
-      }
-    });
+    const empObjArr = [empObj._id];
+    projectObj.empObjectIdArray = empObjArr;
+    projectObj.projectManager = projectManagerIdObj._id;
+    
+    console.log(projectObj, 'Abha Rana');
+    
+    if (await model.project.get({ projectId: projectObj.projectId }))
+      return res.status(400).send({
+        success: false,
+        payload: {
+          message: "Project Id already exists"
+        }
+      });
     const empObjectIdArray = [];
- 
+
     const generateProjectPromise = async () => {
       await Promise.all(
         projectObj.empObjectIdArray.map(async empId => {
-          const { _id } = await model.employee.get(
-            { empId }
-          
-          );
+          const { _id } = await model.employee.get({}, { empId });
           console.log(_id);
-          console.log(_id, 'Before Push in empObjectIdArray');
+          console.log(_id, "Before Push in empObjectIdArray");
           empObjectIdArray.push(_id);
         })
       );
 
-      const newProject = await model.project.save({ ...projectObj, empObjectIdArray });
+      const newProject = await model.project.save({
+        ...projectObj,
+        empObjectIdArray
+      });
       console.log(newProject);
 
       return newProject;
@@ -47,7 +64,7 @@ class Project {
     console.log(empObjectIdArray);
 
     const newProjectId = (await generateProjectPromise())._id;
-console.log(newProjectId,"id mili");
+    console.log(newProjectId, "id mili");
     const employeesUpdatePromise = async () => {
       await Promise.all(
         empObjectIdArray.map(async empObjectId => {
@@ -61,8 +78,8 @@ console.log(newProjectId,"id mili");
 
     await employeesUpdatePromise();
 
-    const projectManagerId = (await model.employee.get({ empId: projectObj.projectManager }))._id;
-    model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
+    //  const projectManagerId = (await model.employee.get({ empId: projectObj.projectManager }))._id;
+    //  model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
 
     res.status(201).send({
       success: true,
@@ -70,15 +87,17 @@ console.log(newProjectId,"id mili");
         message: "Project created successfully"
       }
     });
-  } 
-    
+  }
+
   async index(req, res) {
     const projectList = await model.project.log({});
+    console.log("nmnmnm",projectList);
     res.send(projectList);
   }
 
   async show(req, res) {
     const projectList = await model.project.get({ _id: req.params.id });
+    console.log("nmnmnm",projectList);
     res.send(projectList);
   }
   async update(req, res) {
