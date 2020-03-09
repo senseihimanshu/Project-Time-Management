@@ -5,7 +5,7 @@ const employeeschema=mongoose.Schema(employee);
 class Employee{
   constructor(){
     // console.log(this.model, 'Inside models/employee costructor');
-    this.model=mongoose.model('Employee',employeeschema);
+    this.model=mongoose.model('employee',employeeschema);
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){

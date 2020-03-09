@@ -17,7 +17,7 @@
 </div>
 
 <div class="timesheet-table__wrapper">
-  <app-sidebar></app-sidebar>
+  <app-sidebar [menus]="menus"></app-sidebar>
 
   <div class="card">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
@@ -34,7 +34,7 @@
           class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
         >
           <thead>
-            <td class="text-center">empId</td>
+            <td class="text-center">Employee Name</td>
             <td class="text-center">Project</td>
             <td class="text-center">Client Name</td>
             <td class="text-center">Task Type</td>
@@ -46,7 +46,7 @@
 
           <tr *ngFor="let timesheet of timesheetList; let id = index">
             <td>
-              {{timesheet.empObjId}}
+              {{timesheet.empObjId?.name}}
             </td>
             <td>
               {{ timesheet.week[0]?.projectId?.projectName}}
