@@ -15,8 +15,10 @@ export class ProjectFormComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  emp = new FormControl();
   empList: string[];
+  projManager:string[]=[];
+  projMembers:string[]=[];
+  message:any;
 
   constructor(
     private _service: SendHttpRequestService,
@@ -97,11 +99,12 @@ export class ProjectFormComponent implements OnInit {
       });
   }
 
-  projectCreateOrUpdate(obj, formType, form): any {
+  projectCreateOrUpdate(obj, formType): any {
     console.log(obj, formType);
      this.employeeService
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
+         this.message=res.payload.message;
          console.log(res.payload.message)
        });
    }
@@ -112,5 +115,26 @@ export class ProjectFormComponent implements OnInit {
     });
     console.log(obj);
   }
-
+  addProjectManager(employeeArr: any)
+  {
+    if(employeeArr){
+      console.log('Abha Rana', employeeArr);
+      employeeArr.map((employee) => {
+        this.projManager.push(employee._id);
+      });
+      console.log(this.projManager);
+    }
+    
+  }
+  addProjectMember(employeeArr: any)
+  {
+    if(employeeArr){
+      console.log('Abha Rana', employeeArr);
+      employeeArr.map((employee) => {
+        this.projMembers.push(employee._id);
+      });
+      console.log(this.projMembers);
+    }
+    
+  }
 }
