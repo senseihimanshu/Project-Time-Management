@@ -12,6 +12,8 @@ import {
 
 import * as moment from "moment";
 import { MatDialog } from "@angular/material/dialog";
+import { EmployeeService } from '../services/employee.service';
+import { SendHttpRequestService } from '../services/send-http-request.service';
 
 @Component({
   selector: "table-editable",
@@ -140,12 +142,13 @@ export interface ITaskType {
   value: string;
 }
 
+
 @Component({
   selector: "app-timesheet-modal",
   templateUrl: "./modal.html",
   styleUrls: ["./modal.scss"]
 })
-export class TimesheetModal {
+export class TimesheetModal implements OnInit {
   isDisabled = (date: NgbDate, current: { month: number }) =>
     (moment(`${date.year}-${date.month}-${date.day}`).day() === 0) || (moment(`${date.year}-${date.month}-${date.day}`).day() === 6);
 
@@ -153,6 +156,10 @@ export class TimesheetModal {
   endDate: string;
   numberOfDays: number = 0;
   datesArray: string[];
+
+  project: any;
+  
+  projectArray: any = [];
 
   taskTypes: ITaskType[] = [
     {
@@ -180,6 +187,29 @@ export class TimesheetModal {
       value: "Sick Leave"
     }
   ];
+
+  constructor(private employeeService: EmployeeService, private httpService: SendHttpRequestService){}
+
+  ngOnInit(): void{
+    //Getting empId from token
+    let empId = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data.empId;
+    console.log(empId);
+
+    //subscribing to observable for getting the employee
+    this.employeeService.getEmployee(empId).subscribe((response) => {
+      console.log(response);
+      this.projectArray = response.payload.employee.projectId.map((project) => {
+        return {
+          _id: project._id,
+          projectName: project.projectName,
+          projectManager: project.projectManager,
+          clientName: project.clientName
+        }
+      });
+
+      console.log(this.projectArray);
+    });
+  }
 
   convertDate(selectedDate: string) {
     this.startDate = moment(
@@ -228,5 +258,10 @@ export class TimesheetModal {
     }
 
     console.log(this.numberOfDays, this.datesArray);
+  }
+
+  handleProjectData(project: any){
+    console.log(project);
+    this.project = project;
   }
 }

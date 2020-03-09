@@ -11,7 +11,7 @@ class Employee{
     async get(criteria={},columns={}){
       //debugger
       console.log(criteria, columns);
-      const findDocument=await this.model.findOne(criteria,columns);
+      const findDocument=await this.model.findOne(criteria,columns).populate('projectId');
       // console.log(findDocument, 'findDocument'); 
       return findDocument;
    }

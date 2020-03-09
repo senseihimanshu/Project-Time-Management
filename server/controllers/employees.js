@@ -129,13 +129,11 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log(req.query.empId);
+    console.log(req.query);
     const employee = await model.employee.get({ empId: req.query.empId });
-  //  const date = new Date(employee.joining);
-  //   employee.joining=date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
+    
     console.log(employee);
     if (!employee) {
-      console.log("Request is coming");
       return res.status(404).send({
         success: false,
         payload: {
