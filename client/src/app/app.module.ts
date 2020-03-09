@@ -133,7 +133,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
     BrowserAnimationsModule,
   ],
   providers: [ServicesService, AuthGuardService, RoleGuardService],
-  entryComponents: [TimesheetModal],
+entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]
 })
