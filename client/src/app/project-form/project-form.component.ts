@@ -112,5 +112,9 @@ export class ProjectFormComponent implements OnInit {
     });
     console.log(obj);
   }
+  logout() {
+    this._service.deletetoken();
 
+    this.router.navigate(["/login"]);
+  }
 }

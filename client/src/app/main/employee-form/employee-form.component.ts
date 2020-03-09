@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { SendHttpRequestService } from "../../send-http-request.service";
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss", "../main.component.scss"],
@@ -16,7 +16,7 @@ export class EmployeeFormComponent implements OnInit {
   message: string;
   employeeForm: any;
   constructor(
-   
+    private _service: SendHttpRequestService,
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
@@ -143,5 +143,9 @@ export class EmployeeFormComponent implements OnInit {
       );
     }
   }
-}
+  logout() {
+    this._service.deletetoken();
 
+    this.router.navigate(["/login"]);
+  }
+}
