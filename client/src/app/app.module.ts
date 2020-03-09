@@ -1,3 +1,4 @@
+import { ServicesService } from './services.service';
 // import { NewwComponent } from './neww/neww.component';
 // import { MbscModule } from '@mobiscroll/angular-lite';
 import { TimesheetComponent, TimesheetModal } from './timesheet/timesheet.component';
@@ -60,7 +61,8 @@ import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
-
+import { RoleGuardService } from './guards/role-guard.service';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -130,8 +132,8 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
+  providers: [ServicesService, AuthGuardService, RoleGuardService],
 entryComponents: [TimesheetModal],
-  providers: [],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]
 })
