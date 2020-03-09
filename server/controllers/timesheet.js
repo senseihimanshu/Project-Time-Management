@@ -4,48 +4,72 @@ class Timesheet {
   constructor() {}
 
   async create(req, res) {
-    let timesheetObj = {
-      empObjId: req.body.empObjId,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      billable: req.body.billable,
-      companyName: req.body.companyName,
-      customerName: req.body.customerName,
-      week: req.body.week
-    };
+    console.log(req.body);
+
+    const reqScatteredData = req.body;
+
+// { "project-0": { "_id": "5e65ef289b0b8a3ea421288c", "projectName": "synergy", "projectManager": "5e648fd47faf392b8480af4e", "clientName": "cyg" }, "task-type-0": null, "date-0": "2020-03-30", "hours-0": 21, "billable-0": true}
+    // empObjId: ,
+    // billable: ,
+    // weekObj: {
+    //   projectId: ,
+    //   date: ,
+    //   hours: ,
+    //   taskType: 
+    // },
+    // clientName: 
+
+    let weekObjArray = [];
+
+    for(let dayOfWeek = 0 ; dayOfWeek < 5; dayOfWeek++){  
+        weekObjArray.push({
+          projectId: reqScatteredData[`project-${dayOfWeek}`] && reqScatteredData[`project-${dayOfWeek}`]._id,
+          date: reqScatteredData[`date-${dayOfWeek}`],
+          hours: reqScatteredData[`hours-${dayOfWeek}`],
+          taskType: reqScatteredData[`task-type-${dayOfWeek}`],
+          billable: reqScatteredData[`billable-${dayOfWeek}`],
+          clientName: reqScatteredData[`project-${dayOfWeek}`] && reqScatteredData[`project-${dayOfWeek}`].clientName,
+        })
+    }
+    const timesheetToSave = {
+      empObjId: reqScatteredData.empObjId,
+      week: weekObjArray
+    }
 
     //Creating a new timesheet
-    const newTimesheet = await model.timesheet.save(timesheetObj);
-    console.log(newTimesheet["week"]);
-
+    await model.timesheet.save(timesheetToSave);
+    
     //Adding timesheets of employees to projectManager
     await Promise.all(
-      newTimesheet["week"].map(async week => {
+      timesheetToSave["week"].map(async week => {
         console.log(week["projectId"]);
         const projectManager = await model.project.get(
           { _id: week["projectId"] },
           { projectManager: 1 }
         );
-        console.log(projectManager, projectManager.projectManager);
+        console.log(projectManager, projectManager);
         await model.projectManager.update(
-          { _id: projectManager.projectManager },
-          { $push: { timesheetIds: newTimesheet } }
+          { _id: projectManager && projectManager.projectManager },
+          { $push: { timesheetIds: timesheetToSave } }
         );
       })
     );
 
     //Adding timesheet to employee collection
     await model.employee.update(
-      { _id: timesheetObj.empObjId },
-      { $push: { timesheet: newTimesheet } }
+      { _id: timesheetToSave.empObjId },
+      { $push: { timesheet: timesheetToSave } }
     );
-    await model.employee.update(
-      { _id: timesheetObj.empObjId },
-      { $push: { projectId: newTimesheet } }
-    );
+
     console.log("Reached Here @timesheet.js/line26");
 
-    res.send(newTimesheet);
+    res.send({
+      success: true,
+      payload: {
+        data: timesheetToSave,
+        message: 'Timesheet Added Successfully!'
+      }
+    });
   }
 
   async show(req, res) {

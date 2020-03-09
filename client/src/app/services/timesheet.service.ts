@@ -45,6 +45,12 @@ export class TimesheetService {
       catchError(this.handleError<any>("Some Error Occurred"))
     );
   }
+
+  createTimesheet(timesheetData, empObjId): Observable<any>{
+    return this.http.post("http://localhost:3000/api/timesheet", { ...timesheetData, empObjId }, this.httpOptions)
+  }
+
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure

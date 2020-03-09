@@ -55,7 +55,7 @@
     <div class="card">
       <div class="card-body">
         <div id="table" class="table-editable">
-          <form #form="ngForm">
+          <form #form="ngForm" (ngSubmit)="handleSave(form.value)">
             <table
               class="table table-bordered table-responsive-md table-striped text-center"
             >
@@ -109,7 +109,7 @@
                 </td>
                 <td>
                   <span>
-                    <input type="text" name="date-{{id}}" [ngModel]="datesArray[id]" disabled />
+                    <input type="text" name="date-{{id}}" [ngModel]="datesArray[id]" readonly />
                   </span>
                 </td>
                 <td>
@@ -131,29 +131,31 @@
                 </td>
               </tr>
 
-              {{ form.value | json }}
+              <!-- {{ form.value | json }} -->
             </table>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                aria-label="Close"
+                mat-button
+                mat-dialog-close
+              >
+                Close
+              </button>
+              <button
+                type="submit"
+                class="btn btn-outline-dark"
+              >
+                Submit
+              </button>
+            </div>
+
           </form>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      aria-label="Close"
-      mat-button
-      mat-dialog-close
-    >
-      Close
-    </button>
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="modal.close('Save click')"
-    >
-      Save
-    </button>
-  </div>
+  
 </div>

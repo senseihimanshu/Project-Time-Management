@@ -156,6 +156,7 @@ export class TimesheetModal implements OnInit {
   endDate: string;
   numberOfDays: number = 0;
   datesArray: string[];
+  empObjId: string;
 
   project: any;
   
@@ -188,11 +189,12 @@ export class TimesheetModal implements OnInit {
     }
   ];
 
-  constructor(private employeeService: EmployeeService, private httpService: SendHttpRequestService){}
+  constructor(private employeeService: EmployeeService, private timesheetService: TimesheetService, private httpService: SendHttpRequestService){}
 
   ngOnInit(): void{
     //Getting empId from token
     let empId = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data.empId;
+    this.empObjId = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data._id;
     console.log(empId);
 
     //subscribing to observable for getting the employee
@@ -210,6 +212,18 @@ export class TimesheetModal implements OnInit {
       console.log(this.projectArray);
     });
   }
+
+  handleSave(timesheetData: any){
+    console.log(timesheetData, 'timesheetData');
+    this.timesheetService.createTimesheet(timesheetData, this.empObjId).subscribe((response: any) => {
+      console.log(response);
+    });
+  }
+
+
+
+
+
 
   convertDate(selectedDate: string) {
     this.startDate = moment(
@@ -235,7 +249,7 @@ export class TimesheetModal implements OnInit {
         : this.endDate;
 
     this.numberOfDays =
-      Number(selectedDate["day"]) -
+      Number((moment)(this.endDate).format("DD")) -
       Number(
         moment(
           `${selectedDate["year"]}-${selectedDate["month"]}-${selectedDate["day"]}`

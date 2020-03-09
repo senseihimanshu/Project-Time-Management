@@ -9,20 +9,13 @@ module.exports = {
     ref: "employee",
     unique: true
   },
-
   startDate: {
     type: Date
   },
   endDate: {
     type: Date
   },
-  billable: {
-    type: Boolean
-  },
-  companyName: {
-    type: String,
-    default: "CyberGroup"
-  },
+  
   week: [
     {
       projectId: {
@@ -30,27 +23,23 @@ module.exports = {
         ref: "project"
       },
       date: { type: Date, required: true },
-      hours: { type: Number, required: true },
+      hours: { type: Number },
       taskType: {
         type: String,
-        enum: ["Offshore", "Onsite"]
+        enum: ["offshore", "onsite", "earned-leave", "sick-leave", "casual-leave", null]
       },
-      leaveType: {
+      status: {
         type: String,
-        enum: ["Holiday", "Earned leave", "Casual leave", "Sick leave", "none"]
+        default: "pending",
+        enum: ["approved", "declined", "pending"]
+      },
+      billable: {
+        type: Boolean
+      },
+      clientName: {
+        type: String,
+        default: null
       }
     }
-  ],
-  hoursPerWeek: {
-    type: Number
-  },
-  status: {
-    type: String,
-    default: "Pending",
-    enum: ["Approved", "Declined", "Pending"]
-  },
-  customerName: {
-    type: String,
-    default: null
-  }
+  ]
 };
