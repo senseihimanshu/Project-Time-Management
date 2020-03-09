@@ -1,7 +1,7 @@
 import { ServicesService } from './services.service';
 // import { NewwComponent } from './neww/neww.component';
 // import { MbscModule } from '@mobiscroll/angular-lite';
-import { TimesheetComponent } from './timesheet/timesheet.component';
+import { TimesheetComponent, TimesheetModal } from './timesheet/timesheet.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -52,7 +52,8 @@ import {
   MatInputModule,
   MatToolbarModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 } from "@angular/material";
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -87,6 +88,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
     TimesheetComponent,
     ReviewRowComponent,
     ProjectManagerComponent,
+    TimesheetModal
    
   ],
   imports: [PerfectScrollbarModule ,
@@ -100,6 +102,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
     MatTableModule,
     MatPaginatorModule,
     BrowserModule,
+    MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
@@ -130,6 +133,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
     BrowserAnimationsModule,
   ],
   providers: [ServicesService, AuthGuardService, RoleGuardService],
+  entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]
 })
