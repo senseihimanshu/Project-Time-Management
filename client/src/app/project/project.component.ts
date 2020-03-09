@@ -9,6 +9,10 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./project.component.scss','../main/main.component.scss']
 })
 export class ProjectComponent implements OnInit,OnChanges {
+  name = 'Angular';
+  page = 1;
+  pageSize = 10;
+  items = [];
   menus: any = [
     {
       title: "Employees",
@@ -59,7 +63,7 @@ export class ProjectComponent implements OnInit,OnChanges {
     let obj=this._service.showProjects().subscribe(res => {
       this.projectsArray=res;
       console.log(res);
-      console.log(this.projectsArray);
+      console.log(this.projectsArray,"ghjjhjjh");
     });
    console.log(obj);
     } 

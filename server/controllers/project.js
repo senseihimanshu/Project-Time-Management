@@ -91,11 +91,13 @@ class Project {
 
   async index(req, res) {
     const projectList = await model.project.log({});
+    console.log("nmnmnm",projectList);
     res.send(projectList);
   }
 
   async show(req, res) {
     const projectList = await model.project.get({ _id: req.params.id });
+    console.log("nmnmnm",projectList);
     res.send(projectList);
   }
   async update(req, res) {
