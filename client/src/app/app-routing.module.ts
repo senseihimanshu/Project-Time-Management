@@ -1,3 +1,6 @@
+
+import { ServicesService } from './services.service';
+import { AuthGuardService } from './guards/auth-guard.service';
 // import { NewwComponent } from './neww/neww.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
@@ -22,7 +25,10 @@ import { AdmindashboardComponent } from "./admindashboard/admindashboard.compone
 import { NotFoundComponent } from "./404/notfound.component";
 //import { AuthorizationGuard } from './authorization.guard';
 import { from } from 'rxjs';
+import {RoleGuardService} from "./guards/role-guard.service"
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
+
+
 const routes: Routes = [
   {
     path: "", redirectTo: "login", pathMatch: "full"
@@ -124,7 +130,274 @@ const routes: Routes = [
     component: NotFoundComponent
   }
 ];
+ 
 
+// const routes: Routes = [
+//   {
+//     path: "", redirectTo: "login", pathMatch: "full"
+//   },
+//   { path: "login", component: LoginComponent },
+//   { path: "404", component:NotFoundComponent},
+//   { path: "admin", canActivate: [AuthGuardService, RoleGuardService], data: {role: "Admin"},component: AdmindashboardComponent, children: [
+//     {
+//       path: "projects", component: ProjectComponent
+//     },
+//     {
+//       path:"admin/timesheet",
+//       component:TimesheetComponent
+//     },
+//     {
+//       path: "admindashboard",
+//       component: AdmindashboardComponent
+//     },
+//     {
+//       path: "sidebar",
+//       component: SidebarComponent
+//     },
+//     {
+//       path: "myProfile",
+//       component: MyprofileComponent
+//     },
+// {
+//   path: "review",
+//   component: ReviewComponent
+// },
+// { path: "", component: LoginComponent },
+// {
+//   path: "manager",
+//   component: ReviewComponent
+// },
+// {
+//   path: 'projectmanager',
+//   component: ProjectManagerComponent
+// },
+// {
+//   path: "employee",
+//   component: EmployeedashboardComponent
+// },
+// {
+//   path: "clevel",
+//   component: DashboardComponent
+// },
+// // {
+// //   path: "admin",
+// //   component: AdmindashboardComponent,
+// //   canActivate: [RoleGuardService],
+// //   data: {role: 'Admin'}
+// // },
+// {
+//   path: "accessdenied",
+//   component: AccessDeniedComponent,
+//   data: {}
+// },
+// {
+//   path: "login",
+//   component: LoginComponent
+// },
+// {
+//   path: "employeeform",
+//   children: [
+//     {
+//       path: ":type",
+//       component: EmployeeFormComponent
+//     },
+//     {
+//       path: "details/:empId",
+//       component: EmployeeFormComponent
+//     },
+//     {
+//       path: ":type/:empId",
+//       component: EmployeeFormComponent
+//     }
+//   ],}
+//   ]
+// },
+// //  nmbnm 
+// { path: "clevel", canActivate: [AuthGuardService, RoleGuardService], data: {role: "C Level Manager"},component: DashboardComponent, children: [
+//   {
+//     path: "", redirectTo: "projects", pathMatch: 'full'
+//   },
+//   {
+//        path: "review",
+//        component: ReviewComponent
+//      },
+//   {
+//     path: "projects", component: ProjectComponent
+//   },
+//   {
+//     path:"timesheet",
+//     component:TimesheetComponent
+//   },
+//   {
+//     path: "sidebar",
+//     component: SidebarComponent
+//   },
+//   {
+//     path: "myProfile",
+//     component: MyprofileComponent
+//   },
+// { path: "", component: LoginComponent },
+// {
+// path: 'projectmanager',
+// component: ProjectManagerComponent
+// },
+// {
+// path: "projects",
+// component: ProjectComponent
+// },
+// // {
+// //   path: "admin",
+// //   component: AdmindashboardComponent,
+// //   canActivate: [RoleGuardService],
+// //   data: {role: 'Admin'}
+// // },
+// {
+// path: "accessdenied",
+// component: AccessDeniedComponent,
+// },
+// {
+// path: "login",
+// component: LoginComponent
+// },
+// {
+// path: "employeeform",
+// children: [
+//   {
+//     path: ":type",
+//     component: EmployeeFormComponent
+//   },
+//   {
+//     path: "details/:empId",
+//     component: EmployeeFormComponent
+//   },
+//   {
+//     path: ":type/:empId",
+//     component: EmployeeFormComponent
+//   }
+// ]
+// },
+// {
+//   path: "projectform",
+//   children: [
+//     {
+//       path: "create/:type",
+//       component: ProjectFormComponent
+//     },
+//     {
+//       path: "update/:type",
+//       component: ProjectFormComponent
+//     },
+//     {
+//       path: ":projectId",
+//       component: ProjectFormComponent
+//     },
+//     {
+//       path: "**",
+//       component: NotFoundComponent
+//     }
+//   ],}
+// ]
+// },
+
+// // bfjmnmedfcbmjednn
+
+// { path: "projects", canActivate: [AuthGuardService, RoleGuardService], data: {role: "Project Manager"},component: ProjectComponent, children: [
+//   {
+//     path: "", redirectTo: "projects", pathMatch: 'full'
+//   },
+//   {
+//     path: "projects", component: ProjectComponent,pathMatch:'prefix'
+//   },
+//   {
+//     path:"timesheet",
+//     component:TimesheetComponent
+//   },
+//   {
+//     path: "sidebar",
+//     component: SidebarComponent
+//   },
+//   {
+//     path: "myProfile",
+//     component: MyprofileComponent
+//   },
+// { path: "", component: LoginComponent },
+// {
+// path: 'projectmanager',
+// component: ProjectManagerComponent
+// },
+// {
+// path: "projects",
+// component: ProjectComponent
+// },
+// // {
+// //   path: "admin",
+// //   component: AdmindashboardComponent,
+// //   canActivate: [RoleGuardService],
+// //   data: {role: 'Admin'}
+// // },
+// {
+// path: "accessdenied",
+// component: AccessDeniedComponent,
+// data: {}
+// },
+// {
+// path: "login",
+// component: LoginComponent
+// },
+// {
+// path: "employeeform",
+// children: [
+//   {
+//     path: ":type",
+//     component: EmployeeFormComponent
+//   },
+//   {
+//     path: "details/:empId",
+//     component: EmployeeFormComponent
+//   },
+//   {
+//     path: ":type/:empId",
+//     component: EmployeeFormComponent
+//   }
+// ]
+// },
+// {
+//   path: "projectform",
+//   children: [
+//     {
+//       path: "create/:type",
+//       component: ProjectFormComponent
+//     },
+//     {
+//       path: "update/:type",
+//       component: ProjectFormComponent
+//     },
+//     {
+//       path: ":projectId",
+//       component: ProjectFormComponent
+//     }
+//   ]
+// },
+// {
+//   path: "**",
+//   component: NotFoundComponent
+// }
+//   ],
+// },
+// {
+//   path:"admin/projects",
+//   component:ProjectComponent
+
+// },
+// {
+//   path:"admin/timesheet",
+//   component:TimesheetComponent
+// },
+// {
+//   path:"projects",
+//   component:ProjectComponent
+// }
+// ];
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes), CommonModule],

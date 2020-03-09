@@ -46,6 +46,7 @@ export class SidebarComponent implements OnInit {
    this.router.navigate(['/review']);
   }
   ngOnInit() {
+    // this.router.url();
   }
   redirect(title){
 
