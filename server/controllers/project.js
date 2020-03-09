@@ -121,7 +121,7 @@ class Project {
   async delete(req, res) {
     console.log("running");
     const project = await model.project.delete({ _id: req.params.id });
-    res.send(project);
+    res.send("Project Deleted");
   }
 }
 module.exports = new Project();

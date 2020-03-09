@@ -76,16 +76,16 @@ export class ProjectComponent implements OnInit,OnChanges {
   }
  
  
-//   deleteEmployee(empId: any){
-//     console.log(empId);
-//     this.employeeService.deleteEmployee(empId).subscribe((res) => {
-//       this.message = res.payload.message;
-//       setTimeout(() => {
-//         this.message = null;
-//       }, 5000);
-//       console.log(res);
-//     });
-//   }
+  deleteProject(id: any){
+    console.log(id);
+    this.employeeService.deleteProject(id).subscribe((res) => {
+      this.message = res.payload.message;
+      setTimeout(() => {
+        this.message = null;
+      }, 5000);
+      console.log(res);
+    });
+  }
   logout(){
     this._service.deletetoken();
      
