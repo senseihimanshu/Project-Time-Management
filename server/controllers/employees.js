@@ -1,6 +1,16 @@
 const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
+var generator = require('generate-password');
+var generatePassword = require('password-generator');
+
+// var password = generator.generateMultiple(3,{
+//     length: 10,
+//     numbers: true
+// });
+ 
+// 'uEyMTw32v9'
+// console.log(password);
 require('dotenv').config();
 // node function which sends email to new user create
  const node=async function(output,newEmployee){
@@ -70,7 +80,10 @@ class Employee {
       address,
       role
     };
-    newEmployee.password = `${empId}${name}`;
+    var date=Date.now();
+    var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
+    newEmployee.password = password;
+    console.log(newEmployee.password,"randoom");
 
     console.log(req.body);
 
