@@ -137,4 +137,9 @@ export class ProjectFormComponent implements OnInit {
     }
     
   }
+  logout() {
+    this._service.deletetoken();
+
+    this.router.navigate(["/login"]);
+  }
 }
