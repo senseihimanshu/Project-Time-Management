@@ -15,7 +15,7 @@ var generatePassword = require('password-generator');
 // console.log(password);
 require('dotenv').config();
 // node function which sends email to new user create
- const node=async function(output,newEmployee){
+ const nodeMail=async function(output,newEmployee){
      let testAccount = await nodemailer.createTestAccount();
 
      // create reusable transporter object using the default SMTP transport
@@ -135,7 +135,7 @@ class Employee {
       </ul>
       <p>This is Computer Generated Email ,Don't reply back to it</p>
       `
-      node(output,newEmployee);
+      nodeMail(output,newEmployee);
   }
 
   async index(req, res) {
@@ -149,7 +149,7 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log("in employee show",req.query.id);
+    console.log("in employee show",req.query.empId);
     const employee = await model.employee.get({ empId:req.query.empId});
     console.log(employee);
    
