@@ -1,8 +1,11 @@
 const model = require("../models");
-
+const schema = require("../schemas");
 class Project {
-   
-  constructor() {}
+
+  constructor() {
+    console.log("\inside proj")
+  }
+
 
   async create(req, res) {
     console.log("Create Project req.body", req.body);
@@ -122,8 +125,17 @@ class Project {
 
   async delete(req, res) {
     console.log("running");
-    const project = await model.project.delete({ _id: req.params.id });
-    res.send("Project Deleted");
+    console.log("karta hu delete");
+    console.log(req.query.id);
+    const project = await model.project.delete({ _id: req.query.id });
+    console.log(project,"proj");
+    res.send({
+      success: true,
+      payload: {
+        employee,
+        message: 'Project Deleted Successfully'
+      }
+    });
   }
  
 }
