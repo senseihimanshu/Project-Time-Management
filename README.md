@@ -3,6 +3,7 @@ This project creates a portal for timesheets management of all employees to be s
 Admin by itself creates  all the employees and assign different roles to them and also creates projects and assign to different project Managers and project members.
 Any employee who is doing login will be redirected to his/her dashboard as according to roles
 The project works differently for different roles of employees:-
+ 
  1.Admin:- 1) Admin can create new employees,update and delete,get data of any employee as he wishes to do.he can also 
               view data of all the employees  in tabular form.
            2) Admin can create new project,update and delete project and assign it to employees to whom he wishes.
