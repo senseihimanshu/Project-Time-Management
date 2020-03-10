@@ -1,9 +1,11 @@
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
+
   constructor() {
-    console.log("\inside proj")
+    console.log("inside proj")
   }
+
 
   async create(req, res) {
     console.log("Create Project req.body", req.body);
@@ -100,9 +102,10 @@ class Project {
   }
 
   async show(req, res) {
-    const projectList = await model.project.get({ _id: req.params.id });
+   
+    const projectList = await model.project.get({ _id: req.params.id});
     console.log("nmnmnm",projectList);
-    const projectManager=[projectManagerIdObj];
+    const projectManager=[req.params.projectManagerIdObj];
     projectList.projectManager=projectManager;
     res.send(projectList);
   }
@@ -115,7 +118,7 @@ class Project {
     res.send({
       success: true,
       payload: {
-        project
+        "data":project
       }
     });
   }
@@ -134,5 +137,7 @@ class Project {
       }
     });
   }
+ 
 }
+
 module.exports = new Project();

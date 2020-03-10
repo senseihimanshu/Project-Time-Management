@@ -23,6 +23,11 @@ class Timesheet{
       const timesheet = await this.model.create(timesheetObj);
        return timesheet;
     }
+    async count(criteria={}){
+      console.log("we are getting clevel data for timesheets");
+      const timesheetCount=await this.model.count(criteria);
+      return timesheetCount;
+     }
     //delete the timesheet data as per criteria
     async delete(criteria={}){
       console.log('timesheet deleted');
