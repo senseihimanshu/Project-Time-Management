@@ -12,8 +12,8 @@ import {
 
 import * as moment from "moment";
 import { MatDialog } from "@angular/material/dialog";
-import { EmployeeService } from '../services/employee.service';
-import { SendHttpRequestService } from '../services/send-http-request.service';
+import { EmployeeService } from "../services/employee.service";
+import { SendHttpRequestService } from "../services/send-http-request.service";
 
 @Component({
   selector: "table-editable",
@@ -22,13 +22,18 @@ import { SendHttpRequestService } from '../services/send-http-request.service';
 })
 export class TimesheetComponent implements OnInit {
   constructor(
-    private _service: TimesheetService,
+    private timesheetService: TimesheetService,
     private modalService: NgbModal,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private httpService: SendHttpRequestService
   ) {}
   editField: string;
   timesheetList: any;
   closeResult: string;
+
+  empObjId: string;
+
+
   menus: any = [
     {
       title: "Employees",
@@ -103,25 +108,36 @@ export class TimesheetComponent implements OnInit {
   }
 
   tabularData() {
-    let obj = this._service.getTimesheet().subscribe(res => {
-      this.timesheetList = res;
-      console.log(res);
-      console.log(this.timesheetList);
-    });
-    var curr = new Date(); // get current date
-    console.log(curr, "todays date");
-    var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-    var last = first + 4; // last day is the first day + 6
+    let empId = this.httpService.jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).data.empId;
+    this.empObjId = this.httpService.jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).data._id;
+    console.log(empId);
 
-    var firstday = new Date(curr.setDate(first)).toUTCString();
-    var lastday = new Date(curr.setDate(last)).toUTCString();
-    var secondday = new Date(curr.setDate(first + 1)).toUTCString();
-    firstday;
-    "Sun, 06 Mar 2011 12:25:40 GMT";
-    lastday;
-    "Sat, 12 Mar 2011 12:25:40 GMT";
-    console.log("daaayyyyssss", firstday, lastday, secondday);
-    console.log(obj);
+    this.timesheetService.getTimesheet(empId).subscribe(res => {
+      console.log(res);
+    });
+    // let obj = this._service.getTimesheet().subscribe(res => {
+    //   this.timesheetList = res;
+    //   console.log(res);
+    //   console.log(this.timesheetList);
+    // });
+    // var curr = new Date(); // get current date
+    // console.log(curr, "todays date");
+    // var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
+    // var last = first + 4; // last day is the first day + 6
+
+    // var firstday = new Date(curr.setDate(first)).toUTCString();
+    // var lastday = new Date(curr.setDate(last)).toUTCString();
+    // var secondday = new Date(curr.setDate(first + 1)).toUTCString();
+    // firstday;
+    // "Sun, 06 Mar 2011 12:25:40 GMT";
+    // lastday;
+    // "Sat, 12 Mar 2011 12:25:40 GMT";
+    // console.log("daaayyyyssss", firstday, lastday, secondday);
+    // console.log(obj);
   }
 
   // findweek(){
@@ -142,7 +158,6 @@ export interface ITaskType {
   value: string;
 }
 
-
 @Component({
   selector: "app-timesheet-modal",
   templateUrl: "./modal.html",
@@ -150,7 +165,8 @@ export interface ITaskType {
 })
 export class TimesheetModal implements OnInit {
   isDisabled = (date: NgbDate, current: { month: number }) =>
-    (moment(`${date.year}-${date.month}-${date.day}`).day() === 0) || (moment(`${date.year}-${date.month}-${date.day}`).day() === 6);
+    moment(`${date.year}-${date.month}-${date.day}`).day() === 0 ||
+    moment(`${date.year}-${date.month}-${date.day}`).day() === 6;
 
   startDate: string;
   endDate: string;
@@ -159,7 +175,7 @@ export class TimesheetModal implements OnInit {
   empObjId: string;
 
   project: any;
-  
+
   projectArray: any = [];
 
   taskTypes: ITaskType[] = [
@@ -189,41 +205,46 @@ export class TimesheetModal implements OnInit {
     }
   ];
 
-  constructor(private employeeService: EmployeeService, private timesheetService: TimesheetService, private httpService: SendHttpRequestService){}
+  constructor(
+    private employeeService: EmployeeService,
+    private timesheetService: TimesheetService,
+    private httpService: SendHttpRequestService
+  ) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     //Getting empId from token
-    let empId = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data.empId;
-    this.empObjId = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data._id;
+    let empId = this.httpService.jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).data.empId;
+    this.empObjId = this.httpService.jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).data._id;
     console.log(empId);
 
     //subscribing to observable for getting the employee
-    this.employeeService.getEmployee(empId).subscribe((response) => {
+    this.employeeService.getEmployee(empId).subscribe(response => {
       console.log(response);
-      this.projectArray = response.payload.employee.projectId.map((project) => {
+      this.projectArray = response.payload.employee.projectId.map(project => {
         return {
           _id: project._id,
           projectName: project.projectName,
           projectManager: project.projectManager,
           clientName: project.clientName
-        }
+        };
       });
 
       console.log(this.projectArray);
     });
   }
 
-  handleSave(timesheetData: any){
-    console.log(timesheetData, 'timesheetData');
-    this.timesheetService.createTimesheet(timesheetData, this.empObjId).subscribe((response: any) => {
-      console.log(response);
-    });
+  handleSave(timesheetData: any) {
+    console.log(timesheetData, "timesheetData");
+    this.timesheetService
+      .createTimesheet(timesheetData, this.empObjId)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
   }
-
-
-
-
-
 
   convertDate(selectedDate: string) {
     this.startDate = moment(
@@ -249,7 +270,7 @@ export class TimesheetModal implements OnInit {
         : this.endDate;
 
     this.numberOfDays =
-      Number((moment)(this.endDate).format("DD")) -
+      Number(moment(this.endDate).format("DD")) -
       Number(
         moment(
           `${selectedDate["year"]}-${selectedDate["month"]}-${selectedDate["day"]}`
@@ -274,7 +295,7 @@ export class TimesheetModal implements OnInit {
     console.log(this.numberOfDays, this.datesArray);
   }
 
-  handleProjectData(project: any){
+  handleProjectData(project: any) {
     console.log(project);
     this.project = project;
   }

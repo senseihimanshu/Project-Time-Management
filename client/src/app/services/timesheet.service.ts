@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { Token } from "@angular/compiler/src/ml_parser/lexer";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 @Injectable({
   providedIn: "root"
 })
@@ -39,17 +39,23 @@ export class TimesheetService {
   //       return this.http.get<any>("http://localhost:3000/timesheet", { ...this.httpOptions });
   //     }
   // }
-  getTimesheet(): Observable<any> {
-    return this.http.get("http://localhost:3000/timesheet").pipe(
-      tap(_ => this.log("Log In")),
-      catchError(this.handleError<any>("Some Error Occurred"))
+  getTimesheet(empObjId: any): Observable<any> {
+    console.log(empObjId, 'Inside Service');
+    const params: HttpParams = new HttpParams().set("empObjId", empObjId);
+
+    return this.http.get("http://localhost:3000/timesheet", {
+      ...this.httpOptions,
+      params
+    });
+  }
+
+  createTimesheet(timesheetData, empObjId): Observable<any> {
+    return this.http.post(
+      "http://localhost:3000/api/timesheet",
+      { ...timesheetData, empObjId },
+      this.httpOptions
     );
   }
-
-  createTimesheet(timesheetData, empObjId): Observable<any>{
-    return this.http.post("http://localhost:3000/api/timesheet", { ...timesheetData, empObjId }, this.httpOptions)
-  }
-
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {

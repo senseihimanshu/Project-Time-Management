@@ -9,10 +9,7 @@ class Employee{
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
-      //debugger
-      console.log(criteria, columns);
-      const findDocument=await this.model.findOne(criteria,columns).populate('projectId');
-      // console.log(findDocument, 'findDocument'); 
+      const findDocument=await this.model.findOne(criteria,columns).populate('projectId', 'timesheet');
       return findDocument;
    }
    //saves the data of newly created employee

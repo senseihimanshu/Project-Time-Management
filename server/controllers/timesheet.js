@@ -98,19 +98,39 @@ class Timesheet {
 
   async show(req, res) {
     const empObjId = req.query.empObjId;
+    console.log(req.query);
     var timesheet = [];
     if (empObjId) {
-      timesheet = await model.timesheet.get({ empObjId });
+      timesheet = (await model.employee.get({ empId: empObjId }, { timesheet: 1, projectId: 1 })).timesheet;
     } else {
-      timesheet = await model.timesheet.get();
+      return res.status(400).send({
+        success: false,
+        payload: {
+          message: 'Employee doesn\'t exist'
+        }
+      });
     }
+
     console.log(timesheet);
-    console.log(timesheet[0].week[0]);
+    
     if (!timesheet) {
-      console.log("Not available");
-      return res.status(404).send(timesheet);
+      return res.status(200).send({
+        success: true,
+        payload: {
+          data: null,
+          message: 'No Timesheets for this account'
+        }
+      });
     } else {
-      res.send(timesheet);
+      return res.status(200).send({
+        success: true,
+        payload: {
+          data: {
+            timesheet
+          },
+          message: 'Timesheets retrieved'
+        }
+      });
     }
   }
   async index(req, res) {
