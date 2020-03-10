@@ -26,8 +26,7 @@ import { NotFoundComponent } from "./404/notfound.component";
 //import { AuthorizationGuard } from './authorization.guard';
 import { from } from 'rxjs';
 import {RoleGuardService} from "./guards/role-guard.service"
-import { ProjectManagerComponent } from './project-manager/project-manager.component';
-
+import { ProjectManagerComponent } from './project-manager/project-manager.component'
 
 const routes: Routes = [
   {
@@ -37,6 +36,7 @@ const routes: Routes = [
     path:"timesheet",
     component:TimesheetComponent
   },
+  
   {
     path: "admindashboard",
     component: AdmindashboardComponent
@@ -120,7 +120,7 @@ const routes: Routes = [
         component: ProjectFormComponent
       },
       {
-        path: ":projectId",
+        path: ":details/:projectId",
         component: ProjectFormComponent
       }
     ]

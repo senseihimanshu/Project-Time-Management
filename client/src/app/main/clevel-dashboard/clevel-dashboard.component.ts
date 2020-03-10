@@ -6,7 +6,7 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./clevel-dashboard.component.html"
 })
 export class ClevelDashboardComponent implements OnInit {
-  ngOnInit() {}
+ 
   public chartType: string = 'bar';
 
   //No. of employees
@@ -44,4 +44,7 @@ export class ClevelDashboardComponent implements OnInit {
   };
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
+  ngOnInit() {
+    
+  }
 }

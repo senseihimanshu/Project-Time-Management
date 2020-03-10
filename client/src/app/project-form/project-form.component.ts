@@ -12,6 +12,7 @@ import { SendHttpRequestService } from "../send-http-request.service";
 export class ProjectFormComponent implements OnInit {
   formType: string;
   employee: any;
+  project:any;
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
@@ -74,6 +75,9 @@ export class ProjectFormComponent implements OnInit {
   ngOnInit():any {
      this.getemployees();
     console.log("ngOnInit");
+    this.route.params.subscribe((data: Params) => {
+      console.log(data);
+    });
     this.route.params
       .pipe(
         switchMap((params: Params) => {
@@ -81,21 +85,21 @@ export class ProjectFormComponent implements OnInit {
           this.formType = params.type;
             // debugger;
           console.log(this.formType);
-          console.log("employees dhundu");
+          console.log("projects dhundu");
 
-          if (!params.empId) {
+          if (!params.projectId) {
             console.log("here");
-            return this.employeeService.getEmployee(null);
+            return this.employeeService.getProject(null);
           }
           this.formType = "get";
           console.log(this.formType);
-          return this.employeeService.getEmployee(params.empId);
+          return this.employeeService.getProject(params.projectId);
         })
       )
       .subscribe((response: any) => {
         console.log(response);
-        console.log(response.payload.employee);
-        return (this.employee = response.payload.employee);
+        console.log(response.payload.Project);
+        return (this.project = response.payload.project);
       });
   }
 
