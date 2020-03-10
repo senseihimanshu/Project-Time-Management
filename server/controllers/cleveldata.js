@@ -1,6 +1,4 @@
 const model = require("../models");
-var jwtHandler = require('../jwtMiddleware');
-
 class Cleveldata{
   constructor(){ }
    async projectsStatusData(req,res){
@@ -25,11 +23,9 @@ class Cleveldata{
            const data=[approvedTimesheets,declinedTimesheets,PendingTimesheets];
              console.log(data);
              res.send([{data}]);
-            
-             
-        }catch(error){
+          }catch(error){
          console.log(error);
        }
-      }
+   }
 }
 module.exports = new Cleveldata();
