@@ -1,6 +1,7 @@
 const model = require("../models");
 
 class Project {
+   
   constructor() {}
 
   async create(req, res) {
@@ -98,9 +99,10 @@ class Project {
   }
 
   async show(req, res) {
-    const projectList = await model.project.get({ _id: req.params.id });
+   
+    const projectList = await model.project.get({ _id: req.params.id});
     console.log("nmnmnm",projectList);
-    const projectManager=[projectManagerIdObj];
+    const projectManager=[req.params.projectManagerIdObj];
     projectList.projectManager=projectManager;
     res.send(projectList);
   }
@@ -113,7 +115,7 @@ class Project {
     res.send({
       success: true,
       payload: {
-        project
+        "data":project
       }
     });
   }
@@ -123,5 +125,7 @@ class Project {
     const project = await model.project.delete({ _id: req.params.id });
     res.send("Project Deleted");
   }
+ 
 }
+
 module.exports = new Project();
