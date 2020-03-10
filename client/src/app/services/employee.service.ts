@@ -47,7 +47,7 @@ export class EmployeeService {
       return this.http.get<any>(FEED_API, { ...this.httpOptions });
     }
     console.log(empId);
-    const params = new HttpParams().set("empId", empId);
+    const params = new HttpParams().set("id", empId);
     console.log(params);
     return this.http.get<any>(FEED_API, { ...this.httpOptions, params });
   }

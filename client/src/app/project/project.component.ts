@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
@@ -59,16 +60,44 @@ export class ProjectComponent implements OnInit,OnChanges {
   constructor(private _service:SendHttpRequestService,private router: Router, private employeeService: EmployeeService) { }
 
   projectsArray: any;
+  membersObj:any=[];
+  projManager:any=[];
+  managerarr:any=[];
+  membersarr:any=[];
   tabularData() {
     let obj=this._service.showProjects().subscribe(res => {
       this.projectsArray=res;
       console.log(res);
-      console.log(this.projectsArray,"ghjjhjjh");
+      console.log(this.projectsArray);
+     this.projectsArray=this.projectsArray.tempList;
+      console.log(this.projectsArray);
+    //  this.projectsArray.forEach(project => { 
+    // let member=this.employeeService.getEmployee(project.empObjectIdArray).subscribe(res=>{
+    //   this.membersObj=res;
+    //   this.membersarr.push(this.membersObj.name);
+    //   console.log(res);
+    //   console.log(this.membersObj);
+    //   console.log(this.membersarr);
+  
+    // });
+  
+    // let manager=this.employeeService.getEmployee(project.projectManager).subscribe(res=>{
+    //   this.projManager=res;
+    //   this.managerarr.push(this.projManager.name);
+    //   console.log(res);
+    //   console.log(this.projManager);
+    //   console.log(this.managerarr);
+
+    
+    // });
+     
+  //  });
+  // console.log(this.projectsArray);
+  
     });
-   console.log(obj);
     } 
   ngOnInit() {
-    this.tabularData()
+    this.tabularData();
   }
   
   ngOnChanges(){
