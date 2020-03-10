@@ -116,7 +116,7 @@ const routes: Routes = [
         component: ProjectFormComponent
       },
       {
-        path: "update/:type",
+        path: "update/:type/:projectId",
         component: ProjectFormComponent
       },
       {
