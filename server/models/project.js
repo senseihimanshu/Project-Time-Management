@@ -20,6 +20,12 @@ class Project{
             return newProject;
 
       }
+      //to count the no. of projects as per criteria
+      async count(criteria={}){
+          console.log("we are getting clevel data");
+          const projectCount=await this.model.count(criteria);
+          return projectCount;
+         }
      //update the details of project as per criteria
       async update(criteria={},updatedProjectObj){
          return this.model.update(criteria,updatedProjectObj)

@@ -56,7 +56,8 @@ export class ProjectComponent implements OnInit,OnChanges {
   ];
 
   message: String;
-  constructor(private _service:SendHttpRequestService,private router: Router, private employeeService: EmployeeService) { }
+  constructor(private _service:SendHttpRequestService,private router: Router, 
+    private employeeService: EmployeeService) { }
 
   projectsArray: any;
   tabularData() {
@@ -88,10 +89,8 @@ export class ProjectComponent implements OnInit,OnChanges {
   }
   logout(){
     this._service.deletetoken();
-     
-        this.router.navigate(["/login"]);
-     
-  }
+     this.router.navigate(["/login"]);
+     }
 // }
 
 }

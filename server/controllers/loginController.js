@@ -16,16 +16,16 @@ class employee {
       else{
         console.log("True", user);
         let token = jwtHandler.tokenGenerator(user);
-      if (token != null){
-        return res.status(200).send({ auth: true, message: "Valid Token.", jwtToken: token });
+          if (token != null){
+           return res.status(200).send({ auth: true, message: "Valid Token.", jwtToken: token });
+         }
+         else if(token == null)
+            {  res.status("503").send({
+                auth: false,
+                 message: "Some Error Occured while generating token"
+             });
+          } 
       }
-      else if(token == null)
-      {  res.status("503").send({
-            auth: false,
-            message: "Some Error Occured while generating token"
-          });
-      } 
-      }
-  }
+    }
 }
 module.exports = new employee();
