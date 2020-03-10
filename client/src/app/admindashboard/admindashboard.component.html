@@ -26,7 +26,7 @@ role="button"
 >Sort</a
 > -->
 
-      <table class="table table-striped" id="myTable">
+      <table class="table table-striped table-fixed" id="myTable">
         <thead>
           <tr>
             <th scope="col">Employee Id:</th>
@@ -39,7 +39,7 @@ role="button"
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody id="adminTable"
+        <tbody style="height: 10px !important; overflow: auto" id="adminTable"
           *ngFor="let employee of usersArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <tr>
             <td>

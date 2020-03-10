@@ -55,7 +55,7 @@
             placeholder="Employee Id"
             [(ngModel)]="employee && employee.empId"
             name="empId"
-            required maxlength="6" minlength="3"
+            required maxlength="6" minlength="1"
             [readonly]="!(typeOfForm === 'create')"
             #empId="ngModel"
           />
@@ -79,7 +79,7 @@
             name="email"
             required
             minlength="2"
-            maxlength="10"
+            maxlength="30"
             [disabled]="typeOfForm === 'get'"
             #email="ngModel"
           />
@@ -121,7 +121,7 @@
             [(ngModel)]="employee && employee.address"
             name="address"
             required
-            minlength="20"
+            minlength="8"
             maxlength="40"
 
             [disabled]="typeOfForm === 'get'"
@@ -177,7 +177,7 @@
             [(ngModel)]="employee && employee.projectId"
             name="projectId"
             required
-            minlength="2"
+            minlength="1"
             [disabled]="typeOfForm === 'get'"
             #projectId="ngModel"
           />

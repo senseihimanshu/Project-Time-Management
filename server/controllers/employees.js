@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
