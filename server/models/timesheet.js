@@ -20,7 +20,7 @@ class Timesheet{
 
    async save(timesheetObj){
       console.log(timesheetObj, 'new timesheet created!');
-      const timesheet = await this.model.update({empObjId: timesheetObj.empObjId}, timesheetObj, { upsert : true });
+      const timesheet = await this.model.findOneAndUpdate({empObjId: timesheetObj.empObjId}, timesheetObj, { upsert : true, new: true });
       return timesheet;
     }
 

@@ -63,7 +63,8 @@ module.exports = {
   timesheet: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'timesheet'
+      ref: 'timesheet',
+      unique: true
     }
   ]
 }

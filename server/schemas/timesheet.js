@@ -6,8 +6,7 @@ project = require("./project-details");
 module.exports = {
   empObjId: {
     type: ObjectId,
-    ref: "employee",
-    unique: true
+    ref: "employee"
   },
   startDate: {
     type: Date
