@@ -8,12 +8,12 @@ class Timesheet{
   }
   
    //getting the timesheet data as per criteria  
-    async get(criteria={},columns={}){
+    async get(criteria={},columns={}) {
       console.log("timesheet viewed");
       const timesheetArray = await this.model.find(criteria,columns).populate({
           path: 'week.projectId',
-          model: 'Project'
-      });
+          model: 'project'
+      }).populate('empObjId');
       console.log(timesheetArray);
       return timesheetArray;
    }
@@ -23,6 +23,11 @@ class Timesheet{
       const timesheet = await this.model.create(timesheetObj);
        return timesheet;
     }
+    async count(criteria={}){
+      console.log("we are getting clevel data for timesheets");
+      const timesheetCount=await this.model.count(criteria);
+      return timesheetCount;
+     }
     //delete the timesheet data as per criteria
     async delete(criteria={}){
       console.log('timesheet deleted');

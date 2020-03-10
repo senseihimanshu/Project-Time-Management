@@ -204,6 +204,8 @@ th {
     line-height: 1.4;
     text-align: center;
     font-weight: 400;
+    padding-top: 5px;
+    height: 50px!important;
    }
    th{
     font-family:Lato-Bold,sans-serif;
@@ -226,6 +228,9 @@ th {
     justify-content: space-around;
     text-align: center;
    }
+   tr{
+     height: 30px;
+   }
    @media (min-width: 1200px){
    .container {
        max-width: 1700px;
@@ -233,12 +238,13 @@ th {
   }
 
   .table{
-    margin-top: 10%;
+    // margin-top: 10%;
     border:groove;
     border-color: grey;
     box-shadow: lightblue;
     // box-shadow: 5px 1;
 
+    margin-top: 2%;
   }
 
   .some-horizontal-container {

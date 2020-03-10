@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { SendHttpRequestService } from "../../send-http-request.service";
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss", "../main.component.scss"],
@@ -21,6 +21,7 @@ export class EmployeeFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private _service :SendHttpRequestService
   ) {
     this.employeeForm = this.formBuilder.group({
       name: ['', Validators.required,Validators.minLength(2)],
@@ -143,5 +144,11 @@ export class EmployeeFormComponent implements OnInit {
       );
     }
   }
+  logout() {
+    this._service.deletetoken();
+
+    this.router.navigate(["/login"]);
+  }
 }
 
+   

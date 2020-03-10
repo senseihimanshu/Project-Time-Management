@@ -59,7 +59,7 @@ menus: any = [
 onChartClick(event) {
   console.log(event);
 }
-  projectpieChartLabels =  ['COMPLETED','CLOSED','IN-PROGRESS'];
+  projectpieChartLabels =  ['COMPLETED','DISCARDED','IN-PROGRESS'];
   
   // CHART COLOR.
   projectpieChartColor:any = [
@@ -97,12 +97,14 @@ onChartClick(event) {
     }
   ];
     ngOnInit() {
+      this.clevelDataProjects();
+      this.clevelDataTimesheets();
         this.loading = true;
         // this.userService.getAll().pipe(first()).subscribe(users => {
         //     this.loading = false;
         //     this.users = users;
         // });
-        this.httpService.get('./assets/project.json', {responseType: 'json'}).subscribe(
+      /*  this.httpService.get('./assets/project.json', {responseType: 'json'}).subscribe(
           data => {
               this.projectpieChartData = data as any [];	 // FILL THE CHART ARRAY WITH DATA.
           },
@@ -110,7 +112,7 @@ onChartClick(event) {
               console.log (err.message);
           }
       );
-  
+     
      this.httpService.get('./assets/timesheet.json', {responseType: 'json'}).subscribe(
         data => {
             this.timesheetpieChartData = data as any [];	 // FILL THE CHART ARRAY WITH DATA.
@@ -118,8 +120,24 @@ onChartClick(event) {
             (err: HttpErrorResponse) => {
               console.log (err.message);
          }
-     );
-   }
+     );*/
+   } 
+   clevelDataProjects() {
+     console.log("running");
+    let obj=this._service.clevelDataProjects().subscribe(res => {
+      this.projectpieChartData=res;
+      console.log(res);
+      console.log(this.projectpieChartData,"projects data");
+    });
+  }
+  clevelDataTimesheets() {
+    console.log("running");
+   let obj=this._service.clevelDataTimesheets().subscribe(res => {
+     this.timesheetpieChartData=res;
+     console.log(res);
+     console.log(this.timesheetpieChartData,"timesheets data");
+   });
+ }
 
    ngOnChanges(){
 

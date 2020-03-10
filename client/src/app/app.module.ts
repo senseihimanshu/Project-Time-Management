@@ -1,6 +1,7 @@
+import { ServicesService } from './services.service';
 // import { NewwComponent } from './neww/neww.component';
 // import { MbscModule } from '@mobiscroll/angular-lite';
-import { TimesheetComponent } from './timesheet/timesheet.component';
+import { TimesheetComponent, TimesheetModal } from './timesheet/timesheet.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -51,7 +52,8 @@ import {
   MatInputModule,
   MatToolbarModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 } from "@angular/material";
 import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -59,7 +61,8 @@ import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
-
+import { RoleGuardService } from './guards/role-guard.service';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -85,6 +88,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     TimesheetComponent,
     ReviewRowComponent,
     ProjectManagerComponent,
+    TimesheetModal
    
   ],
   imports: [PerfectScrollbarModule ,
@@ -98,6 +102,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     MatTableModule,
     MatPaginatorModule,
     BrowserModule,
+    MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
@@ -127,7 +132,8 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [ServicesService, AuthGuardService, RoleGuardService],
+entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]
 })

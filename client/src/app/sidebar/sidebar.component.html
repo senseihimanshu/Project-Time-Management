@@ -1,11 +1,11 @@
-
+<div class="wrapper">
 <nav
   id="sidebar"
   class="sidebar"
   [ngClass]="{ 'sidebar-bg': hasBackgroundImage() }"
 >
 
-  <div class="sidebar-content">
+  <div class="sidebar-content"id="side">
     <perfect-scrollbar>
       <div class="sidebar-menu">
         <ul>
@@ -21,12 +21,12 @@
             <a *ngIf="menu.type !== 'header'" (click)="toggle(menu)">
               <i class="{{ menu.icon }}"></i>
               <span>{{ menu.title }}</span>
-              <span
+              <!-- <span
                 *ngIf="menu.badge"
                 class="badge badge-pill"
                 [ngClass]="menu.badge.class"
                 >{{ menu.badge.text }}</span
-              >
+              > -->
             </a>
             <div
               *ngIf="menu.type === 'dropdown'"
@@ -51,3 +51,5 @@
     </perfect-scrollbar>
   </div>
 </nav>
+
+</div>

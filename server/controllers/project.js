@@ -1,35 +1,39 @@
 const model = require("../models");
-
+const schema = require("../schemas");
 class Project {
-  constructor() {}
+
+  constructor() {
+    console.log("\inside proj")
+  }
+
 
   async create(req, res) {
     console.log("Create Project req.body", req.body);
     //It must expect array in future!
-    const empObj = await model.employee.get(
-      { name: req.body.empObjectIdArray },
-      { _id: 1 }
-    );
+    // const empObj = await model.employee.get(
+    //   { name: req.body.empObjectIdArray },
+    //   { _id: 1 }
+    // );
 
-    const projectManagerIdObj = await model.employee.get(
-      { name: req.body.projectManager },
-      { _id: 1 }
-    );
+    // const projectManagerIdObj = await model.employee.get(
+    //   {role:"Project Manager"},
+    //   { name: 1 }
+    // );
 
     let projectObj = {
       projectId: req.body.projectId,
       projectName: req.body.projectName,
-      projectManager: req.body.projectManager,
-      clientName: req.body.clientName,
+      projectManager: req.body.managers,
+      clientName: req.body.client_name,
       status: req.body.status,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      empObjectIdArray: empObj,
+      empObjectIdArray: req.body.members,
       status: req.body.status
     };
-    const empObjArr = [empObj._id];
-    projectObj.empObjectIdArray = empObjArr;
-    projectObj.projectManager = projectManagerIdObj._id;
+    // const empObjArr = [empObj._id];
+    // projectObj.empObjectIdArray = empObjArr;
+    // projectObj.projectManager = projectManagerIdObj._id;
     
     console.log(projectObj, 'Abha Rana');
     
@@ -78,8 +82,8 @@ class Project {
 
     await employeesUpdatePromise();
 
-    //  const projectManagerId = (await model.employee.get({ empId: projectObj.projectManager }))._id;
-    //  model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
+     const projectManagerId = (await model.employee.get({ _id: projectObj.projectManager }))._id;
+     model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
 
     res.status(201).send({
       success: true,
@@ -90,12 +94,19 @@ class Project {
   }
 
   async index(req, res) {
-    const projectList = await model.project.log({});
+   
+       const projectList = await model.project.log({});
+        console.log("nmnmnm",projectList);
+   
     res.send(projectList);
   }
 
   async show(req, res) {
-    const projectList = await model.project.get({ _id: req.params.id });
+   
+    const projectList = await model.project.get({ _id: req.params.id});
+    console.log("nmnmnm",projectList);
+    const projectManager=[req.params.projectManagerIdObj];
+    projectList.projectManager=projectManager;
     res.send(projectList);
   }
   async update(req, res) {
@@ -107,15 +118,26 @@ class Project {
     res.send({
       success: true,
       payload: {
-        project
+        "data":project
       }
     });
   }
 
   async delete(req, res) {
     console.log("running");
-    const project = await model.project.delete({ _id: req.params.id });
-    res.send(project);
+    console.log("karta hu delete");
+    console.log(req.query.id);
+    const project = await model.project.delete({ _id: req.query.id });
+    console.log(project,"proj");
+    res.send({
+      success: true,
+      payload: {
+        employee,
+        message: 'Project Deleted Successfully'
+      }
+    });
   }
+ 
 }
+
 module.exports = new Project();

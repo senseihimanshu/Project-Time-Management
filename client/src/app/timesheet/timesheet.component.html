@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+  <mat-toolbar color="primary" class="navbar" style="z-index: 10; background-color: black;">
     <div>
       <span routerLink="/admin">Home</span>
     </div>
@@ -16,145 +16,14 @@
   </mat-toolbar>
 </div>
 
-<ng-template #content let-modal>
-  <div class="modal-wrapper">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
-      <button
-        type="button"
-        class="close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form #form="ngForm" novalidate>
-        <div class="form-group">
-          <label for="date">Select the week</label>
-          <div class="input-group">
-            <input
-              id="date"
-              class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="selectedDate"
-              [ngModel]="selectedDate?.value"
-              (ngModelChange)="convertDate($event)"
-              ngbDatepicker
-              #dp="ngbDatepicker"
-              #selectedDate="ngModel"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary calendar"
-                (click)="dp.toggle()"
-                type="button"
-              ></button>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label for="date">Start Date</label>
-          <span
-            ><input
-              type="text"
-              name="startDate"
-              [(ngModel)]="startDate"
-              disabled
-          /></span>
-          <!-- {{ selectedDate.value | json }} -->
-          <label for="date">End Date</label>
-          <span
-            ><input type="text" name="endDate" [(ngModel)]="endDate" disabled
-          /></span>
-        </div>
-
-        {{ form.value | json }}
-      </form>
-      <!-- <div><label for="date">Start Date</label>
-    <span><input type="date" disabled/></span>
-      
-    <label for="date">End Date</label>
-    <span><input type="date" disabled/></span>
-  </div>
-
-  <button (click)="findweek(dp)">find</button> -->
-
-      <!-- Editable table -->
-      <div class="card">
-        <div class="card-body">
-          <div id="table" class="table-editable">
-            <table
-              class="table table-bordered table-responsive-md table-striped text-center"
-            >
-              <tr>
-                <th class="text-center">empId</th>
-                <th class="text-center">Project</th>
-                <th class="text-center">Client Name</th>
-                <th class="text-center">Task Type</th>
-                <th class="text-center">Date</th>
-                <th class="text-center">Hours</th>
-                <th class="text-center">Billable</th>
-                <th class="text-center">Status</th>
-              </tr>
-
-              <tr>
-                <!--  *ngFor="let timesheet of timesheetList; let id = index"> -->
-                <td>
-                  <span>-</span>
-                </td>
-                <td>
-                  <span>-</span>
-                </td>
-                <td contenteditable="true">
-                  <span>-</span>
-                </td>
-                <td contenteditable="true">
-                  <span>-</span>
-                </td>
-                <td contenteditable="true">
-                  <span>-</span>
-                </td>
-                <td contenteditable="true">
-                  <span>-</span>
-                </td>
-                <td contenteditable="true">
-                  <span>-</span>
-                </td>
-                <td contenteditable="true">
-                  <span>-</span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-outline-dark"
-        (click)="modal.close('Save click')"
-      >
-        Save
-      </button>
-    </div>
-  </div>
-</ng-template>
-
-<!-- <pre>{{ closeResult }}</pre> -->
-
 <div class="timesheet-table__wrapper">
-  <app-sidebar></app-sidebar>
+  <app-sidebar [menus]="menus"></app-sidebar>
 
-  <!-- Editable table -->
   <div class="card">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
       Timesheets
       <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="open(content)">
+        <a class="text-success" (click)="openDialog()">
           <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
         </a>
       </span>
@@ -165,7 +34,7 @@
           class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
         >
           <thead>
-            <td class="text-center">empId</td>
+            <td class="text-center">Employee Name</td>
             <td class="text-center">Project</td>
             <td class="text-center">Client Name</td>
             <td class="text-center">Task Type</td>
@@ -177,22 +46,22 @@
 
           <tr *ngFor="let timesheet of timesheetList; let id = index">
             <td>
-              <!-- <span>{{timesheet.empObjId}}</span> -->
+              {{timesheet.empObjId?.name}}
             </td>
             <td>
-              <!-- <span>{{timesheet.week[id].projectId}}</span> -->
+              {{ timesheet.week[0]?.projectId?.projectName}}
             </td>
             <td>
               {{ timesheet.customerName }}
             </td>
             <td>
-              {{ timesheet.week[id]?.taskType }}
+              {{ timesheet.week[0]?.taskType }}
             </td>
             <td>
-              {{ timesheet.week[id]?.date | date }}
+              {{ timesheet.week[0]?.date | date }}
             </td>
             <td>
-              {{ timesheet.week[id]?.hours }}
+              {{ timesheet.week[0]?.hours }}
             </td>
             <td>
               {{ timesheet?.billable }}
@@ -206,3 +75,51 @@
     </div>
   </div>
 </div>
+<!-- 
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td><select>
+        <option>select Projects</option>
+      </select>></td>
+      <td><select>
+        <option>select Projects</option>
+      </select>></td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table> -->

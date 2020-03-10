@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <nav class="navbar navbar-expand-lg navbar-fixed-top">
+  <!-- <nav class="navbar navbar-expand-lg navbar-fixed-top">
     <a class="navbar-brand" href="#">Admin Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,25 +17,21 @@
         </li>
       </ul>
     </div>
-  </nav>
-  
-  <!-- <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
+  </nav> -->
+
+  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
     <div routerLink="/admindashboard" class="dashboard">
       Admin Dashboard
     </div>
     <div>
       <span routerLink="/myProfile">My Profile</span>
 
-      <button
-        type="button"
-        class="btn logout text-center text-white m-2 btnsstyle"
-        (click)="logout()"
-      >
+      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+        (click)="logout()">
         <i class="fa fa-power-off"></i>
       </button>
     </div>
-  </mat-toolbar> -->
-
+  </mat-toolbar>
   <div class="main">
     <app-sidebar [menus]="menus"></app-sidebar>
 
@@ -53,13 +49,8 @@
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody
-          id="adminTable"
-          *ngFor="
-            let employee of usersArray
-              | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
-          "
-        >
+        <tbody id="adminTable"
+          *ngFor="let employee of usersArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <tr>
             <td>
               {{ employee.empId }}
@@ -77,10 +68,7 @@
               {{ employee.role }}
             </td>
             <td>
-              <a
-                class=""
-                [routerLink]="['/employeeform/details', employee.empId]"
-              >
+              <a class="" [routerLink]="['/employeeform/details', employee.empId]">
                 <i class="fas fa-eye"></i>
               </a>
             </td>
@@ -101,14 +89,8 @@
         </tbody>
       </table>
       <div class="pagination-div">
-        <ngb-pagination
-          [collectionSize]="usersArray.length"
-          [(page)]="page"
-          [maxSize]="5"
-          [rotate]="true"
-          [ellipses]="false"
-          [boundaryLinks]="true"
-        ></ngb-pagination>
+        <ngb-pagination [collectionSize]="usersArray.length" [(page)]="page" [maxSize]="5" [rotate]="true"
+          [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
       </div>
     </div>
   </div>

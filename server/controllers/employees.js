@@ -1,6 +1,16 @@
 const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
+var generator = require('generate-password');
+var generatePassword = require('password-generator');
+
+// var password = generator.generateMultiple(3,{
+//     length: 10,
+//     numbers: true
+// });
+ 
+// 'uEyMTw32v9'
+// console.log(password);
 require('dotenv').config();
 // node function which sends email to new user create
  const node=async function(output,newEmployee){
@@ -70,7 +80,10 @@ class Employee {
       address,
       role
     };
-    newEmployee.password = `${empId}${name}`;
+    var date=Date.now();
+    var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
+    newEmployee.password = password;
+    console.log(newEmployee.password,"randoom");
 
     console.log(req.body);
 
@@ -114,6 +127,8 @@ class Employee {
       <li>Phone:${phone}</li>
       <li>Address:${address}</li>
       <li>joining:${joining}</li>
+      </ul>
+      <p>This is Computer Generated Email ,Don't reply back to it</p>
       `
       node(output,newEmployee);
   }
@@ -129,13 +144,11 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log(req.query.empId);
+    console.log(req.query);
     const employee = await model.employee.get({ empId: req.query.empId });
-  //  const date = new Date(employee.joining);
-  //   employee.joining=date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
+    
     console.log(employee);
     if (!employee) {
-      console.log("Request is coming");
       return res.status(404).send({
         success: false,
         payload: {
