@@ -26,6 +26,9 @@
             <th scope="col">Project Manager
 
             </th>
+            <th scope="col">Project Members
+
+            </th>
             <th scope="col">Start Date
 
             </th>
@@ -44,23 +47,25 @@
           </tr>
 
         </thead>
-        <tbody id="adminTable"
-          *ngFor="let project of projectsArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+        <tbody  *ngFor="let project of projectsArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <tr>
             <td>
-              {{project.projectName}}
+             {{project.project.projectName}}
             </td>
             <td>
-              {{project.projectManager}}
+              {{project.projectManagerName}}
             </td>
             <td>
-              {{project.startDate}}
+             {{project.memberName}}
             </td>
             <td>
-              {{project.endDate}}
+              {{project.project.startDate}}
             </td>
             <td>
-              {{project.status}}
+              {{project.project.endDate}}
+            </td>
+            <td>
+              {{project.project.status}}
             </td>
             <td>
               <a [routerLink]="['/projectform/details', project._id]">

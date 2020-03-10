@@ -1,7 +1,8 @@
-import { Router } from "@angular/router";
-import { Component, OnInit, OnChanges } from "@angular/core";
-import { SendHttpRequestService } from "./../send-http-request.service";
-import { EmployeeService } from "../services/employee.service";
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { SendHttpRequestService } from './../send-http-request.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: "app-project",
@@ -63,14 +64,22 @@ export class ProjectComponent implements OnInit, OnChanges {
   ) {}
 
   projectsArray: any;
+  membersObj:any=[];
+  projManager:any=[];
+  managerarr:any=[];
+  membersarr:any=[];
   tabularData() {
     let obj = this._service.showProjects().subscribe(res => {
       this.projectsArray = res;
       console.log(res);
-      console.log(this.projectsArray, "ghjjhjjh");
+
+      console.log(this.projectsArray);
+     this.projectsArray=this.projectsArray.tempList;
+      console.log(this.projectsArray);
     });
     console.log(obj);
   }
+
   ngOnInit() {
     this.tabularData();
   }
