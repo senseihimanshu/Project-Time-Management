@@ -3,7 +3,7 @@ const schema = require("../schemas");
 class Project {
 
   constructor() {
-    console.log("\inside proj")
+    console.log("inside proj")
   }
 
 
