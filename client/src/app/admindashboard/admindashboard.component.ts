@@ -1,5 +1,3 @@
-
-  
 import { SendHttpRequestService } from "./../send-http-request.service";
 import { Component, OnInit, OnChanges } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
@@ -11,7 +9,7 @@ import { EmployeeService } from "../services/employee.service";
   styleUrls: ["./admindashboard.component.scss", "../main/main.component.scss"]
 })
 export class AdmindashboardComponent implements OnInit, OnChanges {
-  name = 'Angular';
+  name = "Angular";
   page = 1;
   pageSize = 10;
   items = [];
@@ -58,7 +56,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   ];
 
   message: String;
- 
+
   constructor(
     private _service: SendHttpRequestService,
     private router: Router,
@@ -69,18 +67,17 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     let obj = this._service.showEmployees().subscribe(res => {
       this.usersArray = res;
       console.log(res);
-      console.log(this.usersArray.length,"vxchgsdbhxgb hdsbxb")
+      console.log(this.usersArray.length, "vxchgsdbhxgb hdsbxb");
     });
     console.log(obj);
-   
   }
 
   ngOnInit() {
     this.tabularData();
-  //   $(document).ready(function () {
-  // //    $('#dtBasicExample').DataTable();
-  //     $('.dataTables_length').addClass('bs-select');
-  //   });
+    //   $(document).ready(function () {
+    // //    $('#dtBasicExample').DataTable();
+    //     $('.dataTables_length').addClass('bs-select');
+    //   });
   }
 
   ngOnChanges() {
@@ -102,173 +99,61 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
     this.router.navigate(["/login"]);
   }
+
+  myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    console.log(input, "hgcfdfcj");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  sortTable() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("myTable");
+    switching = true;
+    /* Make a loop that will continue until
+  no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+    first, which contains table headers): */
+      for (i = 1; i < rows.length - 1; i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("TD")[1];
+        y = rows[i + 1].getElementsByTagName("TD")[1];
+        // Check if the two rows should switch place:
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
 }
-
-
-
-
-// import { SendHttpRequestService } from "./../send-http-request.service";
-// import { Component, OnInit, OnChanges } from "@angular/core";
-// import { Router, RouterLink } from "@angular/router";
-// import { EmployeeService } from "../services/employee.service";
-// import {  PipeTransform } from '@angular/core';
-// import { DecimalPipe } from '@angular/common';
-// import { FormControl } from '@angular/forms';
-
-// import { Observable } from 'rxjs';
-// import { map, startWith } from 'rxjs/operators';
-// // interface employee {
-// //   empID: string;
-// //   name: string;
-// //   email: string;
-// //   designation: string;
-// //   role:string;
-// // }
-
-// // var usersArray;
-// @Component({
-//   selector: "app-admindashboard",
-//   templateUrl: "./admindashboard.component.html",
-//   styleUrls: ["./admindashboard.component.scss", "../main/main.component.scss"]
-// })
-// export class AdmindashboardComponent implements OnInit, OnChanges {
-//   message: String;
-
-//   constructor(
-//     private _service: SendHttpRequestService,
-//     private router: Router,
-//     private employeeService: EmployeeService
-//   ) {}
-//   usersArray: any;
-//   tabularData() {
-//     let obj = this._service.showEmployees().subscribe(res => {
-//       this.usersArray = res;
-//       console.log(res);
-//       console.log(this.usersArray,"ghjjhjjh");
-//     });
-
-//     console.log(obj);
-//   }
-
-//   ngOnInit() {
-//     this.tabularData();
-//   }
-
-//   ngOnChanges() {
-//     this.tabularData();
-//   }
-
-//   deleteEmployee(empId: any) {
-//     console.log(empId);
-//     this.employeeService.deleteEmployee(empId).subscribe(res => {
-//       this.message = res.payload.message;
-//       setTimeout(() => {
-//         this.message = null;
-//       }, 5000);
-//       console.log(res);
-//     });
-//   }
-//   logout() {
-//     this._service.deletetoken();
-
-//     this.router.navigate(["/login"]);
-//   }
-// }
-// // @Component({
-// //   selector: 'ngbd-table-pagination',
-// //   templateUrl: './admindashboard.component.html'
-// // })
-
-// // export class NgbdTablePagination {
-// //   constructor(
-// //     private _service: SendHttpRequestService,
-// //     private router: Router,
-// //     private employeeService: EmployeeService
-// //   ) {  console.log("sajkdxsajk");}
-// //   page = 1;
-// //   pageSize = 4;
-// //   usersArray: any;
-// //   collectionSize: any;
-// //   tabularData() {
-// //     let obj = this._service.showEmployees().subscribe(res => {
-// //       this.usersArray = res;
-// //       console.log(res,"yaha aya hai");    });
-// //       this.collectionSize = this.usersArray.length;
-// //       return this.usersArray
-// //       .map((employee, i) => ({id: i + 1, ...employee}))
-// //              .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-
-
-// //     console.log(obj);
-// //   }
-// // }
-// // @Component({
-// //   selector: 'ngbd-table-pagination',
-// //   templateUrl: './table-pagination.html'
-// // })
-// // export class NgbdTablePagination {
-
-// //   page = 1;
-// //   pageSize = 4;
-// //   collectionSize = COUNTRIES.length;
-
-// //   get countries(): Country[] {
-// //     return COUNTRIES
-// //       .map((country, i) => ({id: i + 1, ...country}))
-// //       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-// //   }
-// // }
-// // function search(text: string, pipe: PipeTransform): employee[] {
-// //   return usersArray.filter(employee => {
-// //     const term = text.toLowerCase();
-// //     return employee.name.toLowerCase().includes(term)
-// //         || pipe.transform(employee.designation).includes(term)
-// //         || pipe.transform(employee.empId).includes(term);
-// //   });
-// // }
-
-// // @Component({
-// //   selector: 'ngbd-table-filtering',
-// //   templateUrl: './admindashboard.component.html',
-// //   providers: [DecimalPipe]
-// // })
-// // export class NgbdTableFiltering {
-
-// //   usersArray$: Observable<employee[]>;
-// //   filter = new FormControl('');
-
-// //   constructor(pipe: DecimalPipe) {
-// //     this.usersArray$ = this.filter.valueChanges.pipe(
-// //       startWith(''),
-// //       map(text => search(text, pipe))
-// //     );
-// //   }
-// // }
-
-// //
-// // function search(text: string, pipe: PipeTransform): Country[] {
-// //   return COUNTRIES.filter(country => {
-// //     const term = text.toLowerCase();
-// //     return country.name.toLowerCase().includes(term)
-// //         || pipe.transform(country.area).includes(term)
-// //         || pipe.transform(country.population).includes(term);
-// //   });
-// // }
-
-// // @Component({
-// //   selector: 'ngbd-table-filtering',
-// //   templateUrl: './table-filtering.html',
-// //   providers: [DecimalPipe]
-// // })
-// // export class NgbdTableFiltering {
-
-// //   countries$: Observable<Country[]>;
-// //   filter = new FormControl('');
-
-// //   constructor(pipe: DecimalPipe) {
-// //     this.countries$ = this.filter.valueChanges.pipe(
-// //       startWith(''),
-// //       map(text => search(text, pipe))
-// //     );
-// //   }
-// // }

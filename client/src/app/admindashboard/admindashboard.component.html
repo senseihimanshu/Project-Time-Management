@@ -1,134 +1,3 @@
-<!-- <form>
-  <div class="form-group form-inline">
-      Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
-      <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col" sortable="name" (sort)="onSort($event)">Employee Id:</th>
-      <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
-      <th scope="col" sortable="name" (sort)="onSort($event)">Email</th>
-      <th scope="col" sortable="name" (sort)="onSort($event)">Designation</th>
-      <th scope="col" sortable="name" (sort)="onSort($event)">Role</th>
-      <th scope="col" sortable="" (sort)="onSort($event)">View</th>
-      <th scope="col" sortable="" (sort)="onSort($event)">Update</th>
-      <th scope="col" sortable="" (sort)="onSort($event)">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let employee of countries$ | async">
-      <th scope="row">{{ employee.id }}</th>
-      <td>
-        <ngb-highlight [result]="employee.name" [term]="service.searchTerm"></ngb-highlight>
-      </td>
-      <td><ngb-highlight [result]="employee.email | number" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="employee.designation | number" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="employee.role | number" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="employee.designation | number" [term]="service.searchTerm"></ngb-highlight></td>
-      <td>
-        <a class="" [routerLink]="['/employeeform/details', employee.empId]">
-          <i class="fas fa-eye"></i>
-        </a>
-      </td>
-      <td>
-        <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
-          <i class="fas fa-pencil-alt"></i>
-        </a>
-      </td>
-      <td>
-        <a class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-  <div class="d-flex justify-content-between p-2">
-    <ngb-pagination
-      [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
-    </ngb-pagination>
-
-    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
-      <option [ngValue]="2">2 items per page</option>
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
-    </select>
-  </div>
-
-</form> -->
-
-
-
-<!-- <form>
-  <div class="form-group form-inline">
-      Full text search: <input class="form-control ml-2" type="text" formControl="filter"/>
-  </div>
-</form>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Employee Id:</th>
-      <th scope="col">Name:</th>
-      <th scope="col">Email:</th>
-      <th scope="col">Designation:</th>
-      <th scope="col">Role:</th>
-      <th scope="col">View</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let employee of usersArray$ | async; index as i">
-      <th scope="row">{{ i + 1 }}</th>
-    <td>
-      {{ employee.empId }}
-    </td>
-    <td>
-      <ngb-highlight [result]="employee.name" [term]="filter.value"></ngb-highlight>
-    </td>
-    <td>
-      <ngb-highlight [result]="employee.email" [term]="filter.value"></ngb-highlight>
-    </td>
-    <td>
-      {{ employee.designation }}
-    </td>
-    <td>
-      {{ employee.role }}
-    </td>
-    <td>
-      <a class="" [routerLink]="['/employeeform/details', employee.empId]">
-        <i class="fas fa-eye"></i>
-      </a>
-    </td>
-    <td>
-      <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
-        <i class="fas fa-pencil-alt"></i>
-      </a>
-    </td>
-    <td>
-      <a class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-<div class="d-flex justify-content-between p-2">
-  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
-  </ngb-pagination>
-
-  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
-    <option [ngValue]="2">2 items per page</option>
-    <option [ngValue]="4">4 items per page</option>
-    <option [ngValue]="6">6 items per page</option>
-  </select>
-</div> -->
-
-
-
 <div class="wrapper">
   <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
     <div routerLink="/admindashboard" class="dashboard">
@@ -147,7 +16,17 @@
     <app-sidebar [menus]="menus"></app-sidebar>
 
     <div class="container out-div" style="z-index: 100000000;">
-      <table class="table table-striped">
+
+      <input type="text" class="input-design" id="myInput" (keyup)="myFunction()" placeholder="Search by Employee Id">
+      <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Name</button></p>
+      <!-- <a
+class="btn btn-primary text-white"
+role="button"
+(click)="sortTable"
+>Sort</a
+> -->
+
+      <table class="table table-striped" id="myTable">
         <thead>
           <tr>
             <th scope="col">Employee Id:</th>
@@ -201,11 +80,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-

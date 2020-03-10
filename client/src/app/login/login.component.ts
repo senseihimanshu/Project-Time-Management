@@ -27,13 +27,10 @@ export class LoginComponent implements OnInit{
   myform:FormGroup;
   submitted  =  false;
   ngOnInit() {
-     this.myform  =  this.formBuilder.group({
-        email: ['', [Validators.required,Validators.email]],
-         password: ['', [Validators.required,Validators.minLength(4)]],
-     });
-    if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){
-      alert("Empty Fields !");
-      return ;}
+    this.myform  =  this.formBuilder.group({
+       email: ['', [Validators.required,Validators.email]],
+        password: ['', [Validators.required,Validators.minLength(4)]],
+    });
 }
 get f()
 {
