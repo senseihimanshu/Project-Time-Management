@@ -1,55 +1,34 @@
 <div class="wrapper">
-<nav
-  id="sidebar"
-  class="sidebar"
-  [ngClass]="{ 'sidebar-bg': hasBackgroundImage() }"
->
-
-  <div class="sidebar-content"id="side">
-    <perfect-scrollbar>
-      <div class="sidebar-menu">
-        <ul>
-          <li
-            *ngFor="let menu of menus"
-            [ngClass]="{
-              active: menu.active,
-              'sidebar-dropdown': menu.type === 'dropdown',
-              'header-menu': menu.type === 'header'
-            }"
-          >
-            <span *ngIf="menu.type === 'header'">{{ menu.title }}</span>
-            <a *ngIf="menu.type !== 'header'" (click)="toggle(menu)">
-              <i class="{{ menu.icon }}"></i>
-              <span>{{ menu.title }}</span>
-              <!-- <span
-                *ngIf="menu.badge"
-                class="badge badge-pill"
-                [ngClass]="menu.badge.class"
-                >{{ menu.badge.text }}</span
-              > -->
-            </a>
-            <div
-              *ngIf="menu.type === 'dropdown'"
-              class="sidebar-submenu"
-              [@slide]="getState(menu)"
-            >
+  <nav id="sidebar" class="sidebar" [ngClass]="{ 'sidebar-bg': hasBackgroundImage() }">
+      <div class="sidebar-content" id="side">
+          <div class="sidebar-menu">
               <ul>
-                <li *ngFor="let submenu of menu.submenus">
-                  <a *ngIf="!submenu.route" (click)="routeLink(submenu.title)">
-                    {{ submenu.title }}
-                  </a>
-
-                  <a *ngIf="submenu.route" [routerLink]="[submenu.route]">{{
-                    submenu.title
-                  }}</a>
-                </li>
+                  <li style="margin:10px;" *ngFor="let menu of menus" [ngClass]="{
+            active: menu.active,
+            'sidebar-dropdown': menu.type === 'dropdown',
+            'header-menu': menu.type === 'header'
+          }">
+                      <span *ngIf="menu.type === 'header'">{{ menu.title }}</span>
+                      <a *ngIf="menu.type !== 'header'" (click)="toggle(menu)">
+                          <i class="{{ menu.icon }}"></i>
+                          <span>{{ menu.title }}</span>
+                          <span *ngIf="menu.badge" class="badge badge-pill" [ngClass]="menu.badge.class">{{ menu.badge.text }}</span>
+                      </a>
+                      <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">
+                          <ul>
+                              <li style="margin:5px;" *ngFor="let submenu of menu.submenus">
+                                  <a *ngIf="!submenu.route" (click)="routeLink(submenu.title)">
+                                      {{ submenu.title }}
+                                  </a>
+                                  <a *ngIf="submenu.route" [routerLink]="[submenu.route]">{{
+                                      submenu.title
+                                      }}</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </li>
               </ul>
-            </div>
-          </li>
-        </ul>
+          </div>
       </div>
-    </perfect-scrollbar>
-  </div>
-</nav>
-
+  </nav>
 </div>

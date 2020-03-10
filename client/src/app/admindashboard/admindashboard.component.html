@@ -1,96 +1,107 @@
-<div class="wrapper">
-  <!-- <nav class="navbar navbar-expand-lg navbar-fixed-top">
-    <a class="navbar-brand" href="#">Admin Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<div>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-font ">
+    <a class="navbar-brand" href="#"><img height="40" src="https://avatars3.githubusercontent.com/u/24821935?s=400&u=b312743ee48dc9cfbb15cf74c1da359c301823b0&v=4" />Admin Dashboard</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars custom-toggler-lines"></i>
+      </span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Admin Dashboard <span class="sr-only">(current)</span></a>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="dropdown d-lg-none custom-dropdown-container">
+          <a href="#" class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Employees<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+              <a href="#">Add New Employee</a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">My Profile</a>
+        <li class="dropdown d-lg-none custom-dropdown-container">
+          <a href="#" class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Projects<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+              <a href="#">Add New Project</a>
+            </li>
+            <li>
+              <a href="#">Show All Projects</a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+        <li class="dropdown d-lg-none custom-dropdown-container">
+          <a href="#" class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Timesheets<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+              <a href="#">Show All Timesheets</a>
+            </li>
+          </ul>
         </li>
       </ul>
-    </div>
-  </nav> -->
-
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div routerLink="/admindashboard" class="dashboard">
-      Admin Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-
-      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+      <form class="form-inline my-2 my-lg-0">
+        <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle "
         (click)="logout()">
         <i class="fa fa-power-off"></i>
       </button>
+      </form>
     </div>
-  </mat-toolbar>
-  <div class="main">
-    <app-sidebar [menus]="menus"></app-sidebar>
-
-    <div class="container out-div" style="z-index: 100000000;">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Employee Id:</th>
-            <th scope="col">Name:</th>
-            <th scope="col">Email:</th>
-            <th scope="col">Designation:</th>
-            <th scope="col">Role:</th>
-            <th scope="col">View</th>
-            <th scope="col">Update</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody id="adminTable"
-          *ngFor="let employee of usersArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-          <tr>
-            <td>
-              {{ employee.empId }}
-            </td>
-            <td>
-              {{ employee.name }}
-            </td>
-            <td>
-              {{ employee.email }}
-            </td>
-            <td>
-              {{ employee.designation }}
-            </td>
-            <td>
-              {{ employee.role }}
-            </td>
-            <td>
-              <a class="" [routerLink]="['/employeeform/details', employee.empId]">
-                <i class="fas fa-eye"></i>
-              </a>
-            </td>
-            <td>
-              <a
-                class="edit"
-                [routerLink]="['/employeeform', 'update', employee.empId]"
-              >
-                <i class="fas fa-pencil-alt"></i>
-              </a>
-            </td>
-            <td>
-              <a class="delete" (click)="deleteEmployee(employee.empId)"
-                ><i class="fas fa-trash"></i
-              ></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="pagination-div">
-        <ngb-pagination [collectionSize]="usersArray.length" [(page)]="page" [maxSize]="5" [rotate]="true"
-          [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+  </nav>
+  <div class="row" style="margin-top: 60px;">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+    <div class="col-10">
+      <div class="container">
+        <table class="table table-striped custom-card">
+          <thead>
+            <tr>
+              <th scope="col">EmpId</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Designation</th>
+              <th scope="col">Role</th>
+              <th scope="col">View</th>
+              <th scope="col">Update</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody id="adminTable"
+            *ngFor="let employee of usersArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+            <tr>
+              <td>
+                {{ employee.empId }}
+              </td>
+              <td>
+                {{ employee.name }}
+              </td>
+              <td>
+                {{ employee.email }}
+              </td>
+              <td>
+                {{ employee.designation }}
+              </td>
+              <td>
+                {{ employee.role }}
+              </td>
+              <td>
+                <a class="" [routerLink]="['/employeeform/details', employee.empId]">
+                  <i class="fas fa-eye"></i>
+                </a>
+              </td>
+              <td>
+                <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+              </td>
+              <td>
+                <a class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination-div">
+          <ngb-pagination [collectionSize]="usersArray.length" [(page)]="page" [maxSize]="5" [rotate]="true"
+            [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+        </div>
       </div>
     </div>
   </div>
