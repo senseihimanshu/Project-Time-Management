@@ -68,7 +68,7 @@ class Timesheet {
   async index(req, res) {
     // console.log("dikhaa rha huu");
     const timesheetList = await model.timesheet.get();
-    console.log(timesheetList);
+    console.log(timesheetList,"all timesheet");
     res.send(timesheetList);
     // console.log(employeeList);
   }
