@@ -148,8 +148,8 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log("in employee show",req.query.id);
-    const employee = await model.employee.get({ empId:req.query.empId);
+    console.log("in employee show",req.query.empId);
+    const employee = await model.employee.get({ empId:req.query.empId});
     console.log(employee);
    
     if (!employee) {
