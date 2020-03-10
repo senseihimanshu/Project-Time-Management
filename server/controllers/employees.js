@@ -2,6 +2,7 @@ const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
 var generator = require('generate-password');
+const saltRounds = 10;
 var generatePassword = require('password-generator');
 
 // var password = generator.generateMultiple(3,{
@@ -79,11 +80,15 @@ class Employee {
       address,
       role
     };
+
     var date=Date.now();
     var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
     newEmployee.password = password;
     console.log(newEmployee.password,"randoom");
-
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log(newEmployee.password,"randoom");
+   newEmployee.password=hashedPassword;
     console.log(req.body);
 
     const resultAfterIsUnique = await isUnique(empId, email);

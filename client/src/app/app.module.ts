@@ -11,7 +11,7 @@ import { SendHttpRequestService } from "./services/send-http-request.service";
 import { ChartsModule } from 'ng2-charts';
 //Third Party Components
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import {
   MDBBootstrapModule,
   CheckboxModule,
@@ -63,7 +63,7 @@ import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { RoleGuardService } from './guards/role-guard.service';
 import { AuthGuardService } from './guards/auth-guard.service';
-
+//import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
 @NgModule({
   declarations: [
     // NewwComponent,
@@ -88,7 +88,8 @@ import { AuthGuardService } from './guards/auth-guard.service';
     TimesheetComponent,
     ReviewRowComponent,
     ProjectManagerComponent,
-    TimesheetModal
+    TimesheetModal,
+    //NgbdTablePagination
    
   ],
   imports: [PerfectScrollbarModule ,
