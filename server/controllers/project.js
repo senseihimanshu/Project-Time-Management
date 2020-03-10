@@ -1,11 +1,9 @@
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
-
   constructor() {
-    console.log("\inside proj")
+    console.log("inside proj");
   }
-
 
   async create(req, res) {
     console.log("Create Project req.body", req.body);
@@ -34,9 +32,9 @@ class Project {
     // const empObjArr = [empObj._id];
     // projectObj.empObjectIdArray = empObjArr;
     // projectObj.projectManager = projectManagerIdObj._id;
-    
-    console.log(projectObj, 'Abha Rana');
-    
+
+    console.log(projectObj, "Abha Rana");
+
     if (await model.project.get({ projectId: projectObj.projectId }))
       return res.status(400).send({
         success: false,
@@ -82,8 +80,14 @@ class Project {
 
     await employeesUpdatePromise();
 
-     const projectManagerId = (await model.employee.get({ _id: projectObj.projectManager }))._id;
-     model.projectManager.save({ managerId: projectManagerId, employeeId: empObjectIdArray, projectId: newProjectId });
+    const projectManagerId = (
+      await model.employee.get({ _id: projectObj.projectManager })
+    )._id;
+    model.projectManager.save({
+      managerId: projectManagerId,
+      employeeId: empObjectIdArray,
+      projectId: newProjectId
+    });
 
     res.status(201).send({
       success: true,
@@ -94,19 +98,47 @@ class Project {
   }
 
   async index(req, res) {
-   
-       const projectList = await model.project.log({});
-        console.log("nmnmnm",projectList);
-   
-    res.send(projectList);
+    let projectList = await model.project.log({});
+    console.log("in index function", projectList);
+    console.log(projectList, 'ProjectList -----------------------------------');
+    const tempList = [];
+
+    await Promise.all(
+      projectList.map(async(project) => {
+        const manager = await model.employee.get(
+          { _id: project.projectManager },
+          { name: 1, _id: 0 }
+        );
+        const member=await model.employee.get(
+          { _id: project.empObjectIdArray },
+          { name: 1, _id: 0 }
+        );
+        console.log(manager.name, 'manager.name');
+        console.log(member.name, 'member.name');
+        // console.log(project === projectList[0]);
+
+        // project.projectManager = manager.name;
+        // console.log(project.projectManager);
+        console.log(project);
+        tempList.push({ project: project, projectManagerName: manager.name ,memberName:member.name}); //Point to be noted
+      })
+    );  
+    
+    console.log(tempList);
+
+    res.send({
+      tempList
+    });
   }
 
   async show(req, res) {
-   
-    const projectList = await model.project.get({ _id: req.params.id});
-    console.log("nmnmnm",projectList);
-    const projectManager=[req.params.projectManagerIdObj];
-    projectList.projectManager=projectManager;
+    const projectList = await model.project.get({ _id: req.params.id });
+    console.log("in show function", projectList);
+    const projectManager = [req.params.projectManagerIdObj];
+    //  const manager=await model.employee.get({_id:projectManager});
+    console.log(manager);
+    projectList.projectManager = manager;
+    console.log(projectList);
     res.send(projectList);
   }
   async update(req, res) {
@@ -118,7 +150,7 @@ class Project {
     res.send({
       success: true,
       payload: {
-        "data":project
+        data: project
       }
     });
   }
@@ -128,16 +160,15 @@ class Project {
     console.log("karta hu delete");
     console.log(req.query.id);
     const project = await model.project.delete({ _id: req.query.id });
-    console.log(project,"proj");
+    console.log(project, "proj");
     res.send({
       success: true,
       payload: {
         employee,
-        message: 'Project Deleted Successfully'
+        message: "Project Deleted Successfully"
       }
     });
   }
- 
 }
 
 module.exports = new Project();

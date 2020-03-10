@@ -2,6 +2,7 @@ const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
 var generator = require('generate-password');
+const saltRounds = 10;
 var generatePassword = require('password-generator');
 
 // var password = generator.generateMultiple(3,{
@@ -14,32 +15,31 @@ var generatePassword = require('password-generator');
 require('dotenv').config();
 // node function which sends email to new user create
  const node=async function(output,newEmployee){
-  let testAccount = await nodemailer.createTestAccount();
+     let testAccount = await nodemailer.createTestAccount();
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-  service:'gmail',
-  auth:{
-    user:process.env.EMAIL,
-    pass:process.env.PASSWORD
-  }
-
-  });
+     // create reusable transporter object using the default SMTP transport
+         let transporter = nodemailer.createTransport({
+         service:'gmail',
+          auth:{
+           user:process.env.EMAIL,
+           pass:process.env.PASSWORD
+         }
+      });
   // send mail with defined transport object
   let info ={
-    from: '"balanideepanshu92@gmail.com"', // sender address
-    to:newEmployee.email, // list of receivers
-    subject: "Node Contact Request", // Subject line
-    text: "Hello world?", // plain text body
-    html: output // html body
-  }
+     from: '"balanideepanshu92@gmail.com"', // sender address
+     to:newEmployee.email, // list of receivers
+     subject: "Node Contact Request", // Subject line
+     text: "Hello world?", // plain text body
+     html: output // html body
+   }
    transporter.sendMail(info,function(err,data){
-       if(err){
-         console.log("error occurs",err);
-       }
-       else{
-         console.log("email sent successfully");
-       }
+        if(err){
+          console.log("error occurs",err);
+        }
+        else{
+          console.log("email sent successfully");
+        }
    });
 }
 const isUnique = async function(empId, email) {
@@ -80,11 +80,15 @@ class Employee {
       address,
       role
     };
+
     var date=Date.now();
     var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
     newEmployee.password = password;
     console.log(newEmployee.password,"randoom");
-
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log(newEmployee.password,"randoom");
+   newEmployee.password=hashedPassword;
     console.log(req.body);
 
     const resultAfterIsUnique = await isUnique(empId, email);
@@ -144,27 +148,15 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log(req.query);
-    const employee = await model.employee.get({ empId: req.query.empId });
-    
+    console.log("in employee show",req.query.id);
+    const employee = await model.employee.get({ _id:req.query.id},{name:1,_id:0});
     console.log(employee);
+   
     if (!employee) {
-      return res.status(404).send({
-        success: false,
-        payload: {
-          employee,
-          message: "Employee does not exist"
-        }
-      });
+      return res.status(404).send(employee);
     }
 
-    res.send({
-      success: true,
-      payload: {
-        employee,
-        message: "Employee retrieved successfully"
-      }
-    });
+    res.status(200).send(employee);
   }
 
   async update(req, res) {

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 module.exports = {
+    managerName:{
+        type:String,
+        default:null
+    },
     managerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'employee' 
