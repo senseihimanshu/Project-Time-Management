@@ -99,7 +99,7 @@ class Project {
 
   async index(req, res) {
     let projectList = await model.project.log({});
-    console.log("in index function", projectList);
+    console.log("in index function");
     console.log(projectList, 'ProjectList -----------------------------------');
     const tempList = [];
 
@@ -109,22 +109,18 @@ class Project {
           { _id: project.projectManager },
           { name: 1, _id: 0 }
         );
+        console.log(manager,'manager.name');
         const member=await model.employee.get(
           { _id: project.empObjectIdArray },
           { name: 1, _id: 0 }
         );
-        console.log(manager.name, 'manager.name');
-        console.log(member.name, 'member.name');
-        // console.log(project === projectList[0]);
-
-        // project.projectManager = manager.name;
-        // console.log(project.projectManager);
-        console.log(project);
-        tempList.push({ project: project, projectManagerName: manager.name ,memberName:member.name}); //Point to be noted
+       console.log(member, 'member.name');
+      tempList.push({ project: project, projectManagerName: manager.name ,memberName:member.name}); //Point to be noted
       })
     );  
     
-    console.log(tempList);
+    
+    console.log(tempList,'templist===========');
 
     res.send({
       tempList
