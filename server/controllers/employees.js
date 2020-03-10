@@ -150,16 +150,21 @@ class Employee {
 
   async show(req, res) {
     console.log("in employee show",req.query.id);
-    const employee = await model.employee.get({ _id:req.query.id},{name:1,_id:0});
+    const employee = await model.employee.get({ empId:req.query.empId});
     console.log(employee);
    
     if (!employee) {
-      return res.status(404).send(employee);
+      return res.status(404).send({ employee,
+        message:"Employee does not exists!"
+      });
     }
 
-    res.status(200).send(employee);
+    res.status(200).send({
+      employee,
+      message:"Employee retrieved successfully"
+    });
   }
-
+  
   async update(req, res) {
     const {
       empId,

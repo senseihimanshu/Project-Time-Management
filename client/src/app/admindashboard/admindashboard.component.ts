@@ -67,7 +67,8 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     let obj = this._service.showEmployees().subscribe(res => {
       this.usersArray = res;
       console.log(res);
-      console.log(this.usersArray.length, "vxchgsdbhxgb hdsbxb");
+
+      console.log(this.usersArray.length)
     });
     console.log(obj);
   }

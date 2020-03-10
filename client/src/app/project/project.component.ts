@@ -66,13 +66,10 @@ export class ProjectComponent implements OnInit, OnChanges {
   projectsArray: any;
   membersObj:any=[];
   projManager:any=[];
-  managerarr:any=[];
-  membersarr:any=[];
   tabularData() {
     let obj = this._service.showProjects().subscribe(res => {
       this.projectsArray = res;
       console.log(res);
-
       console.log(this.projectsArray);
      this.projectsArray=this.projectsArray.tempList;
       console.log(this.projectsArray);

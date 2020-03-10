@@ -12,7 +12,7 @@ class Timesheet{
       console.log("timesheet viewed");
       const timesheetArray = await this.model.find(criteria,columns).populate({
           path: 'week.projectId',
-          model: 'Project'
+          model: 'project'
       }).populate('empObjId');
       console.log(timesheetArray);
       return timesheetArray;
