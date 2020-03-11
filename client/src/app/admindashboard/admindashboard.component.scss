@@ -21,10 +21,6 @@
   border: 0;
 }
 
-.out-div{
-  height: 40rem;
-}
-
 .pagination-div{
   display: flex !important;
   justify-content: center ;
@@ -141,7 +137,9 @@ td{
  }
  @media (min-width: 1200px){
  .container {
-     max-width: 1700px;
+     //max-width: 1500px;
+    margin-left: 6rem;
+    margin-right: 1rem;
  }
 }
 
@@ -152,3 +150,12 @@ td{
 .some-horizontal-container {
   pointer-events: none;
 }
+.profile{
+  margin-right: 0.5rem;
+}
+// .card{
+//   width: 75rem;
+//   height: fit-content;
+//   margin-top: 1.5rem;
+
+// }
