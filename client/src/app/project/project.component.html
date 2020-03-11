@@ -1,17 +1,5 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div routerLink="/admindashboard" class="dashboard">
-      Projects Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-
-      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-        (click)="logout()">
-        <i class="fa fa-power-off"></i>
-      </button>
-    </div>
-  </mat-toolbar>
+  <app-navbar></app-navbar>
   <div class="main">
     <app-sidebar [menus]="menus"></app-sidebar>
     <div class="container out-div" style="z-index: 100000000;">
@@ -88,4 +76,5 @@
           [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
       </div>
     </div>
+  </div>
   </div>

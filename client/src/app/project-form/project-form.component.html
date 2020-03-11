@@ -1,22 +1,5 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div>
-      Company Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-      
-    <button
-      type="button"
-      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-      (click)="logout()"
-      >
-      <i class="fa fa-power-off"></i>
-    </button>
-    </div>
-  </mat-toolbar>
-
- 
+  <app-navbar></app-navbar>
    <div class="app-main no-scrollbar-wrap">
     <app-sidebar [menus]="menus"></app-sidebar>
   <div class="no-scrollbar">
@@ -185,40 +168,7 @@
         </mat-select> 
           <div  *ngIf="membersInput.touched">project Members are required</div>
        </div>
-       
-              <!-- <div class="h5 mb-4">
-             <label class="control-label"for="members">Project Members:</label>
-              <mat-select
-               class="browser-default custom-select"
-               name="members"
-               [(ngModel)]="project && project.empObjectIdArray"
-               [disabled]="formType === 'get'"
-               [(ngModel)]="project && project.members[0]"
-               #membersInput
-               required
-               matInput placeholder="members"
-               [formControl]="emp" multiple>
-               <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
-            </mat-select> 
-             
-           </div> -->
-    
-              <!-- <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput.touched">
-            <label for="manager">Project Members:</label>
       
-            <input
-              type="text"
-              id="members"
-              class="form-control"
-              placeholder="Project Manager"
-              [(ngModel)]="project && project.empObjectIdArray"
-              name="members"
-              [disabled]="formType === 'get'"
-              #membersInput
-            />
-                <div  *ngIf="membersInput.touched">members are required</div>
-          </div>
-       -->
            <div class="button-parent" *ngIf="formType !== 'get'">
                <button
                  mdbBtn
@@ -249,6 +199,7 @@
      </div>
      </div>
        </div>
+  </div>
   </div>
 
 
