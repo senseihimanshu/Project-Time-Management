@@ -48,13 +48,13 @@
                id="projectId"
                class="form-control"
                placeholder="Project Id"
-               [ngModel]="project && project.projectId"
+               [ngModel]="project && project._id"
                name="projectId"
                [disabled]="formType === 'get'"
                required
                minlength="1"
                maxlength="20"
-               #projectId
+               #projectId="ngModel"
              />
              <p  *ngIf="projectId.touched">project Id is required</p>
            </div>
@@ -71,7 +71,7 @@
                name="projectName"
                required
                [disabled]="formType === 'get'"
-               #projectNameInput
+               #projectNameInput="ngModel"
              />
              <p  *ngIf="projectNameInput.touched">projectName is required</p>
            </div>
@@ -90,7 +90,7 @@
                minlength="2"
                maxlength="20"
                [disabled]="formType === 'get'"
-               #clientNameInput
+               #clientNameInput="ngModel"
              />
              <p  *ngIf="clientNameInput.touched">clientName is required</p>
            </div>
@@ -101,10 +101,10 @@
              <mat-select
               class="browser-default custom-select"
               name="managers"
-              [ngModel]="projManager"
+              [ngModel]="project && project.projectManager[0]"
               [disabled]="formType ==='get'"
               (ngModelChange)="addProjectManager($event)"
-              #projectManagerInput
+              #projectManagerInput="ngModel"
               required
               minlength="2"
               maxlength="20"
@@ -127,7 +127,7 @@
                name="startDate"
                required
                [disabled]="formType === 'get'"
-               #startDateInput
+               #startDateInput="ngModel"
              />
              <p  *ngIf="startDateInput.touched">startDate is required</p>
            </div>
@@ -144,7 +144,7 @@
                required
                name="endDate"
                [disabled]="formType === 'get'"
-               #endDateInput
+               #endDateInput="ngModel"
              />
              <p  *ngIf="endDateInput.touched">EndDate is required</p>
            </div>
@@ -153,12 +153,13 @@
              <label class="control-label"for="status">Status:</label>
        
              <select
+              
                class="browser-default custom-select"
                name="status"
                [(ngModel)]="project && project.status[0]"
                required
                [disabled]="formType === 'get'"
-               #statusInput
+               #statusInput="ngModel"
              >
                <option value="" disabled>Choose option</option>
                <option value="In Progress" selected>In Progress</option>
@@ -176,49 +177,17 @@
            [ngModel]="projMembers"
            [disabled]="formType ==='get'"
            (ngModelChange)="addProjectMember($event)"
-           #membersInput
+           #membersInput="ngModel"
            required
            minlength="2"
            maxlength="20"
            multiple>
            <mat-option *ngFor="let emp of empList" [value]="emp._id">{{emp.name}}</mat-option>
         </mat-select> 
-          <div  *ngIf="membersInput.touched">project Members are required</div>
+          <p  *ngIf="membersInput.touched">project Members are required</p>
        </div>
        
-              <!-- <div class="h5 mb-4">
-             <label class="control-label"for="members">Project Members:</label>
-              <mat-select
-               class="browser-default custom-select"
-               name="members"
-               [(ngModel)]="project && project.empObjectIdArray"
-               [disabled]="formType === 'get'"
-               [(ngModel)]="project && project.members[0]"
-               #membersInput
-               required
-               matInput placeholder="members"
-               [formControl]="emp" multiple>
-               <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
-            </mat-select> 
              
-           </div> -->
-    
-              <!-- <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput.touched">
-            <label for="manager">Project Members:</label>
-      
-            <input
-              type="text"
-              id="members"
-              class="form-control"
-              placeholder="Project Manager"
-              [(ngModel)]="project && project.empObjectIdArray"
-              name="members"
-              [disabled]="formType === 'get'"
-              #membersInput
-            />
-                <div  *ngIf="membersInput.touched">members are required</div>
-          </div>
-       -->
            <div class="button-parent" *ngIf="formType !== 'get'">
                <button
                  mdbBtn

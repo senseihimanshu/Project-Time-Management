@@ -90,7 +90,7 @@ export class ProjectFormComponent implements OnInit {
             console.log("here");
             return this.employeeService.getProject(null);
           }
-          //this.formType = "get";
+       //   this.formType = "get";
           console.log(this.formType);
           return this.employeeService.getProject(params.projectId);
         })

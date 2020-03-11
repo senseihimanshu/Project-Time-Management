@@ -6,7 +6,7 @@ class Project {
   }
 
   async create(req, res) {
-    console.log("Create Project req.body", req.body);
+    
     //It must expect array in future!
     // const empObj = await model.employee.get(
     //   { name: req.body.empObjectIdArray },

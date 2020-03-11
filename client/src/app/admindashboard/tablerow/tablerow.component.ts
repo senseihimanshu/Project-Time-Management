@@ -45,5 +45,6 @@ export class TableRowComponent {
 
   deleteEmployee(empId: string){
       this.deleteEmp.emit(empId);
+    
   }
 }

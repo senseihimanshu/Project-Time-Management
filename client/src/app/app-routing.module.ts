@@ -111,7 +111,7 @@ const routes: Routes = [
         component: ProjectFormComponent
       },
       {
-        path: ":details/:projectId",
+        path: ":type/:projectId",
         component: ProjectFormComponent
       }
     ]
@@ -121,6 +121,7 @@ const routes: Routes = [
     component: NotFoundComponent
   }
 ];
+
 
 @NgModule({
   declarations: [],
