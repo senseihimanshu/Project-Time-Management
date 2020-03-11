@@ -1,14 +1,12 @@
-
-import { ServicesService } from './services.service';
-import { AuthGuardService } from './guards/auth-guard.service';
-// import { NewwComponent } from './neww/neww.component';
-import { TimesheetComponent } from './timesheet/timesheet.component';
-import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
-import { ProjectRowComponent } from './project/projectrow/projectrow.component';
-import { TableRowComponent } from './admindashboard/tablerow/tablerow.component';
-import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { ServicesService } from "./services.service";
+import { AuthGuardService } from "./guards/auth-guard.service";
+import { TimesheetComponent } from "./timesheet/timesheet.component";
+import { ReviewRowComponent } from "./review/reviewrow/reviewrow.component";
+import { ProjectRowComponent } from "./project/projectrow/projectrow.component";
+import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
+import { EmployeedashboardComponent } from "./employeedashboard/employeedashboard.component";
+import { SidebarComponent } from "./sidebar/sidebar.component";
+import { MatToolbarModule } from "@angular/material/toolbar";
 import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ProjectComponent } from "./project/project.component";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
@@ -24,35 +22,28 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
 import { NotFoundComponent } from "./404/notfound.component";
 //import { AuthorizationGuard } from './authorization.guard';
-import { from } from 'rxjs';
-import {RoleGuardService} from "./guards/role-guard.service"
-import { ProjectManagerComponent } from './project-manager/project-manager.component'
+import { from } from "rxjs";
+import { RoleGuardService } from "./guards/role-guard.service";
+import { ProjectManagerComponent } from "./project-manager/project-manager.component";
 
 const routes: Routes = [
   {
-    path: "", redirectTo: "login", pathMatch: "full"
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
   },
   {
-    path:"timesheet",
-    component:TimesheetComponent
-  },
-  
-  {
-    path: "admindashboard",
-    component: AdmindashboardComponent
+    path: "timesheet",
+    component: TimesheetComponent
   },
   {
     path: "sidebar",
     component: SidebarComponent
   },
-  // {
-  //   path: "newtimesheet",
-  //   component: NewwComponent
-  // },
-      {
-        path: "myProfile",
-        component: MyprofileComponent
-      },
+  {
+    path: "myProfile",
+    component: MyprofileComponent
+  },
   {
     path: "review",
     component: ReviewComponent
@@ -63,7 +54,7 @@ const routes: Routes = [
     component: ReviewComponent
   },
   {
-    path: 'projectmanager',
+    path: "projectmanager",
     component: ProjectManagerComponent
   },
   {
@@ -130,7 +121,6 @@ const routes: Routes = [
     component: NotFoundComponent
   }
 ];
- 
 
 
 @NgModule({

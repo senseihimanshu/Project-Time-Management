@@ -1,6 +1,5 @@
 .user-list{
   font-size: 50px;
-  // font-family:"Open Sans", sans-serif;
   margin-left: 35%;
   color: rgb(148, 63, 17);
 }
@@ -22,10 +21,6 @@
   border: 0;
 }
 
-.out-div{
-  height: 40rem;
-}
-
 .pagination-div{
   display: flex !important;
   justify-content: center ;
@@ -37,55 +32,6 @@
     border-radius: .25rem;
     align-items: center;
 
-  }
-
-  .page-link:hover {
-    z-index: 2;
-    color: #0056b3;
-    text-decoration: none;
-    background-color: #e9ecef;
-    border-color: #dee2e6;
-  }
-
-  .page-link {
-    position: relative;
-    display: block;
-    padding: .5rem .75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-  }
-
-  .page-item.active .page-link {
-    z-index: 1;
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .page-item.disabled .page-link {
-    color: #6c757d;
-    pointer-events: none;
-    cursor: auto;
-    background-color: #fff;
-    border-color: #dee2e6;
-  }
-
-  .form-section {
-    display: flex;
   }
 
   .para-design {
@@ -103,7 +49,6 @@
     border-color: black;
     border-radius: 10px;
     background: white;
-    // display: flex;
   }
 
   input:focus {
@@ -146,18 +91,19 @@
 .logout
 {
  float: right;
+ color: #2f8fe9b4;
+ outline-style: groove;
+ outline-color: #2f8fe9b4;
+ outline-width: thin;
+
 }
 .navbar{
- //justify-content: space-between;
  height: 5rem;
  background-color: black;
- //width: 100vw;
-  //position: fixed;
 }
 tbody:nth-child(even) {   background: whitesmoke}
 tbody:nth-child(odd) {   background:white }
 td{
-  // font-family: 'Lato-Regular',serif sans-serif;
   font-size: 14px;
   color:black;
   line-height: 1.4;
@@ -167,10 +113,9 @@ td{
   height: 50px!important;
  }
  th{
-  // font-family:'Lato-Bold',sans-serif;
   font-size: 16px;
   line-height: 1.4;
-  background-color: #ffc107aa;
+  background-color: #2f8fe9b4;
   text-align: center;
   font-weight: 500;
   margin-top: 8rem!important;
@@ -192,7 +137,9 @@ td{
  }
  @media (min-width: 1200px){
  .container {
-     max-width: 1700px;
+     //max-width: 1500px;
+    margin-left: 6rem;
+    margin-right: 1rem;
  }
 }
 
@@ -203,3 +150,12 @@ td{
 .some-horizontal-container {
   pointer-events: none;
 }
+.profile{
+  margin-right: 0.5rem;
+}
+// .card{
+//   width: 75rem;
+//   height: fit-content;
+//   margin-top: 1.5rem;
+
+// }
