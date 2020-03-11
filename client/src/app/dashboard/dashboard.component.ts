@@ -73,7 +73,7 @@ onChartClick(event) {
 
   projectpieChartData:any = [
       { 
-          data: []
+          "data": []
           
       }
     ];

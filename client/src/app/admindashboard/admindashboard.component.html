@@ -1,22 +1,68 @@
-<div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div routerLink="/admindashboard" class="dashboard">
-      Admin Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-
-      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
+<div>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-font ">
+    <a class="navbar-brand" href="#"><img height="40" src="https://avatars3.githubusercontent.com/u/24821935?s=400&u=b312743ee48dc9cfbb15cf74c1da359c301823b0&v=4" />Admin Dashboard</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars custom-toggler-lines"></i>
+      </span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="dropdown d-lg-none custom-dropdown-container">
+          <a href="#" class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Employees<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+              <a href="#">Add New Employee</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown d-lg-none custom-dropdown-container">
+          <a href="#" class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Projects<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+              <a href="#">Add New Project</a>
+            </li>
+            <li>
+              <a href="#">Show All Projects</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown d-lg-none custom-dropdown-container">
+          <a href="#" class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Timesheets<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+              <a href="#">Show All Timesheets</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle "
         (click)="logout()">
         <i class="fa fa-power-off"></i>
       </button>
+      </form>
     </div>
-  </mat-toolbar>
-  <div class="main">
-    <app-sidebar [menus]="menus"></app-sidebar>
+  </nav>
+  <div class="row" style="margin-top: 60px;">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+ 
+    <div class="col-10">
+    <div class="container out-div">
 
-    <div class="container out-div" style="z-index: 100000000;">
-      <table class="table table-striped">
+      <input type="text" class="input-design" id="myInput" (keyup)="myFunction()" placeholder="Search by Employee Id">
+      <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Name</button></p>
+      <!-- <a
+class="btn btn-primary text-white"
+role="button"
+(click)="sortTable"
+>Sort</a
+> -->
+
+      <table class="table table-striped table-fixed" id="myTable">
         <thead>
           <tr>
             <th scope="col">Employee Id:</th>
@@ -29,7 +75,7 @@
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody id="adminTable"
+        <tbody style="height: 10px !important; overflow: auto" id="adminTable"
           *ngFor="let employee of usersArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <tr>
             <td>
@@ -70,130 +116,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div style="margin:20px;">
- <table>
-    <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-    <td>{{item.Name}}</td>
- 
- 
-    </tr>
- </table>
- <ngb-pagination [collectionSize]="items.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
- </div>  -->
-
-
-
-
-
-
-
-
-<!-- <div class="wrapper">
- <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-   <div routerLink="/admindashboard" class="dashboard">
-     Admin Dashboard
-   </div>
-   <div>
-     <span routerLink="/myProfile">My Profile</span>
-     <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-       (click)="logout()">
-       <i class="fa fa-power-off"></i>
-     </button>
-   </div>
- </mat-toolbar>
- <div class="main">
-   <app-sidebar [menus]="menus"></app-sidebar>
-   <section class="background_dashboard">
-     <table id="dtBasicExample" class="table table-striped table-bordered table-sm empTable responstable" cellspacing="0" width="100%">
-       <thead class="head-design fixed">
-         <tr>
-           <th class="th-sm">Employee Id
-           </th>
-           <th class="th-sm">Name
-           </th>
-           <th class="th-sm">Email
-           </th>
-           <th class="th-sm">Designation
-           </th>
-           <th class="th-sm">Role
-           </th>
-           <th class="th-sm">View
-           </th>
-           <th class="th-sm">Update
-           </th>
-           <th class="th-sm">Delete
-           </th>
-         </tr>
-       </thead>
-       <!- <table class="empTable">
-       <tr>
-         <th>Employee Id:</th>
-         <th>Name:</th>
-         <th>Email:</th>
-         <th>Designation:</th>
-         <th>Role:</th>
-         <th>View</th>
-         <th>Update</th>
-         <th>Delete</th>
-       </tr> -->
-<!-- <tbody class="mt-5" *ngFor="let employee of usersArray">  
-         <tr *ngIf="employee.role != 'Admin'">
-           <td>
-             {{ employee.empId }}
-           </td>
-           <td>
-             {{ employee.name }}
-           </td>
-           <td>
-             {{ employee.email }}
-           </td>
-           <td>
-             {{ employee.designation }}
-           </td>
-           <td>
-             {{ employee.role }}
-           </td>
-           <td>
-             <a [routerLink]="['/employeeform/details', employee.empId]">
-               <i class="fas fa-eye"></i>
-             </a>
-           </td>
-           <td>
-             <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
-               <i class="fas fa-pencil-alt"></i>
-             </a>
-           </td>
-           <td>
-             <a class="delete" (click)="deleteEmployee(employee.empId)"><i class="fas fa-trash"></i></a>
-           </td>
-         </tr>
-       </tbody>
-     </table>
-   </section>
- </div>
-</div> -->
-
-<!-- 
-   <section class="background_dashboard">
-     <table class="empTable table responstable">
-       <thead class="test">
-         <td>Employee Id</td>
-         <td>Name</td>
-         <td>Email</td>
-         <td>Role</td>
-         <td>View</td>
-         <td>Update</td>
-         <td>Delete</td>
-       </thead>
-       <tbody class="mt-5" *ngFor="let employee of usersArray">
-         <table-row
-           [employee]="employee"
-           (deleteEmp)="deleteEmployee($event)"
-         ></table-row>
-       </tbody>
-       <h2 class="message" *ngIf="message">{{ message }}</h2>
-     </table>
-   </section>
- </div>
-</div> -->

@@ -4,7 +4,6 @@ module.exports= (app) => {
 	//Project
 	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
-	
 	app.get("/project",controller.project.show);
 	app.put("/project/:id",controller.project.update);
 	app.delete("/api/project",controller.project.delete);

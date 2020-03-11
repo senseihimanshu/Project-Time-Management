@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit{
   submitted  =  false;
   ngOnInit() {
     this.myform  =  this.formBuilder.group({
-        email: ['', [Validators.required,Validators.email]],
-        password: ['', [Validators.required,Validators.minLength(4)]]
+       email: ['', [Validators.required,Validators.email]],
+        password: ['', [Validators.required,Validators.minLength(4)]],
     });
 }
 get f()
@@ -38,15 +38,30 @@ return this.myform.controls;
 }
   loginFunction() { 
     this.submitted=true;
+    if(this.password.nativeElement.value==""||this.email.nativeElement.value=="")
+    {
+      alert('All fields are necessary!');   
+      return;
+    }
+   
     if(this.myform.invalid)
-     return;
-     
+    {
+    alert("Password should be of minimum length 4");  
+    return;
+    }
+     if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){
+      alert("Empty Fields !");
+      return ;
+    }
      // alert('SUCCESS!!'+JSON.stringify(this.myform.value));
       let userObj = {
       email: this.email.nativeElement.value,
       password: this.password.nativeElement.value
     }
-  
+    if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){
+      alert("Empty Fields !");
+      return ;
+    }
     console.log(userObj);
     
     this.sendReq.logMeIn(userObj).subscribe((res)=> {

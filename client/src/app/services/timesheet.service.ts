@@ -53,7 +53,20 @@ export class TimesheetService {
     return this.http.post(
       "http://localhost:3000/api/timesheet",
       { ...timesheetData, empObjId },
-      this.httpOptions
+      this.httpOptions)
+  }
+  // getTimesheet(empObjId: string): Observable<any> {
+  //   const params = new HttpParams().set("empObjId", empObjId);
+  //   return this.http.get("http://localhost:3000/timesheet", {params}).pipe(
+  //     tap(_ => this.log("Timesheet")),
+  //     catchError(this.handleError<any>("Some Error Occurred"))
+  //   );
+  // }
+
+  getAllTimesheet(): Observable<any> {
+    return this.http.get("http://localhost:3000/timesheet").pipe(
+      tap(_ => this.log("All timesheets")),
+      catchError(this.handleError<any>("Some Error Occurred"))
     );
   }
 

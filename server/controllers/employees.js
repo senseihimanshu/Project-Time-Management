@@ -1,7 +1,9 @@
+const bcrypt = require('bcrypt');
 const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
 var generator = require('generate-password');
+const saltRounds = 10;
 var generatePassword = require('password-generator');
 
 // var password = generator.generateMultiple(3,{
@@ -13,7 +15,7 @@ var generatePassword = require('password-generator');
 // console.log(password);
 require('dotenv').config();
 // node function which sends email to new user create
- const node=async function(output,newEmployee){
+ const nodeMail=async function(output,newEmployee){
      let testAccount = await nodemailer.createTestAccount();
 
      // create reusable transporter object using the default SMTP transport
@@ -79,11 +81,15 @@ class Employee {
       address,
       role
     };
+
     var date=Date.now();
     var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
     newEmployee.password = password;
     console.log(newEmployee.password,"randoom");
-
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log(newEmployee.password,"randoom");
+   newEmployee.password=hashedPassword;
     console.log(req.body);
 
     const resultAfterIsUnique = await isUnique(empId, email);
@@ -129,7 +135,7 @@ class Employee {
       </ul>
       <p>This is Computer Generated Email ,Don't reply back to it</p>
       `
-      node(output,newEmployee);
+      nodeMail(output,newEmployee);
   }
 
   async index(req, res) {
@@ -143,29 +149,22 @@ class Employee {
   }
 
   async show(req, res) {
-    console.log(req.query);
-    const employee = await model.employee.get({ empId: req.query.empId });
-    
+    console.log("in employee show",req.query.empId);
+    const employee = await model.employee.get({ empId:req.query.empId});
     console.log(employee);
+   
     if (!employee) {
-      return res.status(404).send({
-        success: false,
-        payload: {
-          employee,
-          message: "Employee does not exist"
-        }
+      return res.status(404).send({ employee,
+        message:"Employee does not exists!"
       });
     }
 
-    res.send({
-      success: true,
-      payload: {
-        employee,
-        message: "Employee retrieved successfully"
-      }
+    res.status(200).send({
+      employee,
+      message:"Employee retrieved successfully"
     });
   }
-
+  
   async update(req, res) {
     const {
       empId,

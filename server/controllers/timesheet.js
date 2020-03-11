@@ -110,9 +110,6 @@ class Timesheet {
         }
       });
     }
-
-    console.log(timesheet);
-    
     if (!timesheet) {
       return res.status(200).send({
         success: true,
@@ -133,12 +130,11 @@ class Timesheet {
       });
     }
   }
+
   async index(req, res) {
-    // console.log("dikhaa rha huu");
     const timesheetList = await model.timesheet.get();
-    console.log(timesheetList);
+    console.log(timesheetList,"all timesheet");
     res.send(timesheetList);
-    // console.log(employeeList);
   }
   async update(req, res) {
     const col = { ...req.body.week };
