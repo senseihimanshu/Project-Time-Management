@@ -2,21 +2,12 @@ const model = require("../models");
 const schema = require("../schemas");
 class Project {
   constructor() {
-    console.log("inside proj");
+    
   }
 
   async create(req, res) {
     
-    //It must expect array in future!
-    // const empObj = await model.employee.get(
-    //   { name: req.body.empObjectIdArray },
-    //   { _id: 1 }
-    // );
-
-    // const projectManagerIdObj = await model.employee.get(
-    //   {role:"Project Manager"},
-    //   { name: 1 }
-    // );
+   
 
     let projectObj = {
       projectId: req.body.projectId,
@@ -127,22 +118,20 @@ class Project {
 
   async show(req, res) {
     const projectList =await model.project.get({ _id: req.query.projectId });
-    //console.log("in show function", projectList);
-    //const projectManager = [req.params.projectManagerIdObj];
-    //  const manager=await model.employee.get({_id:projectManager});
-   // projectList.projectManager = manager;ole.log(projectList);
+   
     res.send(projectList);
   }
   async update(req, res) {
     //Expecting that req.body will have required details with same keys!!! (Just to save time)
     const project = await model.project.update(
-      { _id: req.body.id },
+      { _id: req.query.id },
       { $set: { ...req.body } }
     );
     res.send({
       success: true,
       payload: {
-        data: project
+        data: project,
+        messsage:"project updated successfully"
       }
     });
   }

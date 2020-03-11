@@ -50,7 +50,7 @@
                placeholder="Project Id"
                [ngModel]="project && project._id"
                name="projectId"
-               [disabled]="formType === 'get'"
+               [readonly]="!(typeOfForm === 'create')"
                required
                minlength="1"
                maxlength="20"
