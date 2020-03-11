@@ -45,8 +45,10 @@ return this.myform.controls;
     }
    
     if(this.myform.invalid)
+    {
     alert("Password should be of minimum length 4");  
     return;
+    }
      if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){
       alert("Empty Fields !");
       return ;
