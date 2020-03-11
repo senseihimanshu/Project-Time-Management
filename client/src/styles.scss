@@ -8,10 +8,6 @@
     box-sizing: inherit;
 }
 
-// html{
-//     font-size: 62.5%;
-// }
-
 body{
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
@@ -41,12 +37,12 @@ body{
 }
 
 .custom-toggler.navbar-toggler { 
-    border-color: lightgreen; 
+    border-color: #ffc107aa;
     outline: none;
 } 
 
 .custom-toggler-lines {
-    color: lightgreen; 
+    color:#ffc107aa; 
     font-size: 22px;
     margin:5px;
 

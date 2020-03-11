@@ -19,9 +19,6 @@ export class SidebarService {
   setSidebarState(state: boolean) {
     this.toggled = state;
   }
-
- 
-
   get hasBackgroundImage() {
     return this._hasBackgroundImage;
   }
