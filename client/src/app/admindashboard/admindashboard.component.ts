@@ -75,10 +75,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.tabularData();
-    //   $(document).ready(function () {
-    // //    $('#dtBasicExample').DataTable();
-    //     $('.dataTables_length').addClass('bs-select');
-    //   });
   }
 
   ngOnChanges() {
