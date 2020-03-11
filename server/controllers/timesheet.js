@@ -41,8 +41,7 @@ class Timesheet {
     };
     console.log(timesheetToSave);
     //Creating a new timesheet
-    const updatedTimesheetObjId = (await model.timesheet.save(timesheetToSave))
-      ._id;
+    const updatedTimesheetObjId = (await model.timesheet.save(timesheetToSave))._id;
     console.log(updatedTimesheetObjId, 'updatedTimesheetObjId');
 
     //Adding timesheets of employees to projectManager
@@ -62,28 +61,28 @@ class Timesheet {
             { $push: { timesheetIds: updatedTimesheetObjId } }
           );
 
-          let timesheetIdsArr = (await model.employee.get(
-            { _id: timesheetToSave.empObjId },
-            { timesheet: 1 }
-          )).timesheet;
-            console.log(timesheetIdsArr, timesheetToSave.empObjId, 'before');
+          // let timesheetIdsArr = (await model.employee.get(
+          //   { _id: timesheetToSave.empObjId },
+          //   { timesheet: 1 }
+          // )).timesheet;
+          //   console.log(timesheetIdsArr, timesheetToSave.empObjId, 'before');
             
-            timesheetIdsArr.filter((item, index) => timesheetIdsArr.indexOf(item) === index);
-            console.log(timesheetIdsArr, 'timesheetIdsArr');
+          //   timesheetIdsArr.filter((item, index) => timesheetIdsArr.indexOf(item) === index);
+          //   console.log(timesheetIdsArr, 'timesheetIdsArr');
 
           await model.employee.update(
             { _id: timesheetToSave.empObjId },
-            { timesheet: timesheetIdsArr }
+            { $addToSet: {timesheet: updatedTimesheetObjId} }
           );
         }
       })
     );
 
     //Adding timesheet to employee collection
-    await model.employee.update(
-      { _id: timesheetToSave.empObjId },
-      { $push: { timesheet: updatedTimesheetObjId } }
-    );
+    // await model.employee.update(
+    //   { _id: timesheetToSave.empObjId },
+    //   { $push: { timesheet: updatedTimesheetObjId } }
+    // );
 
     console.log("Reached Here @timesheet.js/line26");
 
@@ -101,6 +100,7 @@ class Timesheet {
     console.log(req.query);
     var timesheet = [];
     if (empObjId) {
+      console.log(await model.employee.get({ empId: empObjId }, { timesheet: 1, projectId: 1 }));
       timesheet = (await model.employee.get({ empId: empObjId }, { timesheet: 1, projectId: 1 })).timesheet;
     } else {
       return res.status(400).send({
