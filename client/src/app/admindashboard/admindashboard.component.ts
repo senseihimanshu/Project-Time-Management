@@ -13,6 +13,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   page = 1;
   pageSize = 10;
   items = [];
+  dashboard: any=[{title:"Admin DASHBOARD"}]
   menus: any = [
     {
       title: "Employees",

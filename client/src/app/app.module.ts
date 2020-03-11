@@ -63,6 +63,7 @@ import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { RoleGuardService } from './guards/role-guard.service';
 import { AuthGuardService } from './guards/auth-guard.service';
+import { NavbarComponent } from './navbar/navbar.component';
 //import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
     ReviewRowComponent,
     ProjectManagerComponent,
     TimesheetModal,
+    NavbarComponent,
     //NgbdTablePagination
    
   ],
