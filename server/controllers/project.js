@@ -151,7 +151,6 @@ class Project {
 
   async delete(req, res) {
     console.log("running");
-    console.log("karta hu delete");
     console.log(req.query.id);
     const project = await model.project.delete({ _id: req.query.id });
     console.log(project, "proj");
