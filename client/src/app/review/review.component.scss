@@ -59,7 +59,7 @@
   font-size: 18px;
   color: #fff;
   line-height: 1;
-  background-color: #09103a73;
+  background-color: #0183FF;
   padding-top: 12px;
   padding-bottom: 10px;
   padding-right: 10px;
@@ -93,15 +93,6 @@
   z-index: 1;
  }
  
- .navbar{
-  justify-content: space-between;
-  height: 4rem;
-  background-color: black;
- }
- span{
-  padding-right: 2.5rem;
-  cursor: pointer;
- }
  .show i{
   color: pink;
  }
@@ -119,7 +110,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: #ffc107aa;
+  background-color:#0183FF;
  }
  .test td{
   width: 16rem;
