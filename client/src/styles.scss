@@ -4,7 +4,7 @@
 *:after,
 *:before{
     margin: 0;
-    padding: 0;
+    padding: 2px;
     box-sizing: inherit;
 }
 
@@ -16,7 +16,6 @@ body{
     box-sizing: border-box;
     overflow-x: hidden
 }
-
 
 //over riding bootstrap
 .navbar {
@@ -37,12 +36,12 @@ body{
 }
 
 .custom-toggler.navbar-toggler { 
-    border-color: #ffc107aa;
+    border-color: #2f8fe9b4;
     outline: none;
 } 
 
 .custom-toggler-lines {
-    color:#ffc107aa; 
+    color:#2f8fe9b4; 
     font-size: 22px;
     margin:5px;
 
@@ -56,8 +55,6 @@ body{
         padding: 10px;
     }
   }
-
-
 
 //global card styling
 .custom-card {

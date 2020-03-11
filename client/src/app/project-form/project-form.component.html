@@ -1,22 +1,5 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div>
-      Company Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-      
-    <button
-      type="button"
-      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-      (click)="logout()"
-      >
-      <i class="fa fa-power-off"></i>
-    </button>
-    </div>
-  </mat-toolbar>
-
- 
+  <app-navbar></app-navbar>
    <div class="app-main no-scrollbar-wrap">
     <app-sidebar [menus]="menus"></app-sidebar>
   <div class="no-scrollbar">
@@ -186,12 +169,11 @@
         </mat-select> 
           <p  *ngIf="membersInput.touched">project Members are required</p>
        </div>
-       
-             
-           <div class="button-parent" *ngIf="formType !== 'get'">
+
+       <div class="button-parent" *ngIf="formType !== 'get'">
                <button
                  mdbBtn
-                 class=" btn btn-outline-warning  text-center text-yellow m-4 btnsstyle"
+                 class=" btn text-center m-4 btnsstyle"
                  mdbWavesEffect
                  
                 
@@ -202,7 +184,7 @@
            <button
              type="button"
              mdbBtn
-             class="btn btn-outline-warning  text-center text-yellow m-2 btnsstyle"
+             class="btn text-center m-2 btnsstyle"
              mdbWavesEffect
              
              [routerLink]="['/projects']"
@@ -218,6 +200,7 @@
      </div>
      </div>
        </div>
+  </div>
   </div>
 
 

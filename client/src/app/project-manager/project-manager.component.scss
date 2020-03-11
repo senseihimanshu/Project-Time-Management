@@ -37,7 +37,7 @@
     // padding-left: 5rem;
    }
    td{
-    font-family: Arial, Helvetica, sans-serif;
+    // font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     color:black;
     line-height: 1.4;
@@ -47,7 +47,7 @@
     padding-right: 10px;
    }
    th{
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 18px;
     color: #fff;
     line-height: 1;
@@ -84,28 +84,6 @@
     overflow: scroll;
     z-index: 1;
    }
-   // .background_dashboard::-webkit-scrollbar {
-   // width: 30px;
-   // height: 5px;
-   // }
-   // .background_dashboard::-webkit-scrollbar-track {
-   // background: linear-gradient(90deg, #201c29, #201c29 1px, #100e17 0, #100e17);
-   // }
-   // .background_dashboard::-webkit-scrollbar-thumb {
-   // background: -webkit-gradient(linear, left top, left bottom, from(#ff8a00), to(#e52e71));
-   // background: linear-gradient(180deg, #ff8a00, #e52e71);
-   // border-radius: 30px;
-   // box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
-   // }
-   .navbar{
-    justify-content: space-between;
-    height: 4rem;
-    background-color: black;
-   }
-   span{
-    padding-right: 2.5rem;
-    cursor: pointer;
-   }
    .show i{
     color: pink;
    }
@@ -123,12 +101,12 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: #ffc107aa;
+    background-color: #0183FF;
    }
    .test td{
     width: 16rem;
     font-weight: 500;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif;
     word-wrap: break-word;
     font-weight: bold;
    }

@@ -1,19 +1,5 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 10; background-color: black;">
-    <div>
-      <span routerLink="/admin">Home</span>
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-      <button
-        type="button"
-        class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-        (click)="logout()"
-      >
-        <i class="fa fa-power-off"></i>
-      </button>
-    </div>
-  </mat-toolbar>
+  <app-navbar></app-navbar>
 </div>
 
 <div class="timesheet-table__wrapper">
