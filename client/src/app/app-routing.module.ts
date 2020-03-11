@@ -120,7 +120,7 @@ const routes: Routes = [
         component: ProjectFormComponent
       },
       {
-        path: ":details/:projectId",
+        path: ":type/:projectId",
         component: ProjectFormComponent
       }
     ]
