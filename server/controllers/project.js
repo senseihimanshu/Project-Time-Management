@@ -24,7 +24,7 @@ class Project {
     // projectObj.empObjectIdArray = empObjArr;
     // projectObj.projectManager = projectManagerIdObj._id;
 
-    console.log(projectObj, "Abha Rana");
+    console.log(projectObj);
 
     if (await model.project.get({ projectId: projectObj.projectId }))
       return res.status(400).send({
@@ -122,10 +122,26 @@ class Project {
     res.send(projectList);
   }
   async update(req, res) {
+    const projectManager=await  model.projectManager.get({managerName:req.body.projectManager});
+    console.log("here",projectManager);
+    let projectUpdatedObj = {
+     
+      projectName: req.body.projectName,
+      projectManager: projectManager.id,
+      clientName: req.body.clientName,
+      status: req.body.status,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      empObjectIdArray: req.body.members,
+      status: req.body.status
+    };
     //Expecting that req.body will have required details with same keys!!! (Just to save time)
+      
+                           
+                           
     const project = await model.project.update(
       { _id: req.query.id },
-      { $set: { ...req.body } }
+      projectUpdatedObj
     );
     res.send({
       success: true,

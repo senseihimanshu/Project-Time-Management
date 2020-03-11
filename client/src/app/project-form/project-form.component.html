@@ -50,7 +50,8 @@
                placeholder="Project Id"
                [ngModel]="project && project._id"
                name="projectId"
-               [readonly]="!(typeOfForm === 'create')"
+               [readonly]="!( formType=== 'create')"
+              
                required
                minlength="1"
                maxlength="20"
@@ -164,7 +165,7 @@
                <option value="" disabled>Choose option</option>
                <option value="In Progress" selected>In Progress</option>
                <option value="Completed">Completed</option>
-               <option value="Closed">Closed</option>
+               <option value="Discarded">Discarded</option>
              </select>
              <p  *ngIf="statusInput.touched">status is required</p>
            </div>

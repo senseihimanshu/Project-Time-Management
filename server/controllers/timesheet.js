@@ -121,7 +121,7 @@ class Timesheet {
     res.send(timesheetList);
   }
   async update(req, res) {
-    const col = { ...req.body.week };
+    const col = { ...week };
     console.log(col);
     const timesheet = await model.timesheet.update(
       { _id: req.query.id },
