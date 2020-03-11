@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const schema=require('../schemas');
-const projectschema = mongoose.Schema(schema.project);
+const projectschema = new mongoose.Schema(schema.project);
 
 class Project{
   constructor(){

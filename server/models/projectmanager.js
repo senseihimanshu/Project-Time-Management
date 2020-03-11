@@ -8,13 +8,14 @@ class projectManager {
   }
 
   async get(criteria = {}, columns = {}) {
-    return this.model.findOne(criteria, (columns = {}));
+    return this.model.find(criteria, (columns = {}));
   }
   async save(projectObj) {
     const newProject = await this.model.create(projectObj);
     return newProject;
   }
   async update(criteria = {}, updatedProjectObj) {
+    console.log(criteria, updatedProjectObj, 'Inside update of projectManagerModel')
     return this.model.updateOne(criteria, updatedProjectObj);
   }
   async delete(criteria = {}) {

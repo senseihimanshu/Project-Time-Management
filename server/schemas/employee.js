@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const project=require('./project-details');
 var ObjectId = mongoose.Schema.Types.ObjectId;
@@ -63,7 +62,8 @@ module.exports = {
   timesheet: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'timesheet'
+      ref: 'timesheet',
+      unique: true
     }
   ]
 }
