@@ -67,11 +67,7 @@ export class SidebarService {
   setSidebarState(state: boolean) {
     this.toggled = state;
   }
-
-  // getMenuList() {
-  //   return this.menus;
-  // }
-
+  
   get hasBackgroundImage() {
     return this._hasBackgroundImage;
   }
