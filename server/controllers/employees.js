@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
@@ -163,7 +164,7 @@ class Employee {
       message:"Employee retrieved successfully"
     });
   }
-
+  
   async update(req, res) {
     const {
       empId,

@@ -38,8 +38,17 @@ return this.myform.controls;
 }
   loginFunction() { 
     this.submitted=true;
+    if(this.password.nativeElement.value==""||this.email.nativeElement.value=="")
+    {
+      alert('All fields are necessary!');   
+      return;
+    }
+   
     if(this.myform.invalid)
-     return;
+    {
+    alert("Password should be of minimum length 4");  
+    return;
+    }
      if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){
       alert("Empty Fields !");
       return ;
@@ -49,7 +58,10 @@ return this.myform.controls;
       email: this.email.nativeElement.value,
       password: this.password.nativeElement.value
     }
-  
+    if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){
+      alert("Empty Fields !");
+      return ;
+    }
     console.log(userObj);
     
     this.sendReq.logMeIn(userObj).subscribe((res)=> {
