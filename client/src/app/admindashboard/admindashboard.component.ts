@@ -91,6 +91,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
         this.usersArray = this.usersArray.filter(item => item.empId != empId);
       console.log(res);
     });
+    alert("employee "+empId+" deleted successfully");
   }
   logout() {
     this._service.deletetoken();
