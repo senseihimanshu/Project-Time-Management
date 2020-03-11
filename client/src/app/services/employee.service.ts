@@ -48,10 +48,11 @@ export class EmployeeService {
       return this.http.get<any>(FEED_API, { ...this.httpOptions });
     }
     console.log(empId);
-    const params = new HttpParams().set("id", empId);
+    const params = new HttpParams().set("empId", empId);
     console.log(params);
     return this.http.get<any>(FEED_API, { ...this.httpOptions, params });
   }
+  
   getProject(projectId: string): any {
    // let convertedId: { $toObjectId: "$projectId" }
     console.log(projectId);

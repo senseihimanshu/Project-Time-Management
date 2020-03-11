@@ -8,20 +8,86 @@
     box-sizing: inherit;
 }
 
-html{
-    font-size: 62.5%;
-}
+// html{
+//     font-size: 62.5%;
+// }
 
 body{
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     line-height: 1.7;
     color: $color-text-primary;
     box-sizing: border-box;
+    overflow-x: hidden
 }
 
-// html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//over riding bootstrap
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    -webkit-box-shadow: 0 6px 6px -6px #ccc;
+    -moz-box-shadow: 0 6px 6px -6px #ccc;
+    box-shadow: 0 6px 6px -6px #ccc;
+    height: 60px !important;
+}
+
+//navbar font
+.navbar-font>a {
+    font-size: 14px;
+    color: #95989A !important;
+}
+.navbar-font>a:hover {
+    color: #212121 !important;
+}
+
+.custom-toggler.navbar-toggler { 
+    border-color: lightgreen; 
+    outline: none;
+} 
+
+.custom-toggler-lines {
+    color: lightgreen; 
+    font-size: 22px;
+    margin:5px;
+
+}
+/* change navbar background on collapse */
+@media (max-width: 892px) {
+    .collapse {
+        background-color: white;
+        margin-left: -15px;
+        margin-right: -15px;
+        padding: 10px;
+    }
+  }
+
+
+
+//global card styling
+.custom-card {
+    box-shadow: 2px 2px 2px 2px rgba(50, 50, 50, 0.1);
+    background:white;
+    padding: 10px;
+}
+
+// overriding default collapsible nested menu behaviour
+.multi-level {
+    border:none;
+    color:black;
+}
+.custom-dropdown {
+    color:black;
+    padding:5px;
+}
+.custom-dropdown-container {
+    padding:10px;
+}
+.custom-multi-level {
+    padding: 10px;
+    // list-style-type: square;
+}
+
+.custom-multi-level>li>a {
+    color:black !important;
+    padding: 10px;
+}
