@@ -85,21 +85,18 @@ export class ProjectFormComponent implements OnInit {
           this.formType = params.type;
             // debugger;
           console.log(this.formType);
-          console.log("projects dhundu");
 
           if (!params.projectId) {
             console.log("here");
             return this.employeeService.getProject(null);
           }
-          this.formType = "get";
+          //this.formType = "get";
           console.log(this.formType);
           return this.employeeService.getProject(params.projectId);
         })
       )
       .subscribe((response: any) => {
-        console.log(response);
-        console.log(response.payload.Project);
-        return (this.project = response.payload.project);
+        return (this.project = response);
       });
   }
 

@@ -68,17 +68,17 @@
               {{project.project.status}}
             </td>
             <td>
-              <a [routerLink]="['/projectform/details', project._id]">
+              <a [routerLink]="['/projectform/details', project.project._id]">
                 <i class="fas fa-eye"></i>
               </a>
             </td>
             <td>
-              <a class="edit" [routerLink]="['/projectform/update',project._id]">
+              <a class="edit" [routerLink]="['/projectform','update',project.project._id]">
                 <i class="fas fa-pencil-alt"></i>
               </a>
             </td>
             <td>
-              <a class="delete" (click)="deleteProject(project._id)"><i class="fas fa-trash"></i></a>
+              <a class="delete" (click)="deleteProject(project.project._id)"><i class="fas fa-trash"></i></a>
             </td>
           </tr>
         </tbody>
