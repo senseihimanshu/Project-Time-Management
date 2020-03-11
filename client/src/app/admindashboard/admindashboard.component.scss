@@ -3,11 +3,7 @@
   margin-left: 35%;
   color: rgb(148, 63, 17);
 }
-.logo-img{
-  width: 75px;
-  height: 75px;
-  
-}
+
 .panel{
   background-color:#ECEEF1;
 }
@@ -69,15 +65,6 @@
 .main{
  display: flex;
 }
-.message{
- color: red;
- text-align: center;
- font-size: 4.2rem;
-}
-
-.dashboard{
-   cursor: pointer;
-}
 .show i{
  color: pink;
 }
@@ -88,19 +75,7 @@
 .delete i {
  color: red;
 }
-.logout
-{
- float: right;
- color: #2f8fe9b4;
- outline-style: groove;
- outline-color: #2f8fe9b4;
- outline-width: thin;
 
-}
-.navbar{
- height: 5rem;
- background-color: black;
-}
 tbody:nth-child(even) {   background: whitesmoke}
 tbody:nth-child(odd) {   background:white }
 td{
@@ -115,11 +90,12 @@ td{
  th{
   font-size: 16px;
   line-height: 1.4;
-  background-color: #2f8fe9b4;
+  background-color: #0183FF;
   text-align: center;
   font-weight: 500;
   margin-top: 8rem!important;
   position: sticky;
+  color: white;
  }
  .app-main[_ngcontent-meo-c1] {
   padding: 0 8.4rem;
@@ -154,9 +130,6 @@ td{
 
 .some-horizontal-container {
   pointer-events: none;
-}
-.profile{
-  margin-right: 0.5rem;
 }
 // .card{
 //   width: 75rem;

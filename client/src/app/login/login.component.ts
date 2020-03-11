@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
   submitted  =  false;
   ngOnInit() {
     this.myform  =  this.formBuilder.group({
-       email: ['', [Validators.required,Validators.email]],
+       email: ['', [Validators.required,Validators.minLength(8)]],
         password: ['', [Validators.required,Validators.minLength(4)]],
     });
 }
@@ -43,10 +43,15 @@ return this.myform.controls;
       alert('All fields are necessary!');   
       return;
     }
-   
+    
     if(this.myform.invalid)
     {
-    alert("Password should be of minimum length 4");  
+      let valLengthEmail = this.email.nativeElement.value.length;
+        if(valLengthEmail<8)
+          alert("Email should be of minimum length 8");
+      let valLengthPassword=this.password.nativeElement.value.length; 
+       if(valLengthPassword<4)
+          alert("Password should be of minimum length 4");  
     return;
     }
      if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){

@@ -1,19 +1,5 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 10; background-color: black;">
-    <div>
-      <span routerLink="/admin">Home</span>
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-      <button
-        type="button"
-        class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-        (click)="logout()"
-      >
-        <i class="fa fa-power-off"></i>
-      </button>
-    </div>
-  </mat-toolbar>
+  <app-navbar></app-navbar>
 </div>
 
 <div class="timesheet-table__wrapper">
@@ -75,51 +61,3 @@
     </div>
   </div>
 </div>
-<!-- 
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td><select>
-        <option>select Projects</option>
-      </select>></td>
-      <td><select>
-        <option>select Projects</option>
-      </select>></td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</table> -->

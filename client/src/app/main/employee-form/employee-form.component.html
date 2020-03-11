@@ -1,23 +1,6 @@
-
-
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div>
-      Company Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-      
-    <button
-      type="button"
-      class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-      (click)="logout()"
-      >
-        <i class="fa fa-power-off"></i>
-    </button>
-    </div>
-  </mat-toolbar>
-
+  <div>
+    <app-navbar></app-navbar></div>
  
   <div class="main">
     <app-sidebar [menus]="menus"></app-sidebar>
@@ -165,25 +148,8 @@
           />
           <p  *ngIf="joiningInput.touched">joiningDate is required</p>
         </div>
-        <div class="form-group h4 mb-4 was-validated" [class.has-error]="email.invalid && email.touched"
-        >
-           <label class="control-label"for="email">Project Id: </label>
-  
-          <input
-            type="text"
-            id="projectId"
-            class="form-control"
-            placeholder="Project Id"
-            [(ngModel)]="employee && employee.projectId"
-            name="projectId"
-            required
-            minlength="1"
-            [disabled]="typeOfForm === 'get'"
-            #projectId="ngModel"
-          />
-         <p  *ngIf="projectId.invalid && projectId.touched">projectId is required</p>
-           
-        </div>
+       
+        
         <div class="form-group h4 mb-4 was-validated"[class.has-error]="designationInput.touched">
            <label for="designation"class="control-label">Designation: </label>
   
@@ -226,7 +192,7 @@
         <div class="button-parent" *ngIf="formType !== 'get'">
           <button
             mdbBtn
-            class=" btn btn-outline-warning logout text-center text-yellow m-4 btnsstyle"
+            class=" btn logout text-center m-4 btnsstyle"
             mdbWavesEffect
             
            
@@ -240,8 +206,7 @@
           <button
             type="button"
             mdbBtn
-            class=" btn btn-outline-warning logout text-center text-yellow m-4 btnsstyle"
-            color="danger"
+            class=" btn logout text-center m-4 btnsstyle"
             mdbWavesEffect
             [routerLink]="['/admin']"
           >

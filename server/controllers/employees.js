@@ -90,7 +90,7 @@ class Employee {
     const hashedPassword = await bcrypt.hash(password, salt);
     console.log(newEmployee.password,"randoom");
    newEmployee.password=hashedPassword;
-    console.log(req.body);
+    
 
     const resultAfterIsUnique = await isUnique(empId, email);
     if (!resultAfterIsUnique.status) {

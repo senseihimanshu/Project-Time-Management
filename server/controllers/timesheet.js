@@ -4,7 +4,7 @@ class Timesheet {
   constructor() {}
 
   async create(req, res) {
-    console.log(req.body);
+    
 
     const reqScatteredData = req.body;
 
