@@ -100,28 +100,8 @@ onChartClick(event) {
       this.clevelDataProjects();
       this.clevelDataTimesheets();
         this.loading = true;
-        // this.userService.getAll().pipe(first()).subscribe(users => {
-        //     this.loading = false;
-        //     this.users = users;
-        // });
-      /*  this.httpService.get('./assets/project.json', {responseType: 'json'}).subscribe(
-          data => {
-              this.projectpieChartData = data as any [];	 // FILL THE CHART ARRAY WITH DATA.
-          },
-          (err: HttpErrorResponse) => {
-              console.log (err.message);
-          }
-      );
-     
-     this.httpService.get('./assets/timesheet.json', {responseType: 'json'}).subscribe(
-        data => {
-            this.timesheetpieChartData = data as any [];	 // FILL THE CHART ARRAY WITH DATA.
-          },
-            (err: HttpErrorResponse) => {
-              console.log (err.message);
-         }
-     );*/
-   } 
+       
+    }
    clevelDataProjects() {
      console.log("running");
     let obj=this._service.clevelDataProjects().subscribe(res => {

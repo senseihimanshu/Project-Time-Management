@@ -186,39 +186,7 @@
           <div  *ngIf="membersInput.touched">project Members are required</div>
        </div>
        
-              <!-- <div class="h5 mb-4">
-             <label class="control-label"for="members">Project Members:</label>
-              <mat-select
-               class="browser-default custom-select"
-               name="members"
-               [(ngModel)]="project && project.empObjectIdArray"
-               [disabled]="formType === 'get'"
-               [(ngModel)]="project && project.members[0]"
-               #membersInput
-               required
-               matInput placeholder="members"
-               [formControl]="emp" multiple>
-               <mat-option *ngFor="let emp of empList" [value]="emp">{{emp.name}}</mat-option>
-            </mat-select> 
              
-           </div> -->
-    
-              <!-- <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput.touched">
-            <label for="manager">Project Members:</label>
-      
-            <input
-              type="text"
-              id="members"
-              class="form-control"
-              placeholder="Project Manager"
-              [(ngModel)]="project && project.empObjectIdArray"
-              name="members"
-              [disabled]="formType === 'get'"
-              #membersInput
-            />
-                <div  *ngIf="membersInput.touched">members are required</div>
-          </div>
-       -->
            <div class="button-parent" *ngIf="formType !== 'get'">
                <button
                  mdbBtn
