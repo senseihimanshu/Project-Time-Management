@@ -23,7 +23,7 @@
 
 .pagination-div{
   display: flex !important;
-  justify-content: center ;
+  justify-content: flex-end ;
 }
 
 .pagination {
@@ -52,13 +52,13 @@
   }
 
   input:focus {
-    background-color: lightblue;
+    background-color: whitesmoke
   }
 
   input::placeholder {
     color: black;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 15px;
   }
 
 .wrapper{
@@ -138,13 +138,18 @@ td{
  @media (min-width: 1200px){
  .container {
      //max-width: 1500px;
-    margin-left: 6rem;
+    margin-top:1rem;
+    margin-left: 14.5rem;
     margin-right: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
  }
 }
 
 .table{
   margin-top: 2%;
+  margin-left:2%;
+  margin-right:2%;
 }
 
 .some-horizontal-container {
@@ -159,3 +164,12 @@ td{
 //   margin-top: 1.5rem;
 
 // }
+.form-control{
+  float:right !important;
+  border: ridge;
+
+}
+#myInput:active
+{
+background-color: white;
+}
