@@ -1,7 +1,8 @@
 import { ServicesService } from './services.service';
 // import { NewwComponent } from './neww/neww.component';
 // import { MbscModule } from '@mobiscroll/angular-lite';
-import { TimesheetComponent, TimesheetModal } from './timesheet/timesheet.component';
+import { TimesheetComponent } from './timesheet/timesheet.component';
+import { TimesheetModal } from './timesheet/modal/modal.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";

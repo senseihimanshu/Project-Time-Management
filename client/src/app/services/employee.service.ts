@@ -44,12 +44,11 @@ export class EmployeeService {
       return this.http.put<any>(PROJECT_API, obj, this.httpOptions);
   }
   getEmployee(empId: string): any {
+    console.log(empId);
     if (!empId) {
       return this.http.get<any>(FEED_API, { ...this.httpOptions });
     }
-    console.log(empId);
     const params = new HttpParams().set("empId", empId);
-    console.log(params);
     return this.http.get<any>(FEED_API, { ...this.httpOptions, params });
   }
   

@@ -7,14 +7,13 @@ module.exports = {
   empObjId: {
     type: ObjectId,
     ref: "employee"
-  },
+  },  
   startDate: {
     type: Date
   },
   endDate: {
     type: Date
   },
-  
   week: [
     {
       projectId: {

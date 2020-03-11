@@ -3,6 +3,9 @@ import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { Token } from "@angular/compiler/src/ml_parser/lexer";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+
+const TIMESHEET_API: string = "http://localhost:3000/api/timesheet";
+
 @Injectable({
   providedIn: "root"
 })
@@ -49,10 +52,10 @@ export class TimesheetService {
     });
   }
 
-  createTimesheet(timesheetData, empObjId): Observable<any> {
+  createTimesheet(timesheet: any): Observable<any> {
     return this.http.post(
-      "http://localhost:3000/api/timesheet",
-      { ...timesheetData, empObjId },
+      TIMESHEET_API,
+      timesheet,
       this.httpOptions)
   }
   // getTimesheet(empObjId: string): Observable<any> {
