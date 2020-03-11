@@ -165,25 +165,8 @@
           />
           <p  *ngIf="joiningInput.touched">joiningDate is required</p>
         </div>
-        <div class="form-group h4 mb-4 was-validated" [class.has-error]="email.invalid && email.touched"
-        >
-           <label class="control-label"for="email">Project Id: </label>
-  
-          <input
-            type="text"
-            id="projectId"
-            class="form-control"
-            placeholder="Project Id"
-            [(ngModel)]="employee && employee.projectId"
-            name="projectId"
-            required
-            minlength="1"
-            [disabled]="typeOfForm === 'get'"
-            #projectId="ngModel"
-          />
-         <p  *ngIf="projectId.invalid && projectId.touched">projectId is required</p>
-           
-        </div>
+       
+        
         <div class="form-group h4 mb-4 was-validated"[class.has-error]="designationInput.touched">
            <label for="designation"class="control-label">Designation: </label>
   
