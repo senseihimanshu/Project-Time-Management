@@ -1,6 +1,6 @@
   .user-list {
     font-size: 50px;
-    font-family: "Open Sans", sans-serif;
+    // font-family: "Open Sans", sans-serif;
     margin-left: 35%;
     color: rgb(148, 63, 17);
   }
@@ -24,10 +24,6 @@
 
   .panel-info {
     border: 0;
-  }
-
-  .out-div {
-    height: 40rem;
   }
 
   .pagination-div {
@@ -129,14 +125,6 @@
     float: right;
   }
 
-  .navbar {
-    //justify-content: space-between;
-    height: 5rem;
-    background-color: black;
-    //width: 100vw;
-    //position: fixed;
-  }
-
   tbody:nth-child(even) {
     background: whitesmoke
   }
@@ -146,7 +134,7 @@
   }
 
   td {
-    font-family: Lato-Regular, serif sans-serif;
+    // font-family: Lato-Regular, serif sans-serif;
     font-size: 18px;
     color: black;
     line-height: 1.4;
@@ -157,14 +145,15 @@
   }
 
   th {
-    font-family: Lato-Bold, sans-serif;
-    font-size: 20px;
+    // font-family: Lato-Bold, sans-serif;
+    font-size: 16px;
     line-height: 1.4;
-    background-color: #ffc107aa;
+    background-color: #0183FF;
     text-align: center;
-    font-weight: 600;
+    font-weight: 400;
     margin-top: 8rem !important;
     position: sticky;
+    color: white;
   }
 
   .app-main[_ngcontent-meo-c1] {
@@ -185,7 +174,9 @@
 
   @media (min-width: 1200px) {
     .container {
-      max-width: 1700px;
+      // max-width: 1700px;
+      margin-left:20rem;
+      margin-right: 1rem;
     }
   }
 

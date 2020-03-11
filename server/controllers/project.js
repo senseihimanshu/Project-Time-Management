@@ -6,7 +6,7 @@ class Project {
   }
 
   async create(req, res) {
-    console.log("Create Project req.body", req.body);
+    
     //It must expect array in future!
     // const empObj = await model.employee.get(
     //   { name: req.body.empObjectIdArray },
@@ -126,13 +126,11 @@ class Project {
   }
 
   async show(req, res) {
-    const projectList = await model.project.get({ _id: req.params.id });
-    console.log("in show function", projectList);
-    const projectManager = [req.params.projectManagerIdObj];
+    const projectList =await model.project.get({ _id: req.query.projectId });
+    //console.log("in show function", projectList);
+    //const projectManager = [req.params.projectManagerIdObj];
     //  const manager=await model.employee.get({_id:projectManager});
-    console.log(manager);
-    projectList.projectManager = manager;
-    console.log(projectList);
+   // projectList.projectManager = manager;ole.log(projectList);
     res.send(projectList);
   }
   async update(req, res) {

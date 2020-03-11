@@ -13,6 +13,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   page = 1;
   pageSize = 10;
   items = [];
+  dashboard: any=[{title:"Admin DASHBOARD"}]
   menus: any = [
     {
       title: "Employees",
@@ -75,10 +76,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.tabularData();
-    //   $(document).ready(function () {
-    // //    $('#dtBasicExample').DataTable();
-    //     $('.dataTables_length').addClass('bs-select');
-    //   });
   }
 
   ngOnChanges() {
@@ -95,6 +92,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
         this.usersArray = this.usersArray.filter(item => item.empId != empId);
       console.log(res);
     });
+    alert("employee "+empId+" deleted successfully");
   }
   logout() {
     this._service.deletetoken();
