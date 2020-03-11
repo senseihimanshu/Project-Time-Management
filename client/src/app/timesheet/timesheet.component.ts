@@ -168,8 +168,8 @@ export class TimesheetComponent implements OnInit {
   }
 
   ngOnInit() {
-    let role = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data.role[0];
-    // this.tabularData(role);
+   // let role = this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data.role[0];
+   this.tabularData();
   }
 }
 
@@ -244,7 +244,7 @@ export class TimesheetModal implements OnInit {
     //subscribing to observable for getting the employee
     this.employeeService.getEmployee(empId).subscribe(response => {
       console.log(response);
-      this.projectArray = response.payload.employee.projectId.map(project => {
+      this.projectArray = response.employee.projectId.map(project => {
         return {
           _id: project._id,
           projectName: project.projectName,
