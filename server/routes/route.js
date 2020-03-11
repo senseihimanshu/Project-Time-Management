@@ -21,7 +21,7 @@ module.exports= (app) => {
 	app.get("/api/employee", controller.employees.show);
 	app.delete("/api/employee", controller.employees.delete);
 	//Timesheet Routes
-	app.post('/api/timesheet', controller.timesheet.create)
+	app.post('/api/timesheet', controller.timesheet.create);
 	app.patch("/api/timesheet", controller.timesheet.update);
 	app.get('/api/projectmanager', controller.projectManager.get);
 	//review

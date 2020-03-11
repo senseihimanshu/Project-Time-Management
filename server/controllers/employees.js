@@ -59,7 +59,7 @@ class Employee {
   constructor() {}
 
   async create(req, res) {
-    console.log(req.body);
+ 
     const {
       empId,
       email,

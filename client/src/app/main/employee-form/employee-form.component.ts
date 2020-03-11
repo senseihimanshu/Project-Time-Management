@@ -111,8 +111,8 @@ export class EmployeeFormComponent implements OnInit {
       )
       .subscribe((response: any) => {
         console.log(response);
-        console.log(response.payload.employee);
-        return (this.employee = response.payload.employee);
+        console.log(response.employee);
+        return (this.employee = response.employee);
       });
   }
   

@@ -4,7 +4,7 @@ class employee {
   constructor() {}
 
   async checkUserAuthentication(req, res) {
-    console.log(req.body);
+    
     
     const user = await model.employee.get({ "email":req.body.email,"password":req.body.password},
       { role: 1, name: 1, _id: 1,empId:1 });

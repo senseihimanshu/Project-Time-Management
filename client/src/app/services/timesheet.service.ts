@@ -34,14 +34,34 @@ export class TimesheetService {
   projectService(): any {
     this.http.get("/api/project");
   }
+  // getTimesheet(empId: string): any {
+  //     if (!empId) {
+  //       return this.http.get<any>("http://localhost:3000/timesheet", { ...this.httpOptions });
+  //     }
+  // }
+  getTimesheet(empObjId: any): Observable<any> {
+    console.log(empObjId, 'Inside Service');
+    const params: HttpParams = new HttpParams().set("empObjId", empObjId);
 
-  getTimesheet(empObjId: string): Observable<any> {
-    const params = new HttpParams().set("empObjId", empObjId);
-    return this.http.get("http://localhost:3000/timesheet", {params}).pipe(
-      tap(_ => this.log("Timesheet")),
-      catchError(this.handleError<any>("Some Error Occurred"))
-    );
+    return this.http.get("http://localhost:3000/timesheet", {
+      ...this.httpOptions,
+      params
+    });
   }
+
+  createTimesheet(timesheetData, empObjId): Observable<any> {
+    return this.http.post(
+      "http://localhost:3000/api/timesheet",
+      { ...timesheetData, empObjId },
+      this.httpOptions)
+  }
+  // getTimesheet(empObjId: string): Observable<any> {
+  //   const params = new HttpParams().set("empObjId", empObjId);
+  //   return this.http.get("http://localhost:3000/timesheet", {params}).pipe(
+  //     tap(_ => this.log("Timesheet")),
+  //     catchError(this.handleError<any>("Some Error Occurred"))
+  //   );
+  // }
 
   getAllTimesheet(): Observable<any> {
     return this.http.get("http://localhost:3000/timesheet").pipe(
