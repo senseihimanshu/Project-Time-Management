@@ -14,6 +14,8 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   pageSize = 6;
   items = [];
   pager={};
+  // dashboard: "Admin DASHBOARD"
+  hello: "kritika";
   menus: any = [
     {
       title: "Employees",
