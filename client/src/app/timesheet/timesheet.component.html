@@ -54,8 +54,8 @@
     <div class="row">
       <div class="col-sm-6 col-md-12 col-lg-12">
       <div class="container ">
-        <input type="text" class="input-design" id="myInput" (keyup)="myFunction()" placeholder="Search by Employee Id">
-        <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Name</button></p>
+        <!-- <input type="text" class="input-design" id="myInput" (keyup)="myFunction()" placeholder="Search by Employee Id">
+        <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Name</button></p> -->
         <table class="table table-striped table-fixed" id="myTable">
           <thead>
             <tr>
@@ -70,7 +70,7 @@
             </tr>
           </thead>
           <tbody style="height: 10px !important; overflow: auto" id="adminTable"
-          <!-- *ngFor="let timesheet of timesheetList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"> -->
+           *ngFor="let timesheet of timesheetList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"> -->
 <tr>
   <td>
     {{timesheet.empObjId?.name}}

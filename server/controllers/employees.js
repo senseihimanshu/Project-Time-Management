@@ -140,12 +140,43 @@ class Employee {
 
   async index(req, res) {
    // console.log("dikhaa rha huu");
+     const match = {}
+     const sort  = {}
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
     );
     res.send(employeeList);
     console.log(employeeList);
+    
+// router.get('/posts',authenticate, async (req,res) => {
+//   //const _ispublished = req.query.published;
+//   const match = {}
+//   const sort  = {}
+
+//   if(req.query.published){
+//       match.published = req.query.published === 'true'
+//   }
+
+//   if(req.query.sortBy && req.query.OrderBy){
+//       sort[req.query.sortBy]   = req.query.OrderBy === 'desc' ? -1 : 1
+//   }
+  
+//   try {
+//       await req.user.populate({
+//           path:'posts',
+//           match,
+//           options:{
+//               limit: parseInt(req.query.limit),
+//               skip: parseInt(req.query.skip),
+//               sort
+//           }
+//       }).execPopulate()
+//       res.send(req.user.posts)
+//   } catch (error) {
+//       res.status(500).send()
+//   }
+// })
   }
 
   async show(req, res) {

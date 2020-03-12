@@ -11,7 +11,7 @@ import { EmployeeService } from "../services/employee.service";
 export class AdmindashboardComponent implements OnInit, OnChanges {
   name = "Angular";
   page = 1;
-  pageSize = 10;
+  pageSize = 6;
   items = [];
   menus: any = [
     {
