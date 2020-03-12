@@ -1,12 +1,12 @@
 <div class="wrapper">
   <app-navbar></app-navbar>
    <div class="app-main no-scrollbar-wrap">
-    <app-sidebar [menus]="menus"></app-sidebar>
-  <div class="no-scrollbar">
-   <div class="container-fluid ">
     <div class="row">
-      <div class=" col-lg-6 col-md-6 col-xs-0 col-sm-0 ">
-      <div class="app-employee-form">
+      <div class="col-2 d-none d-lg-block">
+        <app-sidebar [menus]="menus"></app-sidebar>
+      </div>
+  <div class="no-scrollbar">
+    <div class="custom-card col-10">
          <form
          (ngSubmit)="projectCreateOrUpdate(form.value, 'create')"
          #form="ngForm"
@@ -198,12 +198,6 @@
        </div>
      </div>
      </div>
-     </div>
-       </div>
-  </div>
-  </div>
+   
+    
 
-
-
-
-  

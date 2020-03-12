@@ -119,52 +119,7 @@ export class TimesheetComponent implements OnInit {
     this.timesheetService.getTimesheet(empId).subscribe(res => {
       console.log(res);
     });
-    // let obj = this._service.getTimesheet().subscribe(res => {
-    //   this.timesheetList = res;
-    //   console.log(res);
-    //   console.log(this.timesheetList);
-    // });
-    // var curr = new Date(); // get current date
-    // console.log(curr, "todays date");
-    // var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-    // var last = first + 4; // last day is the first day + 6
-
-    // var firstday = new Date(curr.setDate(first)).toUTCString();
-    // var lastday = new Date(curr.setDate(last)).toUTCString();
-    // var secondday = new Date(curr.setDate(first + 1)).toUTCString();
-    // firstday;
-    // "Sun, 06 Mar 2011 12:25:40 GMT";
-    // lastday;
-    // "Sat, 12 Mar 2011 12:25:40 GMT";
-    // console.log("daaayyyyssss", firstday, lastday, secondday);
-    // console.log(obj);
-  // tabularData(role:String) {
-  //   if(role=='Admin'||role=='admin'){
-  //   return this._service.getAllTimesheet().subscribe(res => {
-  //     this.timesheetList = res;
-  //   });
-  // }
-
-  // else{
-  //   const empObjId= this.httpService.jsonDecoder(localStorage.getItem('Authorization')).data._id;
-  //   return this._service.getTimesheet(empObjId).subscribe(res => {
-  //     this.timesheetList = res;
-  //   });
-  // }
-
-    // var curr = new Date(); // get current date
-    // console.log(curr, "todays date");
-    // var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-    // var last = first + 4; // last day is the first day + 6
-
-    // var firstday = new Date(curr.setDate(first)).toUTCString();
-    // var lastday = new Date(curr.setDate(last)).toUTCString();
-    // var secondday = new Date(curr.setDate(first + 1)).toUTCString();
-    // firstday;
-    // "Sun, 06 Mar 2011 12:25:40 GMT";
-    // lastday;
-    // "Sat, 12 Mar 2011 12:25:40 GMT";
-    // console.log("daaayyyyssss", firstday, lastday, secondday);
+    
   }
 
   ngOnInit() {

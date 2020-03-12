@@ -10,7 +10,7 @@ import {
 
 const FEED_API: string = "http://localhost:3000/api/employee";
 const PROJECT_API:string="http://localhost:3000/api/project";
-const SHOW_PROJECTAPI:string="http://localhost:3000/project"
+const SHOW_PROJECTAPI:string="http://localhost:3000/project";
 
 @Injectable({
   providedIn: "root"
