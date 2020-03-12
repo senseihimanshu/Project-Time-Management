@@ -6,12 +6,18 @@
     <div class="row">
       <div class="col-sm-6 col-md-12 col-lg-12">
     <div class="container ">
-      <input type="text" class="input-design" id="myInput" (keyup)="myFunction()" placeholder="Search by Project Name">
-      <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Project Name</button></p>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-search"></i>
+      </span>
+        <input type="text" class="form-control"  id="myInput" (keyup)="myFunction()" placeholder= 'Search by Employee Id'/>
+        
+    </div>
+         <!-- <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Project Name</button></p> -->
       <table class="table table-striped" id="myTable">
         <thead>
           <tr>
-            <th scope="col">Project Name
+            <th scope="col">Project Name<i class="fas fa-sort" (click)="sortTable()"></i>
 
             </th>
             <th scope="col">Project Manager
@@ -76,7 +82,7 @@
       </table>
       <div class="pagination-div">
         <ngb-pagination [collectionSize]="projectsArray.length" [(page)]="page" [maxSize]="5" [rotate]="true"
-          [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+          [ellipses]="false" [pageSize]="pageSize" aria-label="Default pagination" size="sm"></ngb-pagination>
       </div>
     </div>
   </div>

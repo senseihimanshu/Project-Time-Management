@@ -2,20 +2,12 @@ const model = require("../models");
 const schema = require("../schemas");
 class Project {
   constructor() {
+    
   }
 
   async create(req, res) {
     
-    //It must expect array in future!
-    // const empObj = await model.employee.get(
-    //   { name: req.body.empObjectIdArray },
-    //   { _id: 1 }
-    // );
-
-    // const projectManagerIdObj = await model.employee.get(
-    //   {role:"Project Manager"},
-    //   { name: 1 }
-    // );
+   
 
     let projectObj = {
       projectId: req.body.projectId,
@@ -32,7 +24,7 @@ class Project {
     // projectObj.empObjectIdArray = empObjArr;
     // projectObj.projectManager = projectManagerIdObj._id;
 
-    console.log(projectObj, "Abha Rana");
+    console.log(projectObj);
 
     if (await model.project.get({ projectId: projectObj.projectId }))
       return res.status(400).send({
@@ -126,18 +118,36 @@ class Project {
 
   async show(req, res) {
     const projectList =await model.project.get({ _id: req.query.projectId });
+   
     res.send(projectList);
   }
   async update(req, res) {
+    const projectManager=await  model.projectManager.get({managerName:req.body.projectManager});
+    console.log("here",projectManager);
+    let projectUpdatedObj = {
+     
+      projectName: req.body.projectName,
+      projectManager: projectManager.id,
+      clientName: req.body.clientName,
+      status: req.body.status,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      empObjectIdArray: req.body.members,
+      status: req.body.status
+    };
     //Expecting that req.body will have required details with same keys!!! (Just to save time)
+      
+                           
+                           
     const project = await model.project.update(
-      { _id: req.body.id },
-      { $set: { ...req.body } }
+      { _id: req.query.id },
+      projectUpdatedObj
     );
     res.send({
       success: true,
       payload: {
-        data: project
+        data: project,
+        messsage:"project updated successfully"
       }
     });
   }

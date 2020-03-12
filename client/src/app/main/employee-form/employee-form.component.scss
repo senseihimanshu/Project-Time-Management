@@ -27,16 +27,22 @@ help-block{
     color:red!important;
 }
 .form-body{
-    margin-left:27rem;
-    border-radius: 2rem;
-    background-color:#1d1d1d;
-    color:white;
-    margin-top:2rem;
-    height:auto;
-    max-width:100%;
-
+    // margin-left:8rem;
+    // border-radius: 2rem;
+    background-color:whitesmoke;
+    padding:50px;
+    // color:white;
+    // margin-top:2rem;
+     height:fit-content;
+     min-width:70vh;
 }
-
+.custom-card {
+    box-shadow: 2px 2px 2px 2px rgba(50, 50, 50, 0.1);
+    background:white;
+    padding: 10px;
+    margin-left:10rem;
+    
+}
 .form-control,.custom-select
 {
     display: block;
@@ -50,9 +56,14 @@ help-block{
   color: red;
 }
 .btn{
-    width:40%;
-    margin-left:20%;
+    width:30%;
+   margin-left:40%;
     outline-color: #0183FF;
     outline-style: auto;
+  
 
+}
+.button-parent{
+    margin-left:20%;
+    min-width:40px;
 }

@@ -7,7 +7,7 @@ import { SendHttpRequestService } from "../send-http-request.service";
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss']
+  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
   formType: string;
