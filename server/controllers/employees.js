@@ -5,7 +5,7 @@ const nodemailer=require('nodemailer');
 var generator = require('generate-password');
 const saltRounds = 10;
 var generatePassword = require('password-generator');
-
+const pagination = require("../pagignation");
 // var password = generator.generateMultiple(3,{
 //     length: 10,
 //     numbers: true
@@ -139,13 +139,10 @@ class Employee {
   }
 
   async index(req, res) {
-   // console.log("dikhaa rha huu");
-     const match = {}
-     const sort  = {}
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    );
+    ) ;
     res.send(employeeList);
     console.log(employeeList);
     
@@ -269,5 +266,33 @@ class Employee {
       }
     });
   }
+
+
+  
+  async index(req,res){
+
+    if(jwtHandler.tokenVerifier(req.headers.token)){
+        const employeeList = await model.employee.get();
+        res.status(200).send(employeeList);
+        // get page from query params or default to first page
+        console.log(employeeList.length, "---------------------->>> here")
+        const page = parseInt(req.query.page) || 1;
+
+        // get pager object for specified page
+        const pageSize = 10;
+
+        const pager = await pagination.paginate(employeeList.length, page, pageSize);
+        console.log(pager, "----------->>>> pager")
+
+        // get page of items from items array
+        const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
+
+
+        // return pager object and current page of items
+        return res.json({ pager, pageOfItems });
+
+    }
+    else{
+        res.status(401)}}
 }
 module.exports = new Employee();

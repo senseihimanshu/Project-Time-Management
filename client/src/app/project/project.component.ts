@@ -92,9 +92,7 @@ export class ProjectComponent implements OnInit, OnChanges {
       setTimeout(() => {
         this.message = null;
       }, 5000);
-      this.projectsArray = this.projectsArray.filter(item => item._id != id);
-      console.log("at filtration");
-      console.log(res);
+      this.projectsArray = this.projectsArray.filter(project =>project.project._id != id);
     });
   }
   logout() {

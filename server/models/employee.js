@@ -29,8 +29,15 @@ class Employee{
     }
     //getting the data of all the employees
     async log(criteria={},columns={}){
-      return this.model.find(criteria,columns);
+      let match=1;
+      let sort=2;
+      console.log("inside request models body")
+      //console.log(req);
+      return this.model.find(criteria,columns);//.limit(match).skip(sort);
     }
+    async getEmp(criteria={}, columns={}){
+     return this.model.find({"name": `/^$columns/i`}).exec(callback);
+  }
 }
 
 const employeeObj = new Employee();
