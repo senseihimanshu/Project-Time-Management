@@ -54,7 +54,7 @@
                   <label for="managers">Project Manager:</label>
 
                   <mat-select class="browser-default custom-select" name="managers"
-                    [ngModel]="project && project.projectManager[0]" [disabled]="formType ==='get'"
+                    [ngModel]="project && project.projectManager" [disabled]="formType ==='get'"
                     (ngModelChange)="addProjectManager($event)" #projectManagerInput="ngModel" required minlength="2"
                     maxlength="20" multiple>
                     <mat-option *ngFor="let emp of empList" [value]="emp._id">{{emp.name}}</mat-option>
@@ -84,7 +84,7 @@
                 <div class="h5 mb-4 form-group was-validated" [class.has-error]="statusInput.touched">
                   <label class="control-label" for="status">Status:</label>
 
-                  <select class="browser-default custom-select" name="status" [(ngModel)]="project && project.status[0]"
+                  <select class="browser-default custom-select" name="status" [(ngModel)]="project && project.status"
                    [disabled]="formType === 'get'" #statusInput="ngModel">
                     <option value="" disabled>Choose option</option>
                     <option value="In Progress" selected>In Progress</option>
