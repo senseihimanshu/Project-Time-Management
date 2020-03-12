@@ -29,6 +29,10 @@
     align-items: center;
 
   }
+  .pagination:active{
+    background-color: #0183FF;
+  }
+ 
 
   .para-design {
     color: black;
@@ -38,7 +42,7 @@
 
   input {
     width: 100%;
-    max-width: 250px;
+    max-width: 240px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -48,7 +52,7 @@
   }
 
   input:focus {
-    background-color: whitesmoke
+    background-color: whitesmoke;
   }
 
   input::placeholder {
@@ -56,7 +60,6 @@
     font-weight: 300;
     font-size: 15px;
   }
-
 .wrapper{
  display: flex;
  flex-direction: column;
@@ -114,18 +117,14 @@ td{
  @media (min-width: 1200px){
  .container {
      //max-width: 1500px;
-    margin-top:1rem;
-    margin-left: 14.5rem;
+    margin-left: 20rem;
     margin-right: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+
  }
 }
 
 .table{
   margin-top: 2%;
-  margin-left:2%;
-  margin-right:2%;
 }
 
 .some-horizontal-container {
@@ -137,10 +136,25 @@ td{
 //   margin-top: 1.5rem;
 
 // }
-.form-control{
+.input-group{
   float:right !important;
-  border: ridge;
+  align-items: center;
+  justify-content: flex-end;
+}
+.input-group > .form-control
+{ border-style: ridge;
+  border-radius: unset;
+  border-color: rgb(134, 142, 156);
+  margin-bottom: 0.5rem;
 
+}
+.input-group-addon
+{
+  color:rgb(24, 161, 216);
+}
+.fa-sort:before
+{
+  margin-left:0.5rem;
 }
 #myInput:active
 {
