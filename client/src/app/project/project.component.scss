@@ -28,7 +28,7 @@
 
   .pagination-div {
     display: flex !important;
-    justify-content: center;
+    justify-content: flex-end;
 
   }
 
@@ -40,7 +40,9 @@
     align-items: center;
 
   }
-
+  .pagination:active{
+    background-color: #0183FF;
+  }
   .page-link:hover {
     z-index: 2;
     color: #0056b3;
@@ -177,6 +179,7 @@
       // max-width: 1700px;
       margin-left:20rem;
       margin-right: 1rem;
+      margin-top: 4rem;
     }
   }
 
@@ -192,7 +195,7 @@
 
   input {
     width: 100%;
-    max-width: 350px;
+    max-width: 240px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -202,13 +205,13 @@
   }
 
   input:focus {
-    background-color: lightblue;
+    background-color: whitesmoke;
   }
 
   input::placeholder {
     color: black;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 15px;
   }
 
   /*style for form field ends here*/
@@ -224,4 +227,28 @@
 
   .some-horizontal-container {
     pointer-events: none;
+  }
+  .input-group{
+    float:right !important;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .input-group > .form-control
+  { border-style: ridge;
+    border-radius: unset;
+    border-color: rgb(134, 142, 156);
+    margin-bottom: 0.5rem;
+  
+  }
+  .input-group-addon
+  {
+    color:rgb(24, 161, 216);
+  }
+  .fa-sort:before
+  {
+    margin-left:0.5rem;
+  }
+  #myInput:active
+  {
+  background-color: white;
   }

@@ -33,6 +33,10 @@
     align-items: center;
 
   }
+  .pagination:active{
+    background-color: #0183FF;
+  }
+ 
 
   .para-design {
     color: black;
@@ -42,7 +46,7 @@
 
   input {
     width: 100%;
-    max-width: 250px;
+    max-width: 240px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -52,7 +56,9 @@
   }
 
   input:focus {
+
     background-color: lightblue;
+
   }
 
   input::placeholder {
@@ -60,7 +66,6 @@
     font-weight: 500;
     font-size: 20px;
   }
-
 .wrapper{
  display: flex;
  flex-direction: column;
@@ -138,8 +143,10 @@ td{
  @media (min-width: 1200px){
  .container {
      //max-width: 1500px;
+
     margin-left: 6rem;
     margin-right: 1rem;
+
  }
 }
 
@@ -150,6 +157,38 @@ td{
 .some-horizontal-container {
   pointer-events: none;
 }
+
 .profile{
   margin-right: 0.5rem;
+}
+
+// .card{
+//   width: 75rem;
+//   height: fit-content;
+//   margin-top: 1.5rem;
+
+// }
+.input-group{
+  float:right !important;
+  align-items: center;
+  justify-content: flex-end;
+}
+.input-group > .form-control
+{ border-style: ridge;
+  border-radius: unset;
+  border-color: rgb(134, 142, 156);
+  margin-bottom: 0.5rem;
+
+}
+.input-group-addon
+{
+  color:rgb(24, 161, 216);
+}
+.fa-sort:before
+{
+  margin-left:0.5rem;
+}
+#myInput:active
+{
+background-color: white;
 }
