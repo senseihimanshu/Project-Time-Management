@@ -10,9 +10,10 @@ module.exports= (app) => {
 	//Employees
 	app.post("/employees",controller.employees.create) ;
 	app.get("/employees",controller.employees.index) 
-	app.get("/employees/:id",controller.employees.show) 
+	//app.get("/employees/:id",controller.employees.show) 
     app.put("/employees/:id",controller.employees.update) ;
 	app.delete("/employees/:id",controller.employees.delete);
+	app.get("/employees/search",controller.employees.searchEmployee);
 	app.post("/login", controller.login.checkUserAuthentication);
 	app.get("/timesheet",controller.timesheet.show);
 	// app.post("./timesheet",controller.timesheet.create);

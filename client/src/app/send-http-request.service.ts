@@ -111,6 +111,26 @@ export class SendHttpRequestService {
     localStorage.removeItem("Authorization");
   }
   
+  // sortData()
+  // {
+  //   const token = localStorage.getItem('Authorization');
+      
+  //   // //Decode JWT and return the Payload in JSON Format
+  //  const decodeToken= this.jsonDecoder(token);
+  //  console.log(decodeToken);
+  //        const empId=decodeToken.data.empId;
+  //      console.log(empId);
+  //     const params = new HttpParams().set("empId", empId);
+  //     console.log(params); 
+  //     if (!empId) {
+  //       return this.http.get<any>("http://localhost:3000/employees/sort", { ...this.httpOptions });
+  //     }
+  //   return this.http.get<any>("http://localhost:3000/employees/sort",{ ...this.httpOptions, params }).pipe(
+  //     tap(_ => this.log("Log In")),
+  //     catchError(this.handleError<any>('Some Error Occurred'))
+  //   );
+  // }
+  
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   

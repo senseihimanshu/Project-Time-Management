@@ -65,6 +65,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     private employeeService: EmployeeService
   ) {}
   usersArray: any;
+  user:any;
   tabularData() {
     let obj = this._service.showEmployees().subscribe(res => {
       this.usersArray = res;
@@ -102,20 +103,23 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   }
 
   myFunction() {
-    // Declare variables
+
+
+    //Declare variables
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
+    let obj = this.employeeService.searchEmp(input.value).subscribe(res => {
+      this.user= res;
+      console.log(res);
+    });
     table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
-    console.log(input, "hgcfdfcj");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
+     tr = table.getElementsByTagName("tr");
+    // // Loop through all table rows, and hide those who don't match the search query
+     for (i = 0; i < tr.length; i++) {
+     td = tr[i].getElementsByTagName("td")[0];
       if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+           txtValue = td.textContent || td.innerText;
+           if (txtValue.toUpperCase().indexOf(this.user) > -1) {
           tr[i].style.display = "";
         } else {
           tr[i].style.display = "none";
@@ -124,6 +128,15 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     }
   }
   sortTable() {
+
+  //   let obj = this._service.sortData().subscribe(res => {
+  //     this.usersArray = res;
+  //     console.log(res);
+
+  //     console.log(this.usersArray.length)
+  //   });
+  //   console.log(obj);
+  // }
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("myTable");
     switching = true;

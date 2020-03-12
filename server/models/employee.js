@@ -14,6 +14,7 @@ class Employee{
    }
    //saves the data of newly created employee
     async save(employeeObj){
+      console.log(employeeObj, 'new employee created!');
       const employee = await this.model.create(employeeObj);
        return employee;
     }
@@ -27,8 +28,19 @@ class Employee{
     }
     //getting the data of all the employees
     async log(criteria={},columns={}){
-      return this.model.find(criteria,columns);
+       const empObj= await this.model.find(criteria,columns).sort({"name": 1 });
+        console.log(empObj);
+      return empObj;
     }
+    async getforsearch(criteria={}, columns={})
+    {
+      
+      console.log(criteria);
+      return this.model.find(criteria, columns).sort({name: 1});
+}
+  async getEmp(criteria={}, columns={}){
+     return this.model.find({"name": `/^$columns/i`}).exec(callback);
+  }
 }
 
 const employeeObj = new Employee();
