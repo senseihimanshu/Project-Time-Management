@@ -4,38 +4,49 @@
 }
 
 .pagination {
-  padding-left: 0;
-  list-style: none;
-  border-radius: 0.25rem;
-  align-items: center;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    align-items: center;
+
+  }
+  .pagination:active{
+    background-color: #0183FF;
+  }
+ 
+
+  // .para-design {
+  //   color: black;
+  //   font-size: 20px;
+  //   margin-top: 1rem;
+  // }
+
+  input {
+    width: 100%;
+    max-width: 240px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-color: black;
+    border-radius: 10px;
+    background: white;
+  }
+
+  input:focus {
+    background-color: whitesmoke;
+  }
+
+  input::placeholder {
+    color: black;
+    font-weight: 300;
+    font-size: 15px;
+  }
+.wrapper{
+ display: flex;
+ flex-direction: column;
+ overflow-y: hidden;
 }
 
-input {
-  width: 100%;
-  max-width: 250px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border-color: black;
-  border-radius: 10px;
-  background: white;
-}
-
-input:focus {
-  background-color: whitesmoke;
-}
-
-input::placeholder {
-  color: black;
-  font-weight: 300;
-  font-size: 15px;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
-}
 .main {
   display: flex;
 }
@@ -74,8 +85,9 @@ th {
   margin-top: 8rem !important;
   position: sticky;
   color: white;
-}
-// .app-main[_ngcontent-meo-c1] {
+ }
+
+//  .app-main[_ngcontent-meo-c1] {
 //   padding: 0 8.4rem;
 //   min-height: 8vh !important;
 //   display: -webkit-box;
@@ -85,9 +97,22 @@ th {
 //   flex-direction: column;
 //   justify-content: space-around;
 //   text-align: justify;
-// }
-tr {
-  height: 30px;
+//  }
+
+ tr{
+   height: 30px;
+ }
+ @media (min-width: 1200px){
+ .container {
+     //max-width: 1500px;
+    margin-left: 20rem;
+    margin-right: 1rem;
+
+ }
+}
+
+.table{
+  margin-top: 2%;
 }
 @media (min-width: 1200px) {
   //  .container {
@@ -99,13 +124,19 @@ tr {
   //     // padding-right: 2rem;
   //  }
 }
+.input-group{
+  float:right !important;
+  align-items: center;
+  justify-content: flex-end;
+}
+.input-group > .form-control
+{ border-style: ridge;
+  border-radius: unset;
+  border-color: rgb(134, 142, 156);
+  margin-bottom: 0.5rem;
+  border-width: thin;
 
-// .table{
-//   // margin-top: 2%;
-//   margin-left:5%;
-//   margin-right:5%;
-// }
-
+}
 .custom-card{
   margin-left: 3rem;
   margin-right: 1.5rem;
@@ -117,4 +148,16 @@ tr {
 }
 #myInput:active {
   background-color: white;
+}
+.input-group-addon
+{
+  color:rgb(24, 161, 216);
+}
+.fa-sort:before
+{
+  margin-left:0.5rem;
+}
+#myInput:active
+{
+background-color: white;
 }
