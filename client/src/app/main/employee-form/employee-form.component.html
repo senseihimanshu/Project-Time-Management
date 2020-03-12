@@ -1,35 +1,37 @@
 <div class="wrapper">
-  <div>
-    <app-navbar></app-navbar></div>
- 
-  <div class="main">
-    <app-sidebar [menus]="menus"></app-sidebar>
-    
-    <div class="app-employee-form">
-      <form
-        class="text-left border border-light p-5 col-xs-8 col-sm-8 col-lg-8 col-md-8 form-body"
-        #form="ngForm"
-        (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
-        novalidate
-      >
-        <div
-          class="h4 mb-4
-           d-flex justify-content-between font-weight-bold"
-          style="font-size: 2rem;"
-        >
-          {{
-            typeOfForm === "get"
-              ? "Employee Data for " + employee?.empId
-              : typeOfForm === "create"
+  
+
+   <app-navbar></app-navbar>
+    <div class="row">
+      
+      <div class="col-2 d-none d-lg-block">
+        <app-sidebar [menus]="menus"></app-sidebar>
+     </div>
+     <div class="custom-card col-6">
+   
+       <div class="app-employee-form"> 
+         <form
+          class="form-body"
+          #form="ngForm"
+           (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
+           novalidate>
+            <div
+             class="h4 mb-4
+               d-flex justify-content-between font-weight-bold"
+               style="font-size: 2rem;"
+             >
+             {{
+               typeOfForm === "get"
+               ? "Employee Data for " + employee?.empId
+               : typeOfForm === "create"
               ? "Create Employee"
               : "Update Employee"
-          }}
+            }}
           
         </div>
   
-        <div class="h4 mb-4 was-validated
-        ">
-           <label for="empId">Employee ID: </label>
+        <div class="h4 mb-4 was-validated">
+          <label for="empId">Employee ID: </label>
          
          <input
             type="text"
@@ -42,30 +44,26 @@
             [readonly]="!(typeOfForm === 'create')"
             #empId="ngModel"
           />
-          
-         <!--  <div class="error" *ngIf="{hidden: !(empId.errors.required && empId.touched)}">
-            Choose a EmpId
-          </div> -->
-        </div>  
+      </div>  
         
   
-        <div class="form-group h4 mb-4 was-validated" [class.has-error]="email.invalid && email.touched"
-        >
-           <label class="control-label"for="email">Email Id: </label>
+      <div class="form-group h4 mb-4 was-validated" [class.has-error]="email.invalid && email.touched"
+      >
+        <label class="control-label"for="email">Email Id: </label>
   
-          <input
-            type="text"
-            id="email"
-            class="form-control"
-            placeholder="Email"
-            [(ngModel)]="employee && employee.email"
-            name="email"
-            required
-            minlength="2"
-            maxlength="30"
-            [disabled]="typeOfForm === 'get'"
-            #email="ngModel"
-          />
+        <input
+          type="text"
+          id="email"
+          class="form-control"
+          placeholder="Email"
+          [(ngModel)]="employee && employee.email"
+          name="email"
+          required
+          minlength="2"
+          maxlength="30"
+          [disabled]="typeOfForm === 'get'"
+          #email="ngModel"
+        />
          <p  *ngIf="email.invalid && email.touched">Email is required</p>
            
         </div>
@@ -84,13 +82,11 @@
              name="name"
             required 
             maxlength="30" minlength="2"
-           
-            [disabled]="typeOfForm === 'get'"
+           [disabled]="typeOfForm === 'get'"
             #empName="ngModel"
           />
          <p *ngIf="empName.touched && empName.invalid">Required</p>
-          
-      </div>
+        </div>
        
         <div class="form-group h4 mb-4 was-validated" [class.has-error]="addressInput.invalid && addressInput.touched"
         >
@@ -189,10 +185,10 @@
           </select>
           <p  *ngIf="role.touched">Role is required</p>
         </div>
-        <div class="button-parent" *ngIf="formType !== 'get'">
+        <div class="button-parent" *ngIf="formType !=='get'">
           <button
             mdbBtn
-            class=" btn logout text-center m-4 btnsstyle"
+            class=" btn logout text-center m-4"
             mdbWavesEffect
             
            
@@ -206,7 +202,7 @@
           <button
             type="button"
             mdbBtn
-            class=" btn logout text-center m-4 btnsstyle"
+            class=" btn logout text-center m-4"
             mdbWavesEffect
             [routerLink]="['/admin']"
           >
@@ -217,7 +213,5 @@
       </form>
       <!-- {{ form.value | json }} -->
     </div>
-  
- </div> 
-
- 
+  </div>
+</div>

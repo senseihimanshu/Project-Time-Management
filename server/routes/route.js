@@ -5,7 +5,7 @@ module.exports= (app) => {
 	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
 	app.get("/project",controller.project.show);
-	app.put("/project/:id",controller.project.update);
+	app.put("/api/project",controller.project.update);
 	app.delete("/api/project",controller.project.delete);
 	//Employees
 	app.post("/employees",controller.employees.create) ;
@@ -30,6 +30,13 @@ module.exports= (app) => {
 	app.put("/review",controller.timesheet.modify);
 	app.get("/clevel/project",controller.cleveldata.projectsStatusData);
 	app.get("/clevel/timesheet",controller.cleveldata.timesheetsStatusData);
+
+
+
+
+
+	app.get('/api/timesheet', controller.timesheet.index);
+	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
 }
 
 
