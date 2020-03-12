@@ -1,0 +1,45 @@
+<div class="app-timesheet">
+    <div class="wrapper">
+      <app-navbar></app-navbar>
+    </div>
+    
+    <div class="timesheet-table__wrapper">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    
+      <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+          Timesheets
+          <span class="table-add float-right mb-3 mr-2">
+            <a class="text-success" (click)="openDialog()">
+              <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
+            </a>
+          </span>
+        </h3>
+        <div class="card-body">
+          <div id="table" class="table-editable">
+            <table
+              class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
+            >
+              <thead>
+                <td class="text-center">Begin Date</td>
+                <td class="text-center">End Date</td>
+                <td class="text-center">State</td>
+                <td class="text-center">View</td>
+                <td class="text-center">Edit</td>
+                <!-- <td class="text-center">Delete</td> -->
+              </thead>
+              <tr *ngFor="let response of response">
+                <td class="text-center">{{ response.startDate | date }}</td>
+                <td class="text-center">{{ response.endDate | date }}</td>
+                <td class="text-center">{{ response.state }}</td>
+                <td><a class="view-btn" [routerLink]="['/timesheet', response._id]"><i class="fas fa-eye"></i></a></td>
+                <td><a class="edit-btn" (click)="openDialog(response._id)"><i class="fas fa-pencil-alt"></i></a></td>
+                <!-- <td><a class="delete-btn"><i class="fas fa-trash"></i></a></td> -->
+            </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+  

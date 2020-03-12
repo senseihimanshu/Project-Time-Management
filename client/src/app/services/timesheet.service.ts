@@ -42,14 +42,18 @@ export class TimesheetService {
   //       return this.http.get<any>("http://localhost:3000/timesheet", { ...this.httpOptions });
   //     }
   // }
-  getTimesheet(empObjId: any): Observable<any> {
+  getTimesheet(empObjId: any, type: string = null): Observable<any> {
     console.log(empObjId, 'Inside Service');
-    const params: HttpParams = new HttpParams().set("empObjId", empObjId);
+    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type);
 
     return this.http.get("http://localhost:3000/timesheet", {
       ...this.httpOptions,
       params
     });
+  }
+
+  getTimesheetUsingRouteParams(timesheetId: string): Observable<any>{
+    return this.http.get(`http://localhost:3000/api/timesheet/${timesheetId}`);
   }
 
   createTimesheet(timesheet: any): Observable<any> {
@@ -87,5 +91,10 @@ export class TimesheetService {
   }
   private log(message: string) {
     console.log(message);
+  }
+
+  private getSpecificTimesheet(empId: string, startDate: any){
+    const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', startDate);
+    // this.http.get(TIMESHEET_API, { params, httpOptions });
   }
 }

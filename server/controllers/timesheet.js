@@ -6,8 +6,6 @@ class Timesheet {
   async create(req, res) {
     const timesheetToSave = req.body;
 
-    console.log(req.body);
-
     //Creating a new timesheet
     const timesheetFromDatabase = await model.timesheet.save(timesheetToSave);
     // console.log(updatedTimesheetObjId, 'updatedTimesheetObjId');
@@ -27,10 +25,9 @@ class Timesheet {
 
             console.log(week.projectId, projectManager, "Here man!");
             await model.projectManager.update(
-              { _id: projectManager },
+              { managerId: projectManager },
               { $push: { timesheetIds: timesheetFromDatabase.timesheet._id } }
             );
-
             await model.employee.update(
               { _id: timesheetToSave.empObjId },
               { $push: { timesheet: timesheetFromDatabase.timesheet._id } }
@@ -39,7 +36,6 @@ class Timesheet {
         })
       );
     }
-    console.log("Reached Here @timesheet.js/line26");
 
     res.send({
       success: true,
@@ -64,6 +60,14 @@ class Timesheet {
         }
       });
     }
+
+    if(req.query.type === 'week'){
+      timesheet = timesheet.map((timesheetWeek) => {
+        return { ...timesheetWeek.toObject(), week: undefined };
+      });
+      console.log(timesheet);
+    }
+
     if (!timesheet) {
       return res.status(200).send({
         success: true,
@@ -86,10 +90,38 @@ class Timesheet {
   }
 
   async index(req, res) {
-    const timesheetList = await model.timesheet.get();
-    console.log(timesheetList, "all timesheet");
-    res.send(timesheetList);
+    const { empId, startDate } = req.body;
+
+    const timesheetToUpdate = await model.timesheet.getTimesheetWeek(empId, startDate);
+
+    return res.send({
+      success: true,
+      payload: {
+        data: {
+          timesheetToUpdate
+        },
+        message: 'Timesheet for update retrieved successfully'
+      }
+    });
   }
+
+
+  async getTimesheetUsingRouteParams(req, res){
+    const timesheetId = req.params.id;
+
+    const timesheet = await model.timesheet.get({ _id: timesheetId });
+    console.log(timesheet, 'timesheet', timesheetId, 'timesheetId');
+    return res.send({
+      success: true,
+      payload: {
+        data: {
+          timesheet
+        }
+      }
+    })
+  }
+
+
   async update(req, res) {
     const col = { ...req.body.week };
     console.log(col);

@@ -1,0 +1,48 @@
+.add-icon{
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+  }
+  
+  .card{
+    width: 100%;
+  }
+  
+  .card-body{
+    padding: 0;
+  }
+  
+  .table-bordered{
+    border: none;
+  }
+  
+  thead{
+    background-color: #0183FF;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: white;
+  }
+  td{
+    border: none;
+    font-size: 1.4rem;
+    padding: 1.8rem 0;
+  }
+  
+  tr:nth-child(2n+1){
+    background-color: #cdcdcda0;
+  }
+  
+  .timesheet-table__wrapper{
+    display: flex;
+  }
+  
+  @media(max-width: 800px){
+    .card-body{
+      overflow-x: scroll;
+    }
+  }
+  
+  
+  
+  
+  

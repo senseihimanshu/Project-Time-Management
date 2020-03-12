@@ -1,63 +1,53 @@
-<div class="wrapper">
-  <app-navbar></app-navbar>
-</div>
-
-<div class="timesheet-table__wrapper">
-  <app-sidebar [menus]="menus"></app-sidebar>
-
-  <div class="card">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
-      Timesheets
-      <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="openDialog()">
-          <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
-        </a>
-      </span>
-    </h3>
-    <div class="card-body">
-      <div id="table" class="table-editable">
-        <table
-          class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
-        >
-          <thead>
-            <td class="text-center">Employee Name</td>
-            <td class="text-center">Project</td>
-            <td class="text-center">Client Name</td>
-            <td class="text-center">Task Type</td>
-            <td class="text-center">Date</td>
-            <td class="text-center">Hours</td>
-            <td class="text-center">Billable</td>
-            <td class="text-center">Status</td>
-          </thead>
-
-          <tr *ngFor="let timesheet of timesheetList; let id = index">
-            <td>
-              {{timesheet.empObjId?.name}}
-            </td>
-            <td>
-              {{ timesheet.week[0]?.projectId?.projectName}}
-            </td>
-            <td>
-              {{ timesheet.customerName }}
-            </td>
-            <td>
-              {{ timesheet.week[0]?.taskType }}
-            </td>
-            <td>
-              {{ timesheet.week[0]?.date | date }}
-            </td>
-            <td>
-              {{ timesheet.week[0]?.hours }}
-            </td>
-            <td>
-              {{ timesheet?.billable }}
-            </td>
-            <td>
-              {{ timesheet?.status }}
-            </td>
-          </tr>
-        </table>
+<div class="app-timesheet">
+  <div class="wrapper">
+    <app-navbar></app-navbar>
+  </div>
+  
+  <div class="timesheet-table__wrapper">
+    <app-sidebar [menus]="menus"></app-sidebar>
+  
+    <div class="card">
+      <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+        Timesheets
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="openDialog()">
+            <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
+          </a>
+        </span>
+      </h3>
+      <div class="card-body">
+        <div id="table" class="table-editable">
+          <table
+            class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
+          >
+            <thead>
+              <td class="text-center">Employee Name</td>
+              <td class="text-center">Project</td>
+              <td class="text-center">Client Name</td>
+              <td class="text-center">Task Type</td>
+              <td class="text-center">Date</td>
+              <td class="text-center">Hours</td>
+              <td class="text-center">Billable</td>
+              <td class="text-center">Status</td>
+            </thead>
+            
+            <ng-template ngFor let-response [ngForOf]="response">
+              <tr *ngFor="let week of response.week; let id=index;">
+                <ng-template [ngIf]="response.week[id].projectId">
+                  <td class="text-center">{{ response.empObjId.name }}</td>
+                  <td class="text-center">{{ response.week[id].projectId?.projectName }}</td>
+                  <td class="text-center">{{ response.week[id].clientName }}</td>
+                  <td class="text-center">{{ response.week[id].taskType }}</td>
+                  <td class="text-center">{{ response.week[id].date | date }}</td>
+                  <td class="text-center">{{ response.week[id].hours }}</td>
+                  <td class="text-center">{{ response.week[id].billable }}</td>
+                  <td class="text-center">{{ response.week[id].status }}</td>
+                </ng-template>
+                </tr>
+            </ng-template>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
+  </div>    
 </div>

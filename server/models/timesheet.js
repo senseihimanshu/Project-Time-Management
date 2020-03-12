@@ -13,9 +13,13 @@ class Timesheet{
       const timesheetArray = await this.model.find(criteria,columns).populate({
           path: 'week.projectId',
           model: 'project'
-      });
+      }).populate('empObjId');
       console.log(timesheetArray);
       return timesheetArray;
+   }
+
+   async getTimesheetWeek(criteria = {}, columns = {}){
+    return this.model.findOne(criteria, columns);
    }
 
    async save(timesheetObj){
@@ -25,7 +29,7 @@ class Timesheet{
         return { timesheet, typeOfOperation: 'update', message: 'Timesheet Updated Successfully' };
       }
       
-      timesheet = await this.model.create({empObjId: timesheetObj.empObjId}, timesheetObj);
+      timesheet = await this.model.create(timesheetObj);
       return { timesheet, typeOfOperation: 'create', message: 'Timesheet Created Successfully' };
     }
 

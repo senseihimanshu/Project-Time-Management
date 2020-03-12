@@ -14,13 +14,18 @@ module.exports = {
   endDate: {
     type: Date
   },
+  state: {
+    type: String,
+    enum: [ 'approved', 'rejected', 'submit'],
+    default: 'submit'
+  },
   week: [
     {
       projectId: {
         type: ObjectId,
         ref: "project"
       },
-      date: { type: Date, required: true },
+      date: { type: Date },
       hours: { type: Number },
       taskType: {
         type: String,

@@ -1,10 +1,10 @@
 <div class="modal-wrapper">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">New Timesheet</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ (modalType === "update")? 'Update Timesheet' : 'New Timesheet' }}</h4>
   </div>
   <div class="modal-body">
-    <form #form="ngForm" novalidate>
-      <div class="form-group">
+    <form #form="ngForm" (ngSubmit)="handleSave(form.value)" novalidate>
+      <div class="form-group" *ngIf="modalType !== 'update'">
         <label for="date">Select the week</label>
         <div class="input-group">
           <input
@@ -33,12 +33,12 @@
       <div class="disabled-inputs">
         <label for="date">Start Date</label>
         <span
-          ><input type="text" name="startDate" [(ngModel)]="startDate" disabled
+          ><input type="text" name="startDate" [ngModel]="modalType === 'update'? (response && (response.startDate | date)) : startDate" readonly
         /></span>
         <!-- {{ selectedDate.value | json }} -->
         <label for="date">End Date</label>
         <span
-          ><input type="text" name="endDate" [(ngModel)]="endDate" disabled
+          ><input type="text" name="endDate" [ngModel]="modalType === 'update'? (response && (response.endDate | date)) : endDate" readonly
         /></span>
       </div>
     </form>
@@ -60,26 +60,26 @@
                 <th scope="col" class="text-center">Billable</th>
                 <th scope="col" class="text-center">Status</th>
               </tr>
+
               <tr *ngFor="let date of datesArray; let id = index">
                 <td>
                   <span>
                     <select
                       name="project-{{id}}"
-                      id="project"
-                      [ngModel]="project && project._id"
+                      [ngModel]="response?.week[id]?.projectId?._id"
                       (ngModelChange)="handleProjectData(form.value)"
                     >
+                    <option [ngValue]="null">Choose Among These</option>
                       <option
                         *ngFor="let project of projectArray"
-                        [ngValue]="project"
+                        [ngValue]="project?._id"
                         >{{ project.projectName }}</option
                       >
                     </select>
                   </span>
                 </td>
-
                 <td>
-                  {{ project && project[('project-'+ id)] && project[('project-'+ id)].clientName }}
+                  {{ (returnClient(form.value['project-'+id])) }}
                   <!-- <select name="customer_name-{{id}}" id="customer_name" [ngModel]="project && project['project-0.clientName']" disabled>
                     <option [value]="project['project-{{id}}'].clientName" selected></option>
                   </select> -->
@@ -87,7 +87,7 @@
                 <td>
                   <select
                     name="task-type-{{id}}"
-                    [ngModel]="timesheet?.taskType"
+                    [ngModel]="response?.week[id]?.taskType"
                     required
                     #taskType="ngModel"
                   >
@@ -106,7 +106,7 @@
                 </td>
                 <td>
                   <span
-                    ><input name="hours-{{id}}" [(ngModel)]="project && project['hours-'+id]" type="number" min="0" max="100"
+                    ><input name="hours-{{id}}" [ngModel]="response?.week[id]?.hours" (ngModelChange)="handleProjectData(form.value)" type="number" min="0" max="100"
                   /></span>
                 </td>
                 <td>
@@ -114,7 +114,7 @@
                     <input
                       name="billable-{{id}}"
                       type="checkbox"
-                      [ngModel]="timesheet?.billable || false"
+                      [ngModel]="response?.week[id]?.billable || false"
                     />
                   </span>
                 </td>
@@ -143,7 +143,7 @@
                 Submit
               </button>
             </div>
-
+            {{ form.value | json}}
           </form>
         </div>
       </div>

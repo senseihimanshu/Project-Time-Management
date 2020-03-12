@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 
 //3rd party
 import { MatPaginator } from "@angular/material/paginator";
@@ -17,6 +17,8 @@ import { EmployeeService } from "../../services/employee.service";
 import { SendHttpRequestService } from "../../services/send-http-request.service";
 import { TimesheetService } from "./../../services/timesheet.service";
 
+import { MAT_DIALOG_DATA } from '@angular/material';
+
 export interface ITaskType {
   key: string;
   value: string;
@@ -32,11 +34,16 @@ export class TimesheetModal implements OnInit {
     moment(`${date.year}-${date.month}-${date.day}`).day() === 0 ||
     moment(`${date.year}-${date.month}-${date.day}`).day() === 6;
 
+
+    response: any;
+
   startDate: string;
   endDate: string;
   numberOfDays: number = 0;
   datesArray: string[];
   empObjId: string;
+
+    modalType: string = null;
 
   isOpen: boolean = false;
 
@@ -74,7 +81,8 @@ export class TimesheetModal implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private timesheetService: TimesheetService,
-    private httpService: SendHttpRequestService
+    private httpService: SendHttpRequestService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
@@ -98,6 +106,16 @@ export class TimesheetModal implements OnInit {
         };
       });
 
+      if(this.data.timesheetId){
+          console.log(this.data);
+            this.modalType = 'update';
+          this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
+            this.response = res.payload.data.timesheet[0];
+            console.log(this.response, 'this.response');
+            this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
+          });
+      }      
+
       console.log(this.projectArray);
     });
   }
@@ -108,21 +126,19 @@ export class TimesheetModal implements OnInit {
     for (let dayOfWeek = 0; dayOfWeek < 5; dayOfWeek++) {
       weekObjArray.push({
         projectId:
-          data[`project-${dayOfWeek}`] && data[`project-${dayOfWeek}`]._id,
+          data[`project-${dayOfWeek}`],
         date: data[`date-${dayOfWeek}`],
         hours: data[`hours-${dayOfWeek}`],
         taskType: data[`task-type-${dayOfWeek}`],
-        billable: data[`billable-${dayOfWeek}`],
-        clientName:
-          data[`project-${dayOfWeek}`] &&
-          data[`project-${dayOfWeek}`].clientName
+        billable: data[`billable-${dayOfWeek}`]
       });
     }
 
     return {
       empObjId: this.empObjId,
-      startDate: this.startDate,
-      endDate: this.endDate,
+      startDate: this.startDate || this.response.startDate,
+      endDate: this.endDate || this.response.endDate,
+      
       week: weekObjArray
     };
   }
@@ -162,22 +178,27 @@ export class TimesheetModal implements OnInit {
             .format("YYYY-MM-DD")
         : this.endDate;
 
+    this.calculateNumberOfDays(this.startDate, this.endDate);
+
+    console.log(this.numberOfDays, this.datesArray);
+  }
+
+  calculateNumberOfDays(startDate: string, endDate: string){
     this.numberOfDays =
-      Number(moment(this.endDate).format("DD")) -
+      Number(moment(endDate).format("DD")) -
       Number(
         moment(
-          `${selectedDate["year"]}-${selectedDate["month"]}-${selectedDate["day"]}`
-        )
-          .day(1)
-          .format("DD")
+          startDate
+        ).format("DD")
       ) +
       1;
+
 
     this.datesArray = [];
     for (let i = 1; i <= this.numberOfDays; i++) {
       this.datesArray.push(
         moment(
-          `${selectedDate["year"]}-${selectedDate["month"]}-${selectedDate["day"]}`
+          startDate
         )
           .day(i)
           .format("YYYY-MM-DD")
@@ -185,7 +206,7 @@ export class TimesheetModal implements OnInit {
       );
     }
 
-    console.log(this.numberOfDays, this.datesArray);
+    console.log(this.datesArray, 'this.datesArray');
   }
 
   handleProjectData(project: any) {
@@ -203,5 +224,11 @@ export class TimesheetModal implements OnInit {
     }
 
     this.handleProjectData(form);
+  }
+
+  returnClient(projectId: string){
+    return this.projectArray.filter((project) => {
+        return project._id === projectId;
+    }).clientName;
   }
 }

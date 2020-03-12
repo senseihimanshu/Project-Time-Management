@@ -2,7 +2,6 @@ const model = require("../models");
 const schema = require("../schemas");
 class Project {
   constructor() {
-    console.log("inside proj");
   }
 
   async create(req, res) {
@@ -127,10 +126,6 @@ class Project {
 
   async show(req, res) {
     const projectList =await model.project.get({ _id: req.query.projectId });
-    //console.log("in show function", projectList);
-    //const projectManager = [req.params.projectManagerIdObj];
-    //  const manager=await model.employee.get({_id:projectManager});
-   // projectList.projectManager = manager;ole.log(projectList);
     res.send(projectList);
   }
   async update(req, res) {

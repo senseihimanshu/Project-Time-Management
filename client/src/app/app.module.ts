@@ -65,6 +65,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
 import { RoleGuardService } from './guards/role-guard.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 //import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ProjectManagerComponent,
     TimesheetModal,
     NavbarComponent,
+    TimesheetWeekComponent
     //NgbdTablePagination
    
   ],

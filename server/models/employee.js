@@ -14,8 +14,6 @@ class Employee{
    }
    //saves the data of newly created employee
     async save(employeeObj){
-      console.log("routes me hu")
-      console.log(employeeObj, 'new employee created!');
       const employee = await this.model.create(employeeObj);
        return employee;
     }
