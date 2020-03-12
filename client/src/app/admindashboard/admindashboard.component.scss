@@ -3,11 +3,7 @@
   margin-left: 35%;
   color: rgb(148, 63, 17);
 }
-.logo-img{
-  width: 75px;
-  height: 75px;
-  
-}
+
 .panel{
   background-color:#ECEEF1;
 }
@@ -23,7 +19,7 @@
 
 .pagination-div{
   display: flex !important;
-  justify-content: center ;
+  justify-content: flex-end ;
 }
 
 .pagination {
@@ -52,13 +48,13 @@
   }
 
   input:focus {
-    background-color: lightblue;
+    background-color: whitesmoke
   }
 
   input::placeholder {
     color: black;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 15px;
   }
 
 .wrapper{
@@ -68,15 +64,6 @@
 }
 .main{
  display: flex;
-}
-.message{
- color: red;
- text-align: center;
- font-size: 4.2rem;
-}
-
-.dashboard{
-   cursor: pointer;
 }
 .show i{
  color: pink;
@@ -88,19 +75,7 @@
 .delete i {
  color: red;
 }
-.logout
-{
- float: right;
- color: #2f8fe9b4;
- outline-style: groove;
- outline-color: #2f8fe9b4;
- outline-width: thin;
 
-}
-.navbar{
- height: 5rem;
- background-color: black;
-}
 tbody:nth-child(even) {   background: whitesmoke}
 tbody:nth-child(odd) {   background:white }
 td{
@@ -115,11 +90,12 @@ td{
  th{
   font-size: 16px;
   line-height: 1.4;
-  background-color: #2f8fe9b4;
+  background-color: #0183FF;
   text-align: center;
   font-weight: 500;
   margin-top: 8rem!important;
   position: sticky;
+  color: white;
  }
  .app-main[_ngcontent-meo-c1] {
   padding: 0 8.4rem;
@@ -138,18 +114,35 @@ td{
  @media (min-width: 1200px){
  .container {
      //max-width: 1500px;
-    margin-left: 6rem;
+    margin-top:1rem;
+    margin-left: 14.5rem;
     margin-right: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
  }
 }
 
 .table{
   margin-top: 2%;
+  margin-left:2%;
+  margin-right:2%;
 }
 
 .some-horizontal-container {
   pointer-events: none;
 }
-.profile{
-  margin-right: 0.5rem;
+// .card{
+//   width: 75rem;
+//   height: fit-content;
+//   margin-top: 1.5rem;
+
+// }
+.form-control{
+  float:right !important;
+  border: ridge;
+
+}
+#myInput:active
+{
+background-color: white;
 }
