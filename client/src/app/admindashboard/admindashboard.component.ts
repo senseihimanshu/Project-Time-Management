@@ -102,10 +102,8 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   }
 
   myFunction() {
-
-
-    //Declare variables
-    var input, filter, table, tr, td, i, txtValue;
+   //Declare variables
+    var input, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchEmp(input.value).subscribe(res => {
       this.user= res;

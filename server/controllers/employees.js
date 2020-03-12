@@ -247,19 +247,7 @@ class Employee {
         res.status(200).send(employees);
     
     }
-  // async searchEmployee(req, res){
-
-  //       console.log(req.query.name);
-  //       const name=[req.query.name];
-  //       const employees = await model.employee.get({"name":req.query.name}, { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 });
-  //       console.log("==========>>>>>>>>>>>>>", employees);
-  //       res.status(200).send(employees);
-      
-   
-       
-  //   }
-
-
+  
 async sort(req,res)
   { console.log("in sort");
     var mysort = { name: 1 };

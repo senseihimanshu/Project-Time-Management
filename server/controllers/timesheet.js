@@ -136,6 +136,17 @@ class Timesheet {
     console.log(timesheetList,"all timesheet");
     res.send(timesheetList);
   }
+
+  async searchTimesheets(req, res){
+   
+    console.log(req.query.date);
+    let query=req.query.date;
+    query = query.toLowerCase().trim()
+    const timesheet = await model.project.getforsearch({ date: { $regex:`^${query}`, $options: 'i'}},{});
+    console.log("==========>>>>>>>>>>>>>", timesheet);
+    res.status(200).send(timesheet);
+
+}
   async update(req, res) {
     const col = { ...req.body.week };
     console.log(col);

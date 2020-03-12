@@ -34,6 +34,15 @@ class Timesheet{
       return this.model.deleteOne(criteria);
     }
 
+    async getforsearch(criteria={}, columns={})
+    {
+      
+      console.log(criteria);
+      return this.model.find(criteria, columns).sort({date: 1});
+}
+  async getTimesheet(criteria={}, columns={}){
+     return this.model.find({"date": `/^$columns/i`}).exec(callback);
+  }
     async update(criteria={},updatedEmployeeObj){
       console.log('timesheet updated');
       return this.model.updateOne(criteria,updatedEmployeeObj);

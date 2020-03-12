@@ -147,6 +147,16 @@ class Project {
     });
   }
 
+  async searchProject(req, res){
+   
+    console.log(req.query.projectName);
+    let query=req.query.projectName;
+    query = query.toLowerCase().trim()
+    const projects = await model.project.getforsearch({projectName: { $regex:`^${query}`, $options: 'i'}},{});
+    console.log("==========>>>>>>>>>>>>>", projects);
+    res.status(200).send(projects);
+
+}
   async delete(req, res) {
     console.log("running");
     console.log(req.query.id);
