@@ -105,6 +105,16 @@ class Timesheet {
     });
   }
 
+  async searchTimesheets(req, res){
+   
+    console.log(req.query.date);
+    let query=req.query.date;
+    query = query.toLowerCase().trim()
+    const timesheet = await model.project.getforsearch({ date: { $regex:`^${query}`, $options: 'i'}},{});
+    console.log("==========>>>>>>>>>>>>>", timesheet);
+    res.status(200).send(timesheet);
+
+}
 
   async getTimesheetUsingRouteParams(req, res){
     const timesheetId = req.params.id;

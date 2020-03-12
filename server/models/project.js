@@ -37,6 +37,15 @@ class Project{
      async log(criteria={}){
           return this.model.find(criteria);
      }
+     async getforsearch(criteria={}, columns={})
+    {
+      
+      console.log(criteria);
+      return this.model.find(criteria, columns).sort({projectName: 1});
+}
+  async getProject(criteria={}, columns={}){
+     return this.model.find({"projectName": `/^$columns/i`}).exec(callback);
+  }
 }
 
 module.exports=new Project();
