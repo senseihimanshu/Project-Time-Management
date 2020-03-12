@@ -101,7 +101,7 @@ export class ProjectComponent implements OnInit, OnChanges {
     this._service.deletetoken();
     this.router.navigate(["/login"]);
   }
-  // }
+ 
   myFunction() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;

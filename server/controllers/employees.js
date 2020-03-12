@@ -139,11 +139,10 @@ class Employee {
   }
 
   async index(req, res) {
-   // console.log("dikhaa rha huu");
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    );
+  );
     res.send(employeeList);
     console.log(employeeList);
   }
@@ -237,6 +236,38 @@ class Employee {
         message: 'Employee Deleted Successfully'
       }
     });
+  }
+  async searchEmployee(req, res){
+   
+        console.log(req.query.name);
+        let query=req.query.name;
+        query = query.toLowerCase().trim()
+        const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
+        console.log("==========>>>>>>>>>>>>>", employees);
+        res.status(200).send(employees);
+    
+    }
+  // async searchEmployee(req, res){
+
+  //       console.log(req.query.name);
+  //       const name=[req.query.name];
+  //       const employees = await model.employee.get({"name":req.query.name}, { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 });
+  //       console.log("==========>>>>>>>>>>>>>", employees);
+  //       res.status(200).send(employees);
+      
+   
+       
+  //   }
+
+
+async sort(req,res)
+  { console.log("in sort");
+    var mysort = { name: 1 };
+    const employeeList = await model.employee.log(
+      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
+      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
+    );
+    res.send(employeeList);
   }
 }
 module.exports = new Employee();
