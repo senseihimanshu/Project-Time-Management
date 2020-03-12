@@ -116,7 +116,12 @@
                   </button>
                   <div class="message">{{ this.message }}</div>
                 </div>
-
+                <div class="button-parent" *ngIf="formType == 'get'">
+                  <button type="button" mdbBtn class="btn btn-outline-primary  text-center m-2 btncancel"
+                  mdbWavesEffect [routerLink]="['/projects']">
+                  Cancel
+                </button>
+                </div> 
               </form>
             </div>
           </div>
