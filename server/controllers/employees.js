@@ -6,13 +6,6 @@ var generator = require('generate-password');
 const saltRounds = 10;
 var generatePassword = require('password-generator');
 const pagination = require("../pagignation");
-// var password = generator.generateMultiple(3,{
-//     length: 10,
-//     numbers: true
-// });
- 
-// 'uEyMTw32v9'
-// console.log(password);
 require('dotenv').config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
@@ -269,9 +262,9 @@ class Employee {
 
 
   
-  async index(req,res){
+  async indexP(req,res){
 
-    if(jwtHandler.tokenVerifier(req.headers.token)){
+    // if(jwtHandler.tokenVerifier(req.headers.token)){
         const employeeList = await model.employee.get();
         res.status(200).send(employeeList);
         // get page from query params or default to first page
@@ -292,7 +285,5 @@ class Employee {
         return res.json({ pager, pageOfItems });
 
     }
-    else{
-        res.status(401)}}
 }
 module.exports = new Employee();
