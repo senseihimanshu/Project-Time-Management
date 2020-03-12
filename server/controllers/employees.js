@@ -6,13 +6,7 @@ var generator = require('generate-password');
 const saltRounds = 10;
 var generatePassword = require('password-generator');
 
-// var password = generator.generateMultiple(3,{
-//     length: 10,
-//     numbers: true
-// });
- 
-// 'uEyMTw32v9'
-// console.log(password);
+
 require('dotenv').config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
@@ -90,9 +84,7 @@ class Employee {
     const hashedPassword = await bcrypt.hash(password, salt);
     console.log(newEmployee.password,"randoom");
    newEmployee.password=hashedPassword;
-    
-
-    const resultAfterIsUnique = await isUnique(empId, email);
+  const resultAfterIsUnique = await isUnique(empId, email);
     if (!resultAfterIsUnique.status) {
       return res.status(401).send({
         success: false,
@@ -221,14 +213,7 @@ class Employee {
     console.log(req.query.empId);
     const employee = await model.employee.delete({ empId: req.query.empId });
     console.log(employee);
-    // if(!employee){
-    //   res.send({
-    //     success: false,
-    //     payload: {
-    //       message: 'Employee cannot be deleted as not found'
-    //     }
-    //   });
-    // }
+   
     res.send({
       success: true,
       payload: {

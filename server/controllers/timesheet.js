@@ -4,93 +4,44 @@ class Timesheet {
   constructor() {}
 
   async create(req, res) {
-    
+    const timesheetToSave = req.body;
 
-    const reqScatteredData = req.body;
-
-    // { "project-0": { "_id": "5e65ef289b0b8a3ea421288c", "projectName": "synergy", "projectManager": "5e648fd47faf392b8480af4e", "clientName": "cyg" }, "task-type-0": null, "date-0": "2020-03-30", "hours-0": 21, "billable-0": true}
-    // empObjId: ,
-    // billable: ,
-    // weekObj: {
-    //   projectId: ,
-    //   date: ,
-    //   hours: ,
-    //   taskType:
-    // },
-    // clientName:
-
-    let weekObjArray = [];
-
-    for (let dayOfWeek = 0; dayOfWeek < 5; dayOfWeek++) {
-      weekObjArray.push({
-        projectId:
-          reqScatteredData[`project-${dayOfWeek}`] &&
-          reqScatteredData[`project-${dayOfWeek}`]._id,
-        date: reqScatteredData[`date-${dayOfWeek}`],
-        hours: reqScatteredData[`hours-${dayOfWeek}`],
-        taskType: reqScatteredData[`task-type-${dayOfWeek}`],
-        billable: reqScatteredData[`billable-${dayOfWeek}`],
-        clientName:
-          reqScatteredData[`project-${dayOfWeek}`] &&
-          reqScatteredData[`project-${dayOfWeek}`].clientName
-      });
-    }
-    const timesheetToSave = {
-      empObjId: reqScatteredData.empObjId,
-      week: weekObjArray
-    };
-    console.log(timesheetToSave);
     //Creating a new timesheet
-    const updatedTimesheetObjId = (await model.timesheet.save(timesheetToSave))._id;
-    console.log(updatedTimesheetObjId, 'updatedTimesheetObjId');
+    const timesheetFromDatabase = await model.timesheet.save(timesheetToSave);
+    // console.log(updatedTimesheetObjId, 'updatedTimesheetObjId');
+    console.log(timesheetFromDatabase.timesheet, '_id of timesheet');
 
-    //Adding timesheets of employees to projectManager
-    await Promise.all(
-      timesheetToSave["week"].map(async week => {
-        if (week.projectId) {
-          const projectManager = (
-            await model.project.get(
-              { _id: week.projectId },
-              { projectManager: 1 }
-            )
-          ).projectManager;
+    //Adding timesheets of employees to projectManager and to employee
+    if (timesheetFromDatabase.typeOfOperation === "create") {
+      await Promise.all(
+        timesheetToSave["week"].map(async week => {
+          if (week.projectId) {
+            const projectManager = (
+              await model.project.get(
+                { _id: week.projectId },
+                { projectManager: 1 }
+              )
+            ).projectManager;
 
-          console.log(week.projectId, projectManager, "Here man!");
-          await model.projectManager.update(
-            { _id: projectManager },
-            { $push: { timesheetIds: updatedTimesheetObjId } }
-          );
-
-          // let timesheetIdsArr = (await model.employee.get(
-          //   { _id: timesheetToSave.empObjId },
-          //   { timesheet: 1 }
-          // )).timesheet;
-          //   console.log(timesheetIdsArr, timesheetToSave.empObjId, 'before');
-            
-          //   timesheetIdsArr.filter((item, index) => timesheetIdsArr.indexOf(item) === index);
-          //   console.log(timesheetIdsArr, 'timesheetIdsArr');
-
-          await model.employee.update(
-            { _id: timesheetToSave.empObjId },
-            { $addToSet: {timesheet: updatedTimesheetObjId} }
-          );
-        }
-      })
-    );
-
-    //Adding timesheet to employee collection
-    // await model.employee.update(
-    //   { _id: timesheetToSave.empObjId },
-    //   { $push: { timesheet: updatedTimesheetObjId } }
-    // );
-
-    console.log("Reached Here @timesheet.js/line26");
+            console.log(week.projectId, projectManager, "Here man!");
+            await model.projectManager.update(
+              { managerId: projectManager },
+              { $push: { timesheetIds: timesheetFromDatabase.timesheet._id } }
+            );
+            await model.employee.update(
+              { _id: timesheetToSave.empObjId },
+              { $push: { timesheet: timesheetFromDatabase.timesheet._id } }
+            );
+          }
+        })
+      );
+    }
 
     res.send({
       success: true,
       payload: {
         data: timesheetToSave,
-        message: "Timesheet Added Successfully!"
+        message: timesheetFromDatabase.message
       }
     });
   }
@@ -100,22 +51,29 @@ class Timesheet {
     console.log(req.query);
     var timesheet = [];
     if (empObjId) {
-      console.log(await model.employee.get({ empId: empObjId }, { timesheet: 1, projectId: 1 }));
-      timesheet = (await model.employee.get({ empId: empObjId }, { timesheet: 1, projectId: 1 })).timesheet;
+      timesheet = await model.timesheet.get({ empObjId });
     } else {
       return res.status(400).send({
         success: false,
         payload: {
-          message: 'Employee doesn\'t exist'
+          message: "Employee doesn't exist"
         }
       });
     }
+
+    if(req.query.type === 'week'){
+      timesheet = timesheet.map((timesheetWeek) => {
+        return { ...timesheetWeek.toObject(), week: undefined };
+      });
+      console.log(timesheet);
+    }
+
     if (!timesheet) {
       return res.status(200).send({
         success: true,
         payload: {
           data: null,
-          message: 'No Timesheets for this account'
+          message: "No Timesheets for this account"
         }
       });
     } else {
@@ -125,16 +83,26 @@ class Timesheet {
           data: {
             timesheet
           },
-          message: 'Timesheets retrieved'
+          message: "Timesheets retrieved"
         }
       });
     }
   }
 
   async index(req, res) {
-    const timesheetList = await model.timesheet.get();
-    console.log(timesheetList,"all timesheet");
-    res.send(timesheetList);
+    const { empId, startDate } = req.body;
+
+    const timesheetToUpdate = await model.timesheet.getTimesheetWeek(empId, startDate);
+
+    return res.send({
+      success: true,
+      payload: {
+        data: {
+          timesheetToUpdate
+        },
+        message: 'Timesheet for update retrieved successfully'
+      }
+    });
   }
 
   async searchTimesheets(req, res){
@@ -147,8 +115,25 @@ class Timesheet {
     res.status(200).send(timesheet);
 
 }
+
+  async getTimesheetUsingRouteParams(req, res){
+    const timesheetId = req.params.id;
+
+    const timesheet = await model.timesheet.get({ _id: timesheetId });
+    console.log(timesheet, 'timesheet', timesheetId, 'timesheetId');
+    return res.send({
+      success: true,
+      payload: {
+        data: {
+          timesheet
+        }
+      }
+    })
+  }
+
+
   async update(req, res) {
-    const col = { ...req.body.week };
+    const col = { ...week };
     console.log(col);
     const timesheet = await model.timesheet.update(
       { _id: req.query.id },
@@ -176,6 +161,11 @@ class Timesheet {
       }
     });
   }
+
+  async(){
+    
+  }
+
 }
 
 module.exports = new Timesheet();

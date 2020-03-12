@@ -55,7 +55,7 @@
   padding-left: 220px;
 }
 .sidebar {
-  width: 250px;
+  width: 13rem;
   height: 100vh;
   max-height: 100%;
   position: fixed;
@@ -217,9 +217,9 @@ $img-border-color: rgba(255, 255, 255, 0.1);
 $img-shadow-color: rgba(0, 0, 0, 0.5);
 
 .sidebar {
-  .sidebar-menu {
-    border-top: 1px solid $border-color;
-  }
+  // .sidebar-menu {
+  //   border-top: 1px solid $border-color;
+  // }
 
   .sidebar-header > a,
   .sidebar-menu ul li a,

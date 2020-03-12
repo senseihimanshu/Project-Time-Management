@@ -5,7 +5,6 @@ const projectschema = new mongoose.Schema(schema.project);
 class Project{
   constructor(){
     this.model=mongoose.model('project',projectschema);
-    console.log(projectschema, 'Inside models/projects.js');
   }
   
      //get the projects of company as per criteria
