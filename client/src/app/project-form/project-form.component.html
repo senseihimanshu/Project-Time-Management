@@ -1,4 +1,5 @@
 <div class="wrapper">
+<<<<<<< HEAD
   <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
     <div>
       Company Dashboard
@@ -15,6 +16,10 @@
 
 
   <div class="app-main no-scrollbar-wrap">
+=======
+  <app-navbar></app-navbar>
+   <div class="app-main no-scrollbar-wrap">
+>>>>>>> 5ca6df7f9f3d420fb732a56ac12253892b092bc6
     <app-sidebar [menus]="menus"></app-sidebar>
     <div class="no-scrollbar">
       <div class="container-fluid ">
@@ -131,7 +136,114 @@
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+           
+          
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="StartDateInput">
+             <label for="start">Start Date:</label>
+       
+             <input
+               type="date"
+               id="start"
+               class="form-control"
+               placeholder="Start Date"
+               [(ngModel)]="project && project.startDate"
+               name="startDate"
+               required
+               [disabled]="formType === 'get'"
+               #startDateInput="ngModel"
+             />
+             <p  *ngIf="startDateInput.touched">startDate is required</p>
+           </div>
+           
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="endDateInput.touched">
+             <label class="control-label"for="end">End Date:</label>
+       
+             <input
+               type="date"
+               id="end"
+               class="form-control"
+               placeholder="End Date"
+               [(ngModel)]="project && project.endDate"
+               required
+               name="endDate"
+               [disabled]="formType === 'get'"
+               #endDateInput="ngModel"
+             />
+             <p  *ngIf="endDateInput.touched">EndDate is required</p>
+           </div>
+       
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="statusInput.touched">
+             <label class="control-label"for="status">Status:</label>
+       
+             <select
+              
+               class="browser-default custom-select"
+               name="status"
+               [(ngModel)]="project && project.status[0]"
+               required
+               [disabled]="formType === 'get'"
+               #statusInput="ngModel"
+             >
+               <option value="" disabled>Choose option</option>
+               <option value="In Progress" selected>In Progress</option>
+               <option value="Completed">Completed</option>
+               <option value="Closed">Closed</option>
+             </select>
+             <p  *ngIf="statusInput.touched">status is required</p>
+           </div>
+
+           <div class="h5 mb-4 form-group was-validated"[class.has-error]="membersInput">
+            <label class="control-label" for="members">Project Members:</label>
+           <mat-select
+           class="browser-default custom-select"
+           name="members"
+           [ngModel]="projMembers"
+           [disabled]="formType ==='get'"
+           (ngModelChange)="addProjectMember($event)"
+           #membersInput="ngModel"
+           required
+           minlength="2"
+           maxlength="20"
+           multiple>
+           <mat-option *ngFor="let emp of empList" [value]="emp._id">{{emp.name}}</mat-option>
+        </mat-select> 
+          <p  *ngIf="membersInput.touched">project Members are required</p>
+       </div>
+
+       <div class="button-parent" *ngIf="formType !== 'get'">
+               <button
+                 mdbBtn
+                 class=" btn text-center m-4 btnsstyle"
+                 mdbWavesEffect
+                 
+                
+                 type="submit"
+               >
+           {{ (formType === "create") ? "Add New Project" : "Update Project" }}
+           </button>
+           <button
+             type="button"
+             mdbBtn
+             class="btn text-center m-2 btnsstyle"
+             mdbWavesEffect
+             
+             [routerLink]="['/projects']"
+           >
+              Cancel
+           </button>
+           <div class="message">{{ this.message }}</div>
+           </div> 
+       
+         </form>
+       </div>
+     </div>
+     </div>
+     </div>
+       </div>
   </div>
+  </div>
+
+
+
+
+  

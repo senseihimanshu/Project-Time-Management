@@ -15,18 +15,6 @@
 p{
     color:red;
 }
- .btn{
-     width:40%;
-     margin-left:20%;
- 
- }
- .navbar{
-     justify-content: space-between;
-     height: 4rem;
-     background-color: black;
- }
- 
-
 .app-main{
     padding: 0.8rem 4rem;
 margin: 0 auto;}
@@ -64,5 +52,7 @@ help-block{
 .btn{
     width:40%;
     margin-left:20%;
+    outline-color: #0183FF;
+    outline-style: auto;
 
 }

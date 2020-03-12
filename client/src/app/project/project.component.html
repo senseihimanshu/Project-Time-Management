@@ -1,26 +1,23 @@
 <div class="wrapper">
-  <mat-toolbar color="primary" class="navbar" style="z-index: 100000000;">
-    <div routerLink="/admindashboard" class="dashboard">
-      Projects Dashboard
-    </div>
-    <div>
-      <span routerLink="/myProfile">My Profile</span>
-
-      <button type="button" class="btn btn-outline-warning logout text-center text-yellow m-2 btnsstyle"
-        (click)="logout()">
-        <i class="fa fa-power-off"></i>
-      </button>
-    </div>
-  </mat-toolbar>
+  <app-navbar></app-navbar>
   <div class="main">
     <app-sidebar [menus]="menus"></app-sidebar>
-    <div class="container out-div" style="z-index: 100000000;">
-      <input type="text" class="input-design" id="myInput" (keyup)="myFunction()" placeholder="Search by Project Name">
-      <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Project Name</button></p>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-12 col-lg-12">
+    <div class="container ">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-search"></i>
+      </span>
+        <input type="text" class="form-control"  id="myInput" (keyup)="myFunction()" placeholder= 'Search by Employee Id'/>
+        
+    </div>
+         <!-- <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Project Name</button></p> -->
       <table class="table table-striped" id="myTable">
         <thead>
           <tr>
-            <th scope="col">Project Name
+            <th scope="col">Project Name<i class="fas fa-sort" (click)="sortTable()"></i>
 
             </th>
             <th scope="col">Project Manager
@@ -85,7 +82,9 @@
       </table>
       <div class="pagination-div">
         <ngb-pagination [collectionSize]="projectsArray.length" [(page)]="page" [maxSize]="5" [rotate]="true"
-          [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+          [ellipses]="false" [pageSize]="pageSize" aria-label="Default pagination" size="sm"></ngb-pagination>
       </div>
     </div>
   </div>
+  </div>
+</div>  </div>

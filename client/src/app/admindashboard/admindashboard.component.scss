@@ -3,11 +3,7 @@
   margin-left: 35%;
   color: rgb(148, 63, 17);
 }
-.logo-img{
-  width: 75px;
-  height: 75px;
-  
-}
+
 .panel{
   background-color:#ECEEF1;
 }
@@ -23,7 +19,7 @@
 
 .pagination-div{
   display: flex !important;
-  justify-content: center ;
+  justify-content: flex-end ;
 }
 
 .pagination {
@@ -33,6 +29,10 @@
     align-items: center;
 
   }
+  .pagination:active{
+    background-color: #0183FF;
+  }
+ 
 
   .para-design {
     color: black;
@@ -42,7 +42,7 @@
 
   input {
     width: 100%;
-    max-width: 250px;
+    max-width: 240px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -52,15 +52,14 @@
   }
 
   input:focus {
-    background-color: lightblue;
+    background-color: whitesmoke;
   }
 
   input::placeholder {
     color: black;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 15px;
   }
-
 .wrapper{
  display: flex;
  flex-direction: column;
@@ -68,15 +67,6 @@
 }
 .main{
  display: flex;
-}
-.message{
- color: red;
- text-align: center;
- font-size: 4.2rem;
-}
-
-.dashboard{
-   cursor: pointer;
 }
 .show i{
  color: pink;
@@ -88,19 +78,7 @@
 .delete i {
  color: red;
 }
-.logout
-{
- float: right;
- color: #2f8fe9b4;
- outline-style: groove;
- outline-color: #2f8fe9b4;
- outline-width: thin;
 
-}
-.navbar{
- height: 5rem;
- background-color: black;
-}
 tbody:nth-child(even) {   background: whitesmoke}
 tbody:nth-child(odd) {   background:white }
 td{
@@ -115,11 +93,12 @@ td{
  th{
   font-size: 16px;
   line-height: 1.4;
-  background-color: #2f8fe9b4;
+  background-color: #0183FF;
   text-align: center;
   font-weight: 500;
   margin-top: 8rem!important;
   position: sticky;
+  color: white;
  }
  .app-main[_ngcontent-meo-c1] {
   padding: 0 8.4rem;
@@ -138,8 +117,9 @@ td{
  @media (min-width: 1200px){
  .container {
      //max-width: 1500px;
-    margin-left: 6rem;
+    margin-left: 20rem;
     margin-right: 1rem;
+
  }
 }
 
@@ -150,12 +130,33 @@ td{
 .some-horizontal-container {
   pointer-events: none;
 }
-.profile{
-  margin-right: 0.5rem;
-}
 // .card{
 //   width: 75rem;
 //   height: fit-content;
 //   margin-top: 1.5rem;
 
 // }
+.input-group{
+  float:right !important;
+  align-items: center;
+  justify-content: flex-end;
+}
+.input-group > .form-control
+{ border-style: ridge;
+  border-radius: unset;
+  border-color: rgb(134, 142, 156);
+  margin-bottom: 0.5rem;
+
+}
+.input-group-addon
+{
+  color:rgb(24, 161, 216);
+}
+.fa-sort:before
+{
+  margin-left:0.5rem;
+}
+#myInput:active
+{
+background-color: white;
+}
