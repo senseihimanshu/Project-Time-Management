@@ -3,6 +3,9 @@ import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { Token } from "@angular/compiler/src/ml_parser/lexer";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+
+const TIMESHEET_API: string = "http://localhost:3000/api/timesheet";
+
 @Injectable({
   providedIn: "root"
 })
@@ -39,9 +42,9 @@ export class TimesheetService {
   //       return this.http.get<any>("http://localhost:3000/timesheet", { ...this.httpOptions });
   //     }
   // }
-  getTimesheet(empObjId: any): Observable<any> {
+  getTimesheet(empObjId: any, type: string = null): Observable<any> {
     console.log(empObjId, 'Inside Service');
-    const params: HttpParams = new HttpParams().set("empObjId", empObjId);
+    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type);
 
     return this.http.get("http://localhost:3000/timesheet", {
       ...this.httpOptions,
@@ -49,10 +52,14 @@ export class TimesheetService {
     });
   }
 
-  createTimesheet(timesheetData, empObjId): Observable<any> {
+  getTimesheetUsingRouteParams(timesheetId: string): Observable<any>{
+    return this.http.get(`http://localhost:3000/api/timesheet/${timesheetId}`);
+  }
+
+  createTimesheet(timesheet: any): Observable<any> {
     return this.http.post(
-      "http://localhost:3000/api/timesheet",
-      { ...timesheetData, empObjId },
+      TIMESHEET_API,
+      timesheet,
       this.httpOptions)
   }
   // getTimesheet(empObjId: string): Observable<any> {
@@ -84,5 +91,10 @@ export class TimesheetService {
   }
   private log(message: string) {
     console.log(message);
+  }
+
+  private getSpecificTimesheet(empId: string, startDate: any){
+    const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', startDate);
+    // this.http.get(TIMESHEET_API, { params, httpOptions });
   }
 }

@@ -29,6 +29,13 @@ module.exports= (app) => {
 	app.put("/review",controller.timesheet.modify);
 	app.get("/clevel/project",controller.cleveldata.projectsStatusData);
 	app.get("/clevel/timesheet",controller.cleveldata.timesheetsStatusData);
+
+
+
+
+
+	app.get('/api/timesheet', controller.timesheet.index);
+	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
 }
 
 
