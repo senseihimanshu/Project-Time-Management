@@ -7,18 +7,6 @@ class Timesheet {
     
 
     const reqScatteredData = req.body;
-
-    // { "project-0": { "_id": "5e65ef289b0b8a3ea421288c", "projectName": "synergy", "projectManager": "5e648fd47faf392b8480af4e", "clientName": "cyg" }, "task-type-0": null, "date-0": "2020-03-30", "hours-0": 21, "billable-0": true}
-    // empObjId: ,
-    // billable: ,
-    // weekObj: {
-    //   projectId: ,
-    //   date: ,
-    //   hours: ,
-    //   taskType:
-    // },
-    // clientName:
-
     let weekObjArray = [];
 
     for (let dayOfWeek = 0; dayOfWeek < 5; dayOfWeek++) {
@@ -78,11 +66,7 @@ class Timesheet {
       })
     );
 
-    //Adding timesheet to employee collection
-    // await model.employee.update(
-    //   { _id: timesheetToSave.empObjId },
-    //   { $push: { timesheet: updatedTimesheetObjId } }
-    // );
+  
 
     console.log("Reached Here @timesheet.js/line26");
 
@@ -137,7 +121,7 @@ class Timesheet {
     res.send(timesheetList);
   }
   async update(req, res) {
-    const col = { ...req.body.week };
+    const col = { ...week };
     console.log(col);
     const timesheet = await model.timesheet.update(
       { _id: req.query.id },

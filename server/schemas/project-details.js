@@ -6,11 +6,11 @@ module.exports = {
     type: String,
     required: true
   },
-  projectManager: {
+  projectManager: [{
     type: ObjectId,
     ref: 'projectmanagers',
     required: true
-  },
+  }],
   clientName: {
     type: String,
     required: true
