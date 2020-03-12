@@ -95,11 +95,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     });
     alert("employee "+empId+" deleted successfully");
   }
-  logout() {
-    this._service.deletetoken();
-
-    this.router.navigate(["/login"]);
-  }
 
   myFunction() {
     // Declare variables

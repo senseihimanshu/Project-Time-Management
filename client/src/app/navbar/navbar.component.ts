@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SendHttpRequestService } from "./../send-http-request.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +11,15 @@ export class NavbarComponent implements OnInit {
   @Input()
   dashboard="";
 
-  constructor() { }
+  constructor(private router: Router, private _service: SendHttpRequestService) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this._service.deletetoken();
+
+    this.router.navigate(["/login"]);
   }
 
 }
