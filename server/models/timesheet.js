@@ -18,11 +18,21 @@ class Timesheet{
       return timesheetArray;
    }
 
+   async getTimesheetWeek(criteria = {}, columns = {}){
+    return this.model.findOne(criteria, columns);
+   }
+
    async save(timesheetObj){
-      console.log(timesheetObj, 'new timesheet created!');
-      const timesheet = await this.model.findOneAndUpdate({empObjId: timesheetObj.empObjId}, timesheetObj, { upsert : true, new: true });
-      return timesheet;
+      let timesheet;
+      if(await this.model.findOne({ empObjId: timesheetObj.empObjId, startDate: timesheetObj['startDate'] })){
+        timesheet = await this.model.updateOne({ empObjId: timesheetObj.empObjId, startDate: timesheetObj['startDate'] } , { week: timesheetObj['week'] });
+        return { timesheet, typeOfOperation: 'update', message: 'Timesheet Updated Successfully' };
+      }
+      
+      timesheet = await this.model.create(timesheetObj);
+      return { timesheet, typeOfOperation: 'create', message: 'Timesheet Created Successfully' };
     }
+
     async count(criteria={}){
       console.log("we are getting clevel data for timesheets");
       const timesheetCount=await this.model.count(criteria);
