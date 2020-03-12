@@ -53,7 +53,7 @@
             >
               <tr>
                 <th scope="col" class="text-center">Project</th>
-                <th scope="col" class="text-center">Client Name</th>
+                <!-- <th scope="col" class="text-center">Client Name</th> -->
                 <th scope="col" class="text-center">Task Type</th>
                 <th scope="col" class="text-center">Date</th>
                 <th scope="col" class="text-center">Hours</th>
@@ -78,12 +78,12 @@
                     </select>
                   </span>
                 </td>
-                <td>
-                  {{ (returnClient(form.value['project-'+id])) }}
+                <!-- <td> -->
+                  <!-- {{ (returnClient(form.value['project-'+id])) }} -->
                   <!-- <select name="customer_name-{{id}}" id="customer_name" [ngModel]="project && project['project-0.clientName']" disabled>
                     <option [value]="project['project-{{id}}'].clientName" selected></option>
                   </select> -->
-                </td>
+                <!-- </td> -->
                 <td>
                   <select
                     name="task-type-{{id}}"
