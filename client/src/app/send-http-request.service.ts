@@ -145,6 +145,16 @@ export class SendHttpRequestService {
       };
     }
     
+
+    showAllEmployees(pageNo:Number): Observable<any>{
+      return this.http.get("http://localhost:3000/employee/employeeList?page=" + pageNo, {headers: this.header_token, observe: 'response'}).pipe(
+        tap(_ => this.log("showing details")),
+        catchError(this.handleError<any>('error in details')
+      ));
+      
+    }
+
+
   }
 
 

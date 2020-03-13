@@ -1,3 +1,33 @@
+
+  <div class="row pagination-div mt-5" id="pageNo">
+		<div class="col-lg-4 col-lg-offset-4 col-md-4 offset-md-4 col-sm-10 offset-sm-2 col-xs-12">
+			<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+					<a (click)="loadEmployees(1)"  class="page-link">First</a>
+				</li>
+				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+					<a (click)="loadEmployees(page-1)"  class="page-link">Previous</a>
+				</li>
+				<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+					<a  (click)="loadEmployees(page)"  class="page-link">{{page}}</a>
+				</li>
+				<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+					<a (click)="loadEmployees(page+1)" class="page-link">Next</a>
+				</li>
+				<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+					<a (click)="loadEmployees(pager.endPage)" class="page-link">Last</a>
+				</li>
+			</ul>
+		</div>
+
+
+
+
+
+
+
+
+
 <div>
   <app-navbar [dashboard]="hello"></app-navbar>
   <div class="row">
@@ -161,3 +191,6 @@
     </div>
   </div>
 </div>
+
+   
+  

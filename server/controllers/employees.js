@@ -5,7 +5,7 @@ const nodemailer=require('nodemailer');
 var generator = require('generate-password');
 const saltRounds = 10;
 var generatePassword = require('password-generator');
-
+const pagination = require("../pagignation");
 
 require('dotenv').config();
 // node function which sends email to new user create
@@ -30,7 +30,7 @@ require('dotenv').config();
    }
    transporter.sendMail(info,function(err,data){
         if(err){
-          console.log("error occurs",err);
+          console.error("error occurs",err);
         }
         else{
           console.log("email sent successfully");
@@ -79,10 +79,8 @@ class Employee {
     var date=Date.now();
     var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
     newEmployee.password = password;
-    console.log(newEmployee.password,"randoom");
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(newEmployee.password,"randoom");
    newEmployee.password=hashedPassword;
   const resultAfterIsUnique = await isUnique(empId, email);
     if (!resultAfterIsUnique.status) {
@@ -134,15 +132,12 @@ class Employee {
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-  );
+    ) ;
     res.send(employeeList);
-    console.log(employeeList);
   }
 
   async show(req, res) {
-    console.log("in employee show",req.query.empId);
     const employee = await model.employee.get({ empId:req.query.empId});
-    console.log(employee);
    
     if (!employee) {
       return res.status(404).send({ employee,
@@ -172,7 +167,6 @@ class Employee {
 
 
     const employeeToUpdate = await model.employee.get({ empId });
-    console.log(empId, email);
     const patchedEmployee = {
       email: employeeToUpdate.email !== email ? email : undefined,
       name,
@@ -185,7 +179,6 @@ class Employee {
       role
     };
 
-    console.log(patchedEmployee);
     
     //discarding keys with undefined
     Object.keys(patchedEmployee).forEach(key => patchedEmployee[key] === undefined && delete patchedEmployee[key])
@@ -210,9 +203,7 @@ class Employee {
   }
 
   async delete(req, res) {
-    console.log(req.query.empId);
     const employee = await model.employee.delete({ empId: req.query.empId });
-    console.log(employee);
    
     res.send({
       success: true,
@@ -222,19 +213,32 @@ class Employee {
       }
     });
   }
-  async searchEmployee(req, res){
-   
-        console.log(req.query.name);
-        let query=req.query.name;
-        query = query.toLowerCase().trim()
-        const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
-        console.log("==========>>>>>>>>>>>>>", employees);
-        res.status(200).send(employees);
-    
+
+
+
+  
+  async indexP(req,res){
+         const employeeList = await model.employee.gets();
+        // get page from query params or default to first page
+        const page = parseInt(req.query.page) || 1;
+
+        // get pager object for specified page
+        const pageSize = 6;
+        
+        const pager = await pagination.paginate(employeeList.length, page, pageSize);
+
+        // get page of items from items array
+        const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
+        
+
+        // return pager object and current page of items
+        return res.json({ pager, pageOfItems });
+        
     }
+
   
 async sort(req,res)
-  { console.log("in sort");
+  { 
     var mysort = { name: 1 };
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
@@ -242,5 +246,6 @@ async sort(req,res)
     );
     res.send(employeeList);
   }
+
 }
 module.exports = new Employee();

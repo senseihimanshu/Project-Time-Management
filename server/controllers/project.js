@@ -1,5 +1,6 @@
 const model = require("../models");
 const schema = require("../schemas");
+const pagination = require("../pagignation");
 class Project {
   constructor() {
     
@@ -24,7 +25,6 @@ class Project {
     // projectObj.empObjectIdArray = empObjArr;
     // projectObj.projectManager = projectManagerIdObj._id;
 
-    console.log(projectObj);
 
     if (await model.project.get({ projectId: projectObj.projectId }))
       return res.status(400).send({
@@ -39,8 +39,6 @@ class Project {
       await Promise.all(
         projectObj.empObjectIdArray.map(async empId => {
           const { _id } = await model.employee.get({}, { empId });
-          console.log(_id);
-          console.log(_id, "Before Push in empObjectIdArray");
           empObjectIdArray.push(_id);
         })
       );
@@ -49,15 +47,12 @@ class Project {
         ...projectObj,
         empObjectIdArray
       });
-      console.log(newProject);
 
       return newProject;
     };
 
-    console.log(empObjectIdArray);
 
     const newProjectId = (await generateProjectPromise())._id;
-    console.log(newProjectId, "id mili");
     const employeesUpdatePromise = async () => {
       await Promise.all(
         empObjectIdArray.map(async empObjectId => {
@@ -90,8 +85,6 @@ class Project {
 
   async index(req, res) {
   const projectList = await model.project.log({});
-    console.log("in index function");
-    console.log(projectList, 'ProjectList -----------------------------------');
     const tempList = [];
    await Promise.all(
     projectList.map(async(project) => {
@@ -103,13 +96,11 @@ class Project {
           { _id: project.empObjectIdArray },
           { name: 1, _id: 0 }
         );
-       console.log(member.name, 'member.name', manager);
       tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member && member.name});
       })
     );  
     
     
-    console.log(tempList,'templist===========');
 
     res.send({
       tempList
@@ -123,7 +114,6 @@ class Project {
   }
   async update(req, res) {
     const projectManager=await  model.projectManager.get({managerName:req.body.projectManager});
-    console.log("here",projectManager);
     let projectUpdatedObj = {
      
       projectName: req.body.projectName,
@@ -154,19 +144,14 @@ class Project {
 
   async searchProject(req, res){
    
-    console.log(req.query.projectName);
     let query=req.query.projectName;
     query = query.toLowerCase().trim()
     const projects = await model.project.getforsearch({projectName: { $regex:`^${query}`, $options: 'i'}},{});
-    console.log("==========>>>>>>>>>>>>>", projects);
     res.status(200).send(projects);
 
 }
   async delete(req, res) {
-    console.log("running");
-    console.log(req.query.id);
     const project = await model.project.delete({ _id: req.query.id });
-    console.log(project, "proj");
     res.send({
       success: true,
       payload: {
@@ -175,6 +160,25 @@ class Project {
       }
     });
   }
+  
+  async indexP(req,res){
+    const projectList = await model.project.gets();
+   // get page from query params or default to first page
+   const page = parseInt(req.query.page) || 1;
+
+   // get pager object for specified page
+   const pageSize = 6;
+   
+   const pager = await pagination.paginate(projectList.length, page, pageSize);
+
+   // get page of items from items array
+   const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
+   
+
+   // return pager object and current page of items
+   return res.json({ pager, pageOfItems });
+   
+}
 }
 
 module.exports = new Project();

@@ -15,7 +15,6 @@ class projectManager {
     return newProject;
   }
   async update(criteria = {}, updatedProjectObj) {
-    console.log(criteria, updatedProjectObj, 'Inside update of projectManagerModel')
     return this.model.updateOne(criteria, updatedProjectObj);
   }
   async delete(criteria = {}) {

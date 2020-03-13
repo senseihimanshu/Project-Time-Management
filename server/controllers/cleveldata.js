@@ -11,7 +11,7 @@ class Cleveldata{
             res.send([{data}]);
                
        }catch(error){
-        console.log(error);
+        console.error(error);
       }
    }
     async timesheetsStatusData(req,res){
@@ -24,7 +24,7 @@ class Cleveldata{
           
              res.send([{data}]);
           }catch(error){
-         console.log(error);
+         console.error(error);
        }
    }
 }
