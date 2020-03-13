@@ -15,6 +15,7 @@ export class EmployeeFormComponent implements OnInit {
   employee: any;
   message: string;
   employeeForm: any;
+  dashboard:string= "Admin Dashboard"
   constructor(
    
     private employeeService: EmployeeService,
