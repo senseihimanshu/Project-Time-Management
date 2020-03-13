@@ -15,7 +15,7 @@ module.exports= (app) => {
 	//app.get("/employees/:id",controller.employees.show) 
     app.put("/employees/:id",controller.employees.update) ;
 	app.delete("/employees/:id",controller.employees.delete);
-	//  app.get("/employees/search",controller.employees.searchEmployee);
+    //app.get("/employees/search",controller.employees.search);
 	app.post("/login", controller.login.checkUserAuthentication);
 	app.get("/timesheet",controller.timesheet.show);
 	app.get("timesheets/search",controller.timesheet.searchTimesheets);

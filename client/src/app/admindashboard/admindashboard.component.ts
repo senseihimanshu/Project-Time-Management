@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 export class AdmindashboardComponent implements OnInit, OnChanges {
   @ViewChild('myAlert',{static:false}) myAlert: ElementRef;
-  
+  deleteEmp:boolean=true;
   name = "Angular";
   page = 1;
   pageSize = 6;
@@ -109,20 +109,55 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
 
   deleteEmployee(empId: any) {
-    console.log(empId);
-    this.employeeService.deleteEmployee(empId).subscribe(res => {
-      this.message = res.payload.message;
-      setTimeout(() => {
-        this.message = null;
-      }, 5000);
-        this.usersArray = this.usersArray.filter(item => item.empId != empId);
-      console.log(res);
-    });
-    swal.fire({
-     icon: 'success',
-     title: 'employee deleted suceessfully',
-    });
-  }
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+     
+    }).then((result) => {
+      if (result.value) {
+        this.employeeService.deleteEmployee(empId).subscribe(res => {
+          this.message = res.payload.message;
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+            this.usersArray = this.usersArray.filter(item => item.empId != empId);
+          console.log(res);
+        });
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'employee has been deleted.',
+          'success'
+          
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+        
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your employee data is safe :)',
+          'error'
+        )
+      }
+    })
+  
+    
+   
+ }
   logout() {
     this._service.deletetoken();
 

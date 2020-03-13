@@ -48,10 +48,11 @@ return this.myform.controls;
     if(this.myform.invalid)
     {
       let valLengthEmail = this.email.nativeElement.value.length;
-        if(valLengthEmail<8)
+        if(valLengthEmail<8){
         swal.fire({icon:'warning',
         title:"Email must be of minimum 8 characters"});  
-  return;
+        return;
+       }
       let valLengthPassword=this.password.nativeElement.value.length; 
        if(valLengthPassword<4)
        swal.fire({icon:'warning',

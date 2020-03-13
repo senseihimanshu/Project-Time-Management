@@ -7,7 +7,7 @@
       <div class="col-2 d-none d-lg-block">
         <app-sidebar [menus]="menus"></app-sidebar>
      </div>
-     <div class="custom-card col-6">
+      <div class="custom-card col-6">
    
        <div class="app-employee-form"> 
          <form
@@ -41,7 +41,9 @@
             placeholder="Employee Id"
             [(ngModel)]="employee && employee.empId"
             name="empId"
-            required maxlength="6" minlength="1"
+            required 
+            maxlength="6" 
+            minlength="1"
             [readonly]="!(typeOfForm === 'create')"
             #empId="ngModel"
           />
@@ -70,7 +72,7 @@
            
         </div>
      
-        <div class="h4 mb-4 formGroup was-validated" [class.has-error]="empName.invalid && empName.touched"
+        <div class="h4 mb-4 form-group was-validated" [class.has-error]="empName.invalid && empName.touched"
        
         >
            <label class="control-label"for="name">Name: </label>
