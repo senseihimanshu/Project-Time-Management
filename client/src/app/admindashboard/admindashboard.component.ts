@@ -1,14 +1,16 @@
 import { SendHttpRequestService } from "./../send-http-request.service";
-import { Component, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit, OnChanges,ViewChild,ElementRef } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { EmployeeService } from "../services/employee.service";
-
+import swal from 'sweetalert2';
 @Component({
   selector: "app-admindashboard",
   templateUrl: "./admindashboard.component.html",
   styleUrls: ["./admindashboard.component.scss", "../main/main.component.scss"]
 })
 export class AdmindashboardComponent implements OnInit, OnChanges {
+  @ViewChild('myAlert',{static:false}) myAlert: ElementRef;
+  
   name = "Angular";
   page = 1;
   pageSize = 6;
@@ -116,7 +118,10 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
         this.usersArray = this.usersArray.filter(item => item.empId != empId);
       console.log(res);
     });
-    alert("employee "+empId+" deleted successfully");
+    swal.fire({
+     icon: 'success',
+     title: 'employee deleted suceessfully',
+    });
   }
   logout() {
     this._service.deletetoken();

@@ -11,14 +11,15 @@
    
        <div class="app-employee-form"> 
          <form
-          class="form-body"
+          class="form-body needs-validation"
+
           #form="ngForm"
            (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
            novalidate>
             <div
              class="h4 mb-4
                d-flex justify-content-between font-weight-bold"
-               style="font-size: 2rem;"
+               style="font-size: 1.1rem;"
              >
              {{
                typeOfForm === "get"
@@ -31,7 +32,7 @@
         </div>
   
         <div class="h4 mb-4 was-validated">
-          <label for="empId">Employee ID: </label>
+          <label class="control-label" for="empId">Employee ID: </label>
          
          <input
             type="text"
@@ -64,6 +65,7 @@
           [disabled]="typeOfForm === 'get'"
           #email="ngModel"
         />
+       
          <p  *ngIf="email.invalid && email.touched">Email is required</p>
            
         </div>
