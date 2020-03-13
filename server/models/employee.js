@@ -12,6 +12,11 @@ class Employee{
       const findDocument=await this.model.findOne(criteria,columns).populate('projectId');
       return findDocument;
    }
+   async gets(criteria={}, columns={}){
+    console.log(criteria);
+    return this.model.find(criteria, columns);
+}
+
    //saves the data of newly created employee
     async save(employeeObj){
       console.log(employeeObj, 'new employee created!');

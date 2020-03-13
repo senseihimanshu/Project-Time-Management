@@ -256,39 +256,26 @@ class Employee {
 
   
   async indexP(req,res){
-
-    // if(jwtHandler.tokenVerifier(req.headers.token)){
-        const employeeList = await model.employee.get();
-        res.status(200).send(employeeList);
+         const employeeList = await model.employee.gets();
         // get page from query params or default to first page
         console.log(employeeList.length, "---------------------->>> here")
         const page = parseInt(req.query.page) || 1;
 
         // get pager object for specified page
-        const pageSize = 10;
-
+        const pageSize = 6;
+        
         const pager = await pagination.paginate(employeeList.length, page, pageSize);
         console.log(pager, "----------->>>> pager")
 
         // get page of items from items array
         const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
-
+        
 
         // return pager object and current page of items
         return res.json({ pager, pageOfItems });
-
+        
     }
 
-  async searchEmployee(req, res){
-   
-        console.log(req.query.name);
-        let query=req.query.name;
-        query = query.toLowerCase().trim()
-        const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
-        console.log("==========>>>>>>>>>>>>>", employees);
-        res.status(200).send(employees);
-    
-    }
   
 async sort(req,res)
   { console.log("in sort");

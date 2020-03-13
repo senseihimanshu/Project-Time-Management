@@ -5,7 +5,7 @@ class pagination{
     async paginate(
     totalItems,
     currentPage=1,
-    pageSize= 10,
+    pageSize= 6,
     maxPages= 10
   ) {
 

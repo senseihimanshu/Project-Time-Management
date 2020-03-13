@@ -78,12 +78,33 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.tabularData();
+    //this.tabularData();
+    this.loadEmployees(0, this.page);
   }
 
   ngOnChanges() {
     this.tabularData();
   }
+
+  loadEmployees(status, page){
+    if(status == 0){
+      this._service.showAllEmployees(page).subscribe(res => {
+        console.log(res, "my fav res--->>")
+        if(res.status == 200){
+          console.log(res, "my fav res--->>")
+          this.pager = res.body.pager;
+          this.usersArray = res.body.pageOfItems;
+          //this.usersArray = res.body;
+          console.log(this.usersArray);
+        }
+        else if(res.status == 401){
+          localStorage.removeItem("JwtHrms");
+          this.router.navigate(['/login']);
+        }
+      });
+    }
+    }
+
 
   deleteEmployee(empId: any) {
     console.log(empId);
