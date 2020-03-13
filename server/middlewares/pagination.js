@@ -30,7 +30,7 @@ function paginator(model) {
         //Now has become specific to only timesheetAPI
         //In future try to remember that the criteria must be a key from request!!!!!!!
         console.log(req.query.desc);
-        results.results = await model.find({ empObjId: req.query.empObjId }).sort({ startDate: (JSON.parse(req.query.desc) ? -1 : 1) }).limit(limit).skip(startIndex);
+        results.results = await model.find({ empObjId: req.query.empObjId }).sort({ startDate: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
         console.log(results);
         req.paginatedResults = results;
         next();
