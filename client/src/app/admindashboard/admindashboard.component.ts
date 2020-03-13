@@ -39,6 +39,9 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
       submenus: [
         {
           title: "Add New Project"
+        },
+        {
+          title: "Show All Projects"
         }
       ]
     },
