@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   @Input()
-  dashboard="";
+  dashboard:string;
 
   constructor(private router: Router, private _service: SendHttpRequestService) { }
 

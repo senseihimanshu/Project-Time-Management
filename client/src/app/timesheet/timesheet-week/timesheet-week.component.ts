@@ -30,8 +30,11 @@ export class TimesheetWeekComponent {
   editField: string;
   timesheetList: any;
   closeResult: string;
-  page: number = 4;
-  pageSize: number = 6;
+  
+  page: number = 1;
+  limit: number = 5;
+  dataSize: number;
+
   empObjId: string;
 
   isSortDecreasing: boolean = false;
@@ -124,9 +127,10 @@ export class TimesheetWeekComponent {
     ).data._id;
     console.log(empId);
 
-    this.timesheetService.getTimesheet(this.empObjId, "week").subscribe(res => {
+    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
       console.log(res);
       this.response = res.payload.data.timesheet;
+      this.dataSize = res.payload.data.result.dataSize;
     });
   }
 
@@ -139,6 +143,10 @@ export class TimesheetWeekComponent {
 
   filterList(date: any) {
     console.log(date);
+    if(!date){
+        console.log(date);
+        date = {year: 2000, month: 1, day: 1}
+    }
     this.timesheetService
       .getSpecificTimesheets(this.empObjId, date)
       .subscribe(res => {
@@ -151,14 +159,21 @@ export class TimesheetWeekComponent {
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
 
-    this.isSortDecreasing
-      ? this.response.sort((first, second) => {
-          return moment(first.startDate, "DD/MM/YYYY") > moment(second.startDate, "DD/MM/YYYY");
-        })
-      : this.response.sort((first, second) => {
-          return moment(second.startDate, "DD/MM/YYYY") > moment(first.startDate, "DD/MM/YYYY");
-        });
+    this.tabularData();
+  }
 
-    console.log(this.response);
+  handlePaginationResult(type: string){
+    if(type === 'prev'){
+        if(this.page > 1){
+            this.page--;
+            this.tabularData();
+        }
+    }
+    if(type === 'next'){
+        if(this.dataSize > this.page * this.limit){
+            this.page++;
+            this.tabularData();
+        }
+    }
   }
 }

@@ -3,7 +3,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { User } from  '../user';
-
+import swal from 'sweetalert2';
 // import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -40,18 +40,23 @@ return this.myform.controls;
     this.submitted=true;
     if(this.password.nativeElement.value==""||this.email.nativeElement.value=="")
     {
-      alert('All fields are necessary!');   
+     swal.fire({icon:'warning',
+            title:"All fields are necessary"});  
       return;
     }
     
     if(this.myform.invalid)
     {
       let valLengthEmail = this.email.nativeElement.value.length;
-        if(valLengthEmail<8)
-          alert("Email should be of minimum length 8");
+        if(valLengthEmail<8){
+        swal.fire({icon:'warning',
+        title:"Email must be of minimum 8 characters"});  
+        return;
+       }
       let valLengthPassword=this.password.nativeElement.value.length; 
        if(valLengthPassword<4)
-          alert("Password should be of minimum length 4");  
+       swal.fire({icon:'warning',
+       title:"Password must be of minimum 8 characters"});  
     return;
     }
      if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){

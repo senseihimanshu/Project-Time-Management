@@ -1,21 +1,22 @@
 import { SendHttpRequestService } from "./../send-http-request.service";
-import { Component, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit, OnChanges,ViewChild,ElementRef } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { EmployeeService } from "../services/employee.service";
-
+import swal from 'sweetalert2';
 @Component({
   selector: "app-admindashboard",
   templateUrl: "./admindashboard.component.html",
   styleUrls: ["./admindashboard.component.scss", "../main/main.component.scss"]
 })
 export class AdmindashboardComponent implements OnInit, OnChanges {
+  @ViewChild('myAlert',{static:false}) myAlert: ElementRef;
+  deleteEmp:boolean=true;
   name = "Angular";
   page = 1;
   pageSize = 6;
   items = [];
   pager={};
-  // dashboard: "Admin DASHBOARD"
-  hello: "kritika";
+  dashboard:string= "Admin Dashboard"
   menus: any = [
     {
       title: "Employees",
@@ -107,18 +108,55 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
 
   deleteEmployee(empId: any) {
-    console.log(empId);
-    this.employeeService.deleteEmployee(empId).subscribe(res => {
-      this.message = res.payload.message;
-      setTimeout(() => {
-        this.message = null;
-      }, 5000);
-        this.usersArray = this.usersArray.filter(item => item.empId != empId);
-      console.log(res);
-    });
-    alert("employee "+empId+" deleted successfully");
-  }
-
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+     
+    }).then((result) => {
+      if (result.value) {
+        this.employeeService.deleteEmployee(empId).subscribe(res => {
+          this.message = res.payload.message;
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+            this.usersArray = this.usersArray.filter(item => item.empId != empId);
+          console.log(res);
+        });
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'employee has been deleted.',
+          'success'
+          
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+        
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your employee data is safe :)',
+          'error'
+        )
+      }
+    })
+  
+    
+   
+ }
   myFunction() {
    //Declare variables
     var input, table, tr, td, i, txtValue;
