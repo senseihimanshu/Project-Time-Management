@@ -30,7 +30,7 @@ require('dotenv').config();
    }
    transporter.sendMail(info,function(err,data){
         if(err){
-          console.log("error occurs",err);
+          console.error("error occurs",err);
         }
         else{
           console.log("email sent successfully");
@@ -79,10 +79,8 @@ class Employee {
     var date=Date.now();
     var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
     newEmployee.password = password;
-    console.log(newEmployee.password,"randoom");
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(newEmployee.password,"randoom");
    newEmployee.password=hashedPassword;
   const resultAfterIsUnique = await isUnique(empId, email);
     if (!resultAfterIsUnique.status) {
@@ -136,42 +134,10 @@ class Employee {
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
     ) ;
     res.send(employeeList);
-    console.log(employeeList);
-    
-// router.get('/posts',authenticate, async (req,res) => {
-//   //const _ispublished = req.query.published;
-//   const match = {}
-//   const sort  = {}
-
-//   if(req.query.published){
-//       match.published = req.query.published === 'true'
-//   }
-
-//   if(req.query.sortBy && req.query.OrderBy){
-//       sort[req.query.sortBy]   = req.query.OrderBy === 'desc' ? -1 : 1
-//   }
-  
-//   try {
-//       await req.user.populate({
-//           path:'posts',
-//           match,
-//           options:{
-//               limit: parseInt(req.query.limit),
-//               skip: parseInt(req.query.skip),
-//               sort
-//           }
-//       }).execPopulate()
-//       res.send(req.user.posts)
-//   } catch (error) {
-//       res.status(500).send()
-//   }
-// })
   }
 
   async show(req, res) {
-    console.log("in employee show",req.query.empId);
     const employee = await model.employee.get({ empId:req.query.empId});
-    console.log(employee);
    
     if (!employee) {
       return res.status(404).send({ employee,
@@ -201,7 +167,6 @@ class Employee {
 
 
     const employeeToUpdate = await model.employee.get({ empId });
-    console.log(empId, email);
     const patchedEmployee = {
       email: employeeToUpdate.email !== email ? email : undefined,
       name,
@@ -214,7 +179,6 @@ class Employee {
       role
     };
 
-    console.log(patchedEmployee);
     
     //discarding keys with undefined
     Object.keys(patchedEmployee).forEach(key => patchedEmployee[key] === undefined && delete patchedEmployee[key])
@@ -239,9 +203,7 @@ class Employee {
   }
 
   async delete(req, res) {
-    console.log(req.query.empId);
     const employee = await model.employee.delete({ empId: req.query.empId });
-    console.log(employee);
    
     res.send({
       success: true,
@@ -258,14 +220,12 @@ class Employee {
   async indexP(req,res){
          const employeeList = await model.employee.gets();
         // get page from query params or default to first page
-        console.log(employeeList.length, "---------------------->>> here")
         const page = parseInt(req.query.page) || 1;
 
         // get pager object for specified page
         const pageSize = 6;
         
         const pager = await pagination.paginate(employeeList.length, page, pageSize);
-        console.log(pager, "----------->>>> pager")
 
         // get page of items from items array
         const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
@@ -278,7 +238,7 @@ class Employee {
 
   
 async sort(req,res)
-  { console.log("in sort");
+  { 
     var mysort = { name: 1 };
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},

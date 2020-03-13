@@ -9,7 +9,6 @@ class pagination{
     maxPages= 10
   ) {
 
-    console.log(totalItems, "inside function---->>")
     // calculate total pages
     let totalPages = Math.ceil(totalItems / pageSize);
 

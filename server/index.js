@@ -16,12 +16,6 @@ if (!config.get("jwtPrivateKey")) {
   process.exit(1);
 }
 
-//Mongoose Connection
-// mongoose
-//   .connect("mongodb://localhost/projectPortal", { useNewUrlParser: true })
-//   .then(() => console.log("MongoDb connected"))
-//   .catch(err => console.error("Error occured while connecting to db", err));
-
 //Using Middlewares
 //view engine setup
 app.engine('handlebars',exphbs());

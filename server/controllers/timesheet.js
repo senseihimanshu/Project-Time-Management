@@ -8,8 +8,6 @@ class Timesheet {
 
     //Creating a new timesheet
     const timesheetFromDatabase = await model.timesheet.save(timesheetToSave);
-    // console.log(updatedTimesheetObjId, 'updatedTimesheetObjId');
-    console.log(timesheetFromDatabase.timesheet, '_id of timesheet');
 
     //Adding timesheets of employees to projectManager and to employee
     if (timesheetFromDatabase.typeOfOperation === "create") {
@@ -23,7 +21,6 @@ class Timesheet {
               )
             ).projectManager;
 
-            console.log(week.projectId, projectManager, "Here man!");
             await model.projectManager.update(
               { managerId: projectManager },
               { $push: { timesheetIds: timesheetFromDatabase.timesheet._id } }
@@ -48,7 +45,6 @@ class Timesheet {
 
   async show(req, res) {
     const empObjId = req.query.empObjId;
-    console.log(req.query);
     var timesheet = [];
     if (empObjId) {
       timesheet = await model.timesheet.get({ empObjId });
@@ -65,7 +61,6 @@ class Timesheet {
       timesheet = timesheet.map((timesheetWeek) => {
         return { ...timesheetWeek.toObject(), week: undefined };
       });
-      console.log(timesheet);
     }
 
     if (!timesheet) {
@@ -91,13 +86,11 @@ class Timesheet {
 
   async index(req, res) {
     const { empId, startDate } = req.query;
-    console.log('Inside controllers/timesheet.js', empId, startDate);
 
     const filteredTimesheets = await model.timesheet.getTimesheetWeeks({ empObjId: empId, startDate: {
       $gte: startDate
     } });
 
-    console.log(filteredTimesheets);
 
     return res.send({
       success: true,
@@ -112,11 +105,9 @@ class Timesheet {
 
   async searchTimesheets(req, res){
    
-    console.log(req.query.date);
     let query=req.query.date;
     query = query.toLowerCase().trim()
     const timesheet = await model.project.getforsearch({ date: { $regex:`^${query}`, $options: 'i'}},{});
-    console.log("==========>>>>>>>>>>>>>", timesheet);
     res.status(200).send(timesheet);
 }
 
@@ -124,7 +115,6 @@ class Timesheet {
     const timesheetId = req.params.id;
 
     const timesheet = await model.timesheet.get({ _id: timesheetId });
-    console.log(timesheet, 'timesheet', timesheetId, 'timesheetId');
     return res.send({
       success: true,
       payload: {
@@ -138,7 +128,6 @@ class Timesheet {
 
   async update(req, res) {
     const col = { ...week };
-    console.log(col);
     const timesheet = await model.timesheet.update(
       { _id: req.query.id },
       { $push: { week: col } }
@@ -151,7 +140,6 @@ class Timesheet {
     });
   }
   async modify(req, res) {
-    console.log(req, "status change");
     const timesheet = await model.timesheet.update(
       { _id: req.body._id },
       { $set: { status: req.body.status } }
