@@ -5,16 +5,20 @@ module.exports= (app) => {
 	app.post("/api/project",controller.project.create);
 	app.get("/projects",controller.project.index);
 	app.get("/project",controller.project.show);
+	app.get("/projects/search",controller.project.searchProject);
+	app.put("/project/:id",controller.project.update);
 	app.put("/api/project",controller.project.update);
 	app.delete("/api/project",controller.project.delete);
 	//Employees
 	app.post("/employees",controller.employees.create) ;
 	app.get("/employees",controller.employees.index) 
-	app.get("/employees/:id",controller.employees.show) 
+	//app.get("/employees/:id",controller.employees.show) 
     app.put("/employees/:id",controller.employees.update) ;
 	app.delete("/employees/:id",controller.employees.delete);
+	app.get("/employees/search",controller.employees.searchEmployee);
 	app.post("/login", controller.login.checkUserAuthentication);
 	app.get("/timesheet",controller.timesheet.show);
+	app.get("timesheets/search",controller.timesheet.searchTimesheets);
 	// app.post("./timesheet",controller.timesheet.create);
 	app.post("/api/employee", controller.employees.create);
 	app.put("/api/employee", controller.employees.update);
