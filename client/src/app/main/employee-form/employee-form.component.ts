@@ -38,9 +38,6 @@ export class EmployeeFormComponent implements OnInit {
       submenus: [
         {
           title: "Add New Employee"
-        },
-        {
-          title: "Show All Employees"
         }
       ]
     },
