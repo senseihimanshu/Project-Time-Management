@@ -90,15 +90,20 @@ class Timesheet {
   }
 
   async index(req, res) {
-    const { empId, startDate } = req.body;
+    const { empId, startDate } = req.query;
+    console.log('Inside controllers/timesheet.js', empId, startDate);
 
-    const timesheetToUpdate = await model.timesheet.getTimesheetWeek(empId, startDate);
+    const filteredTimesheets = await model.timesheet.getTimesheetWeeks({ empObjId: empId, startDate: {
+      $gte: startDate
+    } });
+
+    console.log(filteredTimesheets);
 
     return res.send({
       success: true,
       payload: {
         data: {
-          timesheetToUpdate
+          filteredTimesheets
         },
         message: 'Timesheet for update retrieved successfully'
       }
@@ -113,7 +118,6 @@ class Timesheet {
     const timesheet = await model.project.getforsearch({ date: { $regex:`^${query}`, $options: 'i'}},{});
     console.log("==========>>>>>>>>>>>>>", timesheet);
     res.status(200).send(timesheet);
-
 }
 
   async getTimesheetUsingRouteParams(req, res){
@@ -160,10 +164,6 @@ class Timesheet {
         }
       }
     });
-  }
-
-  async(){
-    
   }
 
 }

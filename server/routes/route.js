@@ -60,8 +60,8 @@ module.exports= (app) => {
 //pagignation
 app.get('/project/projectList', controller.project.indexP);
 app.get('/employee/employeeList', controller.employees.indexP);
-
-app.get('/api/timesheet', controller.timesheet.index);
+app.get('/api/timesheet/filter', controller.timesheet.index);
+//app.get('/api/timesheet', controller.timesheet.index);
 	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
 }
 
