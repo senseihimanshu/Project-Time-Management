@@ -5,7 +5,6 @@ const projectschema = new mongoose.Schema(schema.project);
 class Project{
   constructor(){
     this.model=mongoose.model('project',projectschema);
-    console.log(projectschema, 'Inside models/projects.js');
   }
   
      //get the projects of company as per criteria
@@ -14,15 +13,12 @@ class Project{
     }
     //save the newly created project 
       async save(projectObj){
-        console.log(projectObj, ' created new project!');
         const newProject = await this.model.create(projectObj);
-        console.log(newProject);
             return newProject;
 
       }
       //to count the no. of projects as per criteria
       async count(criteria={}){
-          console.log("we are getting clevel data");
           const projectCount=await this.model.count(criteria);
           return projectCount;
          }
@@ -38,6 +34,20 @@ class Project{
      async log(criteria={}){
           return this.model.find(criteria);
      }
+     async getforsearch(criteria={}, columns={})
+    {
+      
+      return this.model.find(criteria, columns).sort({projectName: 1});
+}
+  async getProject(criteria={}, columns={}){
+     return this.model.find({"projectName": `/^$columns/i`}).exec(callback);
+  }
+  async gets(criteria={}, columns={}){
+    return this.model.find(criteria, columns);
+}
+async getPagignation(criteria={}, columns={}){
+  return this.model.find({"name": `/^$columns/i`}).exec(callback);
+}
 }
 
 module.exports=new Project();

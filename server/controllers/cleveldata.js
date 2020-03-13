@@ -7,11 +7,11 @@ class Cleveldata{
           const discardedProjects=await model.project.count({status:"Discarded"});
           const InProgressProjects=await model.project.count({status:"In Progress"});
           const data=[completedProjects,discardedProjects,InProgressProjects];
-            console.log(data);
+         
             res.send([{data}]);
                
        }catch(error){
-        console.log(error);
+        console.error(error);
       }
    }
     async timesheetsStatusData(req,res){
@@ -21,10 +21,10 @@ class Cleveldata{
            const declinedTimesheets=await model.timesheet.count({status:"Declined"});
            const PendingTimesheets=await model.timesheet.count({status:"Pending"});
            const data=[approvedTimesheets,declinedTimesheets,PendingTimesheets];
-             console.log(data);
+          
              res.send([{data}]);
           }catch(error){
-         console.log(error);
+         console.error(error);
        }
    }
 }

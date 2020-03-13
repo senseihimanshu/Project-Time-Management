@@ -1,7 +1,8 @@
 import { ServicesService } from './services.service';
 // import { NewwComponent } from './neww/neww.component';
 // import { MbscModule } from '@mobiscroll/angular-lite';
-import { TimesheetComponent, TimesheetModal } from './timesheet/timesheet.component';
+import { TimesheetComponent } from './timesheet/timesheet.component';
+import { TimesheetModal } from './timesheet/modal/modal.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -64,6 +65,7 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
 import { RoleGuardService } from './guards/role-guard.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 //import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
 @NgModule({
   declarations: [
@@ -91,6 +93,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ProjectManagerComponent,
     TimesheetModal,
     NavbarComponent,
+    TimesheetWeekComponent
     //NgbdTablePagination
    
   ],

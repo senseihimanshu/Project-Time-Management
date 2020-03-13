@@ -10,7 +10,7 @@ import {
 
 const FEED_API: string = "http://localhost:3000/api/employee";
 const PROJECT_API:string="http://localhost:3000/api/project";
-const SHOW_PROJECTAPI:string="http://localhost:3000/project"
+const SHOW_PROJECTAPI:string="http://localhost:3000/project";
 
 @Injectable({
   providedIn: "root"
@@ -44,12 +44,11 @@ export class EmployeeService {
       return this.http.put<any>(PROJECT_API, obj, this.httpOptions);
   }
   getEmployee(empId: string): any {
+    console.log(empId);
     if (!empId) {
       return this.http.get<any>(FEED_API, { ...this.httpOptions });
     }
-    console.log(empId);
     const params = new HttpParams().set("empId", empId);
-    console.log(params);
     return this.http.get<any>(FEED_API, { ...this.httpOptions, params });
   }
   
@@ -68,5 +67,14 @@ export class EmployeeService {
   deleteProject(id: string): any{
     const params = new HttpParams().set("id", id);
     return this.http.delete<any>(PROJECT_API, { ...this.httpOptions, params });
+  }
+  searchEmp(name:any):Observable<any>
+  {  const params = new HttpParams().set("name", name);
+    return this.http.get<any>("http://localhost:3000/employees/search",{ ...this.httpOptions, params });
+  }
+  searchProjects(name:any):Observable<any>
+  {
+    const params = new HttpParams().set("projectName", name);
+    return this.http.get<any>("http://localhost:3000/projects/search",{ ...this.httpOptions, params });
   }
 }

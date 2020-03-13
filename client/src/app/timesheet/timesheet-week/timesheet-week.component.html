@@ -1,0 +1,88 @@
+<div class="app-timesheet">
+  <div class="wrapper">
+    <app-navbar></app-navbar>
+  </div>
+
+  <div class="timesheet-table__wrapper">
+    <app-sidebar [menus]="menus"></app-sidebar>
+    <div class="card">
+      <div class="input-box">
+          <label for="date" class="labelDate" title="Choose Date to see timesheets above of it!">
+            Choose Date
+          </label>
+        <input
+          id="date"
+          class="form-control date-input"
+          placeholder="yyyy-mm-dd"
+          name="selectedDate"
+          [ngModel]="selectedDate?.value"
+          (ngModelChange)="filterList(selectedDate.value)"
+          ngbDatepicker
+          [markDisabled]="isDisabled"
+          #dp="ngbDatepicker"
+          #selectedDate="ngModel"
+        />
+        <div class="input-group-append">
+          <button
+            style="font-size: 1.8rem;"
+            class="btn btn-outline-secondary fas fa-calendar"
+            (click)="dp.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+        Timesheets
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="openDialog()">
+            <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
+          </a>
+        </span>
+      </h3>
+      <div class="card-body">
+        <div id="table" class="table-editable">
+          <table
+            class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
+          >
+            <thead>
+              <a class="sort" (click)="sortList()"><td class="text-center">Begin Date<i class="fas fa-sort"></i></td></a>
+              <td class="text-center">End Date</td>
+              <td class="text-center">State</td>
+              <td class="text-center">View</td>
+              <td class="text-center">Edit</td>
+              <!-- <td class="text-center">Delete</td> -->
+            </thead>
+            <tr *ngFor="let response of response">
+              <td class="text-center">{{ response.startDate | date }}</td>
+              <td class="text-center">{{ response.endDate | date }}</td>
+              <td class="text-center">{{ response.state }}</td>
+              <td>
+                <a class="view-btn" [routerLink]="['/timesheet', response._id]"
+                  ><i class="fas fa-eye"></i
+                ></a>
+              </td>
+              <td>
+                <a class="edit-btn" (click)="openDialog(response._id)"
+                  ><i class="fas fa-pencil-alt"></i
+                ></a>
+              </td>
+              <!-- <td><a class="delete-btn"><i class="fas fa-trash"></i></a></td> -->
+            </tr>
+          </table>
+
+          <div class="pagination-div">
+            <ngb-pagination
+              [collectionSize]="response?.length"
+              [(page)]="page"
+              [maxSize]="5"
+              [rotate]="true"
+              [pageSize]="pageSize"
+              size="lg"
+              aria-label="Default pagination"
+            ></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

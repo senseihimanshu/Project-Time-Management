@@ -10,6 +10,6 @@ mongoose
     console.log("connection established");
   })
   .catch(error => {
-    console.log(error.message);
+    console.error(error.message);
   });
 module.exports = mongoose;

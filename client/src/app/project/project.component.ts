@@ -57,6 +57,7 @@ export class ProjectComponent implements OnInit, OnChanges {
   ];
 
   message: String;
+  project:any;
   constructor(
     private _service: SendHttpRequestService,
     private router: Router,
@@ -71,7 +72,7 @@ export class ProjectComponent implements OnInit, OnChanges {
       this.projectsArray = res;
       console.log(res);
       console.log(this.projectsArray);
-     this.projectsArray=this.projectsArray.tempList;
+      this.projectsArray=this.projectsArray.tempList;
       console.log(this.projectsArray);
     });
     console.log(obj);
@@ -92,31 +93,29 @@ export class ProjectComponent implements OnInit, OnChanges {
       setTimeout(() => {
         this.message = null;
       }, 5000);
-      this.projectsArray = this.projectsArray.filter(item => item._id != id);
-      console.log("at filtration");
-      console.log(res);
+      this.projectsArray = this.projectsArray.filter(project =>project.project._id != id);
     });
   }
   logout() {
     this._service.deletetoken();
     this.router.navigate(["/login"]);
   }
-  // }
+ 
   myFunction() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
+    var input, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
+    let obj = this.employeeService.searchProjects(input.value).subscribe(res => {
+      this.project= res;
+      console.log(res);
+    });
     table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
-    console.log(input, "hgcfdfcj");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
+     tr = table.getElementsByTagName("tr");
+    // // Loop through all table rows, and hide those who don't match the search query
+     for (i = 0; i < tr.length; i++) {
+     td = tr[i].getElementsByTagName("td")[0];
       if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+           txtValue = td.textContent || td.innerText;
+           if (txtValue.toUpperCase().indexOf(input.value) > -1) {
           tr[i].style.display = "";
         } else {
           tr[i].style.display = "none";

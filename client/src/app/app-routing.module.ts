@@ -25,6 +25,7 @@ import { NotFoundComponent } from "./404/notfound.component";
 import { from } from "rxjs";
 import { RoleGuardService } from "./guards/role-guard.service";
 import { ProjectManagerComponent } from "./project-manager/project-manager.component";
+import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,21 @@ const routes: Routes = [
   },
   {
     path: "timesheet",
-    component: TimesheetComponent
+    children: [
+      {
+        path: '',
+        component: TimesheetComponent,
+        pathMatch: 'full' 
+      },
+      {
+        path: ':timesheetId',
+        component: TimesheetComponent 
+      }
+    ]
+  },
+  {
+    path: "timesheetweek",
+    component: TimesheetWeekComponent
   },
   {
     path: "sidebar",

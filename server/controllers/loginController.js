@@ -8,13 +8,11 @@ class employee {
     
     const user = await model.employee.get({ "email":req.body.email,"password":req.body.password},
       { role: 1, name: 1, _id: 1,empId:1 });
-      console.log(user);
-      if(user==null){
+      if(user==null) {
         console.log("False", user);
         res.status(401).send({auth:false,message:"Invalid Credentials",userobj:user});
       }
       else{
-        console.log("True", user);
         let token = jwtHandler.tokenGenerator(user);
           if (token != null){
            return res.status(200).send({ auth: true, message: "Valid Token.", jwtToken: token });
