@@ -11,7 +11,6 @@ class Leave{
         return this.model.find(criteria);
     }
       async save(employeeObj){
-        console.log(employeeObj, 'new leave is on demand!');
         const leave = await this.model.create(leaveObj);
           return leave;
       }

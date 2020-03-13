@@ -13,15 +13,12 @@ class Project{
     }
     //save the newly created project 
       async save(projectObj){
-        console.log(projectObj, ' created new project!');
         const newProject = await this.model.create(projectObj);
-        console.log(newProject);
             return newProject;
 
       }
       //to count the no. of projects as per criteria
       async count(criteria={}){
-          console.log("we are getting clevel data");
           const projectCount=await this.model.count(criteria);
           return projectCount;
          }
@@ -40,14 +37,12 @@ class Project{
      async getforsearch(criteria={}, columns={})
     {
       
-      console.log(criteria);
       return this.model.find(criteria, columns).sort({projectName: 1});
 }
   async getProject(criteria={}, columns={}){
      return this.model.find({"projectName": `/^$columns/i`}).exec(callback);
   }
   async gets(criteria={}, columns={}){
-    console.log(criteria);
     return this.model.find(criteria, columns);
 }
 async getPagignation(criteria={}, columns={}){
