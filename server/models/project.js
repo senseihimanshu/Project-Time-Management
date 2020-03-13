@@ -46,6 +46,13 @@ class Project{
   async getProject(criteria={}, columns={}){
      return this.model.find({"projectName": `/^$columns/i`}).exec(callback);
   }
+  async gets(criteria={}, columns={}){
+    console.log(criteria);
+    return this.model.find(criteria, columns);
+}
+async getPagignation(criteria={}, columns={}){
+  return this.model.find({"name": `/^$columns/i`}).exec(callback);
+}
 }
 
 module.exports=new Project();

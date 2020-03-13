@@ -20,7 +20,11 @@ export class ProjectFormComponent implements OnInit {
   projManager:string[]=[];
   projMembers:string[]=[];
   message:any;
-
+  name = "Angular";
+  page = 1;
+  pageSize = 6;
+  items = [];
+  pager={};
   constructor(
     private _service: SendHttpRequestService,
     private employeeService: EmployeeService,
