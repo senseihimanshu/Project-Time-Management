@@ -83,8 +83,7 @@
       <div class="pagination-div">
         <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page}<i class="fas fa-arrow-circle-left"></i></a>
         <a class="move-right" [ngClass]="{'disabled': page * limit >= dataSize}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page}}</a>
-      </div>
-      
+        </div>   
     </div>
   </div>
   </div>
