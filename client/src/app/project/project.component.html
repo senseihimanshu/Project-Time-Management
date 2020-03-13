@@ -1,11 +1,12 @@
-<div class="wrapper">
+<div>
   <app-navbar></app-navbar>
-  <div class="main">
+  <div class="row">
+    <div class="col-2 d-none d-lg-block">
     <app-sidebar [menus]="menus"></app-sidebar>
-
-    <div class="row">
-      <div class="col-sm-6 col-md-12 col-lg-12">
-    <div class="container ">
+    </div>
+    
+    <div class="col-10">
+      <div class="custom-card">
       <div class="input-group">
         <span class="input-group-addon">
           <i class="fa fa-search"></i>
@@ -87,4 +88,4 @@
     </div>
   </div>
   </div>
-</div>  </div>
+</div>
