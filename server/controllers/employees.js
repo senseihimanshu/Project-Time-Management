@@ -235,7 +235,16 @@ class Employee {
         return res.json({ pager, pageOfItems });
         
     }
-
+    async searchEmployee(req, res){
+   
+      console.log(req.query.name);
+      let query=req.query.name;
+      query = query.toLowerCase().trim()
+      const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
+      console.log("==========>>>>>>>>>>>>>", employees);
+      res.status(200).send(employees);
+  
+  }
   
 async sort(req,res)
   { 

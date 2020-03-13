@@ -169,7 +169,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     var input, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchEmp(input.value).subscribe(res => {
-      this.user= res;
+      this.usersArray= res;
       console.log(res);
     });
     table = document.getElementById("myTable");
