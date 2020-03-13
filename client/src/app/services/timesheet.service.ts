@@ -42,9 +42,9 @@ export class TimesheetService {
   //       return this.http.get<any>("http://localhost:3000/timesheet", { ...this.httpOptions });
   //     }
   // }
-  getTimesheet(empObjId: any, type: string = null): Observable<any> {
+  getTimesheet(empObjId: any, type: string = null, page: string = null, limit: string = null, desc: boolean = null): Observable<any> {
     console.log(empObjId, 'Inside Service');
-    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type);
+    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type).set("page", page).set("limit", limit).set("desc", desc.toString());
 
     return this.http.get("http://localhost:3000/timesheet", {
       ...this.httpOptions,

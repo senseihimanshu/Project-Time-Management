@@ -1,4 +1,5 @@
 const model = require("../models");
+const moment = require('moment');
 
 class Timesheet {
   constructor() {}
@@ -46,8 +47,9 @@ class Timesheet {
   async show(req, res) {
     const empObjId = req.query.empObjId;
     var timesheet = [];
+    
     if (empObjId) {
-      timesheet = await model.timesheet.get({ empObjId });
+      timesheet = req.paginatedResults.results;
     } else {
       return res.status(400).send({
         success: false,
@@ -76,7 +78,8 @@ class Timesheet {
         success: true,
         payload: {
           data: {
-            timesheet
+            timesheet,
+            result: req.paginatedResults
           },
           message: "Timesheets retrieved"
         }
