@@ -7,7 +7,7 @@ import { SendHttpRequestService } from "../send-http-request.service";
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss']
+  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss','../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
   formType: string;
@@ -114,10 +114,12 @@ export class ProjectFormComponent implements OnInit {
        });
    }
    getemployees() {
+
     let obj = this._service.showEmployees().subscribe(res => {
       this.empList = res;
       console.log(res);
     });
+    console.log("employeelist",this.empList);
     console.log(obj);
   }
   addProjectManager(employeeArr: any)

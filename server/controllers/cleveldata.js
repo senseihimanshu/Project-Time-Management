@@ -17,11 +17,12 @@ class Cleveldata{
     async timesheetsStatusData(req,res){
         
         try{
+        
          const  approvedTimesheets=await model.timesheet.count({status:"Approved"});
            const declinedTimesheets=await model.timesheet.count({status:"Declined"});
            const PendingTimesheets=await model.timesheet.count({status:"Pending"});
            const data=[approvedTimesheets,declinedTimesheets,PendingTimesheets];
-          
+            
              res.send([{data}]);
           }catch(error){
          console.error(error);
