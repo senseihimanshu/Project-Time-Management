@@ -68,4 +68,13 @@ export class EmployeeService {
     const params = new HttpParams().set("id", id);
     return this.http.delete<any>(PROJECT_API, { ...this.httpOptions, params });
   }
+  searchEmp(name:any):Observable<any>
+  {  const params = new HttpParams().set("name", name);
+    return this.http.get<any>("http://localhost:3000/employees/search",{ ...this.httpOptions, params });
+  }
+  searchProjects(name:any):Observable<any>
+  {
+    const params = new HttpParams().set("projectName", name);
+    return this.http.get<any>("http://localhost:3000/projects/search",{ ...this.httpOptions, params });
+  }
 }
