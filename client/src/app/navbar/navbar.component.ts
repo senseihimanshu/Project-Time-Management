@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   @Input()
   dashboard:string;
-
   constructor(private router: Router, private _service: SendHttpRequestService) { }
 
   ngOnInit() {
