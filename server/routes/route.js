@@ -1,4 +1,6 @@
 const controller = require('../controllers');
+const paginator = require('../middlewares/pagination');
+const model = require('../models');
 
 module.exports= (app) => {
 	//Project
@@ -17,7 +19,7 @@ module.exports= (app) => {
 	app.delete("/employees/:id",controller.employees.delete);
 	app.get("/employees/search",controller.employees.searchEmployee);
 	app.post("/login", controller.login.checkUserAuthentication);
-	app.get("/timesheet",controller.timesheet.show);
+	app.get("/timesheet", paginator(model.timesheet.model), controller.timesheet.show);
 	app.get("timesheets/search",controller.timesheet.searchTimesheets);
 	// app.post("./timesheet",controller.timesheet.create);
 	app.post("/api/employee", controller.employees.create);

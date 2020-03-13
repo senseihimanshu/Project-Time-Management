@@ -1,4 +1,5 @@
 const model = require("../models");
+const moment = require('moment');
 
 class Timesheet {
   constructor() {}
@@ -48,10 +49,10 @@ class Timesheet {
 
   async show(req, res) {
     const empObjId = req.query.empObjId;
-    console.log(req.query);
     var timesheet = [];
+    
     if (empObjId) {
-      timesheet = await model.timesheet.get({ empObjId });
+      timesheet = req.paginatedResults.results;
     } else {
       return res.status(400).send({
         success: false,
@@ -65,7 +66,26 @@ class Timesheet {
       timesheet = timesheet.map((timesheetWeek) => {
         return { ...timesheetWeek.toObject(), week: undefined };
       });
-      console.log(timesheet);
+
+      // !req.query.desc
+      // ? timesheet.sort((first, second) => {
+      //     if(moment(first.startDate) < moment(second.startDate)){
+      //       return 1
+      //     }
+      //     if(moment(first.startDate) > moment(second.startDate)){
+      //       return -1
+      //     }
+      //     return 0;
+      //   })
+      // : timesheet.sort((first, second) => {
+      //       if(moment(first.startDate) < moment(second.startDate)){
+      //       return -1
+      //       }
+      //       if(moment(first.startDate) > moment(second.startDate)){
+      //       return 1
+      //       }
+      //       return 0;
+      //   });
     }
 
     if (!timesheet) {
@@ -81,7 +101,8 @@ class Timesheet {
         success: true,
         payload: {
           data: {
-            timesheet
+            timesheet,
+            result: req.paginatedResults
           },
           message: "Timesheets retrieved"
         }
