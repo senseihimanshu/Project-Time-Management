@@ -15,8 +15,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   page:number = 1;
   lastPage:number;
   items = [];
-  // dashboard: "Admin DASHBOARD"
-  hello: "kritika";
+  dashboard:string= "Admin Dashboard"
   menus: any = [
     {
       title: "Employees",
@@ -145,6 +144,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     
    
  }
+
   logout() {
     this._service.deletetoken();
 
@@ -172,6 +172,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
         }
     }
   }
+
   myFunction() {
    //Declare variables
     var input, table, tr, td, i, txtValue;

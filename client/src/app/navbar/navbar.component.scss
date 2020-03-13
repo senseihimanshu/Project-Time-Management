@@ -1,6 +1,8 @@
 
 .profile{
     margin-right: 0.5rem;
+    cursor: pointer;
+    outline: none;
   }
 
   .logout
@@ -9,6 +11,8 @@
    color: #2f8fe9b4;
    border: hidden;
    background-color: white !important;
+   outline: none;
+
   }
 
   .navbar{
