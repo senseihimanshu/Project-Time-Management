@@ -5,7 +5,7 @@ const nodemailer=require('nodemailer');
 var generator = require('generate-password');
 const saltRounds = 10;
 var generatePassword = require('password-generator');
-
+const pagination = require("../pagignation");
 
 require('dotenv').config();
 // node function which sends email to new user create
@@ -134,9 +134,38 @@ class Employee {
     const employeeList = await model.employee.log(
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-  );
+    ) ;
     res.send(employeeList);
     console.log(employeeList);
+    
+// router.get('/posts',authenticate, async (req,res) => {
+//   //const _ispublished = req.query.published;
+//   const match = {}
+//   const sort  = {}
+
+//   if(req.query.published){
+//       match.published = req.query.published === 'true'
+//   }
+
+//   if(req.query.sortBy && req.query.OrderBy){
+//       sort[req.query.sortBy]   = req.query.OrderBy === 'desc' ? -1 : 1
+//   }
+  
+//   try {
+//       await req.user.populate({
+//           path:'posts',
+//           match,
+//           options:{
+//               limit: parseInt(req.query.limit),
+//               skip: parseInt(req.query.skip),
+//               sort
+//           }
+//       }).execPopulate()
+//       res.send(req.user.posts)
+//   } catch (error) {
+//       res.status(500).send()
+//   }
+// })
   }
 
   async show(req, res) {
@@ -222,16 +251,31 @@ class Employee {
       }
     });
   }
-  async searchEmployee(req, res){
-   
-        console.log(req.query.name);
-        let query=req.query.name;
-        query = query.toLowerCase().trim()
-        const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
-        console.log("==========>>>>>>>>>>>>>", employees);
-        res.status(200).send(employees);
-    
+
+
+
+  
+  async indexP(req,res){
+         const employeeList = await model.employee.gets();
+        // get page from query params or default to first page
+        console.log(employeeList.length, "---------------------->>> here")
+        const page = parseInt(req.query.page) || 1;
+
+        // get pager object for specified page
+        const pageSize = 6;
+        
+        const pager = await pagination.paginate(employeeList.length, page, pageSize);
+        console.log(pager, "----------->>>> pager")
+
+        // get page of items from items array
+        const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
+        
+
+        // return pager object and current page of items
+        return res.json({ pager, pageOfItems });
+        
     }
+
   
 async sort(req,res)
   { console.log("in sort");
@@ -242,5 +286,6 @@ async sort(req,res)
     );
     res.send(employeeList);
   }
+
 }
 module.exports = new Employee();

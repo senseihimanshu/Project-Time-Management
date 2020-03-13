@@ -19,6 +19,7 @@ export class EmpTableComponent implements OnInit {
     usersArray: MatTableDataSource<any>;
     displayedColumns: string[]= ['fullname'];
    // usersArray: any;
+   data:any;
     tabularData() {
         this._service.showEmployees().subscribe(res => {
         let array=

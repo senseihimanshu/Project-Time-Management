@@ -15,6 +15,7 @@ import { TimesheetModal } from "./modal/modal.component";
 import { MatDialog } from "@angular/material/dialog";
 import { EmployeeService } from "../services/employee.service";
 import { SendHttpRequestService } from "../services/send-http-request.service";
+import {  RouterLink } from "@angular/router";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
@@ -37,6 +38,10 @@ export class TimesheetComponent implements OnInit {
   closeResult: string;
 
   empObjId: string;
+  name = "Angular";
+  page = 1;
+  pageSize = 10;
+  items = [];
 
   response: any;
 
