@@ -253,6 +253,7 @@ class Employee {
   }
 
 
+
   
   async indexP(req,res){
 
@@ -277,6 +278,7 @@ class Employee {
         return res.json({ pager, pageOfItems });
 
     }
+
   async searchEmployee(req, res){
    
         console.log(req.query.name);
@@ -297,5 +299,6 @@ async sort(req,res)
     );
     res.send(employeeList);
   }
+
 }
 module.exports = new Employee();

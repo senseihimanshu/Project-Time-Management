@@ -45,7 +45,8 @@ class Employee{
       console.log(criteria);
       return this.model.find(criteria, columns).sort({name: 1});
 }
-  async getEmpPagig(criteria={}, columns={}){
+ 
+  async getPagignation(criteria={}, columns={}){
      return this.model.find({"name": `/^$columns/i`}).exec(callback);
   }
 }
