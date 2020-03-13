@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
@@ -10,6 +10,8 @@ import { SendHttpRequestService } from "../send-http-request.service";
   styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss','../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
+ 
+
   formType: string;
   employee: any;
   project:any;
@@ -30,6 +32,8 @@ export class ProjectFormComponent implements OnInit {
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute) { }
+    @Input()
+    dashboard:string="Admin Dashboard";
     menus: any = [
       {
         title: "Employees",
