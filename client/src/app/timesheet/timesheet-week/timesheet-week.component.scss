@@ -43,6 +43,34 @@
   }
   
   
-  
-  
-  
+.input-box{
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+
+    & input{
+        max-width: 20%;
+        font-size: 1.6rem;
+        padding: 1.6rem 1.4rem;
+        outline: none;
+        border: none;
+        transition: all .2s;
+        &:focus{
+            background-color: #cdcdcd;
+        }
+    }
+}
+
+.pagination-div{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.labelDate{
+    width: 12%;
+    font-size: 1.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}

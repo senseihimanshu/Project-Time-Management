@@ -18,8 +18,8 @@ class Timesheet{
       return timesheetArray;
    }
 
-   async getTimesheetWeek(criteria = {}, columns = {}){
-    return this.model.findOne(criteria, columns);
+   async getTimesheetWeeks(criteria = {}, columns = {}){
+    return this.model.find(criteria, columns);
    }
 
    async save(timesheetObj){

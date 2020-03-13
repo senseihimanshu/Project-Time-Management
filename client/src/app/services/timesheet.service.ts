@@ -93,8 +93,9 @@ export class TimesheetService {
     console.log(message);
   }
 
-  private getSpecificTimesheet(empId: string, startDate: any){
-    const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', startDate);
-    // this.http.get(TIMESHEET_API, { params, httpOptions });
+  getSpecificTimesheets(empId: string, startDate: any): Observable<any>{
+    console.log(empId, startDate, 'Inside timesheet.service.ts/getSpecificTimesheets');
+    const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', `${startDate.year}-${startDate.month}-${startDate.day}`);
+    return this.http.get(`${TIMESHEET_API}/filter`, { params, ...this.httpOptions });
   }
 }
