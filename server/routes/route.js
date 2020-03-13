@@ -38,7 +38,7 @@ module.exports= (app) => {
 
 
 
-	app.get('/api/timesheet', controller.timesheet.index);
+	app.get('/api/timesheet/filter', controller.timesheet.index);
 	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
 }
 
