@@ -1,5 +1,6 @@
 const model = require("../models");
 const schema = require("../schemas");
+const pagination = require("../pagignation");
 class Project {
   constructor() {
     
@@ -175,6 +176,27 @@ class Project {
       }
     });
   }
+  
+  async indexP(req,res){
+    const projectList = await model.project.gets();
+   // get page from query params or default to first page
+   console.log(employeeList.length, "---------------------->>> here")
+   const page = parseInt(req.query.page) || 1;
+
+   // get pager object for specified page
+   const pageSize = 6;
+   
+   const pager = await pagination.paginate(projectList.length, page, pageSize);
+   console.log(pager, "----------->>>> pager")
+
+   // get page of items from items array
+   const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
+   
+
+   // return pager object and current page of items
+   return res.json({ pager, pageOfItems });
+   
+}
 }
 
 module.exports = new Project();

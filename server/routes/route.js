@@ -58,6 +58,7 @@ module.exports= (app) => {
 // 		  });
 //   })
 //pagignation
+app.get('/project/projectList', controller.project.indexP);
 app.get('/employee/employeeList', controller.employees.indexP);
 
 app.get('/api/timesheet', controller.timesheet.index);
