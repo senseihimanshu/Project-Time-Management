@@ -5,7 +5,7 @@ const nodemailer=require('nodemailer');
 var generator = require('generate-password');
 const saltRounds = 10;
 var generatePassword = require('password-generator');
-const pagination = require("../pagignation");
+
 
 require('dotenv').config();
 // node function which sends email to new user create
@@ -133,7 +133,16 @@ class Employee {
       {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
     ) ;
-    res.send(employeeList);
+    return res.status(200).send({
+      success: true,
+      payload: {
+        data: {
+          employeeList,
+          result: req.paginatedResults
+        },
+        message: "employees retrieved"
+      }
+    });
   }
 
   async show(req, res) {
@@ -243,18 +252,8 @@ class Employee {
       const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
       console.log("==========>>>>>>>>>>>>>", employees);
       res.status(200).send(employees);
+    }
   
-  }
-  
-async sort(req,res)
-  { 
-    var mysort = { name: 1 };
-    const employeeList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    );
-    res.send(employeeList);
-  }
 
 }
 module.exports = new Employee();

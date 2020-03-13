@@ -1,26 +1,4 @@
-
-  <!-- <div class="row pagination-div mt-5" id="pageNo">
-		<div class="col-lg-4 col-lg-offset-4 col-md-4 offset-md-4 col-sm-10 offset-sm-2 col-xs-12">
-			<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-					<a (click)="loadEmployees(1)"  class="page-link">First</a>
-				</li>
-				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-					<a (click)="loadEmployees(page-1)"  class="page-link">Previous</a>
-				</li>
-				<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-					<a  (click)="loadEmployees(page)"  class="page-link">{{page}}</a>
-				</li>
-				<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-					<a (click)="loadEmployees(page+1)" class="page-link">Next</a>
-				</li>
-				<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-					<a (click)="loadEmployees(pager.endPage)" class="page-link">Last</a>
-				</li>
-			</ul>
-		</div>
- -->
- <div>
+<div>
   <app-navbar [dashboard]="hello"></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
@@ -46,7 +24,7 @@
             <tr>
               <th scope="col">Employee Id</th>
               <th scope="col">
-                Name<i class="fas fa-sort" (click)="sortTable()"></i>
+                Name<i class="fas fa-sort" (click)="sortList()"></i>
               </th>
               <th scope="col">Email</th>
               <th scope="col">Designation</th>
@@ -60,9 +38,7 @@
             style="height: 10px !important; overflow: auto"
             id="adminTable"
             *ngFor="
-              let employee of usersArray
-                | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
-            "
+              let employee of usersArray"
           >
             <tr>
               <td>
@@ -105,16 +81,8 @@
           </tbody>
         </table>
         <div class="pagination-div">
-          <ngb-pagination
-            [collectionSize]="usersArray.length"
-            [(page)]="page"
-            [maxSize]="5"
-            [rotate]="true"
-            [ellipses]="false"
-            [pageSize]="pageSize"
-            aria-label="Default pagination"
-            size="sm"
-          ></ngb-pagination>
+          <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page}}<i class="fas fa-arrow-circle-left"></i></a>
+          <a class="move-right" [ngClass]="{'hide': page===lastPage}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page+1}}</a>
         </div>
       </div>
     </div>

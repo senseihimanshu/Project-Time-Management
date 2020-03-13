@@ -1,6 +1,5 @@
 const model = require("../models");
 const schema = require("../schemas");
-const pagination = require("../pagignation");
 class Project {
   constructor() {
     
@@ -84,7 +83,8 @@ class Project {
   }
 
   async index(req, res) {
-  const projectList = await model.project.log({});
+    console.log(req.paginatedResults);
+  const projectList = req.paginatedResults.results;
     const tempList = [];
    await Promise.all(
     projectList.map(async(project) => {
@@ -100,10 +100,15 @@ class Project {
       })
     );  
     
-    
-
-    res.send({
-      tempList
+    return res.status(200).send({
+      success: true,
+      payload: {
+        data: {
+          tempList,
+          result: req.paginatedResults
+        },
+        message: "projects retrieved"
+      }
     });
   }
 
@@ -147,7 +152,31 @@ class Project {
     let query=req.query.projectName;
     query = query.toLowerCase().trim()
     const projects = await model.project.getforsearch({projectName: { $regex:`^${query}`, $options: 'i'}},{});
-    res.status(200).send(projects);
+    const tempList = [];
+    await Promise.all(
+     projects.map(async(project) => {
+         const manager = await model.employee.get(
+           { _id: project.projectManager },
+           { name: 1, _id: 0 }
+         );
+         const member = await model.employee.get(
+           { _id: project.empObjectIdArray },
+           { name: 1, _id: 0 }
+         );
+       tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member && member.name});
+       })
+     );  
+     
+     return res.status(200).send({
+       success: true,
+       payload: {
+         data: {
+           tempList,
+           result: req.paginatedResults
+         },
+         message: "projects retrieved"
+       }
+     });
 
 }
   async delete(req, res) {

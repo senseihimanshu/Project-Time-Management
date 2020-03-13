@@ -71,8 +71,10 @@ export class SendHttpRequestService {
     );
   }
 
-    showProjects(): Observable<any>{
-    return this.http.get("http://localhost:3000/projects", {headers:this.header_token}).pipe(
+    showProjects(page: string = null, limit: string = null, desc: boolean = null): Observable<any>{
+      const params: HttpParams = new HttpParams().set("page", page).set("limit", limit).set("desc", desc.toString());
+      return this.http.get("http://localhost:3000/projects", { ...this.httpOptions, params
+    }).pipe(
       tap(_ => this.log("Projects data")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
@@ -110,26 +112,7 @@ export class SendHttpRequestService {
   deletetoken() {
     localStorage.removeItem("Authorization");
   }
-  
-  // sortData()
-  // {
-  //   const token = localStorage.getItem('Authorization');
-      
-  //   // //Decode JWT and return the Payload in JSON Format
-  //  const decodeToken= this.jsonDecoder(token);
-  //  console.log(decodeToken);
-  //        const empId=decodeToken.data.empId;
-  //      console.log(empId);
-  //     const params = new HttpParams().set("empId", empId);
-  //     console.log(params); 
-  //     if (!empId) {
-  //       return this.http.get<any>("http://localhost:3000/employees/sort", { ...this.httpOptions });
-  //     }
-  //   return this.http.get<any>("http://localhost:3000/employees/sort",{ ...this.httpOptions, params }).pipe(
-  //     tap(_ => this.log("Log In")),
-  //     catchError(this.handleError<any>('Some Error Occurred'))
-  //   );
-  // }
+ 
   
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -146,8 +129,13 @@ export class SendHttpRequestService {
     }
     
 
-    showAllEmployees(pageNo:Number): Observable<any>{
-      return this.http.get("http://localhost:3000/employeeList?page=" + pageNo, {headers: this.header_token, observe: 'response'}).pipe(
+    showAllEmployees(page: string = null, limit: string = null, desc: boolean = null):Observable<any>
+    {
+    const params: HttpParams = new HttpParams().set("page", page).set("limit", limit).set("desc", desc.toString());
+     
+     
+      return this.http.get("http://localhost:3000/employees" , { ...this.httpOptions, params
+      }).pipe(
         tap(_ => this.log("showing details")),
         catchError(this.handleError<any>('error in details')
       ));

@@ -13,11 +13,10 @@
 
         <input type="text" class="form-control"  id="myInput" (keyup)="myFunction()" placeholder= 'Search By Project Name'/>        
     </div>
-         <!-- <p class="para-design"><button class="p-2" (click)="sortTable()">Sort by Project Name</button></p> -->
       <table class="table table-striped" id="myTable">
         <thead>
           <tr>
-            <th scope="col">Project Name<i class="fas fa-sort" (click)="sortTable()"></i>
+            <th scope="col">Project Name<i class="fas fa-sort" (click)="sortList()"></i>
 
             </th>
             <th scope="col">Project Manager
@@ -44,7 +43,7 @@
           </tr>
 
         </thead>
-        <tbody  *ngFor="let project of projectsArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+        <tbody  *ngFor="let project of projectsArray">
           <tr>
             <td>
              {{project.project.projectName}}
@@ -81,10 +80,12 @@
         </tbody>
       </table>
       <div class="pagination-div">
-        <ngb-pagination [collectionSize]="projectsArray.length" [(page)]="page" [maxSize]="5" [rotate]="true"
-          [ellipses]="false" [pageSize]="pageSize" aria-label="Default pagination" size="sm"></ngb-pagination>
+        <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page}<i class="fas fa-arrow-circle-left"></i></a>
+        <a class="move-right" [ngClass]="{'disabled': page * limit >= dataSize}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page}}</a>
       </div>
+      
     </div>
   </div>
   </div>
-</div>  </div>
+</div> 
+ </div>
