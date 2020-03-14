@@ -41,6 +41,8 @@ export class TimesheetWeekComponent {
 
   response: any;
 
+  role: string;
+
   menus: any = [
     {
       title: "Employees",
@@ -125,34 +127,29 @@ export class TimesheetWeekComponent {
     this.empObjId = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
     ).data._id;
-    console.log(empId);
 
-    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
-      console.log(res);
+    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
+   
       this.response = res.payload.data.timesheet;
       this.dataSize = res.payload.data.result.dataSize;
     });
   }
 
   ngOnInit() {
-    let role = this.httpService.jsonDecoder(
+    this.role = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
     ).data.role[0];
     this.tabularData();
   }
 
   filterList(date: any) {
-    console.log(date);
     if(!date){
-        console.log(date);
         date = {year: 2000, month: 1, day: 1}
     }
     this.timesheetService
       .getSpecificTimesheets(this.empObjId, date)
       .subscribe(res => {
-        console.log(res);
         this.response = res.payload.data.filteredTimesheets;
-        console.log(this.response);
       });
   }
 

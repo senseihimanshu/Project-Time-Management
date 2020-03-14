@@ -33,8 +33,8 @@ module.exports = {
       },
       status: {
         type: String,
-        default: "Pending",
-        enum: ["Approved", "Declined", "Pending"]
+        default: "pending",
+        enum: ["approved", "declined", "pending"]
       },
       billable: {
         type: Boolean

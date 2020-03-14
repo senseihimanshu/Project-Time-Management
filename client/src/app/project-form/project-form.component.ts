@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { FormControl } from '@angular/forms';
 import { SendHttpRequestService } from "../send-http-request.service";
+import swal from'sweetalert2'
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -21,7 +22,7 @@ export class ProjectFormComponent implements OnInit {
   empList: string[];
   projManager:string[]=[];
   projMembers:string[]=[];
-  message:any;
+  message:string;
   name = "Angular";
   page = 1;
   pageSize = 6;
@@ -84,21 +85,16 @@ export class ProjectFormComponent implements OnInit {
      this.getemployees();
     console.log("ngOnInit");
     this.route.params.subscribe((data: Params) => {
-      console.log(data);
+
     });
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          console.log(params);
           this.formType = params.type;
-            // debugger;
-          console.log(this.formType);
 
           if (!params.projectId) {
-            console.log("here");
             return this.employeeService.getProject(null);
           }
-       //   this.formType = "get";
           console.log(this.formType);
           return this.employeeService.getProject(params.projectId);
         })
@@ -114,22 +110,24 @@ export class ProjectFormComponent implements OnInit {
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
          this.message=res.payload.message;
-         console.log(res.payload.message)
-       });
-   }
+         swal.fire({
+          icon: 'success',
+          title: this.message,
+          showConfirmButton: true,
+          timer: 3000
+        }) 
+    }); 
+}
    getemployees() {
 
     let obj = this._service.showEmployees().subscribe(res => {
       this.empList = res.payload.data.employeeList;
-      console.log(res);
     });
     console.log("employeelist",this.empList);
-    console.log(obj);
   }
   addProjectManager(employeeArr: any)
   {
     if(employeeArr){
-      console.log('Abha Rana', employeeArr);
       employeeArr.map((employee) => {
         this.projManager.push(employee._id);
       });
@@ -140,7 +138,6 @@ export class ProjectFormComponent implements OnInit {
   addProjectMember(employeeArr: any)
   {
     if(employeeArr){
-      console.log('Abha Rana', employeeArr);
       employeeArr.map((employee) => {
         this.projMembers.push(employee._id);
       });

@@ -28,15 +28,8 @@ export class ServicesService {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(jsonPayload);
-    console.log(token);
   };
-//   signinUser(UserName,Password): Observable<any>{
-//     return this.http.get('http://api.###.com/api/###/signin?
-//         username='+UserName+'&password='+Password);
-// }
 
-
-  
   isAuthenticated(){
     if(localStorage.getItem("Authorization") != null && this.isValid){
       return true;

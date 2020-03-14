@@ -13,7 +13,7 @@ import { Router, RouterLink } from "@angular/router";
 export class DashboardComponent implements OnInit, OnChanges {
 
   dashboard:string= "C Level Dashboard"
-
+  graphicaldata:Boolean=true;
 menus: any = [
   {
     title: "Employees",
@@ -54,7 +54,7 @@ menus: any = [
 
   loading = false;
   //  users: User[] = [];
-
+  
     constructor(private httpService: HttpClient,
       private _service: SendHttpRequestService,
     private router: Router,
@@ -104,31 +104,26 @@ onChartClick(event) {
     }
   ];
     ngOnInit() {
-      this.clevelDataProjects();
-      this.clevelDataTimesheets();
+      this.clevelDataProjects(this.graphicaldata);
+      this.clevelDataTimesheets(this.graphicaldata);
         this.loading = true;
        
     }
-   clevelDataProjects() {
+   clevelDataProjects(graphicaldata) {
      console.log("running");
-    let obj=this._service.clevelDataProjects().subscribe(res => {
+    let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
       this.projectpieChartData=res;
-      console.log(res);
       console.log(this.projectpieChartData,"projects data");
     });
   }
-  clevelDataTimesheets() {
-    console.log("running");
-   let obj=this._service.clevelDataTimesheets().subscribe(res => {
+  clevelDataTimesheets(graphicaldata) {
+   let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
      this.timesheetpieChartData=res;
-     console.log(res);
      console.log(this.timesheetpieChartData,"timesheets data");
    });
  }
 
-   ngOnChanges(){
-
-  }
+   ngOnChanges(){}
 
   logout() {
     this._service.deletetoken();
