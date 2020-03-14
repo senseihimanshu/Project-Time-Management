@@ -73,30 +73,14 @@ export class EmployeeFormComponent implements OnInit {
   ];
   
   ngOnInit(): any {
-   
-    console.log("ngOnInit");
-
-    // this.route.params.pipe(switchMap((params: Params) => {
-    //   console.log(params);
-    //   this.typeOfForm = params.type;
-    //   if(this.typeOfForm !== 'get'){
-
-    //   }
-    // }));
     this.route.params.subscribe((data: Params) => {
-      console.log(data);
     });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          //console.log(params);
-
-          // debugger;
-          console.log(params,"parrrraammss");
           console.log(this.typeOfForm);
           this.typeOfForm = params.type;
-          console.log(this.typeOfForm,"form-type");
           if (!params.type) {
             this.typeOfForm = "get";
           }
@@ -109,18 +93,14 @@ export class EmployeeFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        console.log(response);
-        console.log(response.employee);
         return (this.employee = response.employee);
       });
   }
   
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
-    console.log(obj, typeOfForm);
     this.employeeService.employeeCreateOrUpdate(obj, typeOfForm).subscribe(
       (res: any) => {
-        console.log(res.payload.message);
         this.message = res.payload.message;
         swal.fire({
           icon: 'success',

@@ -106,22 +106,17 @@ onChartClick(event) {
      console.log("running");
     let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
       this.projectpieChartData=res;
-      console.log(res);
       console.log(this.projectpieChartData,"projects data");
     });
   }
   clevelDataTimesheets(graphicaldata) {
-    console.log("running");
    let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
      this.timesheetpieChartData=res;
-     console.log(res);
      console.log(this.timesheetpieChartData,"timesheets data");
    });
  }
 
-   ngOnChanges(){
-
-  }
+   ngOnChanges(){}
 
   logout() {
     this._service.deletetoken();

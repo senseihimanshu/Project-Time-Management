@@ -77,7 +77,6 @@ export class ProjectComponent implements OnInit, OnChanges {
       this.projectsArray = res;
       this.projectsArray = res.payload.data.tempList;
       this.dataSize = res.payload.data.result.dataSize;
-      console.log(this.projectsArray);
     });
    this.lastPage=(this.dataSize/10)+1;
   }
@@ -164,7 +163,6 @@ export class ProjectComponent implements OnInit, OnChanges {
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchProjects(input.value).subscribe(res => {
       this.projectsArray= res.payload.data.tempList;
-      console.log(res);
     });
     table = document.getElementById("myTable");
      tr = table.getElementsByTagName("tr");

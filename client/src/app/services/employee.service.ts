@@ -44,7 +44,6 @@ export class EmployeeService {
       return this.http.put<any>(PROJECT_API, obj, this.httpOptions);
   }
   getEmployee(empId: string): any {
-    console.log(empId);
     if (!empId) {
       return this.http.get<any>(FEED_API, { ...this.httpOptions });
     }
@@ -53,7 +52,6 @@ export class EmployeeService {
   }
   
   getProject(projectId: string): any {
-   // let convertedId: { $toObjectId: "$projectId" }
     console.log(projectId);
     const params = new HttpParams().set("projectId", projectId); 
       return this.http.get<any>(SHOW_PROJECTAPI, { ...this.httpOptions,params });

@@ -37,13 +37,7 @@ export class TimesheetService {
   projectService(): any {
     this.http.get("/api/project");
   }
-  // getTimesheet(empId: string): any {
-  //     if (!empId) {
-  //       return this.http.get<any>("http://localhost:3000/timesheet", { ...this.httpOptions });
-  //     }
-  // }
   getTimesheet(empObjId: any, type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
-    console.log(empObjId, 'Inside Service');
     const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type).set("page", page).set("limit", limit).set("desc", desc);
 
     return this.http.get("http://localhost:3000/timesheet", {
@@ -62,13 +56,6 @@ export class TimesheetService {
       timesheet,
       this.httpOptions)
   }
-  // getTimesheet(empObjId: string): Observable<any> {
-  //   const params = new HttpParams().set("empObjId", empObjId);
-  //   return this.http.get("http://localhost:3000/timesheet", {params}).pipe(
-  //     tap(_ => this.log("Timesheet")),
-  //     catchError(this.handleError<any>("Some Error Occurred"))
-  //   );
-  // }
 
   getAllTimesheet(): Observable<any> {
     return this.http.get("http://localhost:3000/timesheet").pipe(
@@ -94,7 +81,6 @@ export class TimesheetService {
   }
 
   getSpecificTimesheets(empId: string, startDate: any): Observable<any>{
-    console.log(empId, startDate, 'Inside timesheet.service.ts/getSpecificTimesheets');
     const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', `${startDate.year}-${startDate.month}-${startDate.day}`);
     return this.http.get(`${TIMESHEET_API}/filter`, { params, ...this.httpOptions });
   }

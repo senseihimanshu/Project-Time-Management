@@ -92,11 +92,9 @@ export class TimesheetModal implements OnInit {
     this.empObjId = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
     ).data._id;
-    console.log(empId);
 
     //subscribing to observable for getting the employee
     this.employeeService.getEmployee(empId).subscribe(response => {
-      console.log(response);
       this.projectArray = response.employee.projectId.map(project => {
         return {
           _id: project._id,
@@ -107,16 +105,12 @@ export class TimesheetModal implements OnInit {
       });
 
       if(this.data.timesheetId){
-          console.log(this.data);
             this.modalType = 'update';
           this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
             this.response = res.payload.data.timesheet[0];
-            console.log(this.response, 'this.response');
             this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
           });
       }      
-
-      console.log(this.projectArray);
     });
   }
 
@@ -145,13 +139,11 @@ export class TimesheetModal implements OnInit {
 
   handleSave(timesheetData: any) {
     const dataToSave = this.formatData(timesheetData);
-    console.log(dataToSave, 'dataToSave inside handleSave');
 
     this.timesheetService
       .createTimesheet(dataToSave)
       .subscribe((response: any) => {
         Swal.fire(response.payload.message);
-        console.log(response);
       });
   }
 
@@ -162,14 +154,12 @@ export class TimesheetModal implements OnInit {
       .day(1)
       .format("YYYY-MM-DD")
       .toString();
-    console.log(this.startDate);
     this.endDate = moment(
       `${selectedDate["year"]}-${selectedDate["month"]}-${selectedDate["day"]}`
     )
       .day(5)
       .format("YYYY-MM-DD")
       .toString();
-    console.log(this.endDate);
 
     this.endDate =
       moment(this.endDate) > moment(this.startDate).endOf("month")
@@ -180,7 +170,6 @@ export class TimesheetModal implements OnInit {
 
     this.calculateNumberOfDays(this.startDate, this.endDate);
 
-    console.log(this.numberOfDays, this.datesArray);
   }
 
   calculateNumberOfDays(startDate: string, endDate: string){
@@ -205,17 +194,13 @@ export class TimesheetModal implements OnInit {
           .toString()
       );
     }
-
-    console.log(this.datesArray, 'this.datesArray');
   }
 
   handleProjectData(project: any) {
-    console.log(project);
     this.project = project;
   }
 
   fillProjectDropdown(form) {
-    console.log(this.isOpen, form, "form");
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {

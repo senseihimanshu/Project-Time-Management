@@ -1,6 +1,6 @@
 <div class="wrapper">
   
-   <app-navbar [dashboard]="dashboard"></app-navbar>
+   <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
     <div class="row">
       
       <div class="col-2 d-none d-lg-block">
@@ -26,7 +26,7 @@
               ? "Create Employee"
               : "Update Employee"
             }}
-            <span><h6>*&nbsp;these fields are necessary</h6></span>
+            <span><h6>*&nbsp;Required fields</h6></span>
         </div>
        
         <div class="h4 mb-4">
