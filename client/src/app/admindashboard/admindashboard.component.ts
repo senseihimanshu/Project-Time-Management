@@ -16,8 +16,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   pageSize = 6;
   items = [];
   pager={};
-  // dashboard: "Admin DASHBOARD"
-  hello: "kritika";
+  dashboard:string= "Admin Dashboard"
   menus: any = [
     {
       title: "Employees",
@@ -158,12 +157,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     
    
  }
-  logout() {
-    this._service.deletetoken();
-
-    this.router.navigate(["/login"]);
-  }
-
   myFunction() {
    //Declare variables
     var input, table, tr, td, i, txtValue;
