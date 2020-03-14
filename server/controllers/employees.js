@@ -120,6 +120,7 @@ class Employee {
       <li>Designation:${designation}</li>
       <li>Role:${role}</li>
       <li>Phone:${phone}</li>
+      <li>Password:${password}</li>
       <li>Address:${address}</li>
       <li>joining:${joining}</li>
       </ul>
