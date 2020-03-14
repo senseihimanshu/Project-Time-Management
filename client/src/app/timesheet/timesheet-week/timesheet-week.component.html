@@ -37,7 +37,7 @@
       
       <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
         Timesheets
-        <span class="table-add float-right mb-3 mr-2">
+        <span class="table-add float-right mb-3 mr-2" *ngIf="role !== 'Admin'"> 
           <a class="text-success" (click)="openDialog()">
             <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
           </a>

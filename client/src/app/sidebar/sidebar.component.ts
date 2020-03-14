@@ -41,7 +41,7 @@ export class SidebarComponent implements OnInit {
   //  if(title=='Show All Employees')
   //  this.router.navigate(['/employeeform/update']);
    if(title=='Show All Timesheets')
-   this.router.navigate(['/timesheet']);
+   this.router.navigate(['/timesheetweek']);
    if(title=='Review All Timesheets')
    this.router.navigate(['/review']);
   }
