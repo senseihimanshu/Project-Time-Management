@@ -1,43 +1,62 @@
 .add-icon{
   position: absolute;
-  right: 2rem;
-  top: 1rem;
+  top:0;
+  right: 0;
 }
 
-.card{
-  width: 100%;
+h6{
+  position: relative;
 }
 
-.card-body{
-  padding: 0;
-}
-
-.table-bordered{
-  border: none;
+.table{
+  margin-top: 2%;
 }
 
 thead{
-  background-color: #0183FF;
-  font-size: 1.6rem;
-  font-weight: 600;
+font-size: 16px;
+line-height: 1.4;
+background-color: #0183ff;
+text-align: center;
+font-weight: 500;
+margin-top: 8rem !important;
+position: sticky;
+color: white;}
+
+th {
+  font-size: 16px;
+  line-height: 1.4;
+  background-color: #0183ff;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 8rem !important;
+  position: sticky;
   color: white;
-}
+ }
+
 td{
-  border: none;
-  font-size: 1.4rem;
-  padding: 1.8rem 0;
+  font-size: 14px;
+  color: black;
+  line-height: 1.4;
+  text-align: center;
+  font-weight: 400;
 }
 
-tr:nth-child(2n+1){
-  background-color: #cdcdcda0;
+tbody:nth-child(even) {
+  background: whitesmoke;
 }
-
+tbody:nth-child(odd) {
+  background: white;
+}
 .timesheet-table__wrapper{
   display: flex;
 }
 
 @media(max-width: 800px){
-  .card-body{
-    overflow-x: scroll;
-  }
+}
+
+.custom-card{
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  background-color: whitesmoke;
 }

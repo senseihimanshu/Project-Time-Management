@@ -42,7 +42,7 @@ export class TimesheetComponent implements OnInit {
   page = 1;
   pageSize = 10;
   items = [];
-
+  dashboard:string="Admin Dashboard";
   response: any;
 
   menus: any = [

@@ -14,13 +14,6 @@
     background-color: #0183FF;
   }
  
-
-  // .para-design {
-  //   color: black;
-  //   font-size: 20px;
-  //   margin-top: 1rem;
-  // }
-
   input {
     width: 100%;
     max-width: 240px;
@@ -41,11 +34,6 @@
     font-weight: 300;
     font-size: 15px;
   }
-.wrapper{
- display: flex;
- flex-direction: column;
- overflow-y: hidden;
-}
 
 .main {
   display: flex;
@@ -86,43 +74,14 @@ th {
   color: white;
  }
 
-//  .app-main[_ngcontent-meo-c1] {
-//   padding: 0 8.4rem;
-//   min-height: 8vh !important;
-//   display: -webkit-box;
-//   display: flex;
-//   -webkit-box-orient: vertical;
-//   -webkit-box-direction: normal;
-//   flex-direction: column;
-//   justify-content: space-around;
-//   text-align: justify;
-//  }
-
-//  tr{
-//   //  height: 30px;
-//  }
- @media (min-width: 1200px){
- .container {
-     //max-width: 1500px;
-    margin-left: 20rem;
-    margin-right: 1rem;
-
- }
-}
+//  @media (min-width: 1200px){
+ 
+// }
 
 .table{
   margin-top: 2%;
 }
-@media (min-width: 1200px) {
-  //  .container {
-  //      //max-width: 1500px;
-  //     // margin-top:1rem;
-  //     // margin-left: 1rem;
-  //     // margin-right: 3rem;
-  //     // padding-left: 2rem;
-  //     // padding-right: 2rem;
-  //  }
-}
+
 .input-group{
   float:right !important;
   align-items: center;

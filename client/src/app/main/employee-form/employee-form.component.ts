@@ -129,11 +129,7 @@ export class EmployeeFormComponent implements OnInit {
       );
     }
   }
-  logout() {
-    this._service.deletetoken();
 
-    this.router.navigate(["/login"]);
-  }
 }
 
    

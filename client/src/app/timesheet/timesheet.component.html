@@ -1,35 +1,26 @@
-
-<div class="app-timesheet"> 
-  <div class="wrapper">
-    <app-navbar></app-navbar>
-  </div>
-  
-  <div class="timesheet-table__wrapper">
-    <app-sidebar [menus]="menus"></app-sidebar>
-  
-    <div class="card">
-      <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+<div>
+  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <div class="row">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+    <div class="col-10">
+      <div class="custom-card">
+      <h6 class="card-header text-center font-weight-bold text-uppercase">
         Timesheets
-        <span class="table-add float-right mb-3 mr-2">
-          <a class="text-success" (click)="openDialog()">
-            <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
-          </a>
-        </span>
-      </h3>
-      <div class="card-body">
-        <div id="table" class="table-editable">
+            <mdb-icon fas icon="plus" class="add-icon text-success" size="2x" (click)="openDialog()"></mdb-icon>
+      </h6>
           <table
-            class="table table-bordered table-striped text-center container-fluid table-responsive-stack"
+            class="table table-striped table-fixed" id="myTable"
           >
             <thead>
-              <td class="text-center">Employee Name</td>
-              <td class="text-center">Project</td>
-              <!-- <td class="text-center">Client Name</td> -->
-              <td class="text-center">Task Type</td>
-              <td class="text-center">Date</td>
-              <td class="text-center">Hours</td>
-              <td class="text-center">Billable</td>
-              <td class="text-center">Status</td>
+              <th scope="col">Employee Name</th>
+              <th scope="col">Project</th>
+              <th scope="col">Task Type</th>
+              <th scope="col">Date</th>
+              <th scope="col">Hours</th>
+              <th scope="col">Billable</th>
+              <th scope="col">Status</th>
             </thead>
             
             <ng-template ngFor let-response [ngForOf]="response">
@@ -37,7 +28,6 @@
                 <ng-template [ngIf]="response.week[id].projectId">
                   <td class="text-center">{{ response.empObjId.name }}</td>
                   <td class="text-center">{{ response.week[id].projectId?.projectName }}</td>
-                  <!-- <td class="text-center">{{ response.week[id].clientName }}</td> -->
                   <td class="text-center">{{ response.week[id].taskType }}</td>
                   <td class="text-center">{{ response.week[id].date | date }}</td>
                   <td class="text-center">{{ response.week[id].hours }}</td>
@@ -51,4 +41,5 @@
       </div>
     </div>
   </div>    
-</div>
+<!-- </div> -->
+<!-- </div> -->

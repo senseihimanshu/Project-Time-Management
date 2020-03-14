@@ -80,13 +80,6 @@
             </tr>
           </tbody>
         </table>
-        <!-- <div>
-        <mat-paginator style="background-color: whitesmoke;"
-        [length]="usersArray.length"
-        [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]">
-        </mat-paginator>
-         </div> --> 
         <div class="pagination-div">
           <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page}}<i class="fas fa-arrow-circle-left"></i></a>
           <a class="move-right" [ngClass]="{'disabled': page===lastPage}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page+1}}</a>

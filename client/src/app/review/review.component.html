@@ -1,22 +1,26 @@
-<div class="wrapper">
-  <app-navbar [dashboard]="dashboard"></app-navbar>
-  <div class="main">
-    <app-sidebar [menus]="menus"></app-sidebar>
-    <section class="background_dashboard">
-      <table class="empTable table responstable">
-        <thead class="test" style="z-index: 100000000;" >
-          <td>Employee Id</td>
-          <td>Project Id</td>
-          <td>Client</td>
-          <td>Billable</td>
-          <td>Date</td>
-          <td>Hours</td>
-          <!-- <th>Project members</th> -->
-          <td>Status</td>
-          <!-- <th>Actions</th> -->
+<div>
+  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <div class="row">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+    <div class="col-10">
+      <div class="custom-card">
+      <table class="table table-striped table-fixed" id="myTable">
+        <thead>
+          <tr>
+          <th>Employee Id</th>
+          <th>Project Id</th>
+          <th>Client</th>
+          <th>Billable</th>
+          <th>Date</th>
+          <th>Hours</th>
+          <th>Status</th>
+          </tr>
         </thead>
        
-        <tbody class="mt-5" *ngFor="let employee of usersArray">
+        <tbody  style="height: 10px !important; overflow: auto"
+         *ngFor="let employee of usersArray">
           <review-row
             [employee]="employee"
             (deleteEmp)="deleteEmployee($event)"
@@ -24,6 +28,7 @@
           </tbody>
         <h2 class="message" *ngIf="message">{{ message }}</h2>
       </table>
-    </section>
   </div>
+</div>
+</div>
 </div>

@@ -125,12 +125,6 @@ onChartClick(event) {
 
    ngOnChanges(){}
 
-  logout() {
-    this._service.deletetoken();
-
-    this.router.navigate(["/login"]);
-  }
-
 }
 
 

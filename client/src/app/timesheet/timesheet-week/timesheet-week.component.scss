@@ -1,49 +1,12 @@
 .add-icon{
-    position: absolute;
-    right: 2rem;
-    top: 1rem;
-    z-index: 30;
-  }
-  
-  .card{
-    width: 100%;
-  }
-  
-  .card-body{
-    padding: 0;
-  }
-  
-  .table-bordered{
-    border: none;
-  }
-  
-  thead{
-    background-color: #0183FF;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: white;
-  }
-  td{
-    border: none;
-    font-size: 1.4rem;
-    padding: 1.8rem 0;
-  }
-  
-  tr:nth-child(2n+1){
-    background-color: #cdcdcda0;
-  }
-  
-  .timesheet-table__wrapper{
-    display: flex;
-  }
-  
-  @media(max-width: 800px){
-    .card-body{
-      overflow-x: scroll;
-    }
-  }
-  
-  
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+h6{
+  position: relative;
+}
 .input-box{
     z-index: 20;
     display: flex;
@@ -66,13 +29,21 @@
         }
     }
 }
-
-.pagination-div{
-    display: flex;
-    justify-content: space-around;
-    font-size: 2.4rem;
-    color: #E75A7C;
+.pagination-div {
+  display: flex !important;
+  justify-content: flex-end;
 }
+
+.pagination {
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    align-items: center;
+
+  }
+  .pagination:active{
+    background-color: #0183FF;
+  }
 
 .labelDate{
     width: 8%;
@@ -88,4 +59,63 @@
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
+}
+
+// .add-icon{
+//   // position: absolute;
+//   left: 4rem;
+//   top: 2rem;
+// }
+
+.table{
+  margin-top: 2%;
+}
+
+thead{
+font-size: 16px;
+line-height: 1.4;
+background-color: #0183ff;
+text-align: center;
+font-weight: 500;
+margin-top: 8rem !important;
+position: sticky;
+color: white;}
+
+th {
+  font-size: 16px;
+  line-height: 1.4;
+  background-color: #0183ff;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 8rem !important;
+  position: sticky;
+  color: white;
+ }
+
+td{
+  font-size: 14px;
+  color: black;
+  line-height: 1.4;
+  text-align: center;
+  font-weight: 400;
+}
+
+tbody:nth-child(even) {
+  background: whitesmoke;
+}
+tbody:nth-child(odd) {
+  background: white;
+}
+.timesheet-table__wrapper{
+  display: flex;
+}
+
+@media(max-width: 800px){
+}
+
+.custom-card{
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  background-color: whitesmoke;
 }

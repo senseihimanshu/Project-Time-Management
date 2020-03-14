@@ -133,10 +133,6 @@ export class ProjectComponent implements OnInit, OnChanges {
     }) 
     
   }
-  logout() {
-    this._service.deletetoken();
-    this.router.navigate(["/login"]);
-  }
  
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
