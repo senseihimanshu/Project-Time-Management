@@ -9,30 +9,11 @@
     
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="dropdown d-lg-none custom-dropdown-container">
-            <a class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Employees<span class="caret"></span></a>
-            <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
+          <li class="dropdown d-lg-none custom-dropdown-container" *ngFor="let menu of menus">
+            <a class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button"><a ><i [class]="menu.icon"></i></a>{{ menu.title }}<span class="caret"></span></a>
+            <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu" *ngFor="let submenu of menu.submenus">
               <li>
-                <a>Add New Employee</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown d-lg-none custom-dropdown-container">
-            <a class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Projects<span class="caret"></span></a>
-            <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
-              <li>
-                <a >Add New Project</a>
-              </li>
-              <li>
-                <a>Show All Projects</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown d-lg-none custom-dropdown-container">
-            <a class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button">Timesheets<span class="caret"></span></a>
-            <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu">
-              <li>
-                <a>Show All Timesheets</a>
+                <a [routerLink]="submenu.route">{{ submenu.title }}</a>
               </li>
             </ul>
           </li>

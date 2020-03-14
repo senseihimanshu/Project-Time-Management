@@ -8,6 +8,8 @@ import { SendHttpRequestService } from "./../send-http-request.service";
   styleUrls: ["./review.component.scss"]
 })
 export class ReviewComponent implements OnInit, OnChanges {
+  dashboard: string = "Manager Dashboard";
+  
   menus: any = [
    
     {

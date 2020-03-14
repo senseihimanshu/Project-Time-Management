@@ -120,7 +120,7 @@ export class ProjectFormComponent implements OnInit {
    getemployees() {
 
     let obj = this._service.showEmployees().subscribe(res => {
-      this.empList = res;
+      this.empList = res.payload.data.employeeList;
       console.log(res);
     });
     console.log("employeelist",this.empList);

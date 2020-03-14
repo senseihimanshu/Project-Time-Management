@@ -12,6 +12,8 @@ import { Router, RouterLink } from "@angular/router";
 })
 export class DashboardComponent implements OnInit, OnChanges {
 
+  dashboard:string= "C Level Dashboard"
+
 menus: any = [
   {
     title: "Employees",
@@ -21,7 +23,8 @@ menus: any = [
 
     submenus: [
       {
-        title: "Show All Employees"
+        title: "Show All Employees",
+        route: '/admin'
       }
     ]
   },
@@ -33,13 +36,17 @@ menus: any = [
 
       submenus: [
         {
-          title: "Create New Timesheet"
+          title: "Create New Timesheet",
+          route: '/timesheetweek'
         },
         {
-          title: "Show All Timesheets"
+          title: "Show All Timesheets",
+          route: '/timesheetweek'
         },
         {
-          title: "Review All Timesheets"
+          title: "Review All Timesheets",
+          route: '/review'
+
         }
       ]
     }
