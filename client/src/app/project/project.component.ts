@@ -11,7 +11,8 @@ import swal from 'sweetalert2';
 })
 export class ProjectComponent implements OnInit, OnChanges {
   name = "Angular";
-  page = 1;
+  page :number = 1;
+  lastPage:number;
   pageSize = 10;
   items = [];
   menus: any = [
@@ -67,15 +68,18 @@ export class ProjectComponent implements OnInit, OnChanges {
   projectsArray: any;
   membersObj:any=[];
   projManager:any=[];
+  limit: number = 5;
+  dataSize: number;
+  empObjId: string;
+  isSortDecreasing: boolean = false;
   tabularData() {
-    let obj = this._service.showProjects().subscribe(res => {
+    let obj = this._service.showProjects(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
       this.projectsArray = res;
-      console.log(res);
-      console.log(this.projectsArray);
-      this.projectsArray=this.projectsArray.tempList;
+      this.projectsArray = res.payload.data.tempList;
+      this.dataSize = res.payload.data.result.dataSize;
       console.log(this.projectsArray);
     });
-    console.log(obj);
+   this.lastPage=(this.dataSize/10)+1;
   }
 
   ngOnInit() {
@@ -135,11 +139,31 @@ export class ProjectComponent implements OnInit, OnChanges {
     this.router.navigate(["/login"]);
   }
  
+  sortList() {
+    this.isSortDecreasing = !this.isSortDecreasing;
+
+    this.tabularData();
+  }
+
+  handlePaginationResult(type: string){
+    if(type === 'prev'){
+        if(this.page > 1){
+            this.page--;
+            this.tabularData();
+        }
+    }
+    if(type === 'next'){
+        if(this.dataSize > this.page * this.limit){
+            this.page++;
+            this.tabularData();
+        }
+    }
+  }
   myFunction() {
     var input, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchProjects(input.value).subscribe(res => {
-      this.project= res;
+      this.projectsArray= res.payload.data.tempList;
       console.log(res);
     });
     table = document.getElementById("myTable");
@@ -149,7 +173,7 @@ export class ProjectComponent implements OnInit, OnChanges {
      td = tr[i].getElementsByTagName("td")[0];
       if (td) {
            txtValue = td.textContent || td.innerText;
-           if (txtValue.toUpperCase().indexOf(input.value) > -1) {
+           if (txtValue.toUpperCase().indexOf(this.projectsArray) > -1) {
           tr[i].style.display = "";
         } else {
           tr[i].style.display = "none";

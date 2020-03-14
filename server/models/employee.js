@@ -47,6 +47,7 @@ class Employee{
   async getPagignation(criteria={}, columns={}){
      return this.model.find({"name": `/^$columns/i`}).exec(callback);
   }
+  
 }
 
 const employeeObj = new Employee();
