@@ -159,9 +159,11 @@ export class MyprofileComponent implements OnInit {
           ]
         }
       );
+
    }
   
-   return this._service.getEmployee(decodeToken.data.empId).subscribe((response: any) => {   return (this.employee = response.employee);
+   return this._service.getEmployee(decodeToken.data.empId).subscribe((response: any) => {  
+      return (this.employee = response.employee);
       });
 }
 
