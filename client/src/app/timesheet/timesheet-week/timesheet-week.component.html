@@ -1,4 +1,16 @@
-  <!-- <div class="input-box">
+  <div>
+  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <div class="row">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+    <div class="col-10">
+      <div class="custom-card">   
+      <h6 class="card-header text-center font-weight-bold text-uppercase">
+        Timesheets
+         <mdb-icon fas icon="plus" class="add-icon text-success" size="2x"></mdb-icon>
+      </h6>
+      <div class="input-box">
     <label for="date" class="labelDate" title="Filter Dates above of entered!">
       <i class="fas fa-filter"></i>
       Filter Dates
@@ -24,19 +36,7 @@
       type="button"
     ></button>
   </div>
-</div> -->
-<div>
-  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
-  <div class="row">
-    <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
-    </div>
-    <div class="col-10">
-      <div class="custom-card">   
-      <h6 class="card-header text-center font-weight-bold text-uppercase">
-        Timesheets
-         <mdb-icon fas icon="plus" class="add-icon text-success" size="2x"></mdb-icon>
-      </h6>
+</div>
         <table
             class="table table-striped table-fixed" id="myTable"
           >
