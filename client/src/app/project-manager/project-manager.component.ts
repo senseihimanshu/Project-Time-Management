@@ -7,6 +7,8 @@ import { ISidebarMenus } from '../models/sidebar-menus.interface';
   templateUrl: "./project-manager.component.html"
 })
 export class ProjectManagerComponent {
+  dashboard:string= "Manager Dashboard"
+
   menus: ISidebarMenus[] = [
     {
       title: "Timesheets",
@@ -30,5 +32,5 @@ export class ProjectManagerComponent {
       
       ]
     }
-  ];;
+  ];
 }
