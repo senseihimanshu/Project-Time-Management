@@ -12,10 +12,9 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   @ViewChild('myAlert',{static:false}) myAlert: ElementRef;
   deleteEmp:boolean=true;
   name = "Angular";
-  page = 1;
-  pageSize = 6;
+  page:number = 1;
+  lastPage:number;
   items = [];
-  pager={};
   dashboard:string= "Admin Dashboard"
   menus: any = [
     {
@@ -68,43 +67,31 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   ) {}
   usersArray: any;
   user:any;
-  tabularData() {
-    let obj = this._service.showEmployees().subscribe(res => {
-      this.usersArray = res;
-      console.log(res);
+  limit: number = 5;
+  dataSize: number;
 
-      console.log(this.usersArray.length)
+  empObjId: string;
+
+  isSortDecreasing: boolean = false;
+
+  tabularData() {
+    this._service.showAllEmployees(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
+      console.log(res);
+      this.usersArray = res.payload.data.result.results;
+      this.dataSize = res.payload.data.result.dataSize;
     });
-    console.log(obj);
+    this.lastPage=(this.dataSize/10)+1;
   }
 
   ngOnInit() {
-    //this.tabularData();
-    this.loadEmployees(0, this.page);
+    this.tabularData();
+    
   }
 
   ngOnChanges() {
     this.tabularData();
   }
 
-  loadEmployees(status, page){
-    if(status == 0){
-      this._service.showAllEmployees(page).subscribe(res => {
-        console.log(res, "my fav res--->>")
-        if(res.status == 200){
-          console.log(res, "my fav res--->>")
-          this.pager = res.body.pager;
-          this.usersArray = res.body.pageOfItems;
-          //this.usersArray = res.body;
-          console.log(this.usersArray);
-        }
-        else if(res.status == 401){
-          localStorage.removeItem("JwtHrms");
-          this.router.navigate(['/login']);
-        }
-      });
-    }
-    }
 
 
   deleteEmployee(empId: any) {
@@ -157,12 +144,41 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     
    
  }
+
+  logout() {
+    this._service.deletetoken();
+
+    this.router.navigate(["/login"]);
+  }
+  sortList() {
+    this.isSortDecreasing = !this.isSortDecreasing;
+
+    this.tabularData();
+  }
+
+  handlePaginationResult(type: string){
+    if(type === 'prev'){
+        if(this.page > 1){
+            this.page--;
+            this.tabularData();
+        }
+    }
+    if(type === 'next'){
+
+        if(this.dataSize > this.page * this.limit){
+            this.page++;
+            this.tabularData();
+
+        }
+    }
+  }
+
   myFunction() {
    //Declare variables
     var input, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchEmp(input.value).subscribe(res => {
-      this.user= res;
+      this.usersArray= res;
       console.log(res);
     });
     table = document.getElementById("myTable");
@@ -181,15 +197,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
     }
   }
   sortTable() {
-
-  //   let obj = this._service.sortData().subscribe(res => {
-  //     this.usersArray = res;
-  //     console.log(res);
-
-  //     console.log(this.usersArray.length)
-  //   });
-  //   console.log(obj);
-  // }
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("myTable");
     switching = true;
