@@ -159,7 +159,7 @@ export class MyprofileComponent implements OnInit {
         }
       );
     }
-    console.log('I <3<3<3 u Shivani Bansal');
+ 
    
    return this._service.getEmployee(decodeToken.data.empId).subscribe((response: any) => {
     console.log(response);
