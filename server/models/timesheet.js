@@ -32,7 +32,7 @@ class Timesheet{
     }
 
     async count(criteria={}){
-      const timesheetCount=await this.model.count(criteria);
+      const timesheetCount=await this.model.find().count(criteria);
       return timesheetCount;
      }
     //delete the timesheet data as per criteria

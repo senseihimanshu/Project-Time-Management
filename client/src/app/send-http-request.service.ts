@@ -93,16 +93,16 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  clevelDataProjects(): Observable<any>{
-    console.log("me yaha hoon");
-    return this.http.get("http://localhost:3000/clevel/project").pipe(
+  clevelDataProjects(graphicaldata:any): Observable<any>{
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+      return this.http.get("http://localhost:3000/project/graphicaldata",{params}).pipe(
       tap(_ => this.log("projects data")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  clevelDataTimesheets(): Observable<any>{
-    console.log("me yaha timesheet me hoon");
-    return this.http.get("http://localhost:3000/clevel/timesheet",{headers:this.header_token}).pipe(
+  clevelDataTimesheets(graphicaldata:any): Observable<any>{
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+    return this.http.get("http://localhost:3000/timesheet/graphicaldata",{params}).pipe(
       tap(_ => this.log("timesheets data")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );

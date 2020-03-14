@@ -11,7 +11,7 @@ import { Router, RouterLink } from "@angular/router";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnChanges {
-
+  graphicaldata:Boolean=true;
 menus: any = [
   {
     title: "Employees",
@@ -47,7 +47,7 @@ menus: any = [
 
   loading = false;
   //  users: User[] = [];
-
+  
     constructor(private httpService: HttpClient,
       private _service: SendHttpRequestService,
     private router: Router,
@@ -97,22 +97,22 @@ onChartClick(event) {
     }
   ];
     ngOnInit() {
-      this.clevelDataProjects();
-      this.clevelDataTimesheets();
+      this.clevelDataProjects(this.graphicaldata);
+      this.clevelDataTimesheets(this.graphicaldata);
         this.loading = true;
        
     }
-   clevelDataProjects() {
+   clevelDataProjects(graphicaldata) {
      console.log("running");
-    let obj=this._service.clevelDataProjects().subscribe(res => {
+    let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
       this.projectpieChartData=res;
       console.log(res);
       console.log(this.projectpieChartData,"projects data");
     });
   }
-  clevelDataTimesheets() {
+  clevelDataTimesheets(graphicaldata) {
     console.log("running");
-   let obj=this._service.clevelDataTimesheets().subscribe(res => {
+   let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
      this.timesheetpieChartData=res;
      console.log(res);
      console.log(this.timesheetpieChartData,"timesheets data");

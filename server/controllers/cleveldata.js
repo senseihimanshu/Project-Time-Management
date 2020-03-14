@@ -3,28 +3,41 @@ class Cleveldata{
   constructor(){ }
    async projectsStatusData(req,res){
         try{
+         
+          if(req.query.graphicaldata==='true'){
          const  completedProjects=await model.project.count({status:"Completed"});
           const discardedProjects=await model.project.count({status:"Discarded"});
           const InProgressProjects=await model.project.count({status:"In Progress"});
           const data=[completedProjects,discardedProjects,InProgressProjects];
          
             res.send([{data}]);
-               
+          }    
        }catch(error){
         console.error(error);
       }
    }
     async timesheetsStatusData(req,res){
-        
+        let data=[];
+
         try{
-        
-         const  approvedTimesheets=await model.timesheet.count({status:"Approved"});
-           const declinedTimesheets=await model.timesheet.count({status:"Declined"});
-           const PendingTimesheets=await model.timesheet.count({status:"Pending"});
-           const data=[approvedTimesheets,declinedTimesheets,PendingTimesheets];
-            
+        if(req.query.graphicaldata==='true'){
+          let approvedTimesheets = 0;
+          let declinedTimesheets = 0; 
+          let pendingTimesheets = 0; 
+
+        for(let day=0;day<5;day++){
+          const timesheet = await model.timesheet.model.find({}, {"week": 1});
+          let newArr = timesheet.filter((cur) => {
+            if(cur.week[day].status === "pending") pendingTimesheets++;
+            if(cur.week[day].status === "approved") approvedTimesheets++;
+            if(cur.week[day].status === "declined") declinedTimesheets++;
+          });
+          }
+            data=[approvedTimesheets,declinedTimesheets,pendingTimesheets];
+
              res.send([{data}]);
-          }catch(error){
+              }
+        }catch(error){
          console.error(error);
        }
    }
