@@ -86,9 +86,4 @@ var s=year + "-" + month + "-" + dt;
     this.reviews();
   }
 
-  logout() {
-    this._service.deletetoken();
-
-    this.router.navigate(["/login"]);
-  }
 }

@@ -1,132 +1,132 @@
-    
-.background_dashboard {
-  height: 85vh;
- // background:#9a9184;
- overflow-x: auto;
- overflow-y: auto;
- }
- tbody:nth-child(even) {
-  background: white
- }
- tbody:nth-child(odd) {
-  background: #efefef;
- }
+.add-icon{
+  position: absolute;
+  top:0;
+  right: 0;
+}
 
- .table {
-  max-width: 100%;
-  // margin-top: 2rem;
-  overflow: scroll;
- }
- thead{
-     position: relative;
-  //    margin-bottom: 4rem;
- }
-//    tbody{
-//        margin-top: 10%;
-//    }
- .fixed-top {
-  position: fixed;
-  top: auto;
- }
- .deletebutton {
+h6{
+  position: relative;
+}   
+//  .deletebutton {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-wrap: nowrap;
+//  }
+//  .show {
+//   margin-left: 43% !important;
+//  }
+//  .empTable{
+//   // width: 100vw;
+//   color: black;
+//   font-size: large;
+//   font-weight: 800;
+//   // padding-left: 5rem;
+//  }
+  input {
+    width: 100%;
+    max-width: 240px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-color: black;
+    border-radius: 10px;
+    background: white;
+  }
+
+  input:focus {
+    background-color: whitesmoke;
+  }
+
+  input::placeholder {
+    color: black;
+    font-weight: 300;
+    font-size: 15px;
+  }
+
+.main {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
- }
- .show {
-  margin-left: 43% !important;
- }
- .empTable{
-  // width: 100vw;
+}
+.show i {
+  color: pink;
+}
+.edit i {
+  color: grey;
+  cursor: pointer;
+}
+.delete i {
+  color: red;
+}
+
+tbody:nth-child(even) {
+  background: whitesmoke;
+}
+tbody:nth-child(odd) {
+  background: white;
+}
+td {
+  font-size: 14px;
   color: black;
-  font-size: large;
-  font-weight: 800;
-  // padding-left: 5rem;
- }
- td{
-  // font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  color:black;
   line-height: 1.4;
   text-align: center;
-  padding-top: 18px;
-  padding-bottom: 10px;
-  padding-right: 10px;
- }
- th{
-  // font-family: -Bold;
-  font-size: 18px;
-  color: #fff;
-  line-height: 1;
-  background-color: #0183FF;
-  padding-top: 12px;
-  padding-bottom: 10px;
-  padding-right: 10px;
+  font-weight: 400;
+  // height: 50px !important;
+}
+th {
+  font-size: 16px;
+  line-height: 1.4;
+  background-color: #0183ff;
   text-align: center;
- }
- .app-main[_ngcontent-meo-c1] {
-  padding: 0 8.4rem;
-  min-height: 8vh!important;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
- }
- .app-main[_ngcontent-meo-c1] {
-  padding: 0 8.4rem;
-  min-height: 8vh !important;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
- }
- .background_dashboard{
-  width: 100%;
-  overflow: scroll;
-  z-index: 1;
- }
- 
- .show i{
-  color: pink;
- }
- .edit i{
-  color: grey;
- }
- .delete i {
-  color: red;
- }
- .test{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  background-color:#0183FF;
- }
- .test td{
-  width: 16rem;
   font-weight: 500;
-  // font-family: Roboto, "Helvetica Neue", sans-serif;
-  word-wrap: break-word;
-  font-weight: bold;
+  margin-top: 8rem !important;
+  position: sticky;
+  color: white;
  }
- .wrapper{
-  display: flex;
-  flex-direction: column;
- }
- .main{
-  display: flex;
- }
- .message{
-  color: red;
-  text-align: center;
-  font-size: 4.2rem;
- }
+
+//  @media (min-width: 1200px){
  
- 
- 
+// }
+
+.table{
+  margin-top: 2%;
+}
+
+.input-group{
+  float:right !important;
+  align-items: center;
+  justify-content: flex-end;
+}
+.input-group > .form-control
+{ border-style: ridge;
+  border-radius: unset;
+  border-color: rgb(134, 142, 156);
+  margin-bottom: 0.5rem;
+  border-width: thin;
+
+}
+.custom-card{
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  background-color: whitesmoke;
+  // display: inline-block;
+}
+.form-control {
+  float: right !important;
+  border: ridge;
+}
+#myInput:active {
+  background-color: white;
+}
+.input-group-addon
+{
+  color:rgb(24, 161, 216);
+}
+.fa-sort:before
+{
+  margin-left:0.5rem;
+}
+#myInput:active
+{
+background-color: white;
+}

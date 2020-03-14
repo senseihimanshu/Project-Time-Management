@@ -44,9 +44,4 @@ export class EmployeedashboardComponent implements OnInit,OnChanges {
 
   }
 
-  logout() {
-    this._service.deletetoken();
-
-    this.router.navigate(["/login"]);
-  }
 }
