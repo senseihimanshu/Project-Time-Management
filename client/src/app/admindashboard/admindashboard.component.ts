@@ -68,6 +68,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   ) {}
   usersArray: any;
   user:any;
+  
   tabularData() {
     let obj = this._service.showEmployees().subscribe(res => {
       this.usersArray = res;
