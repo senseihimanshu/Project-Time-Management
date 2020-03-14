@@ -127,7 +127,7 @@ export class TimesheetWeekComponent {
     ).data._id;
     console.log(empId);
 
-    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
+    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
       console.log(res);
       this.response = res.payload.data.timesheet;
       this.dataSize = res.payload.data.result.dataSize;
