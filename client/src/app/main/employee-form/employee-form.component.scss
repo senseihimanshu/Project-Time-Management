@@ -37,17 +37,26 @@ help-block{
     // margin-top:2rem;
     height:fit-content;
     min-width:70vh;
+    border:5px solid #2f8fe9b4;
     
    
+}
+h6{
+    text-align:left;
+    font-weight:bolder;
+    font-size:0.8rem;
+    margin:0;
+    padding:0;
+    max-height:15rem;
+    
 }
 .custom-card {
     box-shadow: 1px 1px 1px 1px rgba(50, 50, 50, 0.1);
     background:white;
-    padding: -10px;
-    margin-left:10rem;
-    margin-top:-5.5rem;
-    
-    
+    padding: 0;
+    margin-left:2rem;
+    margin-top:-5rem;
+  
 }
 .form-control,.custom-select
 {
@@ -62,7 +71,8 @@ help-block{
 
 }
 .h4{
-    font-size:10px;
+    font-size:2px;
+
 }
 .control-label{
     font-size:11px;

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { FormControl } from '@angular/forms';
 import { SendHttpRequestService } from "../send-http-request.service";
+import swal from'sweetalert2'
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -21,7 +22,7 @@ export class ProjectFormComponent implements OnInit {
   empList: string[];
   projManager:string[]=[];
   projMembers:string[]=[];
-  message:any;
+  message:string;
   name = "Angular";
   page = 1;
   pageSize = 6;
@@ -114,9 +115,14 @@ export class ProjectFormComponent implements OnInit {
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
          this.message=res.payload.message;
-         console.log(res.payload.message)
-       });
-   }
+         swal.fire({
+          icon: 'success',
+          title: this.message,
+          showConfirmButton: true,
+          timer: 3000
+        }) 
+    }); 
+}
    getemployees() {
 
     let obj = this._service.showEmployees().subscribe(res => {
