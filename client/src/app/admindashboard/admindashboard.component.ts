@@ -144,11 +144,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
    
  }
 
-  logout() {
-    this._service.deletetoken();
-
-    this.router.navigate(["/login"]);
-  }
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
 
