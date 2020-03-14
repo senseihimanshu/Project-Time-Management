@@ -68,8 +68,8 @@ export class MyprofileComponent implements OnInit {
    
    return this._service.getEmployee(decodeToken.data.empId).subscribe((response: any) => {
     console.log(response);
-        console.log(response.payload.employee);
-     return (this.employee = response.payload.employee);
+        console.log(response.employee);
+     return (this.employee = response.employee);
       });
 }
 

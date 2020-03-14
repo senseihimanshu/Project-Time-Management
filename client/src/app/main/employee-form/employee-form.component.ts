@@ -72,30 +72,14 @@ export class EmployeeFormComponent implements OnInit {
   ];
   
   ngOnInit(): any {
-   
-    console.log("ngOnInit");
-
-    // this.route.params.pipe(switchMap((params: Params) => {
-    //   console.log(params);
-    //   this.typeOfForm = params.type;
-    //   if(this.typeOfForm !== 'get'){
-
-    //   }
-    // }));
     this.route.params.subscribe((data: Params) => {
-      console.log(data);
     });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          //console.log(params);
-
-          // debugger;
-          console.log(params,"parrrraammss");
           console.log(this.typeOfForm);
           this.typeOfForm = params.type;
-          console.log(this.typeOfForm,"form-type");
           if (!params.type) {
             this.typeOfForm = "get";
           }

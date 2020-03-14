@@ -26,7 +26,6 @@ export class SendHttpRequestService {
   constructor( private http: HttpClient) { }
 
   private log(message: string) {
-    console.log(message);
   }
   header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
 
@@ -45,11 +44,8 @@ export class SendHttpRequestService {
       
     // //Decode JWT and return the Payload in JSON Format
    const decodeToken= this.jsonDecoder(token);
-   console.log(decodeToken);
          const empId=decodeToken.data.empId;
-       console.log(empId);
       const params = new HttpParams().set("empId", empId);
-      console.log(params); 
       if (!empId) {
         return this.http.get<any>("http://localhost:3000/employees", { ...this.httpOptions });
       }

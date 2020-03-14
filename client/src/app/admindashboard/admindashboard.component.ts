@@ -76,7 +76,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
   tabularData() {
     this._service.showAllEmployees(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
-      console.log(res);
       this.usersArray = res.payload.data.result.results;
       this.dataSize = res.payload.data.result.dataSize;
     });

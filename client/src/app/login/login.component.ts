@@ -72,11 +72,9 @@ return this.myform.controls;
       alert("Empty Fields !");
       return ;
     }
-    console.log(userObj);
     
     this.sendReq.logMeIn(userObj).subscribe((res)=> {
-      console.log(res);
-      //debugger
+  
       if(res != null){
         window.localStorage.setItem('Authorization', res.jwtToken);
         
@@ -85,8 +83,6 @@ return this.myform.controls;
       
            // //Decode JWT and return the Payload in JSON Format
           const decodeToken= this.jsonDecoder(token);
-          console.log(decodeToken);
-          // console.log(decodeToken.data.role[0]);
       
           // check if it was decoded successfully, if not the token is not valid, deny access
           if (!decodeToken) {
@@ -101,7 +97,6 @@ return this.myform.controls;
           }
           else{
             const role=decodeToken.data.role[0];
-            console.log(role);
             if(role=='Employee'||role=='employee'){
                 this.router.navigate(['/employee']);
             }
