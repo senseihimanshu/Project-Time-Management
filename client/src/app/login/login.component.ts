@@ -98,7 +98,7 @@ return this.myform.controls;
           else{
             const role=decodeToken.data.role[0];
             if(role=='Employee'||role=='employee'){
-                this.router.navigate(['/employee']);
+                this.router.navigate(['/timesheetweek']);
             }
             else if (role=='Admin'||role=='admin'){
               this.router.navigate(['/admin']);

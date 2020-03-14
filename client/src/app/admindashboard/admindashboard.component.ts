@@ -25,7 +25,8 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
       submenus: [
         {
-          title: "Add New Employee"
+          title: "Add New Employee",
+          route: "/employeeform/create"
         }
       ]
     },
@@ -37,10 +38,12 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
       submenus: [
         {
-          title: "Add New Project"
+          title: "Add New Project",
+          route: "/projectform/create/create"
         },
         {
-          title: "Show All Projects"
+          title: "Show All Projects",
+          route: '/projects'
         }
       ]
     },
@@ -52,7 +55,8 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
       submenus: [
         {
-          title: "Show All Timesheets"
+          title: "Show All Timesheets",
+          route: "/timesheetweek"
         }
       ]
     }
