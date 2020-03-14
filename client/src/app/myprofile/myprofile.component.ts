@@ -63,12 +63,8 @@ export class MyprofileComponent implements OnInit {
       
     // //Decode JWT and return the Payload in JSON Format
    const decodeToken= this.jsonDecoder(token);
-   console.log(decodeToken);
-   console.log(decodeToken.data.empId);
    
    return this._service.getEmployee(decodeToken.data.empId).subscribe((response: any) => {
-    console.log(response);
-        console.log(response.employee);
      return (this.employee = response.employee);
       });
 }

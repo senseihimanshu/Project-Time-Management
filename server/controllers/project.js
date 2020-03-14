@@ -83,7 +83,6 @@ class Project {
   }
 
   async index(req, res) {
-    console.log(req.paginatedResults);
   const projectList = req.paginatedResults.results;
     const tempList = [];
    await Promise.all(

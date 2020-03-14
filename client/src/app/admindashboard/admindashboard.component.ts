@@ -120,7 +120,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
             this.message = null;
           }, 5000);
             this.usersArray = this.usersArray.filter(item => item.empId != empId);
-          console.log(res);
         });
         swalWithBootstrapButtons.fire(
           'Deleted!',

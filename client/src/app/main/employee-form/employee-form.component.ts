@@ -93,18 +93,14 @@ export class EmployeeFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        console.log(response);
-        console.log(response.employee);
         return (this.employee = response.employee);
       });
   }
   
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
-    console.log(obj, typeOfForm);
     this.employeeService.employeeCreateOrUpdate(obj, typeOfForm).subscribe(
       (res: any) => {
-        console.log(res.payload.message);
         this.message = res.payload.message;
         swal.fire({
           icon: 'success',

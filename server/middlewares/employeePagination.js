@@ -1,5 +1,4 @@
 function Paginator(model) {
-  console.log("in emp  paginator")
     return async(req, res, next) => {
       const page = parseInt(req.query.page);
       const limit = parseInt(req.query.limit);
@@ -28,9 +27,8 @@ function Paginator(model) {
       results.dataSize = dataSize;
   
       try{
-          console.log(req.query.desc);
           results.results = await model.find({},{}).sort({ name: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
-          console.log(results);
+         
           req.paginatedResults = results;
           next();
       } catch(e){
