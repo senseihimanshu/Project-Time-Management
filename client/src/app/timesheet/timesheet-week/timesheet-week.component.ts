@@ -41,6 +41,8 @@ export class TimesheetWeekComponent {
 
   response: any;
 
+  role: string;
+
   menus: any = [
     {
       title: "Employees",
@@ -127,7 +129,7 @@ export class TimesheetWeekComponent {
     ).data._id;
     console.log(empId);
 
-    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
+    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
       console.log(res);
       this.response = res.payload.data.timesheet;
       this.dataSize = res.payload.data.result.dataSize;
@@ -135,7 +137,7 @@ export class TimesheetWeekComponent {
   }
 
   ngOnInit() {
-    let role = this.httpService.jsonDecoder(
+    this.role = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
     ).data.role[0];
     this.tabularData();

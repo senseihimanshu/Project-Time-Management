@@ -2,6 +2,7 @@
     position: absolute;
     right: 2rem;
     top: 1rem;
+    z-index: 30;
   }
   
   .card{
@@ -47,7 +48,12 @@
     z-index: 20;
     display: flex;
     justify-content: center;
+    align-items: center;
 
+    & label{
+      margin-bottom: 0 !important; 
+    }  
+    
     & input{
         max-width: 20%;
         font-size: 1.6rem;
@@ -69,7 +75,7 @@
 }
 
 .labelDate{
-    width: 12%;
+    width: 8%;
     font-size: 1.8rem;
     font-weight: bold;
     white-space: nowrap;

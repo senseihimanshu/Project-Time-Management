@@ -64,18 +64,21 @@
               <tr *ngFor="let date of datesArray; let id = index">
                 <td>
                   <span>
-                    <select
-                      name="project-{{id}}"
-                      [ngModel]="response?.week[id]?.projectId?._id"
-                      (ngModelChange)="handleProjectData(form.value)"
-                    >
-                    <option [ngValue]="null">Choose Among These</option>
-                      <option
-                        *ngFor="let project of projectArray"
-                        [ngValue]="project?._id"
-                        >{{ project.projectName }}</option
+                    <mat-form-field>
+                      <mat-label>Project</mat-label>
+                      <mat-select
+                        name="project-{{id}}"
+                        [ngModel]="response?.week[id]?.projectId?._id"
+                        (ngModelChange)="handleProjectData(form.value)"
                       >
-                    </select>
+                      <mat-option [value]="null">Choose Among These</mat-option>
+                        <mat-option
+                          *ngFor="let project of projectArray"
+                          [value]="project?._id"
+                          >{{ project.projectName }}</mat-option
+                        >
+                      </mat-select>
+                    </mat-form-field>
                   </span>
                 </td>
                 <!-- <td> -->
@@ -85,19 +88,21 @@
                   </select> -->
                 <!-- </td> -->
                 <td>
-                  <select
-                    name="task-type-{{id}}"
-                    [ngModel]="response?.week[id]?.taskType"
-                    required
-                    #taskType="ngModel"
-                  >
-                    <option
-                      *ngFor="let taskType of taskTypes"
-                      [value]="taskType.key"
-                      [selected]="timesheet?.taskType === taskType.key"
-                      >{{ taskType.value }}</option
+                  <mat-form-field>
+                    <mat-label>Choose Task Type</mat-label>
+                    <mat-select
+                      name="task-type-{{id}}"
+                      [ngModel]="response?.week[id]?.taskType"
+                      required
+                      #taskType="ngModel"
                     >
-                  </select>
+                      <mat-option
+                        *ngFor="let taskType of taskTypes"
+                        [value]="taskType.key"
+                        >{{ taskType.value }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
                 </td>
                 <td>
                   <span>
@@ -111,11 +116,10 @@
                 </td>
                 <td>
                   <span>
-                    <input
+                    <mat-checkbox
                       name="billable-{{id}}"
-                      type="checkbox"
                       [ngModel]="response?.week[id]?.billable || false"
-                    />
+                    ></mat-checkbox>
                   </span>
                 </td>
                 <td>
