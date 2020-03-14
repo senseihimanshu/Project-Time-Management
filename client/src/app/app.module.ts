@@ -24,6 +24,7 @@ import {
   TableModule,
  
 } from "angular-bootstrap-md";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { MainComponent } from "./main/main.component";
@@ -137,6 +138,7 @@ import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-wee
     CardsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatCheckboxModule
   ],
   providers: [ServicesService, AuthGuardService, RoleGuardService],
 entryComponents: [TimesheetModal],

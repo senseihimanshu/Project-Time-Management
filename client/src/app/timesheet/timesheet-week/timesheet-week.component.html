@@ -3,37 +3,41 @@
     <app-navbar></app-navbar>
   </div>
 
+  <div class="input-box">
+    <label for="date" class="labelDate" title="Filter Dates above of entered!">
+      <i class="fas fa-filter"></i>
+      Filter Dates
+    </label>
+  <input
+    id="date"
+    class="form-control date-input"
+    onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'Filter Dates above of entered!(yyyy-mm-dd)'"
+    name="selectedDate"
+    [ngModel]="selectedDate?.value"
+    (ngModelChange)="filterList(selectedDate.value)"
+    ngbDatepicker
+    [markDisabled]="isDisabled"
+    #dp="ngbDatepicker"
+    #selectedDate="ngModel"
+  />
+  <div class="input-group-append">
+    <button
+      style="font-size: 1.8rem;"
+      class="btn btn-outline-secondary fas fa-calendar"
+      (click)="dp.toggle()"
+      type="button"
+    ></button>
+  </div>
+</div>
+
   <div class="timesheet-table__wrapper">
     <app-sidebar [menus]="menus"></app-sidebar>
     <div class="card">
-      <div class="input-box">
-          <label for="date" class="labelDate" title="Choose Date to see timesheets above of it!">
-            Choose Date
-          </label>
-        <input
-          id="date"
-          class="form-control date-input"
-          placeholder="yyyy-mm-dd"
-          name="selectedDate"
-          [ngModel]="selectedDate?.value"
-          (ngModelChange)="filterList(selectedDate.value)"
-          ngbDatepicker
-          [markDisabled]="isDisabled"
-          #dp="ngbDatepicker"
-          #selectedDate="ngModel"
-        />
-        <div class="input-group-append">
-          <button
-            style="font-size: 1.8rem;"
-            class="btn btn-outline-secondary fas fa-calendar"
-            (click)="dp.toggle()"
-            type="button"
-          ></button>
-        </div>
-      </div>
+      
       <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
         Timesheets
-        <span class="table-add float-right mb-3 mr-2">
+        <span class="table-add float-right mb-3 mr-2" *ngIf="role !== 'Admin'"> 
           <a class="text-success" (click)="openDialog()">
             <mdb-icon fas icon="plus" class="add-icon" size="2x"></mdb-icon>
           </a>
@@ -47,7 +51,7 @@
             <thead>
               <a class="sort" (click)="sortList()"><td class="text-center">Begin Date<i class="fas fa-sort"></i></td></a>
               <td class="text-center">End Date</td>
-              <td class="text-center">State</td>
+              <td class="text-center">Status</td>
               <td class="text-center">View</td>
               <td class="text-center">Edit</td>
               <!-- <td class="text-center">Delete</td> -->

@@ -18,17 +18,13 @@ export class EmpTableComponent implements OnInit {
 
     usersArray: MatTableDataSource<any>;
     displayedColumns: string[]= ['fullname'];
-   // usersArray: any;
    data:any;
     tabularData() {
         this._service.showEmployees().subscribe(res => {
         let array=
         this.usersArray = res;
-        console.log(res);
         this.usersArray=new MatTableDataSource(res);
       });
-     // console.log(obj);
-     // this.usersArray=new MatTableDataSource(this.res);
     }
 
   ngOnInit() {

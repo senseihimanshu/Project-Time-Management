@@ -34,9 +34,8 @@ function Paginator(model) {
       results.dataSize = dataSize;
   
       try{
-          console.log(req.query.desc);
           results.results = await model.find({},{}).sort({ name: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
-          console.log(results);
+         
           req.paginatedResults = results;
           next();
       } catch(e){

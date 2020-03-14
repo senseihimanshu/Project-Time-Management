@@ -4,7 +4,8 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { FormBuilder, Validators } from '@angular/forms';
-import { SendHttpRequestService } from "../../send-http-request.service";
+import { SendHttpRequestService } from "../../send-http-request.service"
+import swal from'sweetalert2'
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss", "../main.component.scss"],
@@ -72,30 +73,14 @@ export class EmployeeFormComponent implements OnInit {
   ];
   
   ngOnInit(): any {
-   
-    console.log("ngOnInit");
-
-    // this.route.params.pipe(switchMap((params: Params) => {
-    //   console.log(params);
-    //   this.typeOfForm = params.type;
-    //   if(this.typeOfForm !== 'get'){
-
-    //   }
-    // }));
     this.route.params.subscribe((data: Params) => {
-      console.log(data);
     });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          //console.log(params);
-
-          // debugger;
-          console.log(params,"parrrraammss");
           console.log(this.typeOfForm);
           this.typeOfForm = params.type;
-          console.log(this.typeOfForm,"form-type");
           if (!params.type) {
             this.typeOfForm = "get";
           }
@@ -108,33 +93,35 @@ export class EmployeeFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        console.log(response);
-        console.log(response.employee);
         return (this.employee = response.employee);
       });
   }
   
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
-    console.log(obj, typeOfForm);
     this.employeeService.employeeCreateOrUpdate(obj, typeOfForm).subscribe(
       (res: any) => {
-        console.log(res.payload.message);
         this.message = res.payload.message;
-        setTimeout(() => {
-          this.message = null;
-        }, 5000);
+        swal.fire({
+          icon: 'success',
+          title: this.message,
+          showConfirmButton: true,
+          timer: 3000
+        }) 
         form.reset();
       },
       err => {
-        console.log(err);
         this.message = err.error.payload.message;
-        setTimeout(() => {
-          this.message = null;
-        }, 5000);
-      }
-    );
-  }
+        swal.fire({
+          icon: 'error',
+          title: this.message,
+          showConfirmButton: true,
+          timer: 3000
+        }) 
+        }
+     );
+   
+}
   saveEmployee() {
     if (this.employeeForm.dirty && this.employeeForm.valid) {
       alert(

@@ -8,6 +8,7 @@ import { CommonModule } from "@angular/common";
 import { RoleGuardService } from "./../guards/role-guard.service";
 import { AuthGuardService } from "./../guards/auth-guard.service";
 import { TimesheetWeekComponent } from './timesheet-week/timesheet-week.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { TimesheetWeekComponent } from './timesheet-week/timesheet-week.componen
     TimesheetWeekComponent
     //   MyprofileComponent
   ],
-  imports: [FormsModule, CommonModule, NgbDate],
+  imports: [FormsModule, CommonModule, NgbDate, MatCheckboxModule],
   exports: [TimesheetComponent, TimesheetModal, TimesheetWeekComponent],
   providers: [ServicesService, AuthGuardService, RoleGuardService]
 })

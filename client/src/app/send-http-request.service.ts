@@ -26,7 +26,6 @@ export class SendHttpRequestService {
   constructor( private http: HttpClient) { }
 
   private log(message: string) {
-    console.log(message);
   }
   header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
 
@@ -45,11 +44,8 @@ export class SendHttpRequestService {
       
     // //Decode JWT and return the Payload in JSON Format
    const decodeToken= this.jsonDecoder(token);
-   console.log(decodeToken);
          const empId=decodeToken.data.empId;
-       console.log(empId);
       const params = new HttpParams().set("empId", empId);
-      console.log(params); 
       if (!empId) {
         return this.http.get<any>("http://localhost:3000/employees", { ...this.httpOptions });
       }
@@ -93,16 +89,16 @@ export class SendHttpRequestService {
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  clevelDataProjects(): Observable<any>{
-    console.log("me yaha hoon");
-    return this.http.get("http://localhost:3000/clevel/project").pipe(
+  clevelDataProjects(graphicaldata:any): Observable<any>{
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+      return this.http.get("http://localhost:3000/project/graphicaldata",{params}).pipe(
       tap(_ => this.log("projects data")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );
   }
-  clevelDataTimesheets(): Observable<any>{
-    console.log("me yaha timesheet me hoon");
-    return this.http.get("http://localhost:3000/clevel/timesheet",{headers:this.header_token}).pipe(
+  clevelDataTimesheets(graphicaldata:any): Observable<any>{
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+    return this.http.get("http://localhost:3000/timesheet/graphicaldata",{params}).pipe(
       tap(_ => this.log("timesheets data")),
       catchError(this.handleError<any>('Some Error Occurred'))
     );

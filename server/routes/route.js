@@ -34,9 +34,10 @@ module.exports= (app) => {
 	//review
 	// app.put("/review",controller.review.update);
 	app.put("/review",controller.timesheet.modify);
-	app.get("/clevel/project",controller.cleveldata.projectsStatusData);
-	app.get("/clevel/timesheet",controller.cleveldata.timesheetsStatusData);
-	app.get('/project/projectList', controller.project.indexP);
+	app.get("/project/graphicaldata",controller.cleveldata.projectsStatusData);
+	app.get("/timesheet/graphicaldata",controller.cleveldata.timesheetsStatusData);
+app.get('/project/projectList', controller.project.indexP);
+app.get('/api/timesheet/filter', controller.timesheet.index);
 	app.get('/employeeList', controller.employees.indexP);
 	app.get('/api/timesheet/filter', controller.timesheet.index);
 	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);

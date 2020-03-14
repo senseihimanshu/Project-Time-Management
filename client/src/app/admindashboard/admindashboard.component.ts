@@ -71,6 +71,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   ) {}
   usersArray: any;
   user:any;
+
   limit: number = 5;
   dataSize: number;
 
@@ -80,7 +81,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
   tabularData() {
     this._service.showAllEmployees(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
-      console.log(res);
       this.usersArray = res.payload.data.result.results;
       this.dataSize = res.payload.data.result.dataSize;
     });
@@ -124,7 +124,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
             this.message = null;
           }, 5000);
             this.usersArray = this.usersArray.filter(item => item.empId != empId);
-          console.log(res);
         });
         swalWithBootstrapButtons.fire(
           'Deleted!',

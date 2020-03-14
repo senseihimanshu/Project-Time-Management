@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { EmployeeService } from '../services/employee.service';
-
+import swal from 'sweetalert2';
 @Component({
   selector: "app-project",
   templateUrl: "./project.component.html",
@@ -77,7 +77,6 @@ export class ProjectComponent implements OnInit, OnChanges {
       this.projectsArray = res;
       this.projectsArray = res.payload.data.tempList;
       this.dataSize = res.payload.data.result.dataSize;
-      console.log(this.projectsArray);
     });
    this.lastPage=(this.dataSize/10)+1;
   }
@@ -91,14 +90,48 @@ export class ProjectComponent implements OnInit, OnChanges {
   }
 
   deleteProject(id: any) {
-    console.log(id);
-    this.employeeService.deleteProject(id).subscribe(res => {
-      this.message = res.payload.message;
-      setTimeout(() => {
-        this.message = null;
-      }, 5000);
-      this.projectsArray = this.projectsArray.filter(project =>project.project._id != id);
-    });
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.employeeService.deleteProject(id).subscribe(res => {
+          this.message = res.payload.message;
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+          this.projectsArray = this.projectsArray.filter(project =>project.project._id != id);
+        });
+         swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your project data has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your projectdata is safe :)',
+          'error'
+        )
+      }
+    }) 
+    
   }
   logout() {
     this._service.deletetoken();
@@ -130,7 +163,6 @@ export class ProjectComponent implements OnInit, OnChanges {
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchProjects(input.value).subscribe(res => {
       this.projectsArray= res.payload.data.tempList;
-      console.log(res);
     });
     table = document.getElementById("myTable");
      tr = table.getElementsByTagName("tr");
