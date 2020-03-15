@@ -79,6 +79,18 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
   isSortDecreasing: boolean = false;
 
+////Will Decode!
+parseJwt = (token) => {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+};
+    
+
   tabularData() {
     this._service.showAllEmployees(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
       this.usersArray = res.payload.data.result.results;
@@ -88,6 +100,12 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    const token = window.localStorage.getItem('Authorization');
+    const payload = this.parseJwt(token);
+
+    console.log(payload, 'payload');
+    this.empObjId = payload.data._id;
+    console.log(this.empObjId, 'ajsjahhdasd');
     this.tabularData();
     
   }

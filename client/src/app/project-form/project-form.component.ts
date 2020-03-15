@@ -81,7 +81,30 @@ export class ProjectFormComponent implements OnInit {
     ];
   
     loading = false;
+
+    
+
   ngOnInit():any {
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+
+    
+
      this.getemployees();
     console.log("ngOnInit");
     this.route.params.subscribe((data: Params) => {
@@ -100,6 +123,7 @@ export class ProjectFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
+      
         return (this.project = response);
       });
   }
@@ -110,20 +134,32 @@ export class ProjectFormComponent implements OnInit {
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
          this.message=res.payload.message;
+         console.log(this.message);
          swal.fire({
           icon: 'success',
           title: this.message,
           showConfirmButton: true,
           timer: 3000
         }) 
-    }); 
+        
+    },  err => {
+      this.message = err.error.payload.message;
+      swal.fire({
+        icon: 'error',
+        title: this.message,
+        showConfirmButton: true,
+        timer: 3000
+      }) 
+      }
+    ); 
 }
    getemployees() {
 
     let obj = this._service.showEmployees().subscribe(res => {
       this.empList = res.payload.data.employeeList;
+       console.log("employeelist",this.empList);
+
     });
-    console.log("employeelist",this.empList);
   }
   addProjectManager(employeeArr: any)
   {

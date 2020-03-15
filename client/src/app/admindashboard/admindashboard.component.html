@@ -58,7 +58,7 @@
               </td>
               <td>
                 <a
-                  class=""
+                  [ngClass]="{'disabled': empObjId === employee._id}"
                   [routerLink]="['/employeeform/details', employee.empId]"
                 >
                   <i class="fas fa-eye"></i>
@@ -66,6 +66,7 @@
               </td>
               <td>
                 <a
+                [ngClass]="{'disabled': empObjId === employee._id}"
                   class="edit"
                   [routerLink]="['/employeeform', 'update', employee.empId]"
                 >
@@ -73,7 +74,7 @@
                 </a>
               </td>
               <td>
-                <a class="delete" (click)="deleteEmployee(employee.empId)"
+                <a class="delete" [ngClass]="{'disabled': empObjId === employee._id}" (click)="deleteEmployee(employee.empId)"
                   ><i class="fas fa-trash"></i
                 ></a>
               </td>

@@ -74,9 +74,8 @@ export class ProjectComponent implements OnInit, OnChanges {
   isSortDecreasing: boolean = false;
   tabularData() {
     let obj = this._service.showProjects(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
-      this.projectsArray = res;
       this.projectsArray = res.payload.data.tempList;
-      this.dataSize = res.payload.data.result.dataSize;
+     this.dataSize = res.payload.data.result.dataSize;
     });
    this.lastPage=(this.dataSize/10)+1;
   }
