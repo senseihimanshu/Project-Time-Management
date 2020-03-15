@@ -21,7 +21,7 @@
           />
           <div class="input-group-append">
             <button
-              style="font-size: 1.8rem;"
+              style="font-size: 1rem;"
               class="btn btn-outline-secondary fas fa-calendar"
               (click)="dp.toggle()"
               type="button"
@@ -45,7 +45,6 @@
   
     <!-- Editable table -->
     <div class="card">
-      <div class="card-body">
         <div id="table" class="table-editable">
           <form #form="ngForm" (ngSubmit)="handleSave(form.value)">
             <table
@@ -81,12 +80,6 @@
                     </mat-form-field>
                   </span>
                 </td>
-                <!-- <td> -->
-                  <!-- {{ (returnClient(form.value['project-'+id])) }} -->
-                  <!-- <select name="customer_name-{{id}}" id="customer_name" [ngModel]="project && project['project-0.clientName']" disabled>
-                    <option [value]="project['project-{{id}}'].clientName" selected></option>
-                  </select> -->
-                <!-- </td> -->
                 <td>
                   <mat-form-field>
                     <mat-label>Choose Task Type</mat-label>
@@ -147,11 +140,8 @@
                 Submit
               </button>
             </div>
-            {{ form.value | json}}
           </form>
         </div>
       </div>
     </div>
   </div>
-  
-</div>
