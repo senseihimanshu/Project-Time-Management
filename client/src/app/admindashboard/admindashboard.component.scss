@@ -1,6 +1,11 @@
 .pagination-div {
   display: flex !important;
   justify-content: flex-end;
+
+  & > *{
+    font-size: 1.4rem;
+    padding-right: 1px;
+  }
 }
 
 .pagination {
@@ -169,4 +174,12 @@ background-color: white;
 .disabled{
   cursor: none;
   opacity: 0.4;
+}
+
+.clickable{
+  cursor: pointer;
+  
+  &:hover{
+      opacity: 0.4;
+  }
 }

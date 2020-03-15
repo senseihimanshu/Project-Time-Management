@@ -84,8 +84,12 @@ h6{
     
 }
 .button-parent{
-    margin-left:10%;
     min-width:40px;
     margin-top:-15px;
+
+    & > *{
+        // max-width: 4rem !important;
+        // max-height: 20px;
+    }
     
 }

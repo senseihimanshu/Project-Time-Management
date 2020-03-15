@@ -110,7 +110,8 @@ export class EmployeeFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        return (this.employee = response.employee);
+        this.employee = response.employee;
+        console.log(response.employee);
       });
   }
   
@@ -126,6 +127,8 @@ export class EmployeeFormComponent implements OnInit {
           timer: 3000
         }) 
         form.reset();
+
+        this.router.navigate(['/admin']);
       },
       err => {
         this.message = err.error.payload.message;

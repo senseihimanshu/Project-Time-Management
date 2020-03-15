@@ -91,13 +91,21 @@ class Project {
           { _id: project.projectManager },
           { name: 1, _id: 0 }
         );
-        const member = await model.employee.gets(
-          { _id: project.empObjectIdArray },
-          { name: 1, _id: 0 }
-        );
-      tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member && member.name});
+
+        let member;
+        if(project.empObjectIdArray){
+        member = await Promise.all(project.empObjectIdArray.map(async(employee) => {
+          return ((await model.employee.get(
+            { _id: employee },
+            { name: 1, _id: 0 }
+          )).name);
+        }));}
+
+      tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member});
       })
     );  
+
+    console.log(tempList[0], tempList[1], tempList[2]);
     
     return res.status(200).send({
       success: true,

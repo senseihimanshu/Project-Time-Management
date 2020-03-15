@@ -14,6 +14,7 @@ export class TimesheetService {
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
+      'Access-Control-Allow-Origin': '*',
       token: localStorage.getItem("Authorization")
     })
   };
@@ -57,11 +58,13 @@ export class TimesheetService {
       this.httpOptions)
   }
 
-  getAllTimesheet(): Observable<any> {
-    return this.http.get("http://localhost:3000/timesheet").pipe(
-      tap(_ => this.log("All timesheets")),
-      catchError(this.handleError<any>("Some Error Occurred"))
-    );
+  getAllTimesheet(type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
+    const params: HttpParams = new HttpParams().set("type", type).set("page", page).set("limit", limit).set("desc", desc);
+
+    return this.http.get("http://localhost:3000/timesheet", {
+      ...this.httpOptions,
+      params
+    });
   }
 
   private handleError<T>(operation = "operation", result?: T) {

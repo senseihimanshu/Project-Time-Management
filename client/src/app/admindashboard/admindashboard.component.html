@@ -23,8 +23,8 @@
           <thead>
             <tr>
               <th scope="col">Employee Id</th>
-              <th scope="col">
-                Name<i class="fas fa-sort" (click)="sortList()"></i>
+              <th scope="col" class="clickable" (click)="sortList()">
+                Name<i class="fas fa-sort" ></i>
               </th>
               <th scope="col">Email</th>
               <th scope="col">Designation</th>
@@ -82,7 +82,7 @@
           </tbody>
         </table>
         <div class="pagination-div">
-          <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page}}<i class="fas fa-arrow-circle-left"></i></a>
+          <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page-1 !== 0 ? page-1 : ''}}<i class="fas fa-arrow-circle-left"></i></a>
           <a class="move-right" [ngClass]="{'disabled': page===lastPage}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page+1}}</a>
         </div>
       </div>
