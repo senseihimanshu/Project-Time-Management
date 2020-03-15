@@ -10,6 +10,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   @Input()
   dashboard:string;
+
+  @Input()
+  menus: any;
+
   constructor(private router: Router, private _service: SendHttpRequestService) { }
 
   ngOnInit() {
@@ -20,5 +24,9 @@ export class NavbarComponent implements OnInit {
 
     this.router.navigate(["/login"]);
   }
+
+  // moveToProfile(){
+  //   this.router.navigate(['/myProfile']);
+  // }
 
 }

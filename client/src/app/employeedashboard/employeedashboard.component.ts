@@ -9,6 +9,8 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./employeedashboard.component.scss']
 })
 export class EmployeedashboardComponent implements OnInit,OnChanges {
+  dashboard: string = "Employee Dashboard";
+
   menus: any = [
     {
       title: "Timesheets",
@@ -18,10 +20,12 @@ export class EmployeedashboardComponent implements OnInit,OnChanges {
 
       submenus: [
         {
-          title: "Create New Timesheet"
+          title: "Create New Timesheet",
+          route: "/timesheetweek"
         },
         {
-          title: "Show All Timesheets"
+          title: "Show All Timesheets",
+          route: "/timesheetweek"
         }
 
       ]
