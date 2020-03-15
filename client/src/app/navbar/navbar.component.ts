@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router, private _service: SendHttpRequestService) { }
 
   ngOnInit() {
-    console.log(this.menus, 'Shivani Bansal');
   }
 
   logout() {

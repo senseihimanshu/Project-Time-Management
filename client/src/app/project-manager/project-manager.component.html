@@ -1,8 +1,10 @@
-<div class="app-project-manager">
-  <app-navbar [menus]="menus" [dashboard]="dashboard"></app-navbar>
-  <div class="main">
-    <app-sidebar [menus]="menus"></app-sidebar>
-
+<div>
+  <app-navbar [dashboard]="dashboard" [menus]="menus"></app-navbar>
+  <div class="row">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+    <div class="col-10">
     <section class="background_dashboard">
       <table class="empTable table responstable">
         <thead class="test">
@@ -28,4 +30,5 @@
       </table>
     </section>
   </div>
+</div>
 </div>

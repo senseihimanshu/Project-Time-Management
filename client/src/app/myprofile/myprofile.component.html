@@ -1,106 +1,114 @@
 <div>
-    <app-navbar [menus]="menus"></app-navbar>
-<div class="main">
-<app-sidebar [menus]="menus"></app-sidebar>
-<div class="container bootstrap snippet">
-    <div class="panel-body inf-content">
-        <div class="row mt-4">
-            <div class="col-md-4 col-lg-4 col-sm-12">
-                <img alt=""  title="" class="img-circle img-fluid ml-auto isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
-            </div>
-            <div>
-                <h1 class="font-weight-bold head-design">My Information</h1>
-                <div class="table-responsive">
-                <table class="table table-condensed table-responsive table-user-information">
-                    <tbody>
-                        <tr>        
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-asterisk text-primary"> </span>
-                                    Employee ID
-                                                                          
-                                </strong>
-                            </td>
-                            <td class="">
-                             {{employee?.empId}}
-                            </td>
-                        </tr>
-                        <tr>    
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-user  "></span>    
-                                    Name                                           
-                                </strong>
-                            </td>
-                            <td class="">
-                                {{employee?.name}}  
-                            </td>
-                        </tr>
-                        <tr>        
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-cloud "></span>  
-                                Designation                                                
-                                </strong>
-                            </td>
-                            <td class="">
-                                {{employee?.designation}}
-                            </td>
-                        </tr>
-    
-                        <tr>        
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-bookmark "></span> 
-                                    Role                                          
-                                </strong>
-                            </td>
-                            <td class="">
-                                {{employee?.role}} 
-                            </td>
-                        </tr>
-    
-    
-                        <tr>        
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-eye-open "></span> 
-                                    Phone                                         
-                                </strong>
-                            </td>
-                            <td class="">
-                                {{employee?.phoneNo}}
-                            </td>
-                        </tr>
-                        <tr>        
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-envelope "></span> 
-                                    Email                                                
-                                </strong>
-                            </td>
-                            <td class="">
-                                {{employee?.email}} 
-                            </td>
-                        </tr>
-                        <tr>        
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-calendar "></span>
-                                    Joining Date                                              
-                                </strong>
-                            </td>
-                            <td class="">
-                                {{employee?.joining | date}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                </div>
-            </div>
-        </div>
+  <app-navbar [menus]="menus"></app-navbar>
+  <div class="row">
+    <div class="col-2 d-none d-lg-block">
+      <app-sidebar [menus]="menus"></app-sidebar>
     </div>
-    </div>                                      
-</div>
+    <div class="container bootstrap snippet">
+      <div class="panel-body inf-content">
+        <div class="row mt-4">
+          <div class="col-md-4 col-lg-4 col-sm-12">
+            <img
+              alt=""
+              title=""
+              class="img-circle img-fluid ml-auto isTooltip"
+              src="https://bootdey.com/img/Content/user-453533-fdadfd.png"
+              data-original-title="Usuario"
+            />
+          </div>
+          <div>
+            <h1 class="font-weight-bold head-design">My Information</h1>
+            <div class="table-responsive">
+              <table
+                class="table table-condensed table-responsive table-user-information"
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-asterisk text-primary">
+                        </span>
+                        Employee ID
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.empId }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-user  "></span>
+                        Name
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.name }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-cloud "></span>
+                        Designation
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.designation }}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-bookmark "></span>
+                        Role
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.role }}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-eye-open "></span>
+                        Phone
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.phoneNo }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-envelope "></span>
+                        Email
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.email }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-calendar "></span>
+                        Joining Date
+                      </strong>
+                    </td>
+                    <td class="">
+                      {{ employee?.joining | date }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
