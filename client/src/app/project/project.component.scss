@@ -189,3 +189,27 @@
   {
   background-color: white;
   }
+
+  .pagination-div {
+    display: flex !important;
+    justify-content: flex-end;
+  
+    & > *{
+      font-size: 1.4rem;
+      padding-right: 1px;
+    }
+  }
+
+  .clickable{
+    cursor: pointer;
+    
+    &:hover{
+        opacity: 0.4;
+    }
+  }
+
+  .disabled{
+    cursor: none;
+    opacity: 0.4;
+  }
+  

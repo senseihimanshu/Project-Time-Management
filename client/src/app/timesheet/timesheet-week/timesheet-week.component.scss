@@ -33,6 +33,11 @@ h6 {
 .pagination-div {
   display: flex !important;
   justify-content: flex-end;
+
+  & > *{
+    font-size: 1.4rem;
+    padding-right: 1px;
+  }
 }
 
 .pagination {
@@ -112,4 +117,13 @@ tbody:nth-child(odd) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   background-color: whitesmoke;
+}
+
+.clickable{
+  cursor: pointer;
+  
+  &:hover{
+      opacity: 0.4;
+      background-color: #ffffffe3;
+  }
 }

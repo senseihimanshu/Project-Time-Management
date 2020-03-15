@@ -128,6 +128,13 @@ export class TimesheetWeekComponent {
       localStorage.getItem("Authorization")
     ).data._id;
 
+      if(this.role === "Admin"){
+        this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
+          console.log(res);
+        });
+        return;
+      }
+
     this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
    
       this.response = res.payload.data.timesheet;

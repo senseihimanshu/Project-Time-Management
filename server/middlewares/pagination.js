@@ -8,7 +8,11 @@ function paginator(model) {
 
     const results = {};
 
-    const dataSize = await model.find({ empObjId: req.query.empObjId }).count({});
+    let dataSize = await model.find({ empObjId: req.query.empObjId }).count({});
+
+    if(!(req.query.empObjId)){
+      dataSize = await model.find({}).count({});
+    }
 
     if (endIndex < dataSize) {
       results.next = {
@@ -30,6 +34,15 @@ function paginator(model) {
         //Now has become specific to only timesheetAPI
         //In future try to remember that the criteria must be a key from request!!!!!!!
       
+        if(!(req.query.empObjId)){
+          results.results = await model.find({}).sort({ startDate: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
+
+          req.paginatedResults = results;
+          next();
+
+          return;
+        }
+
         results.results = await model.find({ empObjId: req.query.empObjId }).sort({ startDate: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
     
         req.paginatedResults = results;

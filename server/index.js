@@ -18,10 +18,10 @@ if (!config.get("jwtPrivateKey")) {
 
 //Using Middlewares
 //view engine setup
+app.use(cors());
 app.engine('handlebars',exphbs());
 app.set('view engine','handlebars');
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.json());
 require("./routes/route.js")(app);
 

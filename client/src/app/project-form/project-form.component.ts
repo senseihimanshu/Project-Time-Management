@@ -133,17 +133,19 @@ export class ProjectFormComponent implements OnInit {
      this.employeeService
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
-         this.message=res.payload.message;
-         console.log(this.message);
+         this.message=res.payload.messsage;
+         console.log(res);
          swal.fire({
           icon: 'success',
           title: this.message,
           showConfirmButton: true,
           timer: 3000
         }) 
+
+        this.router.navigate(['/projects']);
         
     },  err => {
-      this.message = err.error.payload.message;
+      this.message = err.error.payload.messsage;
       swal.fire({
         icon: 'error',
         title: this.message,
