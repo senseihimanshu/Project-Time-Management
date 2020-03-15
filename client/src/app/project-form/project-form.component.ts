@@ -147,25 +147,29 @@ export class ProjectFormComponent implements OnInit {
       return;
     }
     console.log(obj, formType);
-    this.employeeService.projectCreateOrUpdate(obj, formType).subscribe(
-      (res: any) => {
-        this.message = res.payload.message;
-        console.log(this.message);
-        swal.fire({
-          icon: "success",
+
+     this.employeeService
+       .projectCreateOrUpdate(obj, formType)
+       .subscribe((res: any) => {
+         this.message=res.payload.messsage;
+         console.log(res);
+         swal.fire({
+          icon: 'success',
           title: this.message,
           showConfirmButton: true,
           timer: 3000
-        });
-      },
-      err => {
-        this.message = err.error.payload.message;
-        swal.fire({
-          icon: "error",
-          title: this.message,
-          showConfirmButton: true,
-          timer: 3000
-        });
+        }) 
+
+        this.router.navigate(['/projects']);
+        
+    },  err => {
+      this.message = err.error.payload.messsage;
+      swal.fire({
+        icon: 'error',
+        title: this.message,
+        showConfirmButton: true,
+        timer: 3000
+      }) 
       }
     );
   }
