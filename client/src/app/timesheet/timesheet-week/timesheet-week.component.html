@@ -1,5 +1,5 @@
   <div>
-  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <app-navbar [dashboard]="dashboard" [menus]="menus"></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
       <app-sidebar [menus]="menus"></app-sidebar>
@@ -8,7 +8,19 @@
       <div class="custom-card">   
       <h6 class="card-header text-center font-weight-bold text-uppercase">
         Timesheets
-         <mdb-icon fas icon="plus" class="add-icon text-success" size="2x"></mdb-icon>
+        <span	
+        class="table-add float-right mb-3 mr-2"	
+        *ngIf="role !== 'Admin'"	
+      >	
+        <a class="text-success" (click)="openDialog()">	
+          <mdb-icon	
+            fas	
+            icon="plus"	
+            class="add-icon text-success"	
+            size="2x"	
+          ></mdb-icon>	
+        </a>	
+      </span>
       </h6>
       <div class="input-box">
     <label for="date" class="labelDate" title="Filter Dates above of entered!">
