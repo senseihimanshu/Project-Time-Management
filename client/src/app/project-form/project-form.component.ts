@@ -113,7 +113,6 @@ export class ProjectFormComponent implements OnInit {
     })();
 
     this.getemployees();
-    console.log("ngOnInit");
     this.route.params.subscribe((data: Params) => {});
     this.route.params
       .pipe(
@@ -123,7 +122,6 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return this.employeeService.getProject(null);
           }
-          console.log(this.formType);
           return this.employeeService.getProject(params.projectId);
         })
       )
@@ -174,7 +172,6 @@ export class ProjectFormComponent implements OnInit {
   getemployees() {
     let obj = this._service.showEmployees().subscribe(res => {
       this.empList = res.payload.data.employeeList;
-      console.log("employeelist", this.empList);
     });
   }
   addProjectManager(employeeArr: any) {
@@ -182,7 +179,6 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map(employee => {
         this.projManager.push(employee._id);
       });
-      console.log(this.projManager);
     }
   }
   addProjectMember(employeeArr: any) {
@@ -190,7 +186,6 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map(employee => {
         this.projMembers.push(employee._id);
       });
-      console.log(this.projMembers);
     }
   }
 }
