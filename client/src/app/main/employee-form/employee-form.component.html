@@ -10,7 +10,7 @@
    
        <div class="app-employee-form"> 
          <form
-          class="form-body"
+          class="form-body needs-validation"
           #form="ngForm"
            (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
            novalidate>
@@ -45,6 +45,7 @@
             [readonly]="!(typeOfForm === 'create')"
             #empId="ngModel"
           />
+          <div class="invalid-feedback"><i class="fa fa-error"></i></div>
           <p  *ngIf="empId.invalid && empId.touched">*Employee Id  is required</p>
       </div>  
         

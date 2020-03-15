@@ -11,7 +11,7 @@
             <form
               class="form-body"
               #form="ngForm"
-              (ngSubmit)="projectCreateOrUpdate(form.value, 'create')"
+              (ngSubmit)="projectCreateOrUpdate(form.value, formType)"
                novalidate>
                <div
                 class="h4 mb-4
@@ -27,7 +27,7 @@
                 }}
                 </div>
                 <div 
-                  class="h5 mb-4  formGroup was-validated" 
+                  class="h5 mb-4  formGroup" 
                   [class.has-error]="projectId?.touched && projectId?.invalid">
                    <label class="control-label" for="projectId">Project ID:</label>
                    <input
@@ -35,17 +35,18 @@
                     id="projectId"
                     class="form-control"
                     placeholder="Project Id"
-                    [ngModel]="project && project._id"
+                    [ngModel]="project && project.projectId"
                     name="projectId"
-                    [disabled]="formType === 'get'" 
+                    [readonly]="!(formType === 'create')"
+                   
                     required
                     minlength="1"
                     maxlength="20" 
                     #projectId="ngModel" />
-                      <p *ngIf="projectId?.touched && projectId?.invalid">project Id is required</p>
+                     
                </div>
                <div
-                class="h5 mb-4 form-group was-validated" 
+                class="h5 mb-4 form-group" 
                [class.has-error]="projectNameInput?.touched && projectNameInput?.invalid">
                 <label for="projectName"class="control-label">Project Name:</label>
                  <input 
@@ -57,10 +58,11 @@
                     name="projectName" required
                     [disabled]="formType === 'get'" 
                     #projectNameInput="ngModel" />
+                    
                       <p *ngIf="projectNameInput?.touched && projectNameInput?.invalid">projectName is required</p>
                </div>
               <div 
-                 class="h5 mb-4 was-validated form-group" 
+                 class="h5 mb-4  form-group" 
                  [class.has-error]="clientNameInput?.touched && clientNameInput?.invalid">
                    <label class="control-label" for="clientName">Client Name:</label>
                    <input 
@@ -78,11 +80,11 @@
                        <p *ngIf="clientNameInput?.touched && clientNameInput?.invalid">clientName is required</p>
               </div>
               <div 
-                class="h5 mb-4 form-group was-validated" 
+                class="h5 mb-4 form-group" 
                 [class.has-error]="projectManagerInput?.touched && projectManagerInput?.invalid">
                   <label for="managers"class="control-label">Project Manager:</label>
                   <mat-select class="browser-default custom-select" name="managers"
-                    [ngModel]="projmanagers" 
+                    [ngModel]="project?.projectManager[0]" 
                     class="form-control"
                     [disabled]="formType ==='get'"
                     (ngModelChange)="addProjectManager($event)" 
@@ -94,7 +96,7 @@
                    <p *ngIf="projectManagerInput?.touched && projectManagerInput?.invalid">projectManager is required</p>
               </div>
             <div 
-              class="h5 mb-4 form-group was-validated" 
+              class="h5 mb-4 form-group " 
               [class.has-error]="StartDateInput?.touched">
                <label for="start"class="control-label">Start Date:</label>
                <input
@@ -108,7 +110,7 @@
                  #startDateInput="ngModel" />
                   <p *ngIf="startDateInput?.invalid && startDateInput?.touched">startDate is required</p>
             </div>
-            <div class="h5 mb-4 form-group was-validated" [class.has-error]="endDateInput?.touched">
+            <div class="h5 mb-4 form-group " [class.has-error]="endDateInput?.touched">
               <label class="control-label" for="end">End Date:</label>
                <input 
                 type="date"
@@ -123,7 +125,7 @@
                 <p *ngIf="endDateInput?.touched && endDateInput?.invalid">EndDate is required</p>
            </div>
        
-            <div class="h5 mb-4 form-group was-validated" 
+            <div class="h5 mb-4 form-group" 
                  [class.has-error]="statusInput?.touched">
               <label class="control-label" for="status">Status:</label>
              <select class="browser-default
@@ -136,36 +138,35 @@
                    <option value="" disabled>Choose option</option>
                    <option value="In Progress" selected>In Progress</option>
                    <option value="Completed">Completed</option>
-                   <option value="Closed">Closed</option>
+                   <option value="Discarded">Discarded</option>
              </select>
               <p *ngIf="statusInput?.touched && statusInput?.invalid">status is required</p>
             </div>
 
-           <div class="h5 mb-4 form-group was-validated" 
+           <div class="h5 mb-4 form-group" 
                 [class.has-error]="membersInput?.touched && membersInput?.invalid">
               <label class="control-label" for="members">Project Members:</label>
                 <mat-select
                  class="browser-default custom-select" 
                  name="members" 
-                 [ngModel]="projMembers"
-                 [disabled]="formType ==='get'" 
+                 [ngModel]="project && project.empObjectIdArray"
                  (ngModelChange)="addProjectMember($event)"
+                 [disabled]="formType ==='get'" 
                  #membersInput="ngModel"
                  required 
-                 minlength="2" 
-                 maxlength="20"
+                
                  multiple>
                  <mat-option *ngFor="let emp of empList" [value]="emp._id">{{emp.name}}</mat-option>
                 </mat-select>
                 <p *ngIf="membersInput?.touched && membersInput?.invalid">project Members are required</p>
             </div>
              <div class="button-parent" *ngIf="formType !== 'get'">
-               <button mdbBtn class=" btn btn-outline-warning  text-center text-yellow m-4 btnsstyle" 
+               <button mdbBtn class=" btn btn-outline-primary  text-center text-yellow m-4 btnsstyle" 
                        mdbWavesEffect
                        type="submit">
                   {{ (formType === "create") ? "Add New Project" : "Update Project" }}
                </button>
-              <button type="button" mdbBtn class="btn btn-outline-warning  text-center text-yellow m-2 btnsstyle"
+              <button type="button" mdbBtn class="btn btn-outline-primary  text-center text-yellow m-2 btnsstyle"
                       mdbWavesEffect
                       [routerLink]="['/projects']">
                   Cancel
@@ -178,7 +179,9 @@
                          [routerLink]="['/projects']">
                       Cancel
                  </button>
-             </div> 
+             </div>
+             {{ project | json }}
+             {{ form.value | json }}
        </form>
    </div>
 </div>

@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 module.exports = {
+  projectId:{
+    type:String,
+    required:true,
+    unique:true
+  },
   projectName: {
     type: String,
     required: true

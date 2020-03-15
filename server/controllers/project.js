@@ -13,7 +13,7 @@ class Project {
       projectId: req.body.projectId,
       projectName: req.body.projectName,
       projectManager: req.body.managers,
-      clientName: req.body.client_name,
+      clientName: req.body.clientName,
       status: req.body.status,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
@@ -76,7 +76,7 @@ class Project {
 
     res.status(201).send({
       success: true,
-      payload: {
+       payload: {
         message: "Project created successfully"
       }
     });
@@ -91,7 +91,7 @@ class Project {
           { _id: project.projectManager },
           { name: 1, _id: 0 }
         );
-        const member = await model.employee.get(
+        const member = await model.employee.gets(
           { _id: project.empObjectIdArray },
           { name: 1, _id: 0 }
         );
@@ -117,11 +117,12 @@ class Project {
     res.send(projectList);
   }
   async update(req, res) {
-    const projectManager=await  model.projectManager.get({managerName:req.body.projectManager});
+     try{
+    const projectManager=await  model.projectManager.get({managerName:req.body.managers});
     let projectUpdatedObj = {
      
       projectName: req.body.projectName,
-      projectManager: projectManager.id,
+      projectManager: req.body.managers,
       clientName: req.body.clientName,
       status: req.body.status,
       startDate: req.body.startDate,
@@ -132,9 +133,9 @@ class Project {
     //Expecting that req.body will have required details with same keys!!! (Just to save time)
       
                            
-                           
+    const projectObjId = (await model.project.get({ projectId: req.body.projectId }))._id;
     const project = await model.project.update(
-      { _id: req.query.id },
+      { _id: projectObjId },
       projectUpdatedObj
     );
     res.send({
@@ -144,6 +145,14 @@ class Project {
         messsage:"project updated successfully"
       }
     });
+     }catch(error){
+      res.status(400).send({
+        success: false,
+        payload: {
+          message: err.message
+        }
+      });
+     }
   }
 
   async searchProject(req, res){

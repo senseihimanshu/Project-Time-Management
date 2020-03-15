@@ -24,7 +24,7 @@ class Project{
          }
      //update the details of project as per criteria
       async update(criteria={},updatedProjectObj){
-         return this.model.update(criteria,updatedProjectObj)
+         return this.model.updateOne(criteria,updatedProjectObj)
       }
       //delete the project of company as per criteria 
       async delete(criteria={}){
