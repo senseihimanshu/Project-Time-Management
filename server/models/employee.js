@@ -8,8 +8,7 @@ class Employee{
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
-      const findDocument=await this.model.findOne(criteria,columns).populate('projectId');
-      return findDocument;
+      return this.model.findOne(criteria,columns);
    }
    async gets(criteria={}, columns={}){
     return this.model.find(criteria, columns);

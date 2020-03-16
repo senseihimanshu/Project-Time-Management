@@ -8,7 +8,7 @@ const bodyParser=require('body-parser');
 const nodemailer=require('nodemailer');
 const exphbs=require('express-handlebars');
 //User Imports
-const employeeRoutes = require("./routes/employee");
+app.use(cors());
 
 //Secret Key Error
 if (!config.get("jwtPrivateKey")) {
@@ -17,16 +17,10 @@ if (!config.get("jwtPrivateKey")) {
 }
 
 //Using Middlewares
-//view engine setup
-app.use(cors());
-app.engine('handlebars',exphbs());
-app.set('view engine','handlebars');
 app.use(bodyParser.json());
 app.use(express.json());
 require("./routes/route.js")(app);
 
-//Adding Routes
-app.use("/api/employee", employeeRoutes);
 
 //Listening and setting of port
 const port = process.env.PORT || 3000;
