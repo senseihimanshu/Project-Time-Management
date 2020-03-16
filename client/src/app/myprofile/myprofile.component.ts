@@ -41,7 +41,7 @@ export class MyprofileComponent implements OnInit {
         submenus: [
           {
             title: "Add New Employee",
-            route: "/employeeform/create"
+            route: "/employee/create"
           }
         ]
       },
