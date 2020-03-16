@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const project=require('./project-details');
+const mongoose = require("mongoose");
+const project = require("./project");
 var ObjectId = mongoose.Schema.Types.ObjectId;
 module.exports = {
   empId: {
@@ -28,12 +28,10 @@ module.exports = {
     minlength: 2,
     maxlength: 30
   },
-  designation: [
-    {
-      type: String,
-      enum: ["Associate", "Consultant 2", "Consultant 1", "Intern"]
-    }
-  ],
+  designation: {
+    type: String,
+    enum: ["associate", "consultant-2", "consultant-1", "intern"]
+  },
   joining: {
     type: Date,
     default: Date.now()
@@ -48,21 +46,16 @@ module.exports = {
     minlength: 10,
     maxlength: 100
   },
-  role:[{
-    type:String,
-    default:'Employee',
-    enum:['Project Manager','C Level Manager','Employee','Admin']
-  }],
-  projectId:[{
-    type:ObjectId,
-    ref:"project",
-    default:null
-  }],
-  timesheet: [
+  role: {
+    type: String,
+    default: "employee",
+    enum: ["project-manager", "c-level", "employee", "admin"]
+  },
+  projectObjIds: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'timesheet',
-      unique: true
+      type: ObjectId,
+      ref: "project",
+      required: true
     }
   ]
-}
+};
