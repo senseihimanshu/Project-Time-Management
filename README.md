@@ -7,12 +7,12 @@ Git clone Install the dependencies and start the project
 ##Installation(Front-end):-
    ```
    npm install
-   npm start
+   ng serve
 ```
 ##Installation(Back-end):-
-    ```bash
+    ```
    npm install
-   ng serve
+   npm start
 ```
 ##Technologies used:-
    *[Angular]-Angular is used for front end
