@@ -137,9 +137,8 @@ export class ProjectFormComponent implements OnInit {
          console.log(res);
          swal.fire({
           icon: 'success',
-          text: this.message,
-          showConfirmButton: true,
-          timer: 3000
+          title: this.message,
+          showConfirmButton: true
         }) 
 
        
@@ -148,9 +147,8 @@ export class ProjectFormComponent implements OnInit {
       this.message = err.error.payload.message;
       swal.fire({
         icon: 'error',
-        text: this.message,
-        showConfirmButton: true,
-        timer: 3000
+        title: this.message,
+        showConfirmButton: true
       }) 
       }
     ); 
