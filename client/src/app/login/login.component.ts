@@ -37,36 +37,32 @@ export class LoginComponent implements OnInit {
       email: ["", [Validators.required, Validators.minLength(8)]],
       password: ["", [Validators.required, Validators.minLength(4)]]
     });
-  }
-  get f() {
-    return this.myform.controls;
-  }
-  loginFunction() {
-    this.submitted = true;
-    if (
-      this.password.nativeElement.value == "" ||
-      this.email.nativeElement.value == ""
-    ) {
-      swal.fire({ icon: "warning", title: "All fields are necessary" });
+}
+get f()
+{
+return this.myform.controls;
+}
+  loginFunction() { 
+    this.submitted=true;
+    if(this.password.nativeElement.value==""||this.email.nativeElement.value=="")
+    {
+     swal.fire({icon:'warning',
+            text:"All fields are necessary"});  
       return;
     }
 
     if (this.myform.invalid) {
       let valLengthEmail = this.email.nativeElement.value.length;
-      if (valLengthEmail < 8) {
-        swal.fire({
-          icon: "warning",
-          title: "Email must be of minimum 8 characters"
-        });
+        if(valLengthEmail<8){
+        swal.fire({icon:'warning',
+        text:"Email must be of minimum 8 characters"});  
         return;
-      }
-      let valLengthPassword = this.password.nativeElement.value.length;
-      if (valLengthPassword < 4)
-        swal.fire({
-          icon: "warning",
-          title: "Password must be of minimum 8 characters"
-        });
-      return;
+       }
+      let valLengthPassword=this.password.nativeElement.value.length; 
+       if(valLengthPassword<4)
+       swal.fire({icon:'warning',
+       text:"Password must be of minimum 8 characters"});  
+    return;
     }
     if (
       this.email.nativeElement.value == "" ||

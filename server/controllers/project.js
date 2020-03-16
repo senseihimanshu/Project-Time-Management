@@ -7,7 +7,7 @@ class Project {
 
   async create(req, res) {
     
-   
+   try{
 
     let projectObj = {
       projectId: req.body.projectId,
@@ -80,7 +80,16 @@ class Project {
         message: "Project created successfully"
       }
     });
-  }
+   }catch(error){
+    
+    res.status(400).send({
+      success: false,
+      payload: {
+        message: err.message
+      }
+    });
+   }
+}
 
   async index(req, res) {
   const projectList = req.paginatedResults.results;
@@ -150,7 +159,7 @@ class Project {
       success: true,
       payload: {
         data: project,
-        messsage:"project updated successfully"
+        message:"project updated successfully"
       }
     });
      }catch(error){

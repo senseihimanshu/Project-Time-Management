@@ -5,17 +5,20 @@
      //  align-items: center;*/
      display:flex;
      flex-wrap: nowrap;
+    
  }
  
  h2{
      align-items:center ;
      font-weight: bolder;
+     
  }
  
 p{
     color:red;
     font-size:0.8rem;
     padding:-5px;
+    text-align:left;
 }
 .app-main{
     padding: 0.8rem 4rem;
@@ -46,6 +49,7 @@ h6{
     max-height:15rem;
     
 }
+
 .custom-card {
     box-shadow: 1px 1px 1px 1px rgba(50, 50, 50, 0.1);
     background:white;
@@ -54,6 +58,7 @@ h6{
     margin-top:1.2rem;
   
 }
+
 .form-control,.custom-select
 {
     display: block;
@@ -62,7 +67,9 @@ h6{
     font-size:9px;
    max-height:9rem;
    padding:-15px;
+ 
 }
+
 .h4{
     font-size:2px;
 
@@ -70,7 +77,10 @@ h6{
 .control-label{
     font-size:11px;
     padding:0;
+   max-height:10px;
+    
 }
+
 .error{
   font-size: 1rem;
   color: red;
@@ -84,9 +94,7 @@ h6{
     
 }
 .button-parent{
-    // margin-left:10%;
-    // min-width:40px;
-    // margin-top:-15px;
+   
     width: 100%;
     display: flex;
     justify-content: space-around;
