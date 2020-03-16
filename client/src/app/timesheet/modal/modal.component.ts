@@ -95,7 +95,7 @@ export class TimesheetModal implements OnInit {
 
     //subscribing to observable for getting the employee
     this.employeeService.getEmployee(empId).subscribe(response => {
-      this.projectArray = response.employee.projectId.map(project => {
+      this.projectArray = response.payload.data.employee.projectId.map(project => {
         return {
           _id: project._id,
           projectName: project.projectName,

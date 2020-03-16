@@ -15,8 +15,7 @@ authenticator = (req, res, next) => {
     );
 
     try{
-        const payload = jwt.verify(token, config.get('jwtPrivateKey'));    
-        console.log(payload);
+        const payload = jwt.verify(token, config.get('jwtPrivateKey'));
         req.employee = payload;
         next();
     }catch(e){

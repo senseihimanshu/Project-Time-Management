@@ -2,17 +2,19 @@ const controller = require('../controllers');
 const paginator = require('../middlewares/pagination');
 const employeePaginator = require('../middlewares/employeePagination');
 const projectPaginator = require('../middlewares/projectPagination');
+const authenticator = require('../middlewares/authentication');
 const model = require('../models');
 
 module.exports = (app) => {
 	//Login
 	app.post('/api/login', controller.login);
 	
-	
-	
 	//Employee
-	
-
+	app.post('/api/employee', [authenticator], controller.employee.create);
+	app.get("/api/employee", [authenticator, paginator(model.employee.model)], controller.employee.index);
+	app.get('/api/employee/:id', authenticator, controller.employee.show);
+	app.put('/api/employee/:id', authenticator, controller.employee.update);	
+	app.delete('/api/employee/:id', authenticator, controller.employee.delete);	
 
 	//Project
 	// app.post("/api/project", controller.project.create);
@@ -27,7 +29,7 @@ module.exports = (app) => {
     // app.put("/employees/:id", controller.employees.update) ;
 	// app.delete("/employees/:id", controller.employees.delete);
 	// app.get("/employees/search", controller.employees.searchEmployee);
-	// app.get("/employees", employeePaginator(model.employee.model), controller.employees.index);
+	// 
 	// app.post("/login", controller.login.checkUserAuthentication);
 	// app.get("/timesheet", paginator(model.timesheet.model), controller.timesheet.show);
 	// app.get("timesheets/search", controller.timesheet.searchTimesheets);

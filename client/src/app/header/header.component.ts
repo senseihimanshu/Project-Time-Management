@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
         <div class="header">
             <div class="header__logo-container"></div>
             <!-- <div class="btn-group">
-                <button type="button" mdbBtn color="primary" mdbWavesEffect [routerLink]="['/employeeform/create', 'create']">Create Employee</button>
-                <button type="button" mdbBtn color="success" mdbWavesEffect [routerLink]="['/employeeform/update', 'update']">Update Employee</button>
+                <button type="button" mdbBtn color="primary" mdbWavesEffect [routerLink]="['/employee/create', 'create']">Create Employee</button>
+                <button type="button" mdbBtn color="success" mdbWavesEffect [routerLink]="['/employee/update', 'update']">Update Employee</button>
             </div> -->
  
         </div>

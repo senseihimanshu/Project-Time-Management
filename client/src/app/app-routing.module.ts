@@ -98,7 +98,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "employeeform",
+    path: "employee",
     children: [
       {
         path: ":type",

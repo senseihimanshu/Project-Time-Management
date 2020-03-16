@@ -24,11 +24,11 @@
                 ? "Create Employee"
                 : "Update Employee"
             }}
-            <span><h6>*&nbsp;Required fields</h6></span>
+            <span *ngIf="typeOfForm !== 'get'"><h6>*&nbsp;Required fields</h6></span>
           </div>
 
           <div class="h4 mb-4">
-            <label class="control-label" for="empId">*Employee ID: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="empId">Employee ID: </label>
 
             <input
               type="text"
@@ -53,7 +53,7 @@
             class="form-group h4 mb-4"
             [class.has-error]="email.invalid && email.touched"
           >
-            <label class="control-label" for="email">*Email Id: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="email">Email Id: </label>
 
             <input
               type="text"
@@ -76,7 +76,7 @@
             class="h4 mb-4 form-group"
             [class.has-error]="empName.invalid && empName.touched"
           >
-            <label class="control-label" for="name">*Name: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="name">Name: </label>
 
             <input
               type="text"
@@ -98,7 +98,7 @@
             class="form-group h4 mb-4"
             [class.has-error]="addressInput.invalid && addressInput.touched"
           >
-            <label class="control-label" for="address">*Address: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="address">Address: </label>
 
             <input
               type="text"
@@ -122,7 +122,7 @@
             class=" form-group h4 mb-4"
             [class.has-error]="phoneInput.invalid && phoneInput.touched"
           >
-            <label for="phone" class="control-label">*Phone: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" for="phone" class="control-label">Phone: </label>
 
             <input
               type="text"
@@ -145,7 +145,7 @@
             class="h5 mb-4 form-group"
             [class.has-error]="joiningInput.touched"
           >
-            <label for="start" class="control-label">*Joining:</label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" for="start" class="control-label">Joining:</label>
             <input
               type="date"
               id="joining"
@@ -165,47 +165,45 @@
             class="form-group h4 mb-4"
             [class.has-error]="designationInput.touched"
           >
-            <label for="designation" class="control-label"
-              >*Designation:
-            </label>
+            <mat-label for="designation" class="control-label"
+              >Designation:
+            </mat-label>
 
-            <select
+            <mat-select
+              placeholder="Choose a Designation"
               class="browser-default custom-select"
               name="designation"
               required
-              [(ngModel)]="employee && employee.designation[0]"
+              [(ngModel)]="employee && employee.designation"
               [disabled]="typeOfForm === 'get'"
               #designationInput="ngModel"
             >
-              <option value="" disabled>Choose option</option>
-              <option value="Associate" selected>Associate</option>
-              <option value="Consultant 2">Consultant 2</option>
-              <option value="Consultant 1">Consultant 1</option>
-              <option value="Intern">Intern</option>
-            </select>
+              <mat-option value="associate" selected>Associate</mat-option>
+              <mat-option value="consultant-2">Consultant 2</mat-option>
+              <mat-option value="consultant-1">Consultant 1</mat-option>
+              <mat-option value="intern">Intern</mat-option>
+            </mat-select>
             <p *ngIf="designationInput.touched && designationInput.invalid">
               Designation is required
             </p>
           </div>
 
           <div class="h4 mb-4 form-group" [class.has-error]="roleInput.touched">
-            <label for="role" class="control-label">*Role: </label>
+            <mat-label for="role" class="control-label">Role: </mat-label>
 
-            <select
+            <mat-select
+              placeholder="Choose a Role"
               required
               class="browser-default custom-select mb-4"
               name="role"
-              [(ngModel)]="employee && employee.role[0]"
+              [(ngModel)]="employee && employee.role"
               [disabled]="typeOfForm === 'get'"
               #roleInput="ngModel"
             >
-              <option value="choose option" hidden default selected
-                >Choose option</option
-              >
-              <option value="Employee">Employee</option>
-              <option value="Project Manager">Project Manager</option>
-              <option value="C Level Manager">C Level Manager</option>
-            </select>
+              <mat-option value="employee">Employee</mat-option>
+              <mat-option value="project-manager">Project Manager</mat-option>
+              <mat-option value="c-level">C Level Manager</mat-option>
+            </mat-select>
             <p *ngIf="roleInput.touched && roleInput.invalid">
               Role is required
             </p>
@@ -232,7 +230,7 @@
             <!--   <div class="message">{{ this.message }}</div>  -->
           </div>
         </form>
-        <!-- {{ form.value | json }} -->
+        {{ form.value | json }}
       </div>
     </div>
   </div>

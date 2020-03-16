@@ -7,7 +7,7 @@ const review=require("./review");
 const cleveldata=require("./cleveldata");
 module.exports = {
   login: login,
-  employees: employees,
+  employee: employees,
   timesheet: timesheet,
   project: project,
   projectManager: projectManager,

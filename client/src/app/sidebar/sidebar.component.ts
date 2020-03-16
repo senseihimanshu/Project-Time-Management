@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
    routeLink(title){
      if(title=='Add New Employee')
     //this.router.navigate(this.routerLink);
-   this.router.navigate(['/employeeform/create']);
+   this.router.navigate(['/employee/create']);
    if(title=='Show All Employees')
    this.router.navigate(['/admindashboard']);
    if(title=='Add New Project')
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
    if(title=='Show All Projects')
    this.router.navigate(['/projects']);
   //  if(title=='Show All Employees')
-  //  this.router.navigate(['/employeeform/update']);
+  //  this.router.navigate(['/employee/update']);
    if(title=='Show All Timesheets')
    this.router.navigate(['/timesheetweek']);
    if(title=='Review All Timesheets')
