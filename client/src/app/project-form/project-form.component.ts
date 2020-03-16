@@ -12,7 +12,7 @@ import swal from'sweetalert2'
 })
 export class ProjectFormComponent implements OnInit {
  
-
+ 
   formType: string;
   employee: any;
   project:any;
@@ -83,7 +83,7 @@ export class ProjectFormComponent implements OnInit {
     loading = false;
 
     
-
+   
   ngOnInit():any {
     (function() {
       'use strict';
@@ -102,9 +102,9 @@ export class ProjectFormComponent implements OnInit {
         });
       }, false);
     })();
-
+   
     
-
+      /* this.compareDates(); */
      this.getemployees();
     console.log("ngOnInit");
     this.route.params.subscribe((data: Params) => {
@@ -127,7 +127,7 @@ export class ProjectFormComponent implements OnInit {
         return (this.project = response);
       });
   }
-
+  
   projectCreateOrUpdate(obj, formType): any {
     console.log(obj, formType);
      this.employeeService
@@ -163,6 +163,19 @@ export class ProjectFormComponent implements OnInit {
 
     });
   }
+ /*  compareDates(){
+    var d1 = moment((document.getElementById('startDate')as HTMLInputElement).value, 'DD-MM-YYYY');
+    var d2 = moment((document.getElementById('endDate')as HTMLInputElement).value, 'DD-MM-YYYY');
+    
+    var diff = d2.diff(d1, 'days'); 
+    
+    if (diff<0) {
+       alert("Expiration date should not be greater than one year from start date");
+    }
+ 
+
+
+  }*/
   addProjectManager(employeeArr: any)
   {
     if(employeeArr){
