@@ -96,7 +96,7 @@ export class EmployeeFormComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          console.log(this.typeOfForm);
+         
           this.typeOfForm = params.type;
           if (!params.type) {
             this.typeOfForm = "get";
@@ -105,13 +105,13 @@ export class EmployeeFormComponent implements OnInit {
           if (!params.empId) {
             return new Observable<any>();
           }
-          console.log(this.typeOfForm);
+        
           return this.employeeService.getEmployee(params.empId);
         })
       )
       .subscribe((response: any) => {
         this.employee = response.employee;
-        console.log(response.employee);
+       
       });
   }
   
@@ -124,7 +124,7 @@ export class EmployeeFormComponent implements OnInit {
           icon: 'success',
           text: this.message,
           showConfirmButton: true,
-          timer: 3000
+         
         }) 
         form.reset();
 

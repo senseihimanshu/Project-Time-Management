@@ -58,11 +58,11 @@ module.exports = {
     ref:"project",
     default:null
   }],
-  timesheet: [
+ /*  timesheet: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'timesheet',
       unique: true
     }
-  ]
+  ] */
 }

@@ -60,8 +60,8 @@ export class ReviewRowComponent {
       status: "Approved"
     };
     console.log(obj._id,"status");
-    console.log("Kar rha hu accept");
-    console.log(obj._id);
+   
+   
     this.sendReq(obj);
   }
       

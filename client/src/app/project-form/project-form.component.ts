@@ -118,7 +118,7 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return this.employeeService.getProject(null);
           }
-          console.log(this.formType);
+        
           return this.employeeService.getProject(params.projectId);
         })
       )
@@ -128,13 +128,14 @@ export class ProjectFormComponent implements OnInit {
       });
   }
   
+  
   projectCreateOrUpdate(obj, formType): any {
-    console.log(obj, formType);
+    
      this.employeeService
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
          this.message=res.payload.message;
-         console.log(res);
+        
          swal.fire({
           icon: 'success',
           text: this.message,
@@ -157,8 +158,9 @@ export class ProjectFormComponent implements OnInit {
 
     let obj = this._service.showEmployeesByRole().subscribe(res => {
       this.projectManagerList = res.payload.data.projectManagerList;
+     
       this.projectMemberList=res.payload.data.projectMemberList;
-
+      
     });
   }
  
@@ -168,7 +170,7 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map((employee) => {
         this.projManager.push(employee._id);
       });
-      console.log(this.projManager);
+      
     }
   }
   addProjectMember(employeeArr: any)
@@ -177,7 +179,7 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map((employee) => {
         this.projMembers.push(employee._id);
       });
-      console.log(this.projMembers);
+     
     }
   }
 }

@@ -28,7 +28,7 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   employeeCreateOrUpdate(obj: any, type: any): any {
-    console.log(obj, type);
+  
     if (type === "create")
       return this.http.post<any>(FEED_API, obj, this.httpOptions);
 
@@ -36,7 +36,7 @@ export class EmployeeService {
       return this.http.put<any>(FEED_API, obj, this.httpOptions);
   }
   projectCreateOrUpdate(obj: any, type: any):Observable <any> {
-    console.log(obj, type);
+    
     if (type === "create")
       return this.http.post<any>(PROJECT_API, obj, this.httpOptions);
 
