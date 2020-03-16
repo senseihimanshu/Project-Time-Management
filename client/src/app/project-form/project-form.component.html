@@ -114,7 +114,7 @@
                 #projectManagerInput="ngModel"
                 required
               >
-                <mat-option *ngFor="let emp of empList" [value]="emp._id">{{
+                <mat-option *ngFor="let emp of projectManagerList" [value]="emp._id">{{
                   emp.name
                 }}</mat-option>
               </mat-select>
@@ -208,7 +208,7 @@
                 required
                 multiple
               >
-                <mat-option *ngFor="let emp of empList" [value]="emp._id">{{
+                <mat-option *ngFor="let emp of projectMemberList" [value]="emp._id">{{
                   emp.name
                 }}</mat-option>
               </mat-select>

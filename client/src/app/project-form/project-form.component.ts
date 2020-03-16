@@ -19,7 +19,8 @@ export class ProjectFormComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  empList: string[];
+  projectManagerList: string[];
+  projectMemberList: string[];
   projManager:string[]=[];
   projMembers:string[]=[];
   message:string;
@@ -141,10 +142,7 @@ export class ProjectFormComponent implements OnInit {
           showConfirmButton: true,
           timer: 3000
         }) 
-
-       
-        
-    },  err => {
+      },  err => {
       this.message = err.error.payload.message;
       swal.fire({
         icon: 'error',
@@ -158,9 +156,10 @@ export class ProjectFormComponent implements OnInit {
 }
    getemployees() {
 
-    let obj = this._service.showEmployees().subscribe(res => {
-      this.empList = res.payload.data.employeeList;
-       console.log("employeelist",this.empList);
+    let obj = this._service.showEmployeesByRole().subscribe(res => {
+      this.projectManagerList = res.payload.data.projectManagerList;
+       console.log("ProjectManagerlist",this.projectManagerList);
+      this.projectMemberList=res.payload.data.projectMemberList;
 
     });
   }
