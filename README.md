@@ -5,15 +5,14 @@
    -3)Angular
 * Git clone Install the dependencies and start the project
 ### Installation(Front-end):-
-   ```
+
    * npm install
    * ng serve
-```
 ### Installation(Back-end):-
-    ```
+
    * npm install
    * npm start
-```
+
 ### Technologies used:-
    * [Angular]-Angular is used for front end
    * [nodejs]-backend is implemented using nodejs
