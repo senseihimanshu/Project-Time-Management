@@ -5,7 +5,7 @@
    3)Angular
 Git clone Install the dependencies and start the project
 ##Installation(Front-end):-
-   ```bash
+   ```
    npm install
    npm start
 ```
