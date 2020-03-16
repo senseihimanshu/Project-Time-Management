@@ -8,7 +8,8 @@ import swal from'sweetalert2'
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss','../main/main.component.scss']
+  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss',
+  '../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
  
@@ -34,7 +35,7 @@ export class ProjectFormComponent implements OnInit {
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute) { }
-    @Input()
+   
     dashboard:string="Admin Dashboard";
     menus: any = [
       {
@@ -82,10 +83,8 @@ export class ProjectFormComponent implements OnInit {
     ];
   
     loading = false;
-
-    
-   
   ngOnInit():any {
+    //this function adds the class was-validated when the user submits the form
     (function() {
       'use strict';
       window.addEventListener('load', function() {
@@ -105,9 +104,9 @@ export class ProjectFormComponent implements OnInit {
     })();
    
     
-      /* this.compareDates(); */
-     this.getemployees();
-    console.log("ngOnInit");
+     
+    this.getemployees();
+   
     this.route.params.subscribe((data: Params) => {
 
     });
@@ -144,12 +143,12 @@ export class ProjectFormComponent implements OnInit {
         }) 
       },  err => {
       this.message = err.error.payload.message;
-      swal.fire({
-        icon: 'error',
-        text: this.message,
-        showConfirmButton: true,
-        timer: 3000
-      }) 
+        swal.fire({
+          icon: 'error',
+          text: this.message,
+          showConfirmButton: true,
+          timer: 3000
+        }) 
       }
     ); 
     this.router.navigate(['/projects']);
@@ -158,7 +157,6 @@ export class ProjectFormComponent implements OnInit {
 
     let obj = this._service.showEmployeesByRole().subscribe(res => {
       this.projectManagerList = res.payload.data.projectManagerList;
-       console.log("ProjectManagerlist",this.projectManagerList);
       this.projectMemberList=res.payload.data.projectMemberList;
 
     });
@@ -172,7 +170,6 @@ export class ProjectFormComponent implements OnInit {
       });
       console.log(this.projManager);
     }
-    
   }
   addProjectMember(employeeArr: any)
   {
@@ -182,7 +179,5 @@ export class ProjectFormComponent implements OnInit {
       });
       console.log(this.projMembers);
     }
-    
   }
-
 }
