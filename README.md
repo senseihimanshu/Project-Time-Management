@@ -1,32 +1,32 @@
 # project-portal
-##Assuming you have installed these things in your system:-
-   1)nodejs
-   2)mongoDB
-   3)Angular
-Git clone Install the dependencies and start the project
-##Installation(Front-end):-
+### Assuming you have installed these things in your system:-
+   -1)nodejs
+   -2)mongoDB
+   -3)Angular
+* Git clone Install the dependencies and start the project
+### Installation(Front-end):-
    ```
-   npm install
-   ng serve
+   * npm install
+   * ng serve
 ```
-##Installation(Back-end):-
+### Installation(Back-end):-
     ```
-   npm install
-   npm start
+   * npm install
+   * npm start
 ```
-##Technologies used:-
-   *[Angular]-Angular is used for front end
-   *[nodejs]-backend is implemented using nodejs
-   *[mongoDb]-A noSql database is used in the project.
-   *[Bootstrap]-Bootstrap is used to make web pages responsive for different screens
-   *[Mediaquery]-Mediaquery is also used to make web pages responsive for different screens
-   *[nodemailer]-nodemailer is used to send emails to employees 
-##Contributers:-
-   *Abha Rana
-   *Himanshu Sharma
-   *Kritika Sachdeva
-   *Deepanshu Balani
-   *Deepak Yadav   
+### Technologies used:-
+   * [Angular]-Angular is used for front end
+   * [nodejs]-backend is implemented using nodejs
+   * [mongoDb]-A noSql database is used in the project.
+   * [Bootstrap]-Bootstrap is used to make web pages responsive for different screens
+   * [Mediaquery]-Mediaquery is also used to make web pages responsive for different screens
+   * [nodemailer]-nodemailer is used to send emails to employees 
+### Contributers:-
+   * Abha Rana
+   * Himanshu Sharma
+   * Kritika Sachdeva
+   * Deepanshu Balani
+   * Deepak Yadav   
  
 This project creates a portal for timesheets management of all employees to be submitted weekly and monthly and reviewed accordingly by their respective Project Managers.
 Admin by itself creates  all the employees and assign different roles to them and also creates projects and assign to different project Managers and project members.
