@@ -133,27 +133,28 @@ export class ProjectFormComponent implements OnInit {
      this.employeeService
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
-         this.message=res.payload.messsage;
+         this.message=res.payload.message;
          console.log(res);
          swal.fire({
           icon: 'success',
-          title: this.message,
+          text: this.message,
           showConfirmButton: true,
           timer: 3000
         }) 
 
-        this.router.navigate(['/projects']);
+       
         
     },  err => {
-      this.message = err.error.payload.messsage;
+      this.message = err.error.payload.message;
       swal.fire({
         icon: 'error',
-        title: this.message,
+        text: this.message,
         showConfirmButton: true,
         timer: 3000
       }) 
       }
     ); 
+    this.router.navigate(['/projects']);
 }
    getemployees() {
 
@@ -163,19 +164,7 @@ export class ProjectFormComponent implements OnInit {
 
     });
   }
- /*  compareDates(){
-    var d1 = moment((document.getElementById('startDate')as HTMLInputElement).value, 'DD-MM-YYYY');
-    var d2 = moment((document.getElementById('endDate')as HTMLInputElement).value, 'DD-MM-YYYY');
-    
-    var diff = d2.diff(d1, 'days'); 
-    
-    if (diff<0) {
-       alert("Expiration date should not be greater than one year from start date");
-    }
  
-
-
-  }*/
   addProjectManager(employeeArr: any)
   {
     if(employeeArr){

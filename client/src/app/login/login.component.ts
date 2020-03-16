@@ -41,7 +41,7 @@ return this.myform.controls;
     if(this.password.nativeElement.value==""||this.email.nativeElement.value=="")
     {
      swal.fire({icon:'warning',
-            title:"All fields are necessary"});  
+            text:"All fields are necessary"});  
       return;
     }
     
@@ -50,13 +50,13 @@ return this.myform.controls;
       let valLengthEmail = this.email.nativeElement.value.length;
         if(valLengthEmail<8){
         swal.fire({icon:'warning',
-        title:"Email must be of minimum 8 characters"});  
+        text:"Email must be of minimum 8 characters"});  
         return;
        }
       let valLengthPassword=this.password.nativeElement.value.length; 
        if(valLengthPassword<4)
        swal.fire({icon:'warning',
-       title:"Password must be of minimum 8 characters"});  
+       text:"Password must be of minimum 8 characters"});  
     return;
     }
      if(this.email.nativeElement.value == "" || this.password.nativeElement.value == ""){

@@ -13,7 +13,8 @@ body{
     line-height: 1.5;
     color: $color-text-primary;
     box-sizing: border-box;
-    overflow-x: hidden
+    overflow-x: hidden;
+    overflow-y:hidden;
 }
 
 //over riding bootstrap
