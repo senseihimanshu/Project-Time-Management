@@ -33,14 +33,14 @@
  Any employee who is doing login will be redirected to his/her dashboard as according to roles
  The project works differently for different roles of employees:-
  
- * Admin:- 
+ #### Admin:- 
 * Admin can create new employees,update and delete,get data of any employee as he wishes to do.he 
    can  also view data of all the employees  in tabular form.
 * Admin can create new project,update and delete project and assign it to employees to whom he wishes.
   that project will also be assigned to project manager to handle it.
 * Admin can view all the timesheets and their status whether they are approved,declined and pending.
 
- * Employee:- 
+ #### Employee:- 
  * An employee can only view and create timesheets.he can view all his timesheets which are 
                 approved,pending or declined.
 
@@ -49,11 +49,11 @@ he has to fill no. of hours he worked on particular project.next whether the hou
 if it is leave,it may not be bilable**
 
 
-* ProjectMananger:- 
+#### ProjectMananger:- 
 * A projectmanger can only create his  timesheets and review timesheets of his/her 
                        project  members.
 
-* C-Level-Manager:- 
+#### C-Level-Manager:- 
 * A C-Level-Manager can view graphical data of all the projects(which are Completed,Discarded and 
   In Progress  ) and timesheets(which are Pending,Approved,Declined).
 * A C-Level-Manager can also create his timesheet and review timesheet of memebers who belong to 
