@@ -1,14 +1,14 @@
 <div class="wrapper">
   <app-navbar [dashboard]="dashboard"></app-navbar>
-  <div class="app-main no-scrollbar-wrap">
-    <div class="row">
+ <div class="app-main no-scrollbar-wrap"> 
+    <div class="row"> 
       <div class="col-2 d-none d-lg-block">
         <app-sidebar [menus]="menus"></app-sidebar>
       </div>
-      <div class="custom-card col-6 myclass">
+      <div class="custom-card col-6">
         <div class="app-employee-form">
           <form
-            class="form-body"
+            class="form-body needs-validation project-card"
             #form="ngForm"
             (ngSubmit)="projectCreateOrUpdate(form.value, formType)"
             novalidate
@@ -25,12 +25,13 @@
                   ? "Create New Project"
                   : "Update Project"
               }}
+              <span><h6>*&nbsp;Required fields</h6></span>
             </div>
             <div
-              class="h5 mb-4  formGroup"
+              class="h5 mb-4  form-group"
               [class.has-error]="projectId?.touched && projectId?.invalid"
             >
-              <label class="control-label" for="projectId">Project ID:</label>
+              <label class="control-label" for="projectId">*Project ID:</label>
               <input
                 type="text"
                 id="projectId"
@@ -52,7 +53,7 @@
               "
             >
               <label for="projectName" class="control-label"
-                >Project Name:</label
+                >*Project Name:</label
               >
               <input
                 type="text"
@@ -67,7 +68,7 @@
               />
 
               <p *ngIf="projectNameInput?.touched && projectNameInput?.invalid">
-                projectName is required
+                Project Name is required
               </p>
             </div>
             <div
@@ -76,7 +77,7 @@
                 clientNameInput?.touched && clientNameInput?.invalid
               "
             >
-              <label class="control-label" for="clientName">Client Name:</label>
+              <label class="control-label" for="clientName">*Client Name:</label>
               <input
                 type="text"
                 id="clientName"
@@ -91,7 +92,7 @@
                 #clientNameInput="ngModel"
               />
               <p *ngIf="clientNameInput?.touched && clientNameInput?.invalid">
-                clientName is required
+                Client Name is required
               </p>
             </div>
             <div
@@ -101,7 +102,7 @@
               "
             >
               <label for="managers" class="control-label"
-                >Project Manager:</label
+                >*Project Manager:</label
               >
               <mat-select
                 class="browser-default custom-select"
@@ -122,14 +123,14 @@
                   projectManagerInput?.touched && projectManagerInput?.invalid
                 "
               >
-                projectManager is required
+                Project Manager is required
               </p>
             </div>
             <div
               class="h5 mb-4 form-group "
               [class.has-error]="StartDateInput?.touched"
             >
-              <label for="start" class="control-label">Start Date:</label>
+              <label for="start" class="control-label">*Start Date:</label>
               <input
                 type="date"
                 id="start"
@@ -142,14 +143,14 @@
                 #startDateInput="ngModel"
               />
               <p *ngIf="startDateInput?.invalid && startDateInput?.touched">
-                startDate is required
+                Start Date is required
               </p>
             </div>
             <div
               class="h5 mb-4 form-group "
               [class.has-error]="endDateInput?.touched"
             >
-              <label class="control-label" for="end">End Date:</label>
+              <label class="control-label" for="end">*End Date:</label>
               <input
                 type="date"
                 id="end"
@@ -162,7 +163,7 @@
                 #endDateInput="ngModel"
               />
               <p *ngIf="endDateInput?.touched && endDateInput?.invalid">
-                EndDate is required
+                End Date is required
               </p>
             </div>
 
@@ -170,7 +171,7 @@
               class="h5 mb-4 form-group"
               [class.has-error]="statusInput?.touched"
             >
-              <label class="control-label" for="status">Status:</label>
+              <label class="control-label" for="status">*Status:</label>
               <select
                 class="browser-default
                     custom-select"
@@ -186,7 +187,7 @@
                 <option value="Discarded">Discarded</option>
               </select>
               <p *ngIf="statusInput?.touched && statusInput?.invalid">
-                status is required
+                Status is required
               </p>
             </div>
 
@@ -195,7 +196,7 @@
               [class.has-error]="membersInput?.touched && membersInput?.invalid"
             >
               <label class="control-label" for="members"
-                >Project Members:</label
+                >*Project Members:</label
               >
               <mat-select
                 class="browser-default custom-select"
@@ -212,7 +213,7 @@
                 }}</mat-option>
               </mat-select>
               <p *ngIf="membersInput?.touched && membersInput?.invalid">
-                project Members are required
+                Project Members are required
               </p>
             </div>
             <div class="button-parent" *ngIf="formType !== 'get'">
@@ -235,7 +236,6 @@
               >
                 Cancel
               </button>
-              <div class="message">{{ this.message }}</div>
             </div>
             <div class="button-parent" *ngIf="formType == 'get'">
               <button
@@ -249,7 +249,7 @@
               </button>
             </div>
           </form>
-        </div>
+         </div> 
       </div>
     </div>
   </div>

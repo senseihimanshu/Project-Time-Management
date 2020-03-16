@@ -122,7 +122,7 @@ export class EmployeeFormComponent implements OnInit {
         this.message = res.payload.message;
         swal.fire({
           icon: 'success',
-          title: this.message,
+          text: this.message,
           showConfirmButton: true,
           timer: 3000
         }) 
@@ -134,7 +134,7 @@ export class EmployeeFormComponent implements OnInit {
         this.message = err.error.payload.message;
         swal.fire({
           icon: 'error',
-          title: this.message,
+          text: this.message,
           showConfirmButton: true,
           timer: 3000
         }) 
