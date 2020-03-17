@@ -130,7 +130,6 @@ export class TimesheetWeekComponent {
 
       if(this.role === "Admin"){
         this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
-          console.log(res);
         });
         return;
       }

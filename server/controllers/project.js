@@ -113,8 +113,6 @@ class Project {
       tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member});
       })
     );  
-
-    console.log(tempList[0], tempList[1], tempList[2]);
     
     return res.status(200).send({
       success: true,

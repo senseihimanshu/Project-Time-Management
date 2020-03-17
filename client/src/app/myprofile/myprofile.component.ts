@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Component, OnInit } from '@angular/core';
+import { jsonDecoder} from 'src/app/utils/json.util';
 
 @Component({
   selector: 'app-myprofile',
@@ -14,8 +15,6 @@ export class MyprofileComponent implements OnInit {
   employee: any;
   role: any;
 
-
-
   constructor(private _service:EmployeeService,
     private router: Router,
     private route: ActivatedRoute) {  }
@@ -26,7 +25,7 @@ export class MyprofileComponent implements OnInit {
     // //Decode JWT and return the Payload in JSON Format
    const decodeToken= this.jsonDecoder(token);
     
-   this.role = decodeToken.data.role[0];
+   this.role = decodeToken.payload.role;
    console.log(decodeToken);
    console.log(decodeToken.data.empId);
 
@@ -41,7 +40,7 @@ export class MyprofileComponent implements OnInit {
         submenus: [
           {
             title: "Add New Employee",
-            route: "/employeeform/create"
+            route: "/employee/create"
           }
         ]
       },

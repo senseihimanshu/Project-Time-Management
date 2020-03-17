@@ -106,7 +106,6 @@ export class ProjectFormComponent implements OnInit {
 
       /* this.compareDates(); */
      this.getemployees();
-    console.log("ngOnInit");
     this.route.params.subscribe((data: Params) => {
 
     });
@@ -118,7 +117,6 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return this.employeeService.getProject(null);
           }
-          console.log(this.formType);
           return this.employeeService.getProject(params.projectId);
         })
       )
@@ -129,17 +127,14 @@ export class ProjectFormComponent implements OnInit {
   }
 
   projectCreateOrUpdate(obj, formType): any {
-    console.log(obj, formType);
      this.employeeService
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
          this.message=res.payload.message;
-         console.log(res);
          swal.fire({
           icon: 'success',
-          text: this.message,
-          showConfirmButton: true,
-          timer: 3000
+          title: this.message,
+          showConfirmButton: true
         }) 
 
 
@@ -148,9 +143,8 @@ export class ProjectFormComponent implements OnInit {
       this.message = err.error.payload.message;
       swal.fire({
         icon: 'error',
-        text: this.message,
-        showConfirmButton: true,
-        timer: 3000
+        title: this.message,
+        showConfirmButton: true
       }) 
       }
     ); 
@@ -160,8 +154,6 @@ export class ProjectFormComponent implements OnInit {
 
     let obj = this._service.showEmployees().subscribe(res => {
       this.empList = res.payload.data.employeeList;
-       console.log("employeelist",this.empList);
-
     });
   }
 
@@ -171,7 +163,6 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map((employee) => {
         this.projManager.push(employee._id);
       });
-      console.log(this.projManager);
     }
 
   }
@@ -181,7 +172,6 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map((employee) => {
         this.projMembers.push(employee._id);
       });
-      console.log(this.projMembers);
     }
 
   }

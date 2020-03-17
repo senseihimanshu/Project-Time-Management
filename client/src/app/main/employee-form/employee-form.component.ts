@@ -76,9 +76,7 @@ export class EmployeeFormComponent implements OnInit {
     (function() {
       'use strict';
       window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
           form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) {
@@ -90,28 +88,24 @@ export class EmployeeFormComponent implements OnInit {
         });
       }, false);
     })();
-    this.route.params.subscribe((data: Params) => {
-    });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          console.log(this.typeOfForm);
           this.typeOfForm = params.type;
           if (!params.type) {
             this.typeOfForm = "get";
           }
 
           if (!params.empId) {
-            return new Observable<any>();
+            return new Observable<IResponse>();
           }
-          console.log(this.typeOfForm);
           return this.employeeService.getEmployee(params.empId);
         })
       )
-      .subscribe((response: any) => {
-        this.employee = response.employee;
-        console.log(response.employee);
+      .subscribe((response: IResponse) => {
+        this.employee = response.payload.data.employee;
+        console.log(response.payload.data.employee);
       });
   }
   
@@ -123,8 +117,7 @@ export class EmployeeFormComponent implements OnInit {
         swal.fire({
           icon: 'success',
           text: this.message,
-          showConfirmButton: true,
-          timer: 3000
+          showConfirmButton: true
         }) 
         form.reset();
 
@@ -135,8 +128,7 @@ export class EmployeeFormComponent implements OnInit {
         swal.fire({
           icon: 'error',
           text: this.message,
-          showConfirmButton: true,
-          timer: 3000
+          showConfirmButton: true
         }) 
         }
      );

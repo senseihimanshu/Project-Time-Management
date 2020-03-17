@@ -1,4 +1,4 @@
-const login = require("./loginController");
+const login = require("./login");
 const employees = require("./employees");
 const timesheet = require("./timesheet");
 const project = require("./project");
@@ -7,10 +7,11 @@ const review=require("./review");
 const cleveldata=require("./cleveldata");
 module.exports = {
   login: login,
-  employees: employees,
+  employee: employees,
   timesheet: timesheet,
   project: project,
   projectManager: projectManager,
   review:review,
-  cleveldata:cleveldata
+  cleveldata:cleveldata,
+  
 };

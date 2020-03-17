@@ -161,21 +161,22 @@
     justify-content: flex-end;
   }
   .input-group > .form-control
-  { border-style: ridge;
-    border-radius: unset;
-    border-color: rgb(134, 142, 156);
+  { border-style: none;
+    border-radius: 2rem;
+    border-color: #868e9c;
     margin-bottom: 0.5rem;
     border-width: thin;
+    margin-left: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
   }
   .custom-card{
     margin-left: 1.5rem;
     margin-right: 1.5rem;
     background-color: whitesmoke;
     display: inline-block;
-  }
-  .form-control {
-    float: right !important;
-    border: ridge;
   }
   .input-group-addon
   {
