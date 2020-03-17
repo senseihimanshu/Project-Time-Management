@@ -11,8 +11,8 @@ import swal from'sweetalert2'
   styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss','../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
- 
- 
+
+
   formType: string;
   employee: any;
   project:any;
@@ -41,7 +41,7 @@ export class ProjectFormComponent implements OnInit {
         icon: "fa fa-users",
         active: false,
         type: "dropdown",
-  
+
         submenus: [
           {
             title: "Add New Employee"
@@ -56,7 +56,7 @@ export class ProjectFormComponent implements OnInit {
         icon: "fa fa-book",
         active: false,
         type: "dropdown",
-  
+
         submenus: [
           {
             title: "Add New Project"
@@ -71,7 +71,7 @@ export class ProjectFormComponent implements OnInit {
         icon: "fa fa-calendar",
         active: false,
         type: "dropdown",
-  
+
         submenus: [
           {
             title: "Show All Timesheets"
@@ -79,11 +79,11 @@ export class ProjectFormComponent implements OnInit {
         ]
       }
     ];
-  
+
     loading = false;
 
-    
-   
+
+
   ngOnInit():any {
     (function() {
       'use strict';
@@ -102,8 +102,8 @@ export class ProjectFormComponent implements OnInit {
         });
       }, false);
     })();
-   
-    
+
+
       /* this.compareDates(); */
      this.getemployees();
     console.log("ngOnInit");
@@ -123,11 +123,11 @@ export class ProjectFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-      
+
         return (this.project = response);
       });
   }
-  
+
   projectCreateOrUpdate(obj, formType): any {
     console.log(obj, formType);
      this.employeeService
@@ -142,8 +142,8 @@ export class ProjectFormComponent implements OnInit {
           timer: 3000
         }) 
 
-       
-        
+
+
     },  err => {
       this.message = err.error.payload.message;
       swal.fire({
@@ -164,7 +164,7 @@ export class ProjectFormComponent implements OnInit {
 
     });
   }
- 
+
   addProjectManager(employeeArr: any)
   {
     if(employeeArr){
@@ -173,7 +173,7 @@ export class ProjectFormComponent implements OnInit {
       });
       console.log(this.projManager);
     }
-    
+
   }
   addProjectMember(employeeArr: any)
   {
@@ -183,7 +183,7 @@ export class ProjectFormComponent implements OnInit {
       });
       console.log(this.projMembers);
     }
-    
+
   }
 
 }
