@@ -3,11 +3,13 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot,Router } from 
 import { Observable } from 'rxjs';
 import { ServicesService } from './services.service';
 import decode from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router:Router,private _service:ServicesService){}
+  constructor(private router:Router,private _service:ServicesService
+    ){}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):  boolean{
@@ -16,11 +18,9 @@ export class AuthGuard implements CanActivate {
     const expectedRole = next.data.expectedRole;
     const token = localStorage.getItem('Authorization');
     // decode the token to get its payload
-    const tokenPayload = decode(token);
-    console.log(expectedRole);
-    console.log(tokenPayload.data.role);
-    console.log(tokenPayload.data.role==expectedRole)
-      if(token!=null  && tokenPayload.data.role == expectedRole )
+     const tokenPayload = decode(token);
+      console.log(tokenPayload.exp>=Date.now())
+      if((token!=null && tokenPayload.data.role == expectedRole)&&tokenPayload.exp>=Date.now())
          return true;
          this.router.navigate(['/login']);
    

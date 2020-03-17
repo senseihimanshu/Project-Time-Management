@@ -69,6 +69,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 import { AuthGuard } from './auth.guard';
 //import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
+
 @NgModule({
   declarations: [
     // NewwComponent,
@@ -117,6 +118,7 @@ import { AuthGuard } from './auth.guard';
     ClevelDashboardModule,
     ChartsModule,
     //Third Party
+   
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
     WavesModule,
