@@ -12,8 +12,8 @@ import swal from'sweetalert2'
   '../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
- 
- 
+
+
   formType: string;
   employee: any;
   project:any;
@@ -43,7 +43,7 @@ export class ProjectFormComponent implements OnInit {
         icon: "fa fa-users",
         active: false,
         type: "dropdown",
-  
+
         submenus: [
           {
             title: "Add New Employee"
@@ -58,7 +58,7 @@ export class ProjectFormComponent implements OnInit {
         icon: "fa fa-book",
         active: false,
         type: "dropdown",
-  
+
         submenus: [
           {
             title: "Add New Project"
@@ -73,7 +73,7 @@ export class ProjectFormComponent implements OnInit {
         icon: "fa fa-calendar",
         active: false,
         type: "dropdown",
-  
+
         submenus: [
           {
             title: "Show All Timesheets"
@@ -81,8 +81,11 @@ export class ProjectFormComponent implements OnInit {
         ]
       }
     ];
-  
+
     loading = false;
+
+
+
   ngOnInit():any {
     //this function adds the class was-validated when the user submits the form
     (function() {
@@ -123,12 +126,10 @@ export class ProjectFormComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-      
+
         return (this.project = response);
       });
   }
-  
-  
   projectCreateOrUpdate(obj, formType): any {
     
      this.employeeService
@@ -142,7 +143,10 @@ export class ProjectFormComponent implements OnInit {
           showConfirmButton: true,
           timer: 3000
         }) 
-      },  err => {
+
+
+
+    },  err => {
       this.message = err.error.payload.message;
         swal.fire({
           icon: 'error',
@@ -163,7 +167,7 @@ export class ProjectFormComponent implements OnInit {
       
     });
   }
- 
+
   addProjectManager(employeeArr: any)
   {
     if(employeeArr){

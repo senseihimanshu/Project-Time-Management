@@ -40,20 +40,19 @@ const routes: Routes = [
       {
         path: '',
         component: TimesheetComponent,
-        pathMatch: 'full',
-        canActivate:[AuthGuard] 
+        pathMatch: 'full'
       },
       {
         path: ':timesheetId',
-        component: TimesheetComponent ,
-        canActivate:[AuthGuard]
+        component: TimesheetComponent 
+      
       }
     ]
   },
   {
     path: "timesheetweek",
     component: TimesheetWeekComponent,
-    canActivate:[AuthGuard]
+   
   },
   {
     path: "sidebar",
@@ -68,38 +67,57 @@ const routes: Routes = [
   {
     path: "review",
     component: ReviewComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project manager'
+    } 
   },
-  { path: "", component: LoginComponent , canActivate:[AuthGuard]},
+  { path: "", component: LoginComponent },
   {
     path: "manager",
     component: ReviewComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project manager'
+    } 
   },
   {
     path: "projectmanager",
     component: ProjectManagerComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project manager'
+    } 
   },
   {
     path: "projects",
     component: ProjectComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+   
   },
   {
     path: "employee",
     component: EmployeedashboardComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'employee'
+    } 
   },
   {
     path: "clevel",
     component: DashboardComponent,
-    canActivate:[AuthGuard]
+     canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'c-level'
+    }  
   },
   {
     path: "admin",
     component: AdmindashboardComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'admin'
+    } 
   },
   {
     path: "accessdenied",
@@ -117,19 +135,23 @@ const routes: Routes = [
       {
         path: ":type",
         component: EmployeeFormComponent,
-        canActivate:[AuthGuard]
+        
+        
       },
       {
         path: "details/:empId",
         component: EmployeeFormComponent,
-        canActivate:[AuthGuard]
+        
       },
       {
         path: ":type/:empId",
         component: EmployeeFormComponent,
-        canActivate:[AuthGuard]
       }
-    ]
+    ],
+    canActivate:[AuthGuard],
+        data: { 
+          expectedRole: 'admin'
+        } 
   },
   {
     path: "projectform",
@@ -137,24 +159,28 @@ const routes: Routes = [
       {
         path: "create/:type",
         component: ProjectFormComponent,
-        canActivate:[AuthGuard]
+       
       },
       {
         path: ":type/:projectId",
         component: ProjectFormComponent,
-        canActivate:[AuthGuard]
+      
       },
       {
         path: ":type/:projectId",
         component: ProjectFormComponent,
-        canActivate:[AuthGuard]
+       
       }
-    ]
+    ],
+    canActivate:[AuthGuard],
+    data:{
+        expectedRole:"admin"
+    }
   },
   {
     path: "**",
     component: NotFoundComponent,
-    canActivate:[AuthGuard]
+    
   }
 ];
 
