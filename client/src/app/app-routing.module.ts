@@ -93,6 +93,9 @@ const routes: Routes = [
     path: "projects",
     component: ProjectComponent,
     canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'admin'
+    } 
    
   },
   {
