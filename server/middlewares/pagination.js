@@ -1,8 +1,11 @@
 function paginator(model) {
   return async (req, res, next) => {
+    console.log(req.query, '---------');
     const criteria = JSON.parse(req.query.criteria);
-    const page = parseInt(req.query.page);
+    const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit);
+    const columns = JSON.parse(req.query.columns);
+    const sort = JSON.parse(req.query.sort);
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
@@ -29,9 +32,9 @@ function paginator(model) {
 
     try {
       results.results = await model
-        .find(criteria)
-        .sort({ name: JSON.parse(req.query.desc) ? 1 : -1 })
-        .limit(limit)
+        .find(criteria, columns)
+        .sort(sort)
+        .limit(limit === -1 ? dataSize : limit)
         .skip(startIndex);
 
       req.paginatedResults = results;

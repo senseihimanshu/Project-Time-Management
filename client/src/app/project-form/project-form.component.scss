@@ -90,6 +90,20 @@ h6{
     & > *{
         // max-width: 4rem !important;
         // max-height: 20px;
+        white-space: nowrap;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+
     }
     
+}
+
+mat-select{
+    text-align: left;
+}
+
+label, mat-label{
+    text-align: left;
+    width: 25%;
 }
