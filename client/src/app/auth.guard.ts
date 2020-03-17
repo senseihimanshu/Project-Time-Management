@@ -19,8 +19,10 @@ export class AuthGuard implements CanActivate {
     const token = localStorage.getItem('Authorization');
     // decode the token to get its payload
      const tokenPayload = decode(token);
-      console.log(tokenPayload.exp>=Date.now())
-      if((token!=null && tokenPayload.data.role == expectedRole)&&tokenPayload.exp>=Date.now())
+    
+      const now = Date.now().valueOf() / 1000
+      console.log(tokenPayload.exp>=now)
+      if((token!=null && tokenPayload.data.role == expectedRole) &&tokenPayload.exp>=now )
          return true;
          this.router.navigate(['/login']);
    
