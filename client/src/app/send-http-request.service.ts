@@ -38,7 +38,21 @@ export class SendHttpRequestService {
     }).join(''));
     return JSON.parse(jsonPayload);
   }
-
+  showEmployeesByRole(): Observable<any>{
+    const token = localStorage.getItem('Authorization');
+      
+    // //Decode JWT and return the Payload in JSON Format
+   const decodeToken= this.jsonDecoder(token);
+         const empId=decodeToken.data.empId;
+      const params = new HttpParams().set("empId", empId);
+      if (!empId) {
+        return this.http.get<any>("http://localhost:3000/employees/role", { ...this.httpOptions });
+      }
+    return this.http.get<any>("http://localhost:3000/employees/role",{ ...this.httpOptions, params }).pipe(
+      tap(_ => this.log("Log In")),
+      catchError(this.handleError<any>('Some Error Occurred'))
+    );
+  }
    showEmployees(): Observable<any>{
     const token = localStorage.getItem('Authorization');
       

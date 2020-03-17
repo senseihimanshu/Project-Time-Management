@@ -1,6 +1,6 @@
 function Paginator(model) {
     return async(req, res, next) => {
-  console.log(req.query, 'Abha Rana');
+  
   if(req.query['empId']){
     req.paginatedResults = await model.find();
     next();

@@ -113,9 +113,9 @@ return this.myform.controls;
             const role = decodeToken.data.role[0];
             if (role == "Employee" || role == "employee") {
               this.router.navigate(["/employee"]);
-            } else if (role == "Admin" || role == "admin") {
+            } else if ( role == "admin") {
               this.router.navigate(["/admin"]);
-            } else if (role == "C Level Manager") {
+            } else if (role == "c-level") {
               this.router.navigate(["/clevel"]);
             } else if (role == "Project Manager" || role == "project manager") {
               this.router.navigate(["/manager"]);

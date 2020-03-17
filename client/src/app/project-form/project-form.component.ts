@@ -8,7 +8,8 @@ import swal from'sweetalert2'
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss','../main/main.component.scss']
+  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss',
+  '../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
 
@@ -19,7 +20,8 @@ export class ProjectFormComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  empList: string[];
+  projectManagerList: string[];
+  projectMemberList: string[];
   projManager:string[]=[];
   projMembers:string[]=[];
   message:string;
@@ -33,7 +35,7 @@ export class ProjectFormComponent implements OnInit {
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute) { }
-    @Input()
+   
     dashboard:string="Admin Dashboard";
     menus: any = [
       {
@@ -85,6 +87,7 @@ export class ProjectFormComponent implements OnInit {
 
 
   ngOnInit():any {
+    //this function adds the class was-validated when the user submits the form
     (function() {
       'use strict';
       window.addEventListener('load', function() {
@@ -102,11 +105,11 @@ export class ProjectFormComponent implements OnInit {
         });
       }, false);
     })();
-
-
-      /* this.compareDates(); */
-     this.getemployees();
-    console.log("ngOnInit");
+   
+    
+     
+    this.getemployees();
+   
     this.route.params.subscribe((data: Params) => {
 
     });
@@ -118,7 +121,7 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return this.employeeService.getProject(null);
           }
-          console.log(this.formType);
+        
           return this.employeeService.getProject(params.projectId);
         })
       )
@@ -127,14 +130,13 @@ export class ProjectFormComponent implements OnInit {
         return (this.project = response);
       });
   }
-
   projectCreateOrUpdate(obj, formType): any {
-    console.log(obj, formType);
+    
      this.employeeService
        .projectCreateOrUpdate(obj, formType)
        .subscribe((res: any) => {
          this.message=res.payload.message;
-         console.log(res);
+        
          swal.fire({
           icon: 'success',
           text: this.message,
@@ -146,22 +148,23 @@ export class ProjectFormComponent implements OnInit {
 
     },  err => {
       this.message = err.error.payload.message;
-      swal.fire({
-        icon: 'error',
-        text: this.message,
-        showConfirmButton: true,
-        timer: 3000
-      }) 
+        swal.fire({
+          icon: 'error',
+          text: this.message,
+          showConfirmButton: true,
+          timer: 3000
+        }) 
       }
     ); 
     this.router.navigate(['/projects']);
 }
    getemployees() {
 
-    let obj = this._service.showEmployees().subscribe(res => {
-      this.empList = res.payload.data.employeeList;
-       console.log("employeelist",this.empList);
-
+    let obj = this._service.showEmployeesByRole().subscribe(res => {
+      this.projectManagerList = res.payload.data.projectManagerList;
+     
+      this.projectMemberList=res.payload.data.projectMemberList;
+      
     });
   }
 
@@ -171,9 +174,8 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map((employee) => {
         this.projManager.push(employee._id);
       });
-      console.log(this.projManager);
+      
     }
-
   }
   addProjectMember(employeeArr: any)
   {
@@ -181,9 +183,7 @@ export class ProjectFormComponent implements OnInit {
       employeeArr.map((employee) => {
         this.projMembers.push(employee._id);
       });
-      console.log(this.projMembers);
+     
     }
-
   }
-
 }

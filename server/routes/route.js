@@ -19,6 +19,7 @@ module.exports= (app) => {
 	app.delete("/employees/:id",controller.employees.delete);
 	app.get("/employees/search",controller.employees.searchEmployee);
 	app.get("/employees", employeePaginator(model.employee.model), controller.employees.index);
+	app.get("/employees/role",controller.employees.indexByRole);
 	app.post("/login", controller.login.checkUserAuthentication);
 	app.get("/timesheet", paginator(model.timesheet.model), controller.timesheet.show);
 	app.get("timesheets/search",controller.timesheet.searchTimesheets);
@@ -36,8 +37,8 @@ module.exports= (app) => {
 	app.put("/review",controller.timesheet.modify);
 	app.get("/project/graphicaldata",controller.cleveldata.projectsStatusData);
 	app.get("/timesheet/graphicaldata",controller.cleveldata.timesheetsStatusData);
-app.get('/project/projectList', controller.project.indexP);
-app.get('/api/timesheet/filter', controller.timesheet.index);
+    app.get('/project/projectList', controller.project.indexP);
+    app.get('/api/timesheet/filter', controller.timesheet.index);
 	app.get('/employeeList', controller.employees.indexP);
 	app.get('/api/timesheet/filter', controller.timesheet.index);
 	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);

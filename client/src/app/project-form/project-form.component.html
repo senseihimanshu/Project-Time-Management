@@ -1,6 +1,6 @@
 <div class="wrapper">
   <app-navbar [dashboard]="dashboard"></app-navbar>
- <div class="app-main no-scrollbar-wrap"> 
+  <div class="app-main no-scrollbar-wrap"> 
     <div class="row"> 
       <div class="col-2 d-none d-lg-block">
         <app-sidebar [menus]="menus"></app-sidebar>
@@ -53,8 +53,7 @@
               "
             >
               <label for="projectName" class="control-label"
-                >*Project Name:</label
-              >
+                >*Project Name:</label>
               <input
                 type="text"
                 id="projectName"
@@ -114,7 +113,7 @@
                 #projectManagerInput="ngModel"
                 required
               >
-                <mat-option *ngFor="let emp of empList" [value]="emp._id">{{
+                <mat-option *ngFor="let emp of projectManagerList" [value]="emp._id">{{
                   emp.name
                 }}</mat-option>
               </mat-select>
@@ -157,7 +156,7 @@
                 class="form-control"
                 placeholder="End Date"
                 [(ngModel)]="project && project.endDate"
-                required
+                (ngModelChange)="onKeyUp($event)"
                 name="endDate"
                 [disabled]="formType === 'get'"
                 #endDateInput="ngModel"
@@ -208,7 +207,7 @@
                 required
                 multiple
               >
-                <mat-option *ngFor="let emp of empList" [value]="emp._id">{{
+                <mat-option *ngFor="let emp of projectMemberList" [value]="emp._id">{{
                   emp.name
                 }}</mat-option>
               </mat-select>

@@ -26,6 +26,7 @@ import { from } from "rxjs";
 import { RoleGuardService } from "./guards/role-guard.service";
 import { ProjectManagerComponent } from "./project-manager/project-manager.component";
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -39,59 +40,90 @@ const routes: Routes = [
       {
         path: '',
         component: TimesheetComponent,
-        pathMatch: 'full' 
+        pathMatch: 'full'
       },
       {
         path: ':timesheetId',
         component: TimesheetComponent 
+      
       }
     ]
   },
   {
     path: "timesheetweek",
-    component: TimesheetWeekComponent
+    component: TimesheetWeekComponent,
+   
   },
   {
     path: "sidebar",
-    component: SidebarComponent
+    component: SidebarComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: "myProfile",
-    component: MyprofileComponent
+    component: MyprofileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: "review",
-    component: ReviewComponent
+    component: ReviewComponent,
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project manager'
+    } 
   },
   { path: "", component: LoginComponent },
   {
     path: "manager",
-    component: ReviewComponent
+    component: ReviewComponent,
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project manager'
+    } 
   },
   {
     path: "projectmanager",
-    component: ProjectManagerComponent
+    component: ProjectManagerComponent,
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project manager'
+    } 
   },
   {
     path: "projects",
-    component: ProjectComponent
+    component: ProjectComponent,
+    canActivate:[AuthGuard],
+   
   },
   {
     path: "employee",
-    component: EmployeedashboardComponent
+    component: EmployeedashboardComponent,
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'employee'
+    } 
   },
   {
     path: "clevel",
-    component: DashboardComponent
+    component: DashboardComponent,
+     canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'c-level'
+    }  
   },
   {
     path: "admin",
-    component: AdmindashboardComponent
+    component: AdmindashboardComponent,
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'admin'
+    } 
   },
   {
     path: "accessdenied",
     component: AccessDeniedComponent,
-    data: {}
+    data: {},
+    canActivate:[AuthGuard]
   },
   {
     path: "login",
@@ -102,38 +134,53 @@ const routes: Routes = [
     children: [
       {
         path: ":type",
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
+        
+        
       },
       {
         path: "details/:empId",
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
+        
       },
       {
         path: ":type/:empId",
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
       }
-    ]
+    ],
+    canActivate:[AuthGuard],
+        data: { 
+          expectedRole: 'admin'
+        } 
   },
   {
     path: "projectform",
     children: [
       {
         path: "create/:type",
-        component: ProjectFormComponent
+        component: ProjectFormComponent,
+       
       },
       {
         path: ":type/:projectId",
-        component: ProjectFormComponent
+        component: ProjectFormComponent,
+      
       },
       {
         path: ":type/:projectId",
-        component: ProjectFormComponent
+        component: ProjectFormComponent,
+       
       }
-    ]
+    ],
+    canActivate:[AuthGuard],
+    data:{
+        expectedRole:"admin"
+    }
   },
   {
     path: "**",
-    component: NotFoundComponent
+    component: NotFoundComponent,
+    
   }
 ];
 

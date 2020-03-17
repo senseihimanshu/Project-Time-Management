@@ -103,9 +103,9 @@ parseJwt = (token) => {
     const token = window.localStorage.getItem('Authorization');
     const payload = this.parseJwt(token);
 
-    console.log(payload, 'payload');
+  
     this.empObjId = payload.data._id;
-    console.log(this.empObjId, 'ajsjahhdasd');
+   
     this.tabularData();
     
   }
@@ -195,7 +195,7 @@ parseJwt = (token) => {
     input = document.getElementById("myInput");
     let obj = this.employeeService.searchEmp(input.value).subscribe(res => {
       this.usersArray= res;
-      console.log(res);
+      
     });
     table = document.getElementById("myTable");
      tr = table.getElementsByTagName("tr");
