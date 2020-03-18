@@ -21,10 +21,6 @@ export class MyprofileComponent implements OnInit {
   ngOnInit(): any {
     const token = localStorage.getItem('Authorization');
     const decodeToken = jsonDecoder(token);
-    // if (!decodeToken) {
-    //   console.log("Invalid token");
-    // } else {
-    //   const role = decodeToken.role;}
 
    if(decodeToken.role == "Admin"||decodeToken.role == "admin")
     this.menus.push(

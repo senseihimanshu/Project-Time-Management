@@ -76,7 +76,6 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   tabularData(criteria: any = {}) {
-    console.log(this.sortAccordingTo);
     this.projectService.showProjects({
         page: this.page.toString(), 
         limit: this.limit.toString(), 
@@ -144,7 +143,6 @@ export class ProjectComponent implements OnInit {
 
     this.sortAccordingTo = tempObj;
 
-    console.log('called!!');
     this.tabularData();
   }
 

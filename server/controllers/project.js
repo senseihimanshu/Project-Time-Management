@@ -39,8 +39,6 @@ class Project {
       })
     )._id;
 
-    console.log(projectObj, "Abha Rana");
-
     await Promise.all(
       projectObj.empObjectIdArray.map(async staff => {
         await model.projectManager.save({
@@ -66,7 +64,6 @@ class Project {
       }
     });
    }
-}
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
@@ -96,7 +93,6 @@ class Project {
             ).name;
           })
         );
-        console.log(managerName, memberNames, "Abha Rana");
 
         projectList[index] = {
           ...project.toObject(),
@@ -170,9 +166,6 @@ class Project {
       const staffIdsStoredStringArray = projectManagerDocumentArray.map(
         document => document.staffId
       );
-
-      console.log(projectToBeUpdatedObj.empObjectIdArray, 'New');
-      console.log(staffIdsStoredStringArray, 'Old');
       
       if(projectManagerDocumentArray[0] && projectManagerDocumentArray[0].managerId !== projectToBeUpdatedObj.projectManager)
         await model.projectManager.updateAll({

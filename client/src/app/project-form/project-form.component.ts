@@ -171,14 +171,11 @@ export class ProjectFormComponent implements OnInit {
     this.getemployees();
 
     this.route.params.subscribe((data: Params) => {
-      console.log(data);
     });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          //
-          console.log(this.formType);
           this.formType = params.type;
           if (!params.type) {
             this.formType = "get";
@@ -187,24 +184,19 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return new Observable<IResponse>();
           }
-          console.log(this.formType);
           this.projectId = params.projectId;
           return this.projectService.getProject(params.projectId);
-          //
         })
       )
       .subscribe((response: any) => {
-        console.log(response);
         return (this.project = response.payload.data.projectDetails);
       });
   }
 
   projectCreateOrUpdate(obj, formType): any {
-    console.log(obj, formType);
     this.projectService.projectCreateOrUpdate(obj, formType, this.projectId).subscribe(
       (res: IResponse) => {
         this.message = res.payload.message;
-        console.log(res);
         swal.fire({
           icon: "success",
           title: this.message,
@@ -228,16 +220,13 @@ export class ProjectFormComponent implements OnInit {
       .showAllEmployees({ page: this.page.toString(), limit: '-1', criteria: JSON.stringify({}), columns: JSON.stringify({ empId: 1, name: 1 }), sort: JSON.stringify({}) })
       .subscribe(res => {
         this.empList = res.payload.data.result.results;
-        console.log("employeelist", this.empList);
       });
   }
 
   addProjectManager(managerId: any) {
-    console.log(managerId, '-------------');
     this.projManager = managerId;
   }
   addProjectMember(employeeArr: any) {
-    console.log(employeeArr, '----------');
     this.projMembers === [];
 
     if (employeeArr) {

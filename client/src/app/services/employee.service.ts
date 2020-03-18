@@ -36,7 +36,6 @@ export class EmployeeService {
   }
 
   employeeCreateOrUpdate(obj: any, type: any): Observable<IResponse> {
-    console.log(obj, type, 'I was here');
     if (type === "create")
       return this.http.post<IResponse>(EMPLOYEE_API, obj, this.httpOptions);
 

@@ -30,7 +30,6 @@ export class ProjectService {
   }
 
   projectCreateOrUpdate(obj: any, type: any, projectId: string): Observable<IResponse> {
-    console.log(obj, type);
     if (type === "create")
       return this.http.post<IResponse>(PROJECT_API, obj, this.httpOptions);
 
