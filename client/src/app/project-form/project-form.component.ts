@@ -19,6 +19,7 @@ export class ProjectFormComponent implements OnInit {
   projectManagerList:string[]=[];
   projectMemberList: string[]=[];
   projectManagerNamesArray:string[]=[];
+  projectMemberNamesArray:string[]=[];
   employee: any;
   project:any;
   
@@ -166,8 +167,8 @@ export class ProjectFormComponent implements OnInit {
       
       this.projectMemberList=res.payload.data.projectMemberList;
       console.log(this.projectMemberList);
-      this.names(this.projectManagerList);
-      
+      this.namesProjectManager(this.projectManagerList);
+      this.namesProjectMember(this.projectMemberList);
     });
   }
   addProjectManager(employeeArr: any)
@@ -191,22 +192,26 @@ export class ProjectFormComponent implements OnInit {
 
   }
   formatter = (result: string) => result.toUpperCase();
-  search = (text$: Observable<string>) =>
+  searchProjectManager = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       map(term => term.length < 2 ? []
-        : this.projectManagerList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5))
+        : this.projectManagerList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
-    names(projectManagerList) {
+    namesProjectMember(projectManagerList) {
    
       projectManagerList.map((employee) => {
         this.projectManagerNamesArray.push(employee.name);
       });
-     
-     
-     
-  }
+    }
+    searchProjectMember = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.projectMemberNamesArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
 
   
 }

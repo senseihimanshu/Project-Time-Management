@@ -116,9 +116,9 @@
                 required>
                 <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
                 name="search"
-                [ngbTypeahead]="search"
+                [ngbTypeahead]="searchProjectManager"
                 [resultFormatter]="formatter"
-                (selectItem)="selected($event)"
+               
                 placeholder="search"/>
                 <hr>
               <div >
@@ -218,7 +218,12 @@
                 multiple
 
               >
-             
+              <input id="typeahead-config" type="text" class="my-control"
+               [(ngModel)]="(project?.projectMember)[0]" 
+              name="search"
+              [ngbTypeahead]="searchProjectMember"
+              [resultFormatter]="formatter"
+               placeholder="search"/> 
          
                 <mat-option *ngFor="let emp of projectMemberList" [value]="emp._id">{{
                   emp.name
