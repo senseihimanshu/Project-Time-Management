@@ -18,8 +18,8 @@ class projectManager {
     return this.model.updateOne(criteria, updatedProjectObj);
   }
 
-  async updateAll(criteria = {}, updatedProjectObj) {
-    return this.model.update(criteria, updatedProjectObj);
+  async updateMany(criteria = {}, updatedProjectObj) {
+    return this.model.updateMany(criteria, updatedProjectObj);
   }
 
   async delete(criteria = {}) {
