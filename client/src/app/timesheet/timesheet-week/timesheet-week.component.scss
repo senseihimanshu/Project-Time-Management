@@ -127,3 +127,7 @@ tbody:nth-child(odd) {
       background-color: #ffffffe3;
   }
 }
+
+.myCustomModalClass .modal-dialog {
+  max-height: 50px;
+}

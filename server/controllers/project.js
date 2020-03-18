@@ -64,12 +64,14 @@ class Project {
 
     await Promise.all(
       projectList.map(async (project, index) => {
-        const managerName = (
+        const manager = (
           await model.employee.get(
             { _id: project.projectManager },
             { name: 1, _id: 0 }
           )
-        ).name;
+        );
+
+        const managerName = manager && manager.name;
 
         const staffIds = (
           await model.projectManager.get(
@@ -159,7 +161,7 @@ class Project {
         { staffId: 1, managerId: 1 }
       );
       const staffIdsStoredStringArray = projectManagerDocumentArray.map(
-        document => document.staffId
+        document => document.staffId.toString()
       );
 
       console.log(projectToBeUpdatedObj.empObjectIdArray, 'New');
@@ -172,7 +174,7 @@ class Project {
 
       await Promise.all(
         projectToBeUpdatedObj.empObjectIdArray.map(async employee => {
-          if(!staffIdsStoredStringArray.includes(employee))
+          !staffIdsStoredStringArray.includes(employee) &&
             (await model.projectManager.save({
               projectObjId,
               managerId: projectToBeUpdatedObj.projectManager,
@@ -183,7 +185,7 @@ class Project {
 
       await Promise.all(
         staffIdsStoredStringArray.map(async employee => {
-          if(!projectToBeUpdatedObj.empObjectIdArray.includes(employee))
+          !projectToBeUpdatedObj.empObjectIdArray.includes(employee) &&
             (await model.projectManager.delete({
               projectObjId,
               staffId: employee
@@ -220,26 +222,6 @@ class Project {
         message: "Project Deleted Successfully"
       }
     });
-  }
-
-  async indexP(req, res) {
-    const projectList = await model.project.gets();
-    // get page from query params or default to first page
-    const page = parseInt(req.query.page) || 1;
-
-    // get pager object for specified page
-    const pageSize = 6;
-
-    const pager = await pagination.paginate(projectList.length, page, pageSize);
-
-    // get page of items from items array
-    const pageOfItems = employeeList.slice(
-      pager.startIndex,
-      pager.endIndex + 1
-    );
-
-    // return pager object and current page of items
-    return res.json({ pager, pageOfItems });
   }
 }
 

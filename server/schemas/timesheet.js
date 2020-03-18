@@ -8,6 +8,10 @@ module.exports = {
     type: ObjectId,
     ref: "employee"
   },
+  projectObjId: {
+    type: ObjectId,
+    ref: "project"
+  },
   startDate: {
     type: Date
   },
@@ -21,10 +25,6 @@ module.exports = {
   },
   week: [
     {
-      projectObjId: {
-        type: ObjectId,
-        ref: "project"
-      },
       date: { type: Date },
       hours: { type: Number },
       taskType: {

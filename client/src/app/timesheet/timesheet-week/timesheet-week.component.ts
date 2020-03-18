@@ -14,6 +14,7 @@ import { TimesheetModal } from "./../modal/modal.component";
 import { MatDialog } from "@angular/material/dialog";
 import { SendHttpRequestService } from "../../services/send-http-request.service";
 import * as moment from "moment";
+import { jsonDecoder } from 'src/app/utils/json.util';
 
 @Component({
   selector: "app-timesheet-week",
@@ -24,8 +25,7 @@ export class TimesheetWeekComponent {
   constructor(
     private timesheetService: TimesheetService,
     private modalService: NgbModal,
-    public dialog: MatDialog,
-    private httpService: SendHttpRequestService
+    public dialog: MatDialog
   ) {}
   editField: string;
   timesheetList: any;
@@ -39,7 +39,7 @@ export class TimesheetWeekComponent {
 
   isSortDecreasing: boolean = false;
 
-  response: any;
+  timesheet: any;
 
   role: string;
 
@@ -99,7 +99,7 @@ export class TimesheetWeekComponent {
 
   open(content) {
     this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .open(content, { windowClass : "myCustomModalClass"})
       .result.then(
         result => {
           this.closeResult = `Closed with: ${result}`;
@@ -121,29 +121,26 @@ export class TimesheetWeekComponent {
   }
 
   tabularData() {
-    let empId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).empId;
-    this.empObjId = this.httpService.jsonDecoder(
+    this.empObjId = jsonDecoder(
       localStorage.getItem("Authorization")
     )._id;
 
-      if(this.role === "Admin"){
-        this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
-          console.log(res);
-        });
-        return;
-      }
+      // if(this.role === "Admin"){
+      //   this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
+      //     console.log(res);
+      //   });
+      //   return;
+      // }
 
-    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
+    this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), criteria: JSON.stringify({})}).subscribe((res: IResponse) => {
    
-      this.response = res.payload.data.timesheet;
+      this.timesheet = res.payload.data.timesheet;
       this.dataSize = res.payload.data.result.dataSize;
     });
   }
 
   ngOnInit() {
-    this.role = this.httpService.jsonDecoder(
+    this.role = jsonDecoder(
       localStorage.getItem("Authorization")
     ).role;
     this.tabularData();
@@ -156,7 +153,7 @@ export class TimesheetWeekComponent {
     this.timesheetService
       .getSpecificTimesheets(this.empObjId, date)
       .subscribe(res => {
-        this.response = res.payload.data.filteredTimesheets;
+        this.timesheet = res.payload.data.filteredTimesheets;
       });
   }
 
