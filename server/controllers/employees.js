@@ -2,14 +2,15 @@ const bcrypt = require('bcrypt');
 const model = require("../models");
 const schema = require("../schemas");
 const nodemailer=require('nodemailer');
-var generator = require('generate-password');
-const saltRounds = 10;
 var generatePassword = require('password-generator');
 
 
 require('dotenv').config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
+   try{
+   console.log("deepanshu");
+    
      let testAccount = await nodemailer.createTestAccount();
 
      // create reusable transporter object using the default SMTP transport
@@ -29,25 +30,18 @@ require('dotenv').config();
      html: output // html body
    }
    transporter.sendMail(info,function(err,data){
-        if(err){
+    debugger   
+     if(err){
           console.error("error occurs",err);
         }
         else{
           console.log("email sent successfully");
         }
    });
+  }catch(error){
+    console.error(error);
+  }
 }
-const isUnique = async function(empId, email) {
-  const employeeWithEmpId = await model.employee.get({ empId });
-  const employeeWithEmail = await model.employee.get({ email });
-
-  if (employeeWithEmpId)
-    return { status: false, message: "EmployeeId already exists" };
-  if (employeeWithEmail)
-    return { status: false, message: "Email already exists" };
-
-  return { status: true };
-};
 
 class Employee {
   constructor() {}
@@ -76,21 +70,13 @@ class Employee {
       role
     };
 
-    var date=Date.now();
-    var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
-    newEmployee.password = password;
+    newEmployee.password = 'cyg-'+empId;
+     let pass=newEmployee.password
+
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-   newEmployee.password=hashedPassword;
-  const resultAfterIsUnique = await isUnique(empId, email);
-    if (!resultAfterIsUnique.status) {
-      return res.status(401).send({
-        success: false,
-        payload: {
-          message: resultAfterIsUnique.message
-        }
-      });
-    }
+    const hashedPassword = await bcrypt.hash(newEmployee.password, salt);
+    
+    newEmployee.password  = hashedPassword;
 
     try {
       await model.employee.save(newEmployee).then(() => {
@@ -115,14 +101,14 @@ class Employee {
      <p>Thanks again for 
       <h3>your details</h3>
       <ul>
-      <li>Name:${name}</li>
-      <li>Email:${email}</li>
-      <li>Designation:${designation}</li>
-      <li>Role:${role}</li>
-      <li>Phone:${phone}</li>
-      <li>Password:${password}</li>
-      <li>Address:${address}</li>
-      <li>joining:${joining}</li>
+      <li>Name:${newEmployee.name}</li>
+      <li>Email:${newEmployee.email}</li>
+      <li>Designation:${newEmployee.designation}</li>
+      <li>Role:${newEmployee.role}</li>
+      <li>Phone:${newEmployee.phone}</li>
+      <li>Password:${pass}</li>
+      <li>Address:${newEmployee.address}</li>
+      <li>joining:${newEmployee.joining}</li>
       </ul>
       <p>This is Computer Generated Email ,Don't reply back to it</p>
       `
@@ -130,14 +116,16 @@ class Employee {
   }
   async index(req, res) {
     const employeeList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
+      { $and: [ { "_id":{ $ne:req.employee._id }} ] },
       { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    ) ;
+    );
+
+    console.log(employeeList, 'List of Employees');
+
     return res.status(200).send({
       success: true,
       payload: {
         data: {
-          employeeList,
           result: req.paginatedResults
         },
         message: "employees retrieved"
@@ -167,23 +155,32 @@ class Employee {
   }
  
   async show(req, res) {
-    const employee = await model.employee.get({ empId:req.query.empId});
+    const employee = await model.employee.get({ empId: req.params.id});
    
     if (!employee) {
-      return res.status(404).send({ employee,
+      return res.status(404).send({ 
+        payload: {
+          data: {
+            employee
+          }
+        },
         message:"Employee does not exists!"
       });
     }
 
     res.status(200).send({
-      employee,
+      payload: {
+        data: {
+          employee
+        }
+      },
       message:"Employee retrieved successfully"
     });
   }
   
   async update(req, res) {
+    const empId = req.params.id;
     const {
-      empId,
       email,
       name,
       designation,
@@ -194,7 +191,6 @@ class Employee {
       projectId,
       role
     } = req.body;
-
 
     const employeeToUpdate = await model.employee.get({ empId });
     const patchedEmployee = {
@@ -209,7 +205,6 @@ class Employee {
       role
     };
 
-    
     //discarding keys with undefined
     Object.keys(patchedEmployee).forEach(key => patchedEmployee[key] === undefined && delete patchedEmployee[key])
 
@@ -233,7 +228,7 @@ class Employee {
   }
 
   async delete(req, res) {
-    const employee = await model.employee.delete({ empId: req.query.empId });
+    const employee = await model.employee.delete({ empId: req.params.id });
    
     res.send({
       success: true,
@@ -243,37 +238,5 @@ class Employee {
       }
     });
   }
-
-
-
-  
-  async indexP(req,res){
-         const employeeList = await model.employee.gets();
-        // get page from query params or default to first page
-        const page = parseInt(req.query.page) || 1;
-
-        // get pager object for specified page
-        const pageSize = 6;
-        
-        const pager = await pagination.paginate(employeeList.length, page, pageSize);
-
-        // get page of items from items array
-        const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
-        
-
-        // return pager object and current page of items
-        return res.json({ pager, pageOfItems });
-        
-    }
-    async searchEmployee(req, res){
-   
-      let query=req.query.name;
-      query = query.toLowerCase().trim()
-      const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
-    
-      res.status(200).send(employees);
-    }
-  
-
 }
 module.exports = new Employee();

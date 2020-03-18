@@ -139,21 +139,19 @@ export class ProjectFormComponent implements OnInit {
         
          swal.fire({
           icon: 'success',
-          text: this.message,
-          showConfirmButton: true,
-          timer: 3000
+          title: this.message,
+          showConfirmButton: true
         }) 
 
 
 
     },  err => {
       this.message = err.error.payload.message;
-        swal.fire({
-          icon: 'error',
-          text: this.message,
-          showConfirmButton: true,
-          timer: 3000
-        }) 
+      swal.fire({
+        icon: 'error',
+        title: this.message,
+        showConfirmButton: true
+      }) 
       }
     ); 
     this.router.navigate(['/projects']);

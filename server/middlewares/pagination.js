@@ -1,5 +1,6 @@
 function paginator(model) {
-  return async(req, res, next) => {
+  return async (req, res, next) => {
+    const criteria = JSON.parse(req.query.criteria);
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
 
@@ -8,11 +9,7 @@ function paginator(model) {
 
     const results = {};
 
-    let dataSize = await model.find({ empObjId: req.query.empObjId }).count({});
-
-    if(!(req.query.empObjId)){
-      dataSize = await model.find({}).count({});
-    }
+    const dataSize = await model.find(criteria).count({});
 
     if (endIndex < dataSize) {
       results.next = {
@@ -30,30 +27,22 @@ function paginator(model) {
 
     results.dataSize = dataSize;
 
-    try{
-        //Now has become specific to only timesheetAPI
-        //In future try to remember that the criteria must be a key from request!!!!!!!
-      
-        if(!(req.query.empObjId)){
-          results.results = await model.find({}).sort({ startDate: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
+    try {
+      results.results = await model
+        .find(criteria)
+        .sort({ name: JSON.parse(req.query.desc) ? 1 : -1 })
+        .limit(limit)
+        .skip(startIndex);
 
-          req.paginatedResults = results;
-          next();
-
-          return;
+      req.paginatedResults = results;
+      next();
+    } catch (e) {
+      res.status(500).send({
+        success: false,
+        payload: {
+          message: e.message
         }
-
-        results.results = await model.find({ empObjId: req.query.empObjId }).sort({ startDate: (JSON.parse(req.query.desc) ? 1 : -1) }).limit(limit).skip(startIndex);
-    
-        req.paginatedResults = results;
-        next();
-    } catch(e){
-        res.status(500).send({
-            success: false,
-            payload: {
-                message: e.message
-            }
-        });
+      });
     }
   };
 }

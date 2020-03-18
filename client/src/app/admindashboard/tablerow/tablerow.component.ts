@@ -20,13 +20,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
       </td>
       <td>
         <a
-          [routerLink]="['/employeeform/details', employee.empId]"
+          [routerLink]="['/employee/details', employee.empId]"
         >
           <i class="fas fa-eye"></i>
         </a>
       </td>
       <td>
-        <a class="edit" [routerLink]="['/employeeform', 'update', employee.empId]">
+        <a class="edit" [routerLink]="['/employee', 'update', employee.empId]">
           <i class="fas fa-pencil-alt"></i>
         </a>
       </td>

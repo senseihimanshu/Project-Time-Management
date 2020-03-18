@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
   templateUrl: "./admindashboard.component.html",
   styleUrls: ["./admindashboard.component.scss", "../main/main.component.scss"]
 })
-export class AdmindashboardComponent implements OnInit, OnChanges {
+export class AdmindashboardComponent implements OnInit {
   @ViewChild('myAlert',{static:false}) myAlert: ElementRef;
   deleteEmp:boolean=true;
   name = "Angular";
@@ -26,7 +26,7 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
       submenus: [
         {
           title: "Add New Employee",
-          route: "/employeeform/create"
+          route: "/employee/create"
         }
       ]
     },
@@ -65,8 +65,6 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
   message: String;
 
   constructor(
-    private _service: SendHttpRequestService,
-    private router: Router,
     private employeeService: EmployeeService
   ) {}
   usersArray: any;
@@ -79,44 +77,21 @@ export class AdmindashboardComponent implements OnInit, OnChanges {
 
   isSortDecreasing: boolean = false;
 
-////Will Decode!
-parseJwt = (token) => {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
 
-  return JSON.parse(jsonPayload);
-};
-    
-
-  tabularData() {
-    this._service.showAllEmployees(this.page.toString(), this.limit.toString(), this.isSortDecreasing).subscribe(res => {
+  tabularData(criteria: any = {}) {
+    this.employeeService.showAllEmployees({ page: this.page.toString(), limit: this.limit.toString(), isSortDesc: this.isSortDecreasing.toString(), criteria: criteria }).subscribe(res => {
       this.usersArray = res.payload.data.result.results;
       this.dataSize = res.payload.data.result.dataSize;
     });
-    this.lastPage=(this.dataSize/10)+1;
+    this.lastPage=(this.dataSize/5)+1;
   }
 
   ngOnInit() {
-    const token = window.localStorage.getItem('Authorization');
-    const payload = this.parseJwt(token);
-
-  
-    this.empObjId = payload.data._id;
-   
-    this.tabularData();
-    
-  }
-
-  ngOnChanges() {
     this.tabularData();
   }
 
-
-
-  deleteEmployee(empId: any) {
+  deleteEmployee(empId: string) {
+    console.log(empId, 'EMPLOYEE ID');
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -147,7 +122,6 @@ parseJwt = (token) => {
           'Deleted!',
           'employee has been deleted.',
           'success'
-          
         )
       } else if (
         /* Read more about handling dismissals below */
@@ -189,61 +163,9 @@ parseJwt = (token) => {
     }
   }
 
-  myFunction() {
-   //Declare variables
-    var input, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    let obj = this.employeeService.searchEmp(input.value).subscribe(res => {
-      this.usersArray= res;
-      
-    });
-    table = document.getElementById("myTable");
-     tr = table.getElementsByTagName("tr");
-    // // Loop through all table rows, and hide those who don't match the search query
-     for (i = 0; i < tr.length; i++) {
-     td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-           txtValue = td.textContent || td.innerText;
-           if (txtValue.toUpperCase().indexOf(this.user) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      }
-    }
-  }
-  sortTable() {
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("myTable");
-    switching = true;
-    /* Make a loop that will continue until
-  no switching has been done: */
-    while (switching) {
-      // Start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /* Loop through all table rows (except the
-    first, which contains table headers): */
-      for (i = 1; i < rows.length - 1; i++) {
-        // Start by saying there should be no switching:
-        shouldSwitch = false;
-        /* Get the two elements you want to compare,
-      one from current row and one from the next: */
-        x = rows[i].getElementsByTagName("TD")[1];
-        y = rows[i + 1].getElementsByTagName("TD")[1];
-        // Check if the two rows should switch place:
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-      if (shouldSwitch) {
-        /* If a switch has been marked, make the switch
-      and mark that a switch has been done: */
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-      }
-    }
+  handleSearch(value: string) {
+    var input: string
+    input = value;
+    this.tabularData({$or: [{ name: { $regex:`^${input.toLowerCase().trim()}`, $options: 'i' }}, {role: { $regex:`^${input.toLowerCase().trim()}`, $options: 'i' }}]});
   }
 }

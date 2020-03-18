@@ -9,6 +9,7 @@ import {
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
+import { HOST } from './config/host';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ import { Token } from '@angular/compiler/src/ml_parser/lexer';
 export class SendHttpRequestService {
 
   headers: HttpHeaders = new HttpHeaders({
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Authorization": localStorage.getItem('Authorization')
   });
   
   httpOptions = {
@@ -136,22 +138,7 @@ export class SendHttpRequestService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
       };
-    }
-    
-
-    showAllEmployees(page: string = null, limit: string = null, desc: boolean = null):Observable<any>
-    {
-    const params: HttpParams = new HttpParams().set("page", page).set("limit", limit).set("desc", desc.toString());
-     
-     
-      return this.http.get("http://localhost:3000/employees" , { ...this.httpOptions, params
-      }).pipe(
-        tap(_ => this.log("showing details")),
-        catchError(this.handleError<any>('error in details')
-      ));
-      
-    }
-
+  }
 
   }
 
