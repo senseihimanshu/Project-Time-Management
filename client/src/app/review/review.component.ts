@@ -1,7 +1,8 @@
+import { IResponse } from './../models/response.model';
 import { Router } from "@angular/router";
 import { Component, OnInit, OnChanges } from "@angular/core";
 import { SendHttpRequestService } from "./../send-http-request.service";
-
+import swal from 'sweetalert2';
 @Component({
   selector: "app-review",
   templateUrl: "./review.component.html",
@@ -102,9 +103,50 @@ var s=year + "-" + month + "-" + dt;
     this.sendReq(obj);
   }
   sendReq(data) {
-    let obj = this._service.reviewRequest(data).subscribe(res => {
-      this.usersArray = res;
-      alert(data.status);
-    });
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Confirm review!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        let obj = this._service.reviewRequest(data).subscribe((res:IResponse) => {
+          this.usersArray = res;
+          this.message = res.payload.message;
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+        });
+         swalWithBootstrapButtons.fire(
+          'Reviewed!',
+          'data.status',
+          'success'
+        )
+      } else if (
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Review request has been cancelled:)',
+          'error'
+        )
+      }
+    }) 
+    
   }
-}
+    // let obj = this._service.reviewRequest(data).subscribe(res => {
+    //   this.usersArray = res;
+    //   alert(data.status);
+    // });
+  }
