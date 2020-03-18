@@ -66,7 +66,7 @@
               </td>
               <td>
                 <a
-                [ngClass]="{'disabled': empObjId === employee._id}"
+                [ngClass]="{'disabled': empObjId === employee.empId}"
                   class="edit"
                   [routerLink]="['/employee', 'update', employee.empId]"
                 >
@@ -74,7 +74,7 @@
                 </a>
               </td>
               <td>
-                <a class="delete" [ngClass]="{'disabled': empObjId === employee._id}" (click)="deleteEmployee(employee.empId)"
+                <a class="delete" [ngClass]="{'disabled': empObjId === employee.empId}" (click)="deleteEmployee(employee.empId)"
                   ><i class="fas fa-trash"></i
                 ></a>
               </td>

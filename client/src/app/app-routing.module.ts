@@ -63,7 +63,6 @@ const routes: Routes = [
     path: "review",
     component: ReviewComponent
   },
-  { path: "", component: LoginComponent },
   {
     path: "manager",
     component: ReviewComponent
@@ -71,10 +70,6 @@ const routes: Routes = [
   {
     path: "projectmanager",
     component: ProjectManagerComponent
-  },
-  {
-    path: "projects",
-    component: ProjectComponent
   },
   {
     path: "employee",
@@ -115,14 +110,19 @@ const routes: Routes = [
     ]
   },
   {
-    path: "projectform",
+    path: "project",
     children: [
       {
-        path: "create/:type",
+        path: "",
+        component: ProjectComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: ":type",
         component: ProjectFormComponent
       },
       {
-        path: ":type/:projectId",
+        path: "details/:projectId",
         component: ProjectFormComponent
       },
       {

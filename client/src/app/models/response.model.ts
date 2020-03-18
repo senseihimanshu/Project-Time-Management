@@ -1,4 +1,4 @@
-interface IResponse{
+ interface IResponse{
     success: Boolean;
     payload: {
         data?: any,

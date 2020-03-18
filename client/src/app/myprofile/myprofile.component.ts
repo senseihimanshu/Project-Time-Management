@@ -54,11 +54,11 @@ export class MyprofileComponent implements OnInit {
         submenus: [
           {
             title: "Add New Project",
-            route: "/projectform/create/create"
+            route: "/project/create"
           },
           {
             title: "Show All Projects",
-            route: '/projects'
+            route: '/project'
           }
         ]
       },

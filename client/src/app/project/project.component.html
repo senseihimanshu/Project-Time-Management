@@ -12,12 +12,12 @@
           <i class="fa fa-search"></i>
       </span>
 
-        <input type="text" class="form-control"  id="myInput" (keyup)="myFunction()" placeholder= 'Search By Project Name'/>        
+        <input type="text" class="form-control"  id="myInput" (keyup)="handleSearch($event.target.value)" placeholder= 'Search By Project Name'/>        
     </div>
       <table class="table table-striped" id="myTable">
         <thead>
           <tr>
-            <th scope="col" class="clickable">Project Name<i class="fas fa-sort" (click)="sortList()"></i>
+            <th scope="col" class="clickable" (click)="sortList('projectName')">Project Name<i class="fas fa-sort" ></i>
 
             </th>
             <th scope="col">Project Manager
@@ -26,7 +26,7 @@
             <th scope="col">Project Members
 
             </th>
-            <th scope="col">Start Date
+            <th scope="col" class="clickable" (click)="sortList('startDate')">Start Date<i class="fas fa-sort" ></i>
 
             </th>
             <th scope="col">End Date
@@ -44,40 +44,40 @@
           </tr>
 
         </thead>
-        <tbody  *ngFor="let project of projectsArray">
+        <tbody *ngFor="let project of projectsArray">
           <tr>
             <td>
-             {{project.project.projectName}}
+             {{project.projectName}}
             </td>
             <td>
-              {{project.projectManagerName}}
+              {{project.managerName}}
             </td>
             <td>
-              <span *ngFor="let member of project.memberName">
+              <span *ngFor="let member of project.memberNames">
                <span class="member">{{member}}</span><br/>
               </span>
             </td>
             <td>
-              {{project.project.startDate}}
+              {{project.startDate}}
             </td>
             <td>
-              {{project.project.endDate}}
+              {{project.endDate}}
             </td>
             <td>
-              {{project.project.status}}
+              {{project.status}}
             </td>
             <td>
-              <a [routerLink]="['/projectform','get',project.project._id]">
+              <a [routerLink]="['/project/details', project.projectId]">
                 <i class="fas fa-eye"></i>
               </a>
             </td>
             <td>
-              <a class="edit" [routerLink]="['/projectform','update',project.project._id]">
+              <a class="edit" [routerLink]="['/project','update',project.projectId]">
                 <i class="fas fa-pencil-alt"></i>
               </a>
             </td>
             <td>
-              <a class="delete" (click)="deleteProject(project.project._id)"><i class="fas fa-trash"></i></a>
+              <a class="delete" (click)="deleteProject(project.projectId)"><i class="fas fa-trash"></i></a>
             </td>
           </tr>
         </tbody>
