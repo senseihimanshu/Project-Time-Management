@@ -58,6 +58,7 @@ export class ReviewRowComponent {
       _id: data,
       status: "Approved"
     };
+
     this.sendReq(obj);
   }
       

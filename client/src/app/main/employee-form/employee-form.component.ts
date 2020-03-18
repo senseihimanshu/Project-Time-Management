@@ -73,7 +73,7 @@ export class EmployeeFormComponent implements OnInit {
         swal.fire({
           icon: 'success',
           text: this.message,
-          showConfirmButton: true
+          showConfirmButton: true,
         }) 
         form.reset();
 

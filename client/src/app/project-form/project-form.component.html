@@ -55,8 +55,7 @@
               "
             >
               <label for="projectName" class="control-label"
-                >*Project Name:</label
-              >
+                >*Project Name:</label>
               <input
                 type="text"
                 id="projectName"
@@ -116,6 +115,7 @@
                 #projectManagerInput="ngModel"
                 required
               >
+
                 <ng-template ngFor let-emp [ngForOf]="empList">
                   <mat-option *ngIf="!projMembers.includes(emp._id)" [value]="emp._id">{{ emp.empId }}----{{
                     emp.name
@@ -161,7 +161,7 @@
                 class="form-control"
                 placeholder="End Date"
                 [(ngModel)]="project && project.endDate"
-                required
+                (ngModelChange)="onKeyUp($event)"
                 name="endDate"
                 [disabled]="formType === 'get'"
                 #endDateInput="ngModel"

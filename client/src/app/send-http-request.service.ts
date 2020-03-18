@@ -46,11 +46,11 @@ export class SendHttpRequestService {
         .join("")
     );
     return JSON.parse(jsonPayload);
+
   };
 
   showEmployees(): Observable<any> {
     const token = localStorage.getItem("Authorization");
-
     // //Decode JWT and return the Payload in JSON Format
     const decodeToken = this.jsonDecoder(token);
     const empId = decodeToken.data.empId;
