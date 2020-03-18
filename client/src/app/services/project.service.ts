@@ -33,12 +33,7 @@ export class ProjectService {
     });
   }
 
-  projectCreateOrUpdate(
-    obj: any,
-    type: any,
-    projectId: string
-  ): Observable<IResponse> {
-    //console.log(obj, type);
+  projectCreateOrUpdate(obj: any, type: any, projectId: string): Observable<IResponse> {
     if (type === "create")
       return this.http.post<IResponse>(PROJECT_API, obj, this.httpOptions);
 

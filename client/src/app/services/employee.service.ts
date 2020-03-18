@@ -1,9 +1,13 @@
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { HOST } from "../config/host";
-import { IPagination } from "../models/pagination.model";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams
+} from "@angular/common/http";
+import { HOST } from '../config/host';
 
+import { IPagination } from '../models/pagination.model';
 const EMPLOYEE_API: string = `${HOST}/api/employee`;
 
 @Injectable({
@@ -34,9 +38,7 @@ export class EmployeeService {
       params
     });
   }
-
   employeeCreateOrUpdate(obj: any, type: any): Observable<IResponse> {
-    //console.log(obj, type, 'I was here');
     if (type === "create")
       return this.http.post<IResponse>(EMPLOYEE_API, obj, this.httpOptions);
 

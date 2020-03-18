@@ -53,14 +53,10 @@ export class ReviewRowComponent {
   }
   usersArray: any;
   accept(data) {
-    //console.log(data);
     let obj = {
       _id: data,
       status: "Approved"
     };
-    //console.log(obj._id,"status");
-    //console.log("Kar rha hu accept");
-    //console.log(obj._id);
     this.sendReq(obj);
   }
 
@@ -69,13 +65,11 @@ export class ReviewRowComponent {
       _id: data,
       status: "Declined"
     };
-    //console.log(obj,"status data");
     this.sendReq(obj);
   }
   sendReq(data) {
     let obj = this._service.reviewRequest(data).subscribe(res => {
       this.usersArray = res;
-      //console.log(res);
       alert(data.status);
     });
   }

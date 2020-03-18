@@ -103,7 +103,6 @@ class Project {
             }
           })
         );
-        //console.log(managerName, memberNames, "Abha Rana");
 
         projectList[index] = {
           ...project.toObject(),

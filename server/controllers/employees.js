@@ -105,7 +105,6 @@ class Employee {
       `;
     nodeMail(output, newEmployee);
   }
-
   async index(req, res) {
     return res.status(200).send({
       success: true,
@@ -117,7 +116,28 @@ class Employee {
       }
     });
   }
-
+   
+   async indexByRole(req, res) {
+    const projectManagerList = await model.employee.log(
+      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}},{role:"Project Manager"}]},
+      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
+    ) ;
+    const projectMemberList = await model.employee.log(
+      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}},{role:"Employee"}]},
+      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
+    ) ;
+    return res.status(200).send({
+      success: true,
+      payload: {
+        data: {
+           projectManagerList,
+           projectMemberList
+        },
+        message: "employees retrieved"
+      }
+    });
+  }
+ 
   async show(req, res) {
     const employee = await model.employee.get({ empId: req.params.id });
 

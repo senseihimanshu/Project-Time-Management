@@ -217,7 +217,6 @@ export class TimesheetModal implements OnInit {
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
-      //console.log("Inside fillProjectDropdown()");
       //Getting empId from token
     }
 

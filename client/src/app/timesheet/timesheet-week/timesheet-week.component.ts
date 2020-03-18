@@ -86,7 +86,6 @@ export class TimesheetWeekComponent {
       ]
     }
   ];
-
   openDialog(timesheetId: string) {
     const dialogRef = this.dialog.open(TimesheetModal, {
       data: {

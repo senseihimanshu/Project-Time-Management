@@ -55,6 +55,10 @@ export class DashboardComponent implements OnInit, OnChanges {
 
   constructor(
     private httpService: HttpClient,
+  graphicaldata:Boolean=true;
+  loading = false;
+  
+    constructor(private httpService: HttpClient,
     private _service: SendHttpRequestService,
     private router: Router,
     private employeeService: EmployeeService
@@ -100,6 +104,7 @@ export class DashboardComponent implements OnInit, OnChanges {
     {
       data: []
     }
+<<<<<<< HEAD
   ];
   ngOnInit() {
     this.clevelDataProjects(this.graphicaldata);
@@ -121,6 +126,21 @@ export class DashboardComponent implements OnInit, OnChanges {
         //console.log(this.timesheetpieChartData,"timesheets data");
       });
   }
+=======
+   clevelDataProjects(graphicaldata) {
+    let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
+      this.projectpieChartData=res;
+    });
+  }
+  clevelDataTimesheets(graphicaldata) {
+   let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
+     this.timesheetpieChartData=res;
+
+   });
+ }
+
+   ngOnChanges(){}
+>>>>>>> 5b30508c2a5c420fc6cde5231eaa773b96c357fc
 
   ngOnChanges() {}
 }

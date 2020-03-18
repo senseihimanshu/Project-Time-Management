@@ -41,56 +41,10 @@ export class ProjectFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  @Input()
-  dashboard: string = "Admin Dashboard";
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        },
-        {
-          title: "Show All Employees"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
-
   loading = false;
 
   ngOnInit(): any {
+
     (function() {
       "use strict";
       window.addEventListener(
@@ -118,16 +72,12 @@ export class ProjectFormComponent implements OnInit {
     })();
 
     this.getemployees();
-
     this.route.params.subscribe((data: Params) => {
-      //console.log(data);
     });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          //
-          //console.log(this.formType);
           this.formType = params.type;
           if (!params.type) {
             this.formType = "get";
@@ -136,31 +86,23 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return new Observable<IResponse>();
           }
-          //console.log(this.formType);
           this.projectId = params.projectId;
           return this.projectService.getProject(params.projectId);
-          //
         })
       )
       .subscribe((response: any) => {
-        //console.log(response);
         return (this.project = response.payload.data.projectDetails);
       });
   }
-
   projectCreateOrUpdate(obj, formType): any {
-    //console.log(obj, formType);
-    this.projectService
-      .projectCreateOrUpdate(obj, formType, this.projectId)
-      .subscribe(
-        (res: IResponse) => {
-          this.message = res.payload.message;
-          //console.log(res);
-          swal.fire({
-            icon: "success",
-            title: this.message,
-            showConfirmButton: true
-          });
+    this.projectService.projectCreateOrUpdate(obj, formType, this.projectId).subscribe(
+      (res: IResponse) => {
+        this.message = res.payload.message;
+        swal.fire({
+          icon: "success",
+          title: this.message,
+          showConfirmButton: true
+        });
 
           this.router.navigate(["/project"]);
         },
@@ -185,16 +127,13 @@ export class ProjectFormComponent implements OnInit {
       })
       .subscribe(res => {
         this.empList = res.payload.data.result.results;
-        //console.log("employeelist", this.empList);
       });
   }
 
   addProjectManager(managerId: any) {
-    //console.log(managerId, '-------------');
     this.projManager = managerId;
   }
   addProjectMember(employeeArr: any) {
-    //console.log(employeeArr, '----------');
     this.projMembers === [];
 
     if (employeeArr) {
