@@ -86,7 +86,7 @@ export class AdmindashboardComponent implements OnInit {
 
   columns: any = {};
 
-  sortAccordingTo: any = { name: (this.isSortDecreasing? 1 : -1) };
+  sortAccordingTo: any = { name: this.isSortDecreasing ? 1 : -1 };
 
   tabularData(criteria: any = {}) {
     this.employeeService
@@ -111,7 +111,7 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   deleteEmployee(empId: string) {
-    console.log(empId, "EMPLOYEE ID");
+    //console.log(empId, "EMPLOYEE ID");
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -162,7 +162,7 @@ export class AdmindashboardComponent implements OnInit {
 
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
-    this.sortAccordingTo = { name: (this.isSortDecreasing? 1 : -1) };
+    this.sortAccordingTo = { name: this.isSortDecreasing ? 1 : -1 };
 
     this.tabularData();
   }

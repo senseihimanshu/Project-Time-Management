@@ -22,19 +22,18 @@
               <th scope="col">Billable</th>
               <th scope="col">Status</th>
             </thead>
-            
             <ng-template ngFor let-response [ngForOf]="response">
               <tr *ngFor="let week of response.week; let id=index;">
-                <ng-template [ngIf]="response.week[id].projectId">
-                  <td class="text-center">{{ response.empObjId.name }}</td>
-                  <td class="text-center">{{ response.week[id].projectId?.projectName }}</td>
+                <ng-template [ngIf]="response.week[id].hours">
+                  <td class="text-center">{{ response.employeeName }}</td>
+                  <td class="text-center">{{ response.projectName }}</td>
                   <td class="text-center">{{ response.week[id].taskType }}</td>
                   <td class="text-center">{{ response.week[id].date | date }}</td>
                   <td class="text-center">{{ response.week[id].hours }}</td>
                   <td class="text-center">{{ response.week[id].billable }}</td>
                   <td class="text-center">{{ response.week[id].status }}</td>
                 </ng-template>
-                </tr>
+              </tr>
             </ng-template>
           </table>
         </div>

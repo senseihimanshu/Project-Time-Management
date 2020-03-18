@@ -40,7 +40,7 @@ class Project {
         })
       )._id;
 
-      console.log(projectObj, "Abha Rana");
+      //console.log(projectObj, "Abha Rana");
 
       if (projectObj.empObjectIdArray) {
         await Promise.all(
@@ -72,7 +72,7 @@ class Project {
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
-    
+
     await Promise.all(
       projectList.map(async (project, index) => {
         const manager = await model.employee.get(
@@ -86,21 +86,24 @@ class Project {
           { managerId: project.projectManager },
           { staffId: 1, _id: 0 }
         );
-    
+
         const staffIds = projectManagerStaffObjs.map(employeeId => {
           return employeeId.staffId;
         });
-        console.log(staffIds);
+        //console.log(staffIds);
 
         const memberNames = await Promise.all(
           staffIds.map(async employee => {
-            const employeeObj = await model.employee.get({ _id: employee }, { name: 1, _id: 0 });
-            if(employeeObj){
+            const employeeObj = await model.employee.get(
+              { _id: employee },
+              { name: 1, _id: 0 }
+            );
+            if (employeeObj) {
               return employeeObj.name;
             }
           })
         );
-        console.log(managerName, memberNames, "Abha Rana");
+        //console.log(managerName, memberNames, "Abha Rana");
 
         projectList[index] = {
           ...project.toObject(),
@@ -175,8 +178,8 @@ class Project {
         document => document.staffId.toString()
       );
 
-      console.log(projectToBeUpdatedObj.empObjectIdArray, "New");
-      console.log(staffIdsStoredStringArray, "Old");
+      //console.log(projectToBeUpdatedObj.empObjectIdArray, "New");
+      //console.log(staffIdsStoredStringArray, "Old");
 
       if (
         projectManagerDocumentArray[0] &&

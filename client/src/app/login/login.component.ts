@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { User } from "../user";
 import swal from "sweetalert2";
 import { LoginService } from "../services/login.service";
-import { jsonDecoder } from '../utils/json.util';
+import { jsonDecoder } from "../utils/json.util";
 // import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -82,42 +82,47 @@ export class LoginComponent implements OnInit {
       password: this.password.nativeElement.value
     };
 
-    this.loginService.login(userObj).subscribe((res) => {
-      console.log(res);
+    this.loginService.login(userObj).subscribe(
+      res => {
+        //console.log(res);
 
-      if (res != null) {
-        window.localStorage.setItem("Authorization", `Bearer ${res.payload.data['x-auth-token']}`);
+        if (res != null) {
+          window.localStorage.setItem(
+            "Authorization",
+            `Bearer ${res.payload.data["x-auth-token"]}`
+          );
 
-        const token = localStorage.getItem("Authorization");
+          const token = localStorage.getItem("Authorization");
 
-        const decodeToken = jsonDecoder(token);
-        console.log(decodeToken);
-        if (!decodeToken) {
-          console.log("Invalid token");
-        } else {
-          const role = decodeToken.role;
-          if (role == "Employee" || role == "employee") {
-            this.router.navigate(["/timesheetweek"]);
-          } else if (role == "Admin" || role == "admin") {
-            this.router.navigate(["/admin"]);
-          } else if (role == "C Level Manager" || role == "c-level") {
-            this.router.navigate(["/clevel"]);
-          } else if (role == "Project Manager" || role == "project-manager") {
-            this.router.navigate(["/manager"]);
-          } else this.router.navigate(["/accessdenied"]);
+          const decodeToken = jsonDecoder(token);
+          //console.log(decodeToken);
+          if (!decodeToken) {
+            //console.log("Invalid token");
+          } else {
+            const role = decodeToken.role;
+            if (role == "Employee" || role == "employee") {
+              this.router.navigate(["/timesheetweek"]);
+            } else if (role == "Admin" || role == "admin") {
+              this.router.navigate(["/admin"]);
+            } else if (role == "C Level Manager" || role == "c-level") {
+              this.router.navigate(["/clevel"]);
+            } else if (role == "Project Manager" || role == "project-manager") {
+              this.router.navigate(["/manager"]);
+            } else this.router.navigate(["/accessdenied"]);
+          }
         }
+      },
+      err => {
+        //console.log(err);
+        this.isMessage = true;
+        swal.fire({
+          icon: "warning",
+          title: err.error.payload.message
+        });
+        setTimeout(() => {
+          this.isMessage = false;
+        }, 3000);
       }
-
-    }, err => {
-      console.log(err);
-      this.isMessage = true;
-      swal.fire({
-        icon: "warning",
-        title: err.error.payload.message
-      });
-      setTimeout(() => {
-        this.isMessage = false;
-      }, 3000);
-    });
-  };
+    );
+  }
 }

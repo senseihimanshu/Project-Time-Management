@@ -15,9 +15,10 @@ import { TimesheetModal } from "./modal/modal.component";
 import { MatDialog } from "@angular/material/dialog";
 import { EmployeeService } from "../services/employee.service";
 import { SendHttpRequestService } from "../services/send-http-request.service";
-import {  RouterLink } from "@angular/router";
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { RouterLink } from "@angular/router";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { switchMap } from "rxjs/operators";
+import { jsonDecoder } from '../utils/json.util';
 
 @Component({
   selector: "table-editable",
@@ -29,7 +30,6 @@ export class TimesheetComponent implements OnInit {
     private timesheetService: TimesheetService,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    private httpService: SendHttpRequestService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -42,7 +42,7 @@ export class TimesheetComponent implements OnInit {
   page = 1;
   pageSize = 10;
   items = [];
-  dashboard:string="Admin Dashboard";
+  dashboard: string = "Admin Dashboard";
   response: any;
 
   menus: any = [
@@ -91,7 +91,7 @@ export class TimesheetComponent implements OnInit {
     const dialogRef = this.dialog.open(TimesheetModal);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -118,14 +118,16 @@ export class TimesheetComponent implements OnInit {
     }
   }
 
-  tabularData() {
-    let empId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.empId;
-    this.empObjId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data._id;
+  empName: string = null;
 
+  tabularData() {
+    this.empObjId = jsonDecoder(
+      localStorage.getItem("Authorization")
+    )._id;
+
+    this.empName = jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).name;
 
     let timesheetId: string = null;
 
@@ -133,23 +135,33 @@ export class TimesheetComponent implements OnInit {
       timesheetId = data.timesheetId;
     });
 
-    if(timesheetId){
-      this.timesheetService.getTimesheetUsingRouteParams(timesheetId).subscribe((res) => {
-        this.response = res.payload.data.timesheet;
-      });
+    if (timesheetId) {
+      this.timesheetService
+        .getTimesheetUsingRouteParams(timesheetId)
+        .subscribe(res => {
+          console.log(res);
+          this.response = [res.payload.data.timesheet];
+        });
       return;
     }
-    
-    this.timesheetService.getTimesheet({ criteria: JSON.stringify({ _id: timesheetId }), columns: JSON.stringify({}), page: String(1), limit: String(-1), sort: JSON.stringify({ date: -1 }) }).subscribe((res: IResponse) => {
-      this.response = res.payload.data.timesheet;
-    });
-    
+
+    this.timesheetService
+      .getTimesheet({
+        criteria: JSON.stringify({ _id: timesheetId }),
+        columns: JSON.stringify({}),
+        page: String(1),
+        limit: String(-1),
+        sort: JSON.stringify({ date: -1 })
+      })
+      .subscribe((res: IResponse) => {
+        this.response = res.payload.data.timesheet;
+      });
   }
 
   ngOnInit() {
-    let role = this.httpService.jsonDecoder(
+    let role = jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data.role[0];
+    ).role;
     this.tabularData();
   }
 }

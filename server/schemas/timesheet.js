@@ -21,7 +21,7 @@ module.exports = {
   status: {
     type: String,
     enum: ['approved', 'declined', 'pending'],
-    default: 'submit'
+    default: 'pending'
   },
   week: [
     {
@@ -29,7 +29,7 @@ module.exports = {
       hours: { type: Number },
       taskType: {
         type: String,
-        enum: ["offshore", "onsite", "earned-leave", "sick-leave", "casual-leave"],
+        enum: ["offshore", "onsite", "earned-leave", "sick-leave", "casual-leave", null]
       },
       status: {
         type: String,

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { HOST } from '../config/host';
-import { IPagination } from '../models/pagination.model';
+import { HOST } from "../config/host";
+import { IPagination } from "../models/pagination.model";
 
 const TIMESHEET_API: string = `${HOST}/api/timesheet`;
 
@@ -14,32 +14,17 @@ export class TimesheetService {
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': '*',
-      token: localStorage.getItem("Authorization")
+      "Authorization": localStorage.getItem("Authorization")
     })
   };
 
-  jsonDecoder = token => {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function(c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-    return JSON.parse(jsonPayload);
-  };
-
-  payload: any = this.jsonDecoder(localStorage.getItem("Authorization"));
-
-  projectService(): any {
-    this.http.get("/api/project");
-  }
   getTimesheet(paginationObj: IPagination): Observable<IResponse> {
-    const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
+    const params: HttpParams = new HttpParams()
+      .set("criteria", paginationObj.criteria)
+      .set("columns", paginationObj.columns)
+      .set("page", paginationObj.page)
+      .set("limit", paginationObj.limit)
+      .set("sort", paginationObj.sort);
 
     return this.http.get<IResponse>(`${TIMESHEET_API}`, {
       ...this.httpOptions,
@@ -47,44 +32,23 @@ export class TimesheetService {
     });
   }
 
-  getTimesheetUsingRouteParams(timesheetId: string): Observable<any>{
-    return this.http.get(`http://localhost:3000/api/timesheet/${timesheetId}`);
+  getTimesheetUsingRouteParams(timesheetId: string): Observable<any> {
+    return this.http.get(`${TIMESHEET_API}/${timesheetId}`);
   }
 
-  createTimesheet(timesheet: any): Observable<any> {
-    return this.http.post(
-      TIMESHEET_API,
-      timesheet,
-      this.httpOptions)
+  createTimesheet(timesheet: any): Observable<IResponse> {
+    return this.http.post<IResponse>(TIMESHEET_API, timesheet, this.httpOptions);
   }
 
-  getAllTimesheet(type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
-    const params: HttpParams = new HttpParams().set("type", type).set("page", page).set("limit", limit).set("desc", desc);
-
-    return this.http.get("http://localhost:3000/timesheet", {
-      ...this.httpOptions,
-      params
+  getSpecificTimesheet(startDate: any): Observable<IResponse> {
+    const params: HttpParams = new HttpParams()
+      .set(
+        "startDate",
+        `${startDate}`
+      );
+    return this.http.get<IResponse>(`${TIMESHEET_API}/selectedweek`, {
+      params,
+      ...this.httpOptions
     });
-  }
-
-  private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    console.log(message);
-  }
-
-  getSpecificTimesheets(empId: string, startDate: any): Observable<any>{
-    const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', `${startDate.year}-${startDate.month}-${startDate.day}`);
-    return this.http.get(`${TIMESHEET_API}/filter`, { params, ...this.httpOptions });
   }
 }

@@ -2,7 +2,7 @@ import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { HOST } from "../config/host";
-import { IPagination } from '../models/pagination.model';
+import { IPagination } from "../models/pagination.model";
 
 const PROJECT_API: string = `${HOST}/api/project`;
 
@@ -22,25 +22,35 @@ export class ProjectService {
   constructor(private http: HttpClient) {}
 
   deleteProject(id: string): Observable<IResponse> {
-    return this.http.delete<IResponse>(`${PROJECT_API}/${id}`, { ...this.httpOptions });
+    return this.http.delete<IResponse>(`${PROJECT_API}/${id}`, {
+      ...this.httpOptions
+    });
   }
 
   getProject(projectId: string): Observable<IResponse> {
-    return this.http.get<IResponse>(`${PROJECT_API}/${projectId}`, { ...this.httpOptions });
+    return this.http.get<IResponse>(`${PROJECT_API}/${projectId}`, {
+      ...this.httpOptions
+    });
   }
 
-  projectCreateOrUpdate(obj: any, type: any, projectId: string): Observable<IResponse> {
-    console.log(obj, type);
+  projectCreateOrUpdate(
+    obj: any,
+    type: any,
+    projectId: string
+  ): Observable<IResponse> {
+    //console.log(obj, type);
     if (type === "create")
       return this.http.post<IResponse>(PROJECT_API, obj, this.httpOptions);
 
     if (type === "update")
-      return this.http.put<IResponse>(`${PROJECT_API}/${projectId}`, obj, this.httpOptions);
+      return this.http.put<IResponse>(
+        `${PROJECT_API}/${projectId}`,
+        obj,
+        this.httpOptions
+      );
   }
 
-  showProjects(
-    paginationObj: IPagination
-  ): Observable<IResponse> {
+  showProjects(paginationObj: IPagination): Observable<IResponse> {
     const params: HttpParams = new HttpParams()
       .set("page", paginationObj.page)
       .set("limit", paginationObj.limit)
@@ -48,7 +58,9 @@ export class ProjectService {
       .set("columns", paginationObj.columns)
       .set("sort", paginationObj.sort);
 
-    return this.http.get<IResponse>(PROJECT_API, { ...this.httpOptions, params });
+    return this.http.get<IResponse>(PROJECT_API, {
+      ...this.httpOptions,
+      params
+    });
   }
-
 }
