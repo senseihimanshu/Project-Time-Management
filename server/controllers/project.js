@@ -38,9 +38,6 @@ class Project {
         ...projectObj
       })
     )._id;
-
-    console.log(projectObj, "Abha Rana");
-
     await Promise.all(
       projectObj.empObjectIdArray.map(async staff => {
         await model.projectManager.save({
@@ -87,7 +84,6 @@ class Project {
             ).name;
           })
         );
-        console.log(managerName, memberNames, "Abha Rana");
 
         projectList[index] = {
           ...project.toObject(),
@@ -162,32 +158,36 @@ class Project {
         document => document.staffId
       );
 
-      console.log(projectToBeUpdatedObj.empObjectIdArray, 'New');
-      console.log(staffIdsStoredStringArray, 'Old');
-      
-      if(projectManagerDocumentArray[0] && projectManagerDocumentArray[0].managerId !== projectToBeUpdatedObj.projectManager)
-        await model.projectManager.updateAll({
-          projectObjId
-        }, { managerId: projectToBeUpdatedObj.projectManager });
+      if (
+        projectManagerDocumentArray[0] &&
+        projectManagerDocumentArray[0].managerId !==
+          projectToBeUpdatedObj.projectManager
+      )
+        await model.projectManager.updateAll(
+          {
+            projectObjId
+          },
+          { managerId: projectToBeUpdatedObj.projectManager }
+        );
 
       await Promise.all(
         projectToBeUpdatedObj.empObjectIdArray.map(async employee => {
-          if(!staffIdsStoredStringArray.includes(employee))
-            (await model.projectManager.save({
+          if (!staffIdsStoredStringArray.includes(employee))
+            await model.projectManager.save({
               projectObjId,
               managerId: projectToBeUpdatedObj.projectManager,
               staffId: employee
-            }));
+            });
         })
       );
 
       await Promise.all(
         staffIdsStoredStringArray.map(async employee => {
-          if(!projectToBeUpdatedObj.empObjectIdArray.includes(employee))
-            (await model.projectManager.delete({
+          if (!projectToBeUpdatedObj.empObjectIdArray.includes(employee))
+            await model.projectManager.delete({
               projectObjId,
               staffId: employee
-            }));
+            });
         })
       );
 
@@ -207,11 +207,12 @@ class Project {
     }
   }
 
-  
   async delete(req, res) {
-    const projectObjId = (await model.project.get({ projectId: req.params.id }, { _id: 1 }))._id;
+    const projectObjId = (
+      await model.project.get({ projectId: req.params.id }, { _id: 1 })
+    )._id;
 
-    await model.project.delete({_id: projectObjId });
+    await model.project.delete({ _id: projectObjId });
     await model.projectManager.model.deleteMany({ projectObjId });
 
     res.send({

@@ -9,7 +9,6 @@ class employee {
     const user = await model.employee.get({ "email":req.body.email,"password":req.body.password},
       { role: 1, name: 1, _id: 1,empId:1 });
       if(user==null) {
-        console.log("False", user);
         res.status(401).send({auth:false,message:"Invalid Credentials",userobj:user});
       }
       else{
