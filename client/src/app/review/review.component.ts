@@ -85,5 +85,26 @@ var s=year + "-" + month + "-" + dt;
   ngOnChanges() {
     this.reviews();
   }
-
+   accept(data) {
+    console.log(data);
+    let obj = {
+      _id: data,
+      status: "Approved"
+    };;
+    this.sendReq(obj);
+  }
+      
+  reject(data) {
+    let obj = {
+      _id: data,
+      status: "Declined"
+    };
+    this.sendReq(obj);
+  }
+  sendReq(data) {
+    let obj = this._service.reviewRequest(data).subscribe(res => {
+      this.usersArray = res;
+      alert(data.status);
+    });
+  }
 }

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { HOST } from "../config/host";
 import { IPagination } from '../models/pagination.model';
-
+import {IResponse} from '../models/response.model';
 const PROJECT_API: string = `${HOST}/api/project`;
 
 @Injectable({

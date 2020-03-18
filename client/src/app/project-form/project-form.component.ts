@@ -1,3 +1,4 @@
+import { IResponse } from './../models/response.model';
 import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
@@ -7,7 +8,6 @@ import { SendHttpRequestService } from "../send-http-request.service";
 import swal from "sweetalert2";
 import { ProjectService } from "../services/project.service";
 import { Observable } from 'rxjs';
-
 @Component({
   selector: "app-project-form",
   templateUrl: "./project-form.component.html",

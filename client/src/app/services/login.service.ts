@@ -1,7 +1,7 @@
+import { IResponse } from './../models/response.model';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 //CUSTOMS
 import * as config from '../config/host';
 

@@ -82,7 +82,7 @@ export class SendHttpRequestService {
   }
   reviewRequest(obj: any): Observable<any> {
     return this.http
-      .put("http://localhost:3000/review", obj, { headers: this.header_token })
+      .put("http://localhost:3000/api/review", obj, { headers: this.header_token })
       .pipe(
         tap(_ => this.log("Log In")),
         catchError(this.handleError<any>("Some Error Occurred"))
