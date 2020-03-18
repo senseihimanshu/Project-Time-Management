@@ -139,11 +139,19 @@
       // margin-top: 4rem;
     }
   }
-
   
-.table{
+.table { 
   margin-top: 2%;
+  table-layout: fixed;
+  overflow: hidden;
+  word-wrap: break-word;
 }
+
+.table tr:hover {
+  background-color: #ddd;
+  cursor: default;
+}
+
 @media (min-width: 1200px) {
   //  .container {
   //      //max-width: 1500px;
@@ -173,6 +181,7 @@
     margin-right: 0.5rem;
   }
   .custom-card{
+    margin-top: 1rem;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
     background-color: whitesmoke;

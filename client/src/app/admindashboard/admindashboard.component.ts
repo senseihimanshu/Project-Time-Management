@@ -24,53 +24,6 @@ export class AdmindashboardComponent implements OnInit {
   page: number = 1;
   lastPage: number;
   items = [];
-  dashboard: string = "Admin Dashboard";
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee",
-          route: "/employee/create"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project",
-          route: "/project/create"
-        },
-        {
-          title: "Show All Projects",
-          route: "/project"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets",
-          route: "/timesheetweek"
-        }
-      ]
-    }
-  ];
-
   message: String;
 
   constructor(private employeeService: EmployeeService) {}

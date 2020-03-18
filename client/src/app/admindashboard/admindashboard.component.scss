@@ -88,6 +88,11 @@ th {
   word-wrap: break-word;
 }
 
+.table tr:hover {
+  background-color: #ddd;
+  cursor: default;
+}
+
 .input-group{
   float:right !important;
   align-items: center;
