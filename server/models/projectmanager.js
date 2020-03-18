@@ -8,7 +8,7 @@ class projectManager {
   }
 
   async get(criteria = {}, columns = {}) {
-    return this.model.find(criteria, (columns = {}));
+    return this.model.findOne(criteria, (columns = {}));
   }
   async save(projectObj) {
     const newProject = await this.model.create(projectObj);

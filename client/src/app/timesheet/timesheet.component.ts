@@ -140,7 +140,7 @@ export class TimesheetComponent implements OnInit {
       return;
     }
     
-    this.timesheetService.getTimesheet(this.empObjId).subscribe(res => {
+    this.timesheetService.getTimesheet({ criteria: JSON.stringify({ _id: timesheetId }), columns: JSON.stringify({}), page: String(1), limit: String(-1), sort: JSON.stringify({ date: -1 }) }).subscribe((res: IResponse) => {
       this.response = res.payload.data.timesheet;
     });
     

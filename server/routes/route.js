@@ -21,6 +21,8 @@ module.exports = (app) => {
 	app.put('/api/project/:id', authenticator, controller.project.update);
 	app.delete('/api/project/:id', authenticator, controller.project.delete);
 
+	//Project Manager
+	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
 
 
 	//Timesheet
