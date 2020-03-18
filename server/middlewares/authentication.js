@@ -3,6 +3,7 @@ const config = require('config');
 
 authenticator = (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ','');
+    console.log(token);
 
     if(!token) return res.status(401).send(
         {
@@ -18,6 +19,7 @@ authenticator = (req, res, next) => {
         req.employee = payload;
         next();
     }catch(e){
+        console.log(e);
         res.status(400).send({
             success: false,
             payload: {

@@ -35,9 +35,9 @@ export class SidebarComponent implements OnInit {
    if(title=='Show All Employees')
    this.router.navigate(['/admindashboard']);
    if(title=='Add New Project')
-   this.router.navigate(['/projectform/create/create']);
+   this.router.navigate(['/project/create']);
    if(title=='Show All Projects')
-   this.router.navigate(['/projects']);
+   this.router.navigate(['/project']);
   //  if(title=='Show All Employees')
   //  this.router.navigate(['/employee/update']);
    if(title=='Show All Timesheets')

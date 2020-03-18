@@ -11,25 +11,22 @@ import { jsonDecoder} from 'src/app/utils/json.util';
 })
 export class MyprofileComponent implements OnInit {
   menus: any = [];
-
   employee: any;
   role: any;
 
   constructor(private _service:EmployeeService,
     private router: Router,
-    private route: ActivatedRoute) {  }
+    private route: ActivatedRoute) {}
     
   ngOnInit(): any {
     const token = localStorage.getItem('Authorization');
-      
-    // //Decode JWT and return the Payload in JSON Format
-   const decodeToken= this.jsonDecoder(token);
-    
-   this.role = decodeToken.payload.role;
-   console.log(decodeToken);
-   console.log(decodeToken.data.empId);
+    const decodeToken = jsonDecoder(token);
+    // if (!decodeToken) {
+    //   console.log("Invalid token");
+    // } else {
+    //   const role = decodeToken.role;}
 
-   if(this.role === "Admin")
+   if(decodeToken.role == "Admin"||decodeToken.role == "admin")
     this.menus.push(
       {
         title: "Employees",
@@ -53,11 +50,11 @@ export class MyprofileComponent implements OnInit {
         submenus: [
           {
             title: "Add New Project",
-            route: "/projectform/create/create"
+            route: "/project/create"
           },
           {
             title: "Show All Projects",
-            route: '/projects'
+            route: '/project'
           }
         ]
       },
@@ -75,7 +72,7 @@ export class MyprofileComponent implements OnInit {
         ]
       }
     );
-    else if(this.role === "Project Manager"){
+    else if(decodeToken.role == "Project Manager"||decodeToken.role == "project-manager"){
       this.menus.push({
         title: "Timesheets",
         icon: "fa fa-calendar",
@@ -99,7 +96,7 @@ export class MyprofileComponent implements OnInit {
         ]
       });
     }
-    else if(this.role === "C Level Manager"){
+    else if(decodeToken.role == "C Level Manager"||decodeToken.role == "c-level"){
       this.menus.push(
         {
           title: "Employees",
@@ -161,17 +158,9 @@ export class MyprofileComponent implements OnInit {
 
    }
   
-   return this._service.getEmployee(decodeToken.data.empId).subscribe((response: any) => {  
+   return this._service.getEmployee(decodeToken.empId).subscribe((response: any) => {  
       return (this.employee = response.employee);
       });
 }
 
-jsonDecoder = (token) => {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-  return JSON.parse(jsonPayload);
-};
 }

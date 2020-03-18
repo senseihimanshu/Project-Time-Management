@@ -123,10 +123,10 @@ export class TimesheetWeekComponent {
   tabularData() {
     let empId = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data.empId;
+    ).empId;
     this.empObjId = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data._id;
+    )._id;
 
       if(this.role === "Admin"){
         this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
@@ -144,7 +144,7 @@ export class TimesheetWeekComponent {
   ngOnInit() {
     this.role = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data.role[0];
+    ).role;
     this.tabularData();
   }
 

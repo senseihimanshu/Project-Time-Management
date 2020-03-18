@@ -3,7 +3,43 @@
    padding:20px;
 
 }
-.form-group{
+.control-label{
+    font-size:11px;
+    padding:0;
+}
+.error{
+  font-size: 1rem;
+  color: red;
+}
+.btn{
+    width:30%;
+   margin-left:40%;
+    outline-color: #0183FF;
+    outline-style: auto;
+    font-size:9px;
     
-    text-align:left;
+}
+.button-parent{
+    min-width:40px;
+    margin-top:-15px;
+
+    & > *{
+        // max-width: 4rem !important;
+        // max-height: 20px;
+        white-space: nowrap;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+
+    }
+    
+}
+
+mat-select{
+    text-align: left;
+}
+
+label, mat-label{
+    text-align: left;
+    width: 25%;
 }

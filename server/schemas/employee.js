@@ -50,12 +50,5 @@ module.exports = {
     type: String,
     default: "employee",
     enum: ["project-manager", "c-level", "employee", "admin"]
-  },
-  projectObjIds: [
-    {
-      type: ObjectId,
-      ref: "project",
-      required: true
-    }
-  ]
+  }
 };

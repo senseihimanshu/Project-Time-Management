@@ -41,7 +41,7 @@ class Employee {
 
   async create(req, res) {
  
-    const {
+    let {
       empId,
       email,
       name,
@@ -62,6 +62,8 @@ class Employee {
       address,
       role
     };
+
+    newEmployee.empId = newEmployee.empId.replace(/ /g,'');
 
     newEmployee.password = 'cyg-'+empId;
 
@@ -108,11 +110,6 @@ class Employee {
   }
 
   async index(req, res) {
-    const employeeList = await model.employee.log(
-      { $and: [ { "_id":{ $ne:req.employee._id }} ] },
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    );
-
     return res.status(200).send({
       success: true,
       payload: {
