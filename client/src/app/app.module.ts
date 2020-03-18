@@ -14,6 +14,11 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import {
+  MatAutocompleteModule,
+  
+} from '@angular/material';
+
+import {
   MDBBootstrapModule,
   CheckboxModule,
   WavesModule,
@@ -104,7 +109,7 @@ import { AuthGuard } from './auth.guard';
     NgbModule,
     // MbscModule,
     //PerfectScrollbarConfigInterface,
-    MatSelectModule,
+   
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
@@ -117,6 +122,8 @@ import { AuthGuard } from './auth.guard';
     HttpClientModule,
     ClevelDashboardModule,
     ChartsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
     //Third Party
    
     MDBBootstrapModule.forRoot(),
@@ -144,6 +151,7 @@ import { AuthGuard } from './auth.guard';
     MatCheckboxModule
   ],
   providers: [ServicesService, AuthGuardService, RoleGuardService,AuthGuard],
+  exports: [MatAutocompleteModule],
 entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]

@@ -5,6 +5,7 @@ const cors = require("cors");
 const config = require("config");
 const database=require('./database/config');
 const bodyParser=require('body-parser');
+const exphbs=require('express-handlebars');
 
 //User Imports
 app.use(cors());
@@ -19,6 +20,9 @@ if (!config.get("jwtPrivateKey")) {
 app.use(bodyParser.json());
 app.use(express.json());
 require("./routes/route.js")(app);
+
+app.engine('handlebars',exphbs());
+app.set('view engine','handlebars');
 
 
 //Listening and setting of port

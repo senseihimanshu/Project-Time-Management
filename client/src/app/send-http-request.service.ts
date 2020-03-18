@@ -45,7 +45,7 @@ export class SendHttpRequestService {
       
     // //Decode JWT and return the Payload in JSON Format
    const decodeToken= this.jsonDecoder(token);
-         const empId=decodeToken.data.empId;
+         const empId=decodeToken.empId;
       const params = new HttpParams().set("empId", empId);
       if (!empId) {
         return this.http.get<any>("http://localhost:3000/employees/role", { ...this.httpOptions });

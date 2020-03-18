@@ -1,10 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,ViewChild} from '@angular/core';
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { FormControl } from '@angular/forms';
 import { SendHttpRequestService } from "../send-http-request.service";
 import swal from'sweetalert2'
+
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -12,16 +15,16 @@ import swal from'sweetalert2'
   '../main/main.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
-
-
-  formType: string;
+  
+  projectManagerList:string[]=[];
+  projectMemberList: string[]=[];
+  projectManagerNamesArray:string[]=[];
   employee: any;
   project:any;
-  dropdownList = [];
+  
   selectedItems = [];
-  dropdownSettings = {};
-  projectManagerList: string[];
-  projectMemberList: string[];
+ 
+   formType:string;
   projManager:string[]=[];
   projMembers:string[]=[];
   message:string;
@@ -83,10 +86,9 @@ export class ProjectFormComponent implements OnInit {
     ];
 
     loading = false;
-
-
-
+    public model: any;
   ngOnInit():any {
+    
     //this function adds the class was-validated when the user submits the form
     (function() {
       'use strict';
@@ -109,7 +111,7 @@ export class ProjectFormComponent implements OnInit {
     
      
     this.getemployees();
-   
+  
     this.route.params.subscribe((data: Params) => {
 
     });
@@ -156,16 +158,18 @@ export class ProjectFormComponent implements OnInit {
     ); 
     this.router.navigate(['/projects']);
 }
+
    getemployees() {
 
     let obj = this._service.showEmployeesByRole().subscribe(res => {
       this.projectManagerList = res.payload.data.projectManagerList;
-     
+      
       this.projectMemberList=res.payload.data.projectMemberList;
+      console.log(this.projectMemberList);
+      this.names(this.projectManagerList);
       
     });
   }
-
   addProjectManager(employeeArr: any)
   {
     if(employeeArr){
@@ -183,5 +187,26 @@ export class ProjectFormComponent implements OnInit {
       });
      
     }
+
+
   }
+  formatter = (result: string) => result.toUpperCase();
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.projectManagerList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5))
+    )
+    names(projectManagerList) {
+   
+      projectManagerList.map((employee) => {
+        this.projectManagerNamesArray.push(employee.name);
+      });
+     
+     
+     
+  }
+
+  
 }

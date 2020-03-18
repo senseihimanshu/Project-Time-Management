@@ -103,7 +103,9 @@
               <label for="managers" class="control-label"
                 >*Project Manager:</label
               >
+             
               <mat-select
+             
                 class="browser-default custom-select"
                 name="managers"
                 [ngModel]="(project?.projectManager)[0]"
@@ -111,11 +113,19 @@
                 [disabled]="formType === 'get'"
                 (ngModelChange)="addProjectManager($event)"
                 #projectManagerInput="ngModel"
-                required
-              >
-                <mat-option *ngFor="let emp of projectManagerList" [value]="emp._id">{{
+                required>
+                <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
+                name="search"
+                [ngbTypeahead]="search"
+                [resultFormatter]="formatter"
+                (selectItem)="selected($event)"
+                placeholder="search"/>
+                <hr>
+              <div >
+                <mat-option *ngFor="let emp of projectManagerList"[value]="emp._id">{{
                   emp.name
                 }}</mat-option>
+              </div>
               </mat-select>
               <p
                 *ngIf="
@@ -200,16 +210,20 @@
               <mat-select
                 class="browser-default custom-select"
                 name="members"
-                [ngModel]="project && project.empObjectIdArray"
+                [ngModel]="project && project.projectMemberList"
                 (ngModelChange)="addProjectMember($event)"
                 [disabled]="formType === 'get'"
                 #membersInput="ngModel"
                 required
                 multiple
+
               >
+             
+         
                 <mat-option *ngFor="let emp of projectMemberList" [value]="emp._id">{{
                   emp.name
                 }}</mat-option>
+              
               </mat-select>
               <p *ngIf="membersInput?.touched && membersInput?.invalid">
                 Project Members are required

@@ -1,4 +1,4 @@
-const controller = require('../controllers');
+ const controller = require('../controllers');
 const paginator = require('../middlewares/pagination');
 const employeePaginator = require('../middlewares/employeePagination');
 const projectPaginator = require('../middlewares/projectPagination');
@@ -15,21 +15,21 @@ module.exports = (app) => {
 	app.get('/api/employee/:id', authenticator, controller.employee.show);
 	app.put('/api/employee/:id', authenticator, controller.employee.update);	
 	app.delete('/api/employee/:id', authenticator, controller.employee.delete);	
-
+	 app.get("/employees/role",controller.employee.indexByRole);
 	//Project
-	// app.post("/api/project", controller.project.create);
-	// app.get("/projects", projectPaginator(model.project.model), controller.project.index);
-	// app.get("/project", controller.project.show);
-	// app.get("/projects/search", controller.project.searchProject);
-	// app.put("/project/:id", controller.project.update);
-	// app.put("/api/project", controller.project.update);
-	// app.delete("/api/project", controller.project.delete);
+	 app.post("/api/project", controller.project.create);
+	 app.get("/projects", projectPaginator(model.project.model), controller.project.index);
+	 app.get("/project", controller.project.show);
+	 app.get("/projects/search", controller.project.searchProject);
+	 app.put("/project/:id", controller.project.update);
+	 app.put("/api/project", controller.project.update);
+	 app.delete("/api/project", controller.project.delete);
 	// //Employees
 	// app.post("/employees", controller.employees.create) ;
     // app.put("/employees/:id", controller.employees.update) ;
 	// app.delete("/employees/:id", controller.employees.delete);
 	// app.get("/employees/search", controller.employees.searchEmployee);
-	// 
+	  
 	// app.post("/login", controller.login.checkUserAuthentication);
 	// app.get("/timesheet", paginator(model.timesheet.model), controller.timesheet.show);
 	// app.get("timesheets/search", controller.timesheet.searchTimesheets);
@@ -53,3 +53,4 @@ module.exports = (app) => {
 	// app.get('/api/timesheet/filter', controller.timesheet.index);
 	// app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
 }
+ 
