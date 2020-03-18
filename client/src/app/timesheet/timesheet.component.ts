@@ -18,6 +18,7 @@ import { SendHttpRequestService } from "../services/send-http-request.service";
 import {  RouterLink } from "@angular/router";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { jsonDecoder } from '../utils/json.util';
 
 @Component({
   selector: "table-editable",
@@ -42,50 +43,7 @@ export class TimesheetComponent implements OnInit {
   page = 1;
   pageSize = 10;
   items = [];
-  dashboard:string="Admin Dashboard";
   response: any;
-
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
 
   openDialog() {
     const dialogRef = this.dialog.open(TimesheetModal);
@@ -146,10 +104,8 @@ export class TimesheetComponent implements OnInit {
     
   }
 
-  ngOnInit() {
-    let role = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.role[0];
+  ngOnInit() { 
+    const decodeToken = jsonDecoder();
     this.tabularData();
   }
 }

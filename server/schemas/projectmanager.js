@@ -1,23 +1,19 @@
 const mongoose = require('mongoose');
 
 module.exports = {
-    managerName:{
-        type:String,
-        default:null
+    projectObjId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'project'
     },
     managerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'employee' 
     },
-    employeeIds: [{
+    staffId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'employee' 
-    }],
-    projectId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'project'
+        ref: 'employee'
     },
-    timesheetIds:[{
+    staffTimesheetIds: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'timesheet'
     }]

@@ -10,6 +10,14 @@ h6{
 
 .table{
   margin-top: 2%;
+  table-layout: fixed;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+  cursor: default;
 }
 
 thead{

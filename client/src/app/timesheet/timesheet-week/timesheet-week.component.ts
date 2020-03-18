@@ -14,6 +14,7 @@ import { TimesheetModal } from "./../modal/modal.component";
 import { MatDialog } from "@angular/material/dialog";
 import { SendHttpRequestService } from "../../services/send-http-request.service";
 import * as moment from "moment";
+import { jsonDecoder } from 'src/app/utils/json.util';
 
 @Component({
   selector: "app-timesheet-week",
@@ -42,48 +43,6 @@ export class TimesheetWeekComponent {
   response: any;
 
   role: string;
-
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
 
   openDialog(timesheetId: string) {
     const dialogRef = this.dialog.open(TimesheetModal, {
@@ -123,14 +82,13 @@ export class TimesheetWeekComponent {
   tabularData() {
     let empId = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data.empId;
+    ).empId;
     this.empObjId = this.httpService.jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data._id;
+    )._id;
 
       if(this.role === "Admin"){
         this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
-          console.log(res);
         });
         return;
       }
@@ -143,9 +101,7 @@ export class TimesheetWeekComponent {
   }
 
   ngOnInit() {
-    this.role = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.role[0];
+    const decodeToken = jsonDecoder();
     this.tabularData();
   }
 

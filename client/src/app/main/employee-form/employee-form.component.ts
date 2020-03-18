@@ -16,7 +16,6 @@ export class EmployeeFormComponent implements OnInit {
   employee: any;
   message: string;
   employeeForm: any;
-  dashboard:string= "Admin Dashboard"
   constructor(
    
     private employeeService: EmployeeService,
@@ -30,55 +29,11 @@ export class EmployeeFormComponent implements OnInit {
      
     });
   }
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
-  
   ngOnInit(): any {
     (function() {
       'use strict';
       window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
           form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) {
@@ -90,28 +45,23 @@ export class EmployeeFormComponent implements OnInit {
         });
       }, false);
     })();
-    this.route.params.subscribe((data: Params) => {
-    });
 
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-         
           this.typeOfForm = params.type;
           if (!params.type) {
             this.typeOfForm = "get";
           }
 
           if (!params.empId) {
-            return new Observable<any>();
+            return new Observable<IResponse>();
           }
-        
           return this.employeeService.getEmployee(params.empId);
         })
       )
-      .subscribe((response: any) => {
-        this.employee = response.employee;
-       
+      .subscribe((response: IResponse) => {
+        this.employee = response.payload.data.employee;
       });
   }
   
@@ -124,7 +74,6 @@ export class EmployeeFormComponent implements OnInit {
           icon: 'success',
           text: this.message,
           showConfirmButton: true,
-         
         }) 
         form.reset();
 
@@ -135,8 +84,7 @@ export class EmployeeFormComponent implements OnInit {
         swal.fire({
           icon: 'error',
           text: this.message,
-          showConfirmButton: true,
-          timer: 3000
+          showConfirmButton: true
         }) 
         }
      );

@@ -1,11 +1,12 @@
 <div class="wrapper">
-  <app-navbar [dashboard]="dashboard"></app-navbar>
-  <div class="app-main no-scrollbar-wrap"> 
+  <app-navbar></app-navbar>
     <div class="row"> 
       <div class="col-2 d-none d-lg-block">
-        <app-sidebar [menus]="menus"></app-sidebar>
+        <app-sidebar></app-sidebar>
       </div>
-      <div class="custom-card col-6">
+      
+ <div class="app-main no-scrollbar-wrap"> 
+      <div class="custom-card col-5">
         <div class="app-employee-form">
           <form
             class="form-body needs-validation project-card"
@@ -13,6 +14,7 @@
             (ngSubmit)="projectCreateOrUpdate(form.value, formType)"
             novalidate
           >
+         
             <div
               class="h4 mb-4
                 d-flex justify-content-between font-weight-bold"
@@ -100,22 +102,25 @@
                 projectManagerInput?.touched && projectManagerInput?.invalid
               "
             >
-              <label for="managers" class="control-label"
-                >*Project Manager:</label
+              <label for="manager" class="control-label"
+                >Project Manager:</label
               >
               <mat-select
                 class="browser-default custom-select"
-                name="managers"
-                [ngModel]="(project?.projectManager)[0]"
+                name="manager"
+                [ngModel]="(project && project?.projectManager)"
                 class="form-control"
                 [disabled]="formType === 'get'"
                 (ngModelChange)="addProjectManager($event)"
                 #projectManagerInput="ngModel"
                 required
               >
-                <mat-option *ngFor="let emp of projectManagerList" [value]="emp._id">{{
-                  emp.name
-                }}</mat-option>
+
+                <ng-template ngFor let-emp [ngForOf]="empList">
+                  <mat-option *ngIf="!projMembers.includes(emp._id)" [value]="emp._id">{{ emp.empId }}----{{
+                    emp.name
+                  }}</mat-option>
+                </ng-template>
               </mat-select>
               <p
                 *ngIf="
@@ -170,8 +175,8 @@
               class="h5 mb-4 form-group"
               [class.has-error]="statusInput?.touched"
             >
-              <label class="control-label" for="status">*Status:</label>
-              <select
+              <label class="control-label" for="status">Status:</label>
+              <mat-select
                 class="browser-default
                     custom-select"
                 name="status"
@@ -180,16 +185,15 @@
                 #statusInput="ngModel"
                 required
               >
-                <option value="" disabled>Choose option</option>
-                <option value="In Progress" selected>In Progress</option>
-                <option value="Completed">Completed</option>
-                <option value="Discarded">Discarded</option>
-              </select>
+                <mat-option value="" disabled>Choose option</mat-option>
+                <mat-option value="in-progress" selected>In Progress</mat-option>
+                <mat-option value="completed">Completed</mat-option>
+                <mat-option value="discarded">Discarded</mat-option>
+              </mat-select>
               <p *ngIf="statusInput?.touched && statusInput?.invalid">
                 Status is required
               </p>
             </div>
-
             <div
               class="h5 mb-4 form-group"
               [class.has-error]="membersInput?.touched && membersInput?.invalid"
@@ -200,16 +204,18 @@
               <mat-select
                 class="browser-default custom-select"
                 name="members"
-                [ngModel]="project && project.empObjectIdArray"
+                [ngModel]="project && project.memberIds"
                 (ngModelChange)="addProjectMember($event)"
                 [disabled]="formType === 'get'"
                 #membersInput="ngModel"
                 required
                 multiple
               >
-                <mat-option *ngFor="let emp of projectMemberList" [value]="emp._id">{{
-                  emp.name
-                }}</mat-option>
+                <ng-template ngFor let-emp [ngForOf]="empList">
+                  <mat-option *ngIf="projManager !== emp._id" [value]="emp._id">{{ emp.empId }}----{{
+                    emp.name
+                  }}</mat-option>
+                </ng-template>
               </mat-select>
               <p *ngIf="membersInput?.touched && membersInput?.invalid">
                 Project Members are required
@@ -229,9 +235,9 @@
               <button
                 type="button"
                 mdbBtn
-                class="btn btn-outline-primary  text-center text-yellow m-2 btnsstyle"
+                class="btn btn-outline-primary  text-center text-yellow m-4 btnsstyle"
                 mdbWavesEffect
-                [routerLink]="['/projects']"
+                [routerLink]="['/project']"
               >
                 Cancel
               </button>
@@ -242,7 +248,7 @@
                 mdbBtn
                 class="btn btn-outline-primary  text-center m-2 btncancel"
                 mdbWavesEffect
-                [routerLink]="['/projects']"
+                [routerLink]="['/project']"
               >
                 Cancel
               </button>
@@ -250,6 +256,6 @@
           </form>
          </div> 
       </div>
+      </div>
     </div>
   </div>
-</div>

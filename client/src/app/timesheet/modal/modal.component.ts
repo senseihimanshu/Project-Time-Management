@@ -95,7 +95,7 @@ export class TimesheetModal implements OnInit {
 
     //subscribing to observable for getting the employee
     this.employeeService.getEmployee(empId).subscribe(response => {
-      this.projectArray = response.employee.projectId.map(project => {
+      this.projectArray = response.payload.data.employee.projectId.map(project => {
         return {
           _id: project._id,
           projectName: project.projectName,
@@ -204,7 +204,6 @@ export class TimesheetModal implements OnInit {
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
-     
       //Getting empId from token
     }
 

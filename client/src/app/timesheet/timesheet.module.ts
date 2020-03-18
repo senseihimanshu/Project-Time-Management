@@ -15,7 +15,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     TimesheetComponent,
     TimesheetModal,
     TimesheetWeekComponent
-    //   MyprofileComponent
   ],
   imports: [FormsModule, CommonModule, NgbDate, MatCheckboxModule],
   exports: [TimesheetComponent, TimesheetModal, TimesheetWeekComponent],

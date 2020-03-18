@@ -1,27 +1,27 @@
 mongoose = require("mongoose");
 ObjectId = mongoose.Schema.Types.ObjectId;
 employee = require("./employee");
-project = require("./project-details");
+project = require("./project");
 
 module.exports = {
   empObjId: {
     type: ObjectId,
     ref: "employee"
-  },  
+  },
   startDate: {
     type: Date
   },
   endDate: {
     type: Date
   },
-  state: {
+  status: {
     type: String,
-    enum: [ 'approved', 'rejected', 'submit'],
+    enum: ['approved', 'declined', 'pending'],
     default: 'submit'
   },
   week: [
     {
-      projectId: {
+      projectObjId: {
         type: ObjectId,
         ref: "project"
       },
@@ -29,7 +29,7 @@ module.exports = {
       hours: { type: Number },
       taskType: {
         type: String,
-        enum: ["offshore", "onsite", "earned-leave", "sick-leave", "casual-leave", null]
+        enum: ["offshore", "onsite", "earned-leave", "sick-leave", "casual-leave"],
       },
       status: {
         type: String,
@@ -38,10 +38,6 @@ module.exports = {
       },
       billable: {
         type: Boolean
-      },
-      clientName: {
-        type: String,
-        default: null
       }
     }
   ]

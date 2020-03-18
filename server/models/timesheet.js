@@ -1,6 +1,6 @@
-const mongoose=require('mongoose');
-const schema=require('../schemas');
-const timesheetschema=mongoose.Schema(schema.timesheet);
+const mongoose = require('mongoose');
+const schema = require('../schemas');
+const timesheetschema = new mongoose.Schema(schema.timesheet);
 
 class Timesheet{
   constructor(){

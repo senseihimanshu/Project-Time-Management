@@ -72,7 +72,6 @@ const routes: Routes = [
       expectedRole: 'project manager'
     } 
   },
-  { path: "", component: LoginComponent },
   {
     path: "manager",
     component: ReviewComponent,
@@ -130,7 +129,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "employeeform",
+    path: "employee",
     children: [
       {
         path: ":type",
@@ -154,17 +153,20 @@ const routes: Routes = [
         } 
   },
   {
-    path: "projectform",
+    path: "project",
     children: [
       {
-        path: "create/:type",
-        component: ProjectFormComponent,
-       
+        path: "",
+        component: ProjectComponent,
+        pathMatch: 'full'
       },
       {
-        path: ":type/:projectId",
-        component: ProjectFormComponent,
-      
+        path: ":type",
+        component: ProjectFormComponent
+      },
+      {
+        path: "details/:projectId",
+        component: ProjectFormComponent
       },
       {
         path: ":type/:projectId",

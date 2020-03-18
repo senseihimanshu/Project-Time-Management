@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
-import { Token } from "@angular/compiler/src/ml_parser/lexer";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 
 const TIMESHEET_API: string = "http://localhost:3000/api/timesheet";
@@ -41,7 +39,7 @@ export class TimesheetService {
   getTimesheet(empObjId: any, type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
     const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type).set("page", page).set("limit", limit).set("desc", desc);
 
-    return this.http.get("http://localhost:3000/timesheet", {
+    return this.http.get("http://localhost:3000/api/timesheet", {
       ...this.httpOptions,
       params
     });
