@@ -133,6 +133,9 @@ var s=year + "-" + month + "-" + dt;
           'data.status',
           'success'
         )
+        this.usersArray = this.usersArray.filter(
+          item => item._id !=data._id
+        );
       } else if (
         result.dismiss === swal.DismissReason.cancel
       ) {
