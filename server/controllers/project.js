@@ -32,7 +32,7 @@ class Project {
           message: "Project Id already exists"
         }
       });
-
+    try{
     const newProjectId = (
       await model.project.save({
         ...projectObj
@@ -64,6 +64,7 @@ class Project {
       }
     });
    }
+  }
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
