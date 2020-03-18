@@ -43,6 +43,8 @@ export class TimesheetWeekComponent {
 
   role: string;
 
+  sortAccordingTo: any = { startDate: (this.isSortDecreasing? 1 : -1) };
+
   menus: any = [
     {
       title: "Employees",
@@ -99,7 +101,7 @@ export class TimesheetWeekComponent {
 
   open(content) {
     this.modalService
-      .open(content, { windowClass : "myCustomModalClass"})
+      .open(content)
       .result.then(
         result => {
           this.closeResult = `Closed with: ${result}`;
@@ -132,7 +134,7 @@ export class TimesheetWeekComponent {
       //   return;
       // }
 
-    this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), criteria: JSON.stringify({})}).subscribe((res: IResponse) => {
+    this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), criteria: JSON.stringify({ empObjId: this.empObjId }), columns: JSON.stringify({}), sort: JSON.stringify(this.sortAccordingTo)}).subscribe((res: IResponse) => {
    
       this.timesheet = res.payload.data.timesheet;
       this.dataSize = res.payload.data.result.dataSize;

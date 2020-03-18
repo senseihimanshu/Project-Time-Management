@@ -39,7 +39,7 @@ export class TimesheetService {
     this.http.get("/api/project");
   }
   getTimesheet(paginationObj: IPagination): Observable<IResponse> {
-    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type).set("page", page).set("limit", limit).set("desc", desc);
+    const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
 
     return this.http.get<IResponse>(`${TIMESHEET_API}`, {
       ...this.httpOptions,

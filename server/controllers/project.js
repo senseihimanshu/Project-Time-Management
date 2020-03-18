@@ -73,7 +73,7 @@ class Project {
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
-
+    
     await Promise.all(
       projectList.map(async (project, index) => {
         const manager = await model.employee.get(
@@ -83,20 +83,22 @@ class Project {
 
         const managerName = manager && manager.name;
 
-        const staffIds = (
-          await model.projectManager.get(
-            { managerId: project.projectManager },
-            { staffId: 1, _id: 0 }
-          )
-        ).map(employeeId => {
+        const projectManagerStaffObjs = await model.projectManager.log(
+          { managerId: project.projectManager },
+          { staffId: 1, _id: 0 }
+        );
+    
+        const staffIds = projectManagerStaffObjs.map(employeeId => {
           return employeeId.staffId;
         });
+        console.log(staffIds);
 
         const memberNames = await Promise.all(
           staffIds.map(async employee => {
-            return (
-              await model.employee.get({ _id: employee }, { name: 1, _id: 0 })
-            ).name;
+            const employeeObj = await model.employee.get({ _id: employee }, { name: 1, _id: 0 });
+            if(employeeObj){
+              return employeeObj.name;
+            }
           })
         );
         console.log(managerName, memberNames, "Abha Rana");
@@ -125,12 +127,12 @@ class Project {
   async show(req, res) {
     const project = await model.project.get({ projectId: req.params.id });
 
-    const staffIds = (
-      await model.projectManager.get(
-        { managerId: project.projectManager },
-        { staffId: 1, _id: 0 }
-      )
-    ).map(employeeId => {
+    const projectManagerStaffObjs = await model.projectManager.log(
+      { managerId: project.projectManager },
+      { staffId: 1, _id: 0 }
+    );
+
+    const staffIds = projectManagerStaffObjs.map(employeeId => {
       return employeeId.staffId;
     });
 
