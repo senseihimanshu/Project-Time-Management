@@ -1,71 +1,6 @@
-.main{
-    /* padding: 0.8rem 4rem;
-     margin: 0 0;
-     //  justify-content: center;
-     //  align-items: center;*/
-     display:flex;
-     flex-wrap: nowrap;
- }
- 
- h2{
-     align-items:center ;
-     font-weight: bolder;
- }
- 
-p{
-    color:red;
-    font-size:0.8rem;
-    padding:-5px;
-}
-.app-main{
-    padding: 0.8rem 4rem;
-margin: 0 auto;}
-.message{
-    font-size: 9px;
-    color: red;
-    transition: all 2s;
-}
-help-block{
-    color:red!important;
-}
-.form-body{
-    background-color:whitesmoke;
-    padding:26px;
-    height:fit-content;
-    min-width:70vh;
-    border:5px solid #2f8fe9b4;
-    
-   
-}
-h6{
-    text-align:left;
-    font-weight:bolder;
-    font-size:0.8rem;
-    margin:0;
-    padding:0;
-    max-height:15rem;
-    
-}
-.custom-card {
-    box-shadow: 1px 1px 1px 1px rgba(50, 50, 50, 0.1);
-    background:white;
-    padding: 0;
-    margin: 0 auto;
-    margin-top:1.2rem;
-  
-}
-.form-control,.custom-select
-{
-    display: block;
-    width:70%;
-    float:right;
-    font-size:9px;
-   max-height:9rem;
-   padding:-15px;
-}
-.h4{
-    font-size:2px;
-
+.project-card{
+    margin-top:-4.4rem;
+   padding:20px;
 }
 .control-label{
     font-size:11px;
@@ -94,9 +29,7 @@ h6{
         text-align: center;
         padding-left: 0;
         padding-right: 0;
-
-    }
-    
+    }  
 }
 
 mat-select{

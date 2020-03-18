@@ -65,4 +65,18 @@ module.exports = (app) => {
 	// app.get('/employeeList', controller.employees.indexP);
 	// app.get('/api/timesheet/filter', controller.timesheet.index);
 	// app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
+
+// 	app.get("/timesheet", paginator(model.timesheet.model), controller.timesheet.show);
+// 	app.get("timesheets/search",controller.timesheet.searchTimesheets);
+// 	// app.post("./timesheet",controller.timesheet.create);
+// 	app.post('/api/timesheet', controller.timesheet.create);
+// 	app.patch("/api/timesheet", controller.timesheet.update);
+// 	app.get('/api/projectmanager', controller.projectManager.get);
+// 	//review
+// 	app.put("/review",controller.timesheet.modify);
+// 	app.get("/project/graphicaldata",controller.cleveldata.projectsStatusData);
+// 	app.get("/timesheet/graphicaldata",controller.cleveldata.timesheetsStatusData);
+//     app.get('/api/timesheet/filter', controller.timesheet.index);
+// 	app.get('/api/timesheet/filter', controller.timesheet.index);
+// 	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
 }

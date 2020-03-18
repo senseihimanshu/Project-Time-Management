@@ -23,7 +23,6 @@ generateToken = ((async (req, res) => {
     });
 
     const token = jwt.sign({ _id: employee._id, empId: employee.empId, name: employee.name, role: employee.role }, config.get('jwtPrivateKey'));
-    console.log(token);
 
     res.send({
         success: true,

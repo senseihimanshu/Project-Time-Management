@@ -86,7 +86,6 @@ export class TimesheetWeekComponent {
       ]
     }
   ];
-
   openDialog(timesheetId: string) {
     const dialogRef = this.dialog.open(TimesheetModal, {
       data: {
@@ -133,6 +132,11 @@ export class TimesheetWeekComponent {
       //   });
       //   return;
       // }
+      if(this.role === "Admin"){
+        this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
+        });
+        return;
+      }
 
     this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), criteria: JSON.stringify({ empObjId: this.empObjId }), columns: JSON.stringify({}), sort: JSON.stringify(this.sortAccordingTo)}).subscribe((res: IResponse) => {
    
@@ -145,6 +149,7 @@ export class TimesheetWeekComponent {
     this.role = jsonDecoder(
       localStorage.getItem("Authorization")
     ).role;
+    const decodeToken = jsonDecoder();
     this.tabularData();
   }
 

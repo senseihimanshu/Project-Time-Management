@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { ISidebarMenus } from '../models/sidebar-menus.interface';
 
 @Component({
   selector: "app-project-manager",
@@ -7,30 +6,4 @@ import { ISidebarMenus } from '../models/sidebar-menus.interface';
   templateUrl: "./project-manager.component.html"
 })
 export class ProjectManagerComponent {
-  dashboard:string= "Manager Dashboard"
-
-  menus: ISidebarMenus[] = [
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Create Timesheet",
-          route: "/create/timesheet"
-        },
-        {
-          title: "Show Filled Timesheets",
-          route: "/show/timesheet"
-        },
-        {
-          title: "Review Timesheets",
-          route: "/review"
-        }
-      
-      ]
-    }
-  ];
 }

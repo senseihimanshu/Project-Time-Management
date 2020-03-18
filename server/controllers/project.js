@@ -69,6 +69,37 @@ class Project {
       });
     }
   }
+    const newProjectId = (
+      await model.project.save({
+        ...projectObj
+      })
+    )._id;
+
+    await Promise.all(
+      projectObj.empObjectIdArray.map(async staff => {
+        await model.projectManager.save({
+          managerId: projectObj.projectManager,
+          staffId: staff,
+          projectObjId: newProjectId
+        });
+      })
+    );
+
+    return res.status(201).send({
+      success: true,
+      payload: {
+        message: "Project created successfully"
+      }
+    });
+   }catch(error){
+    
+    res.status(400).send({
+      success: false,
+      payload: {
+        message: err.message
+      }
+    });
+   }
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
@@ -100,7 +131,6 @@ class Project {
             }
           })
         );
-        console.log(managerName, memberNames, "Abha Rana");
 
         projectList[index] = {
           ...project.toObject(),
@@ -177,6 +207,22 @@ class Project {
 
       console.log(projectToBeUpdatedObj.empObjectIdArray, "New");
       console.log(staffIdsStoredStringArray, "Old");
+      
+      if(projectManagerDocumentArray[0] && projectManagerDocumentArray[0].managerId !== projectToBeUpdatedObj.projectManager)
+        await model.projectManager.updateAll({
+          projectObjId
+        }, { managerId: projectToBeUpdatedObj.projectManager });
+
+      await Promise.all(
+        projectToBeUpdatedObj.empObjectIdArray.map(async employee => {
+          if(!staffIdsStoredStringArray.includes(employee))
+            (await model.projectManager.save({
+              projectObjId,
+              managerId: projectToBeUpdatedObj.projectManager,
+              staffId: employee
+            }));
+        })
+      );
 
       if (
         projectManagerDocumentArray[0] &&
