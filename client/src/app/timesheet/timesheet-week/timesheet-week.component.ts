@@ -25,8 +25,7 @@ export class TimesheetWeekComponent {
   constructor(
     private timesheetService: TimesheetService,
     private modalService: NgbModal,
-    public dialog: MatDialog,
-    private httpService: SendHttpRequestService
+    public dialog: MatDialog
   ) {}
   editField: string;
   timesheetList: any;
@@ -40,10 +39,53 @@ export class TimesheetWeekComponent {
 
   isSortDecreasing: boolean = false;
 
-  response: any;
+  timesheet: any;
 
   role: string;
 
+  sortAccordingTo: any = { startDate: (this.isSortDecreasing? 1 : -1) };
+
+  menus: any = [
+    {
+      title: "Employees",
+      icon: "fa fa-users",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Employee"
+        }
+      ]
+    },
+    {
+      title: "Projects",
+      icon: "fa fa-book",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Add New Project"
+        },
+        {
+          title: "Show All Projects"
+        }
+      ]
+    },
+    {
+      title: "Timesheets",
+      icon: "fa fa-calendar",
+      active: false,
+      type: "dropdown",
+
+      submenus: [
+        {
+          title: "Show All Timesheets"
+        }
+      ]
+    }
+  ];
   openDialog(timesheetId: string) {
     const dialogRef = this.dialog.open(TimesheetModal, {
       data: {
@@ -58,7 +100,7 @@ export class TimesheetWeekComponent {
 
   open(content) {
     this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .open(content)
       .result.then(
         result => {
           this.closeResult = `Closed with: ${result}`;
@@ -80,27 +122,33 @@ export class TimesheetWeekComponent {
   }
 
   tabularData() {
-    let empId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).empId;
-    this.empObjId = this.httpService.jsonDecoder(
+    this.empObjId = jsonDecoder(
       localStorage.getItem("Authorization")
     )._id;
 
+      // if(this.role === "Admin"){
+      //   this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
+      //     console.log(res);
+      //   });
+      //   return;
+      // }
       if(this.role === "Admin"){
         this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
         });
         return;
       }
 
-    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
+    this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), criteria: JSON.stringify({ empObjId: this.empObjId }), columns: JSON.stringify({}), sort: JSON.stringify(this.sortAccordingTo)}).subscribe((res: IResponse) => {
    
-      this.response = res.payload.data.timesheet;
+      this.timesheet = res.payload.data.timesheet;
       this.dataSize = res.payload.data.result.dataSize;
     });
   }
 
   ngOnInit() {
+    this.role = jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).role;
     const decodeToken = jsonDecoder();
     this.tabularData();
   }
@@ -112,7 +160,7 @@ export class TimesheetWeekComponent {
     this.timesheetService
       .getSpecificTimesheets(this.empObjId, date)
       .subscribe(res => {
-        this.response = res.payload.data.filteredTimesheets;
+        this.timesheet = res.payload.data.filteredTimesheets;
       });
   }
 
