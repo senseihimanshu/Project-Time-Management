@@ -38,7 +38,6 @@ class Timesheet {
 
   async index(req, res) {
     var timesheet = req.paginatedResults.results;
-    //console.log(timesheet);
 
     timesheet = await Promise.all(
       timesheet.map(async timesheetWeek => {

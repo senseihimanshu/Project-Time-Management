@@ -5,12 +5,9 @@ import { MatDialogModule, MatFormFieldModule, MatInputModule, MatPaginatorModule
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from "@angular/material/select";
 import { BrowserModule } from "@angular/platform-browser";
-//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-//Third Party Components
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ButtonsModule, CardsModule, CheckboxModule, IconsModule, InputsModule, MDBBootstrapModule, TableModule, WavesModule } from "angular-bootstrap-md";
-//import { AuthorizationService } from './services/authorization.service';
 import { ChartsModule } from 'ng2-charts';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { NotFoundComponent } from "./404/notfound.component";
@@ -22,7 +19,6 @@ import { AppComponent } from "./app.component";
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EmployeedashboardComponent } from './employeedashboard/employeedashboard.component';
-import { AuthGuardService } from './guards/auth-guard.service';
 import { RoleGuardService } from './guards/role-guard.service';
 import { HeaderComponent } from "./header/header.component";
 import { HomeComponent } from "./home/home.component";
@@ -42,14 +38,10 @@ import { ServicesService } from './services.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TimesheetModal } from './timesheet/modal/modal.component';
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
-// import { NewwComponent } from './neww/neww.component';
-// import { MbscModule } from '@mobiscroll/angular-lite';
 import { TimesheetComponent } from './timesheet/timesheet.component';
-//import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
 
 @NgModule({
   declarations: [
-    // NewwComponent,
     AppComponent,
     HeaderComponent,
     MainComponent,
@@ -74,13 +66,10 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
     TimesheetModal,
     NavbarComponent,
     TimesheetWeekComponent
-    //NgbdTablePagination
    
   ],
   imports: [PerfectScrollbarModule ,
     NgbModule,
-    // MbscModule,
-    //PerfectScrollbarConfigInterface,
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
@@ -106,8 +95,6 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
     FormsModule,
     HttpClientModule,
     TableModule,
-    // NgMultiSelectDropDownModule.forRoot(),
-    // JwtModule.forRoot({}),
     //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
@@ -120,7 +107,7 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
     BrowserAnimationsModule,
     MatCheckboxModule
   ],
-  providers: [ServicesService, AuthGuardService, RoleGuardService,AuthGuard],
+  providers: [ServicesService, RoleGuardService,AuthGuard],
 entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]

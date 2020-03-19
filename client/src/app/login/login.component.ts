@@ -12,7 +12,6 @@ import { User } from "../user";
 import swal from "sweetalert2";
 import { LoginService } from "../services/login.service";
 import { jsonDecoder } from "../utils/json.util";
-// import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: "app-login",
@@ -24,7 +23,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private sendReq: SendHttpRequestService,
-    // private jwtHelperService: JwtHelperService,
     private router: Router,
     private formBuilder: FormBuilder,
     private loginService: LoginService
@@ -90,9 +88,7 @@ export class LoginComponent implements OnInit {
             `Bearer ${res.payload.data["x-auth-token"]}`
           );
 
-          const token = localStorage.getItem("Authorization");
-
-          const decodeToken = jsonDecoder(token);
+          const decodeToken = jsonDecoder();
           if (!decodeToken) {
           } else {
             const role = decodeToken.role;
