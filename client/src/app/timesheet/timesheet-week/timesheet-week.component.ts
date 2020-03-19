@@ -126,12 +126,6 @@ export class TimesheetWeekComponent {
       localStorage.getItem("Authorization")
     )._id;
 
-      // if(this.role === "Admin"){
-      //   this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
-      //     console.log(res);
-      //   });
-      //   return;
-      // }
       if(this.role === "Admin"){
         this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
         });

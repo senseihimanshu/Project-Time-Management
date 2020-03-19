@@ -83,13 +83,9 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginService.login(userObj).subscribe((res) => {
-
       if (res != null) {
         window.localStorage.setItem("Authorization", `Bearer ${res.payload.data['x-auth-token']}`);
-
-        const token = localStorage.getItem("Authorization");
-
-        const decodeToken = jsonDecoder(token);
+        const decodeToken = jsonDecoder();
         if (!decodeToken) {
           console.log("Invalid token");
         } else {

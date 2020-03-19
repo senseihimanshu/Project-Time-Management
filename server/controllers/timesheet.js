@@ -49,7 +49,6 @@ class Timesheet {
 
   async index(req, res) {
     var timesheet = req.paginatedResults.results;
-    console.log(timesheet);
   
     timesheet = timesheet.map((timesheetWeek) => {
       return { ...timesheetWeek.toObject(), week: undefined };

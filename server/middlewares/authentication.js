@@ -10,8 +10,7 @@ authenticator = (req, res, next) => {
             payload: {
                 message: 'Token Not Provided. Hence, Unauthorized'
             }
-        } 
-    );
+        }     );
 
     try{
         const payload = jwt.verify(token, config.get('jwtPrivateKey'));

@@ -98,23 +98,6 @@ export class TimesheetModal implements OnInit {
     //subscribing to observable for getting the employee
     this.projectManagerService.getProjectsForCurrentStaffId(this.empObjId).subscribe(response => {
       console.log(response);
-      
-      // this.projectArray = response.payload.data.employee.projectId.map(project => {
-      //   return {
-      //     _id: project._id,
-      //     projectName: project.projectName,
-      //     projectManager: project.projectManager,
-      //     clientName: project.clientName
-      //   };
-      // });
-
-      // if(this.data.timesheetId){
-      //       this.modalType = 'update';
-      //     this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
-      //       this.response = res.payload.data.timesheet[0];
-      //       this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
-      //     });
-      // }      
     });
   }
 
