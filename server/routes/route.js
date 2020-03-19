@@ -30,6 +30,7 @@ module.exports = (app) => {
 	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
 	app.get('/api/timesheet', [authenticator, paginator(model.timesheet.model)], controller.timesheet.index);
 	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
+	app.get('/api/timesheet/review/:id', controller.timesheet.updateStatus);
 
 
 	//Project

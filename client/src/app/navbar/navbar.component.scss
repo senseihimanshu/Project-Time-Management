@@ -29,3 +29,16 @@
   .navbar-nav{
     align-items: flex-end;
   }
+
+  form{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  li{
+    a{
+      i{
+        padding: 0 1rem 0 0 !important;
+      }
+    }
+  }

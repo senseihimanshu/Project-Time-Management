@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { SendHttpRequestService } from "./../../send-http-request.service";
+
 @Component({
   selector: "review-row",
   styleUrls: ["./reviewrow.component.scss", "../review.component.scss"],
@@ -41,7 +41,7 @@ import { SendHttpRequestService } from "./../../send-http-request.service";
   `
 })
 export class ReviewRowComponent {
-  constructor(private _service: SendHttpRequestService) {}
+  constructor() {}
   @Input()
   employee: any;
 
@@ -57,7 +57,7 @@ export class ReviewRowComponent {
       _id: data,
       status: "Approved"
     };
-    this.sendReq(obj);
+    // this.sendReq(obj);
   }
 
   reject(data) {
@@ -65,12 +65,12 @@ export class ReviewRowComponent {
       _id: data,
       status: "Declined"
     };
-    this.sendReq(obj);
+    // this.sendReq(obj);
   }
-  sendReq(data) {
-    let obj = this._service.reviewRequest(data).subscribe(res => {
-      this.usersArray = res;
-      alert(data.status);
-    });
-  }
+  // sendReq(data) {
+  //   let obj = this._service.reviewRequest(data).subscribe(res => {
+  //     this.usersArray = res;
+  //     alert(data.status);
+  //   });
+  // }
 }

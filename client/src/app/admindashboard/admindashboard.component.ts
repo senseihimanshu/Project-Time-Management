@@ -1,16 +1,8 @@
-import { SendHttpRequestService } from "./../send-http-request.service";
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  ViewChild,
-  ElementRef
-} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
-import { EmployeeService } from "../services/employee.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import swal from "sweetalert2";
-
+import { EmployeeService } from "../services/employee.service";
 import { jsonDecoder } from "../utils/json.util";
+
 
 @Component({
   selector: "app-admindashboard",

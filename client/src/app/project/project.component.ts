@@ -1,10 +1,7 @@
 import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { SendHttpRequestService } from "./../send-http-request.service";
 import { ProjectService } from "../services/project.service";
 import swal from "sweetalert2";
-import { IMenu } from "../models/menu.model";
-import { isRegExp } from "util";
 
 @Component({
   selector: "app-project",
@@ -17,47 +14,6 @@ export class ProjectComponent implements OnInit {
   lastPage: number;
   pageSize = 10;
   items = [];
-  menus: IMenu[] = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
 
   message: String;
   project: any;
@@ -71,8 +27,6 @@ export class ProjectComponent implements OnInit {
   sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
 
   constructor(
-    private _service: SendHttpRequestService,
-    private router: Router,
     private projectService: ProjectService
   ) {}
 

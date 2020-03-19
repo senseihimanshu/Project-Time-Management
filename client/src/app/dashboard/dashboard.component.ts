@@ -1,9 +1,4 @@
-import { Component, OnInit, OnChanges } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { HttpErrorResponse } from "@angular/common/http";
-import { EmployeeService } from "../services/employee.service";
-import { SendHttpRequestService } from "./../send-http-request.service";
-import { Router, RouterLink } from "@angular/router";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-dashboard",
@@ -11,44 +6,7 @@ import { Router, RouterLink } from "@angular/router";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent {
-  // dashboard: string = "C Level Dashboard";
   graphicaldata: Boolean = true;
-  // menus: any = [
-  //   {
-  //     title: "Employees",
-  //     icon: "fa fa-users",
-  //     active: false,
-  //     type: "dropdown",
-
-  //     submenus: [
-  //       {
-  //         title: "Show All Employees",
-  //         route: "/admin"
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Timesheets",
-  //     icon: "fa fa-calendar",
-  //     active: false,
-  //     type: "dropdown",
-
-  //     submenus: [
-  //       {
-  //         title: "Create New Timesheet",
-  //         route: "/timesheetweek"
-  //       },
-  //       {
-  //         title: "Show All Timesheets",
-  //         route: "/timesheetweek"
-  //       },
-  //       {
-  //         title: "Review All Timesheets",
-  //         route: "/review"
-  //       }
-  //     ]
-  //   }
-  // ];
 
   loading = false;
   //  users: User[] = [];
@@ -110,6 +68,4 @@ export class DashboardComponent {
   // }
 
   //  ngOnChanges(){}
-
-  // ngOnChanges() {}
 }
