@@ -44,6 +44,7 @@ export class ProjectFormComponent implements OnInit {
   loading = false;
 
   ngOnInit(): any {
+
     (function() {
       "use strict";
       window.addEventListener(
@@ -71,7 +72,6 @@ export class ProjectFormComponent implements OnInit {
     })();
 
     this.getemployees();
-
     this.route.params.subscribe((data: Params) => {
     });
 
@@ -86,6 +86,7 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return new Observable<IResponse>();
           }
+
           this.projectId = params.projectId;
           return this.projectService.getProject(params.projectId);
         })
@@ -94,7 +95,6 @@ export class ProjectFormComponent implements OnInit {
         return (this.project = response.payload.data.projectDetails);
       });
   }
-
   projectCreateOrUpdate(obj, formType): any {
     this.projectService.projectCreateOrUpdate(obj, formType, this.projectId).subscribe(
       (res: IResponse) => {

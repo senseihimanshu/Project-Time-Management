@@ -77,6 +77,7 @@ onChartClick(event) {
   clevelDataTimesheets(graphicaldata) {
    let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
      this.timesheetpieChartData=res;
+
    });
  }
 

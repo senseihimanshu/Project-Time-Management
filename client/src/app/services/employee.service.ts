@@ -7,9 +7,6 @@ import {
 } from "@angular/common/http";
 import { HOST } from '../config/host';
 
-// const EMPLOYEE_API: string = `${HOST}/api/employee`;
-// const PROJECT_API:string="http://localhost:3000/api/project";
-// const SHOW_PROJECTAPI:string="http://localhost:3000/project";
 import { IPagination } from '../models/pagination.model';
 const EMPLOYEE_API: string = `${HOST}/api/employee`;
 
@@ -34,8 +31,8 @@ export class EmployeeService {
 
     return this.http.get<IResponse>(`${HOST}/api/employee` , { ...this.httpOptions, params }); 
   }
-
   employeeCreateOrUpdate(obj: any, type: any): Observable<IResponse> {
+
     if (type === "create")
       return this.http.post<IResponse>(EMPLOYEE_API, obj, this.httpOptions);
 
@@ -50,29 +47,6 @@ export class EmployeeService {
     return this.http.get<IResponse>(`${EMPLOYEE_API}/${empId}`, { ...this.httpOptions });
   }
   
-  // getProject(projectId: string): any {
-  //   const params = new HttpParams().set("projectId", projectId); 
-  //     return this.http.get<any>(SHOW_PROJECTAPI, { ...this.httpOptions,params });
-    
-  // }
-
-  // deleteEmployee(empId: string): Observable<IResponse>{
-  //   return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empId}`, { ...this.httpOptions });
-  // }
-  // deleteProject(id: string): any{
-  //   const params = new HttpParams().set("id", id);
-  //   return this.http.delete<any>(PROJECT_API, { ...this.httpOptions, params });
-  // }
-  // searchEmp(name:any):Observable<any>
-  // {  const params = new HttpParams().set("name", name);
-  //   return this.http.get<any>("http://localhost:3000/employees/search",{ ...this.httpOptions, params });
-  // }
-  // searchProjects(name:any):Observable<any>
-  // {
-  //   const params = new HttpParams().set("projectName", name);
-  //   return this.http.get<any>("http://localhost:3000/projects/search",{ ...this.httpOptions, params });
-  
-
   deleteEmployee(empId: string): Observable<IResponse>{
     return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empId}`, { ...this.httpOptions });
   }

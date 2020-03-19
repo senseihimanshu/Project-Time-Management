@@ -36,8 +36,8 @@ export class ServicesService {
     }
   }
 
-  isValid(){
-    if(this.jsonDecoder(localStorage.getItem("Authorization")).exp <= Date.now()){
+  isValid(token){
+    if(this.jsonDecoder(token).exp <= Date.now()){
       return false;
     }
     else{

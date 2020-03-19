@@ -30,6 +30,24 @@
         </div>
       </div>
 
+      <span>
+        <mat-form-field>
+          <mat-label>Project</mat-label>
+          <mat-select
+            name="projectObjId"
+            [ngModel]="response?.projectId?._id"
+            (ngModelChange)="handleProjectData(form.value)"
+          >
+          <mat-option [value]="null">Choose Among These</mat-option>
+            <mat-option
+              *ngFor="let project of projectArray"
+              [value]="project?._id"
+              >{{ project.projectName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </span>
+
       <div class="disabled-inputs">
         <label for="date">Start Date</label>
         <span
@@ -51,7 +69,7 @@
               class="table table-bordered table-responsive-md table-striped text-center"
             >
               <tr>
-                <th scope="col" class="text-center">Project</th>
+                <!-- <th scope="col" class="text-center">Project</th> -->
                 <!-- <th scope="col" class="text-center">Client Name</th> -->
                 <th scope="col" class="text-center">Task Type</th>
                 <th scope="col" class="text-center">Date</th>
@@ -61,25 +79,6 @@
               </tr>
 
               <tr *ngFor="let date of datesArray; let id = index">
-                <td>
-                  <span>
-                    <mat-form-field>
-                      <mat-label>Project</mat-label>
-                      <mat-select
-                        name="project-{{id}}"
-                        [ngModel]="response?.week[id]?.projectId?._id"
-                        (ngModelChange)="handleProjectData(form.value)"
-                      >
-                      <mat-option [value]="null">Choose Among These</mat-option>
-                        <mat-option
-                          *ngFor="let project of projectArray"
-                          [value]="project?._id"
-                          >{{ project.projectName }}</mat-option
-                        >
-                      </mat-select>
-                    </mat-form-field>
-                  </span>
-                </td>
                 <td>
                   <mat-form-field>
                     <mat-label>Choose Task Type</mat-label>
@@ -120,8 +119,8 @@
                 </td>
               </tr>
 
-              <!-- {{ form.value | json }} -->
             </table>
+              {{ form.value | json }}
 
             <div class="modal-footer">
               <button
