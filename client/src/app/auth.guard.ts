@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ServicesService } from './services.service';
 
 import {jsonDecoder} from './utils/json.util'
+import { onErrorResumeNextStatic } from 'rxjs/internal/operators/onErrorResumeNext';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +16,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot):  boolean{
      // this will be passed from the route config
     // on the data property
+    
     const expectedRole = next.data.expectedRole;
     const token = localStorage.getItem('Authorization');
     // decode the token to get its payload
-    const decodeToken = jsonDecoder(token);
+    const decodeToken = jsonDecoder();
      
     
       const now = Date.now().valueOf() / 1000
