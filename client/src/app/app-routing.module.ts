@@ -62,10 +62,10 @@ const routes: Routes = [
   {
     path: "myProfile",
     component: MyprofileComponent,
-    /* canActivate:[AuthGuard],
-    data:{
-      expectedRole:['admin','employee','c-level','project-manager']
-      }    */
+     canActivate:[AuthGuard],
+    /* data:{
+      expectedRole:'admin','project-manager'
+      }     */
   },
   {
     path: "review",

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot,Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ServicesService } from './services.service';
-import decode from 'jwt-decode';
+
 import {jsonDecoder} from './utils/json.util'
 @Injectable({
   providedIn: 'root'

@@ -170,8 +170,7 @@
                 class="form-control"
                 placeholder="End Date"
                 [(ngModel)]="project && project.endDate"
-                (ngModelChange)="onKeyUp($event)"
-                name="endDate"
+                 name="endDate"
                 [disabled]="formType === 'get'"
                 #endDateInput="ngModel"
               />

@@ -145,5 +145,21 @@ export class ProjectFormComponent implements OnInit {
       this.projMembers = employeeArr;
     }
   }
+  formatter = (result: string) => result.toUpperCase();
+  searchProjectManager = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.projectManagerList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+    searchProjectMember = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.projectMemberList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+
 
 }
