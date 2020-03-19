@@ -3,10 +3,9 @@ import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { FormControl } from "@angular/forms";
-import { SendHttpRequestService } from "../send-http-request.service";
 import swal from "sweetalert2";
 import { ProjectService } from "../services/project.service";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-project-form",
@@ -86,7 +85,6 @@ export class ProjectFormComponent implements OnInit {
           if (!params.projectId) {
             return new Observable<IResponse>();
           }
-
           this.projectId = params.projectId;
           return this.projectService.getProject(params.projectId);
         })
@@ -105,21 +103,27 @@ export class ProjectFormComponent implements OnInit {
           showConfirmButton: true
         });
 
-        this.router.navigate(["/project"]);
-      },
-      err => {
-        this.message = err.error.payload.message;
-        swal.fire({
-          icon: "error",
-          title: this.message,
-          showConfirmButton: true
-        });
-      }
-    );
+          this.router.navigate(["/project"]);
+        },
+        err => {
+          this.message = err.error.payload.message;
+          swal.fire({
+            icon: "error",
+            title: this.message,
+            showConfirmButton: true
+          });
+        }
+      );
   }
   getemployees() {
     this.employeeService
-      .showAllEmployees({ page: this.page.toString(), limit: '-1', criteria: JSON.stringify({}), columns: JSON.stringify({ empId: 1, name: 1 }), sort: JSON.stringify({}) })
+      .showAllEmployees({
+        page: this.page.toString(),
+        limit: "-1",
+        criteria: JSON.stringify({}),
+        columns: JSON.stringify({ empId: 1, name: 1 }),
+        sort: JSON.stringify({})
+      })
       .subscribe(res => {
         this.empList = res.payload.data.result.results;
       });
@@ -135,5 +139,4 @@ export class ProjectFormComponent implements OnInit {
       this.projMembers = employeeArr;
     }
   }
-
 }

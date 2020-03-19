@@ -1,5 +1,5 @@
 .modal-wrapper {
-  z-index: 1032;
+  z-index: 100;
 }
 
 .modal-title {
@@ -61,10 +61,14 @@ th{
 }
 td{
   font-size: 1rem;
-  padding: 0.1rem;
-  height: 0.5rem;
+  vertical-align: middle !important;
+  padding: 0 !important;
 }
 
 input{
     text-align: center;
+}
+
+.modal-wrapper{
+  max-height: 85vh !important;
 }

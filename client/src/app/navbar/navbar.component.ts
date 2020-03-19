@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SendHttpRequestService } from "./../send-http-request.service";
 import { Router } from '@angular/router';
 import { jsonDecoder } from '../utils/json.util';
 
@@ -10,12 +9,10 @@ import { jsonDecoder } from '../utils/json.util';
 })
 export class NavbarComponent implements OnInit {
   @Input()
-  dashboard:string;
-
-  @Input()
   menus: any=[];
+  dashboard: string;
 
-  constructor(private router: Router, private _service: SendHttpRequestService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     const decodeToken = jsonDecoder();
@@ -171,8 +168,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/accessdenied']);
   }
   logout() {
-    this._service.deletetoken();
-
+    localStorage.removeItem('Authorization');
     this.router.navigate(["/login"]);
   }
 }
