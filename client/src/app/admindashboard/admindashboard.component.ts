@@ -1,16 +1,8 @@
-import { SendHttpRequestService } from "./../send-http-request.service";
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  ViewChild,
-  ElementRef
-} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
-import { EmployeeService } from "../services/employee.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import swal from "sweetalert2";
-
+import { EmployeeService } from "../services/employee.service";
 import { jsonDecoder } from "../utils/json.util";
+
 
 @Component({
   selector: "app-admindashboard",
@@ -39,7 +31,7 @@ export class AdmindashboardComponent implements OnInit {
 
   columns: any = {};
 
-  sortAccordingTo: any = { name: (this.isSortDecreasing? 1 : -1) };
+  sortAccordingTo: any = { name: this.isSortDecreasing ? 1 : -1 };
 
   tabularData(criteria: any = {}) {
     this.employeeService
@@ -114,7 +106,7 @@ export class AdmindashboardComponent implements OnInit {
 
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
-    this.sortAccordingTo = { name: (this.isSortDecreasing? 1 : -1) };
+    this.sortAccordingTo = { name: this.isSortDecreasing ? 1 : -1 };
 
     this.tabularData();
   }

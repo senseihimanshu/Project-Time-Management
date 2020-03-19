@@ -2,24 +2,17 @@ const mongoose = require("mongoose");
 const schema = require("../schemas");
 const timesheetschema = new mongoose.Schema(schema.timesheet);
 
-class Timesheet {
-  constructor() {
-    this.model = mongoose.model("Timesheet", timesheetschema);
+class Timesheet{
+  constructor(){
+    this.model = mongoose.model('Timesheet',timesheetschema);
   }
+  
+   //getting the timesheet data as per criteria  
+    async get(criteria={},columns={}) {
+      return this.model.findOne(criteria, columns);
+   }
 
-  //getting the timesheet data as per criteria
-  async get(criteria = {}, columns = {}) {
-    const timesheetArray = await this.model
-      .find(criteria, columns)
-      .populate({
-        path: "week.projectId",
-        model: "project"
-      })
-      .populate("empObjId");
-    return timesheetArray;
-  }
-
-  async getTimesheetWeeks(criteria = {}, columns = {}) {
+   async getTimesheetWeeks(criteria = {}, columns = {}){
     return this.model.find(criteria, columns);
   }
 

@@ -9,7 +9,7 @@ class Project{
   
      //get the projects of company as per criteria
       async get(criteria={},columns={}){
-        return this.model.findOne(criteria,columns={});
+        return this.model.findOne(criteria, columns);
     }
     //save the newly created project 
       async save(projectObj){

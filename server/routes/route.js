@@ -27,8 +27,12 @@ module.exports = (app) => {
 	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
 
 
-	//Timesheet
-	// app.get('/api/timesheet', controller.timesheet.index);
+	// Timesheet
+	app.post('/api/timesheet', authenticator, controller.timesheet.create);
+	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
+	app.get('/api/timesheet', [authenticator, paginator(model.timesheet.model)], controller.timesheet.index);
+	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
+	app.get('/api/timesheet/review/:id', controller.timesheet.updateStatus);
 
 
 	//Project

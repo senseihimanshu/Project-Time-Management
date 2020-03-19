@@ -1,7 +1,8 @@
+import { SendHttpRequestService } from './../send-http-request.service';
+// import { SendHttpRequestService } from './../services/send-http-request.service';
 import { IResponse } from './../models/response.model';
 import { Router } from "@angular/router";
 import { Component, OnInit, OnChanges } from "@angular/core";
-import { SendHttpRequestService } from "./../send-http-request.service";
 import swal from 'sweetalert2';
 @Component({
   selector: "app-review",
@@ -11,14 +12,14 @@ import swal from 'sweetalert2';
 export class ReviewComponent implements OnInit, OnChanges {
   message: String;
   constructor(
-    private _service: SendHttpRequestService,
-    private router: Router
+    private router: Router,
+    private _service:SendHttpRequestService
   ) {}
   usersArray: any;
   reviews() {
-    let obj = this._service.showReviews().subscribe(res => {
-      this.usersArray = res;
-    });
+    // let obj = this._service.showReviews().subscribe(res => {
+    //   this.usersArray = res;
+    // });
     var date = new Date("2013-08-03T02:00:00Z");
     var year = date.getFullYear();
     var month = date.getMonth() + 1;

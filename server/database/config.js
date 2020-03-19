@@ -5,9 +5,13 @@ const url =
   "mongodb+srv://deepak:deepak@cluster0-kehud.mongodb.net/Project-Management?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(url, { useNewUrlParser: true, keepAlive: 1, useUnifiedTopology: true })
+  .connect(url, {
+    useNewUrlParser: true,
+    keepAlive: 1,
+    useUnifiedTopology: true
+  })
   .then(res => {
-    console.log("connection established");
+    //console.log("connection established");
   })
   .catch(error => {
     console.error(error.message);

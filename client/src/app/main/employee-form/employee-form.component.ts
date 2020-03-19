@@ -18,33 +18,39 @@ export class EmployeeFormComponent implements OnInit {
   message: string;
   employeeForm: any;
   constructor(
-   
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private _service :SendHttpRequestService
+    private formBuilder: FormBuilder
   ) {
     this.employeeForm = this.formBuilder.group({
-      name: ['', Validators.required,Validators.minLength(2)],
-     
+      name: ["", Validators.required, Validators.minLength(2)]
     });
   }
+  
   ngOnInit(): any {
     (function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
+      "use strict";
+      window.addEventListener(
+        "load",
+        function() {
+          var forms = document.getElementsByClassName("needs-validation");
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener(
+              "submit",
+              function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+              },
+              false
+            );
+          });
+        },
+        false
+      );
     })();
 
     this.route.params
@@ -65,40 +71,33 @@ export class EmployeeFormComponent implements OnInit {
         this.employee = response.payload.data.employee;
       });
   }
-  
 
   employeeCreateOrUpdate(obj, typeOfForm, form): any {
     this.employeeService.employeeCreateOrUpdate(obj, typeOfForm).subscribe(
       (res: any) => {
         this.message = res.payload.message;
         swal.fire({
-          icon: 'success',
+          icon: "success",
           text: this.message,
-          showConfirmButton: true,
-        }) 
+          showConfirmButton: true
+        });
         form.reset();
 
-        this.router.navigate(['/admin']);
+        this.router.navigate(["/admin"]);
       },
       err => {
         this.message = err.error.payload.message;
         swal.fire({
-          icon: 'error',
+          icon: "error",
           text: this.message,
           showConfirmButton: true
-        }) 
-        }
-     );
-   
-}
+        });
+      }
+    );
+  }
   saveEmployee() {
     if (this.employeeForm.dirty && this.employeeForm.valid) {
-      alert(
-        `Name: ${this.employeeForm.value.empName} `
-      );
+      alert(`Name: ${this.employeeForm.value.empName} `);
     }
   }
-
 }
-
-   

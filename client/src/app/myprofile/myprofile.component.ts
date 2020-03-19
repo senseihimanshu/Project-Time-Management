@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
 import { jsonDecoder} from 'src/app/utils/json.util';
 
 @Component({
-  selector: 'app-myprofile',
-  templateUrl: './myprofile.component.html',
-  styleUrls: ['./myprofile.component.scss']
+  selector: "app-myprofile",
+  templateUrl: "./myprofile.component.html",
+  styleUrls: ["./myprofile.component.scss"]
 })
-export class MyprofileComponent implements OnInit {
+export class MyprofileComponent {
   employee: any;
   role: any;
   constructor(private _service:EmployeeService,
@@ -23,5 +23,5 @@ export class MyprofileComponent implements OnInit {
       return (this.employee = response.payload.data.employee);
       });
 }
-
 }
+
