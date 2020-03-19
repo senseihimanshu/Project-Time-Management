@@ -145,4 +145,5 @@ export class ProjectFormComponent implements OnInit {
       this.projMembers = employeeArr;
     }
   }
+
 }
