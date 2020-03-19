@@ -31,11 +31,6 @@ module.exports = {
         type: String,
         enum: ["offshore", "onsite", "earned-leave", "sick-leave", "casual-leave", null]
       },
-      status: {
-        type: String,
-        default: "pending",
-        enum: ["approved", "declined", "pending"]
-      },
       billable: {
         type: Boolean
       }

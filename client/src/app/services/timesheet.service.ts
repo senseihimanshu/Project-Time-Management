@@ -33,7 +33,7 @@ export class TimesheetService {
   }
 
   getTimesheetUsingRouteParams(timesheetId: string): Observable<any> {
-    return this.http.get(`${TIMESHEET_API}/${timesheetId}`);
+    return this.http.get(`${TIMESHEET_API}/${timesheetId}`, this.httpOptions);
   }
 
   createTimesheet(timesheet: any): Observable<IResponse> {
@@ -50,5 +50,16 @@ export class TimesheetService {
       params,
       ...this.httpOptions
     });
+  }
+
+  getStaffTimesheets(paginationObj: IPagination): Observable<IResponse>{
+    const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
+
+    return this.http.get<IResponse>(`${TIMESHEET_API}/staff`, { params, ...this.httpOptions });
+  }
+
+  updateStatus(status: Boolean, timesheetId: string): Observable<IResponse>{
+
+    return this.http.patch<IResponse>(`${TIMESHEET_API}/review/${timesheetId}`, {status}, { ...this.httpOptions });
   }
 }

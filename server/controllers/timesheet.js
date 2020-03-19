@@ -14,7 +14,6 @@ class Timesheet {
     const timesheetObjId =
       timesheetFromDatabase.timesheet && timesheetFromDatabase.timesheet._id;
 
-    console.log(timesheetObjId);
 
     //Adding timesheets of employees to projectManager
     if (timesheetFromDatabase.typeOfOperation === "create") {
@@ -134,7 +133,6 @@ class Timesheet {
 
   async getTimesheetUsingStartDate(req, res) {
     const startDate = req.query.startDate;
-    console.log(startDate, "Start Date");
     const timesheet = await model.timesheet.get({
       startDate,
       empObjId: req.employee._id
@@ -163,38 +161,68 @@ class Timesheet {
       }
     });
   }
-  async modify(req, res) {
-    const timesheet = await model.timesheet.update(
-      { _id: req.body._id },
-      { $set: { status: req.body.status } }
+
+  async retrieveTimesheetsOfStaff(req, res){
+    let staffTimesheetIds = [];
+
+    staffTimesheetIds = req.paginatedResults.results.map( (staffTimesheetIds) => staffTimesheetIds.staffTimesheetIds );
+
+    staffTimesheetIds = [].concat.apply([], staffTimesheetIds);
+    
+    const staffTimesheets = await Promise.all(
+      staffTimesheetIds.map(async(timesheetId) => {
+        const timesheet = await model.timesheet.get({ _id: timesheetId });
+
+        const employeeName = (
+          await model.employee.get({ _id: timesheet.empObjId })
+        ).name;
+        const startDate = (
+          await model.timesheet.get({ _id: timesheetId })
+        ).startDate;
+        const projectName = (
+          await model.project.get({ _id: timesheet.projectObjId })
+        ).projectName;
+        const clientName = (
+          await model.project.get({ _id: timesheet.projectObjId })
+        ).clientName;
+    
+        return {
+          ...timesheet.toObject(),
+          week: undefined,
+          employeeName,
+          projectName,
+          clientName,
+          startDate
+        };
+      })
     );
-    res.send({
+
+    staffTimesheets.sort((a, b) => (+new Date(b.startDate) - +new Date(a.startDate)));
+
+    req.paginatedResults.results = staffTimesheets;
+    req.paginatedResults.dataSize = staffTimesheets.length;
+
+    return res.send({
       success: true,
       payload: {
         data: {
-          timesheet
+          result: req.paginatedResults
         }
       }
     });
   }
 
-  async retrieveTimesheetsOfStaff(req, res){
-    const managerId = req.employee._id;
-
-    const staffTimesheetIds = [];
-    staffTimesheetIds = (await model.projectManager.log({ managerId }, { staffTimesheetIds:1, _id: 0 })).map((staffTimesheetIds) => { 
-      staffTimesheetIds.staffTimesheetIds 
-    });
-
-
-  }
-
   async updateStatus(req, res) {
     const timesheetId = req.params.id;
-    const status = req.body.status;
-
+    
+    const status = Boolean(req.body.status);
+    
     try {
-      await model.timesheet.update({ _id: timesheetId }, { status });
+      if(status){
+        await model.timesheet.update({ _id: timesheetId }, { status: 'approved' });
+      }else{
+        await model.timesheet.update({ _id: timesheetId }, { status: 'declined' });
+      }
 
       res.send({
         success: true,

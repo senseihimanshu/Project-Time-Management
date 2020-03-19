@@ -130,3 +130,31 @@ th {
 {
 background-color: white;
 }
+
+.pagination-div {
+  display: flex !important;
+  justify-content: flex-end;
+
+  & > *{
+    font-size: 1.4rem;
+    padding-right: 1px;
+  }
+}
+
+
+.pagination {
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  align-items: center;
+}
+.pagination:active {
+  background-color: #0183ff;
+}
+
+.disabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}

@@ -5,18 +5,13 @@ import { TimesheetComponent } from "./timesheet.component";
 import { TimesheetModal } from "./modal/modal.component";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { RoleGuardService } from "./../guards/role-guard.service";
-import { TimesheetWeekComponent } from './timesheet-week/timesheet-week.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { TimesheetWeekComponent } from "./timesheet-week/timesheet-week.component";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @NgModule({
-  declarations: [
-    TimesheetComponent,
-    TimesheetModal,
-    TimesheetWeekComponent
-  ],
+  declarations: [TimesheetComponent, TimesheetModal, TimesheetWeekComponent],
   imports: [FormsModule, CommonModule, NgbDate, MatCheckboxModule],
   exports: [TimesheetComponent, TimesheetModal, TimesheetWeekComponent],
-  providers: [ServicesService, RoleGuardService]
+  providers: [ServicesService]
 })
 export class TimesheetModule {}
