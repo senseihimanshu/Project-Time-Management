@@ -1,3 +1,4 @@
+import { IResponse } from './../models/response.model';
 import { TimesheetService } from "./../services/timesheet.service";
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
 
@@ -19,7 +20,6 @@ import { RouterLink } from "@angular/router";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { jsonDecoder } from '../utils/json.util';
-
 @Component({
   selector: "table-editable",
   templateUrl: "./timesheet.component.html",

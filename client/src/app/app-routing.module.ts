@@ -52,20 +52,12 @@ const routes: Routes = [
   {
     path: "myProfile",
     component: MyprofileComponent,
-
-   
-    /* canActivate:[AuthGuard],
-     data:{
-
-      expectedRole:'admin','project-manager'
-      }     */
-
-  
+    // canActivate:[AuthGuard]
   },
   {
     path: "review",
     component: ReviewComponent,
-    // canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     data: { 
       expectedRole: 'project manager'
     } 
@@ -73,7 +65,7 @@ const routes: Routes = [
   {
     path: "manager",
     component: ReviewComponent,
-    // canActivate:[AuthGuard],
+     canActivate:[AuthGuard],
     data: { 
       expectedRole: 'project manager'
     } 
@@ -81,7 +73,7 @@ const routes: Routes = [
   {
     path: "projectmanager",
     component: ProjectManagerComponent,
-    // canActivate:[AuthGuard],
+     canActivate:[AuthGuard],
     data: { 
       expectedRole: 'project manager'
     } 
@@ -102,7 +94,7 @@ const routes: Routes = [
   {
     path: "employee",
     component: EmployeedashboardComponent,
-    // canActivate:[AuthGuard],
+     canActivate:[AuthGuard],
     data: { 
       expectedRole: 'employee'
     } 
@@ -110,7 +102,7 @@ const routes: Routes = [
   {
     path: "clevel",
     component: DashboardComponent,
-    //  canActivate:[AuthGuard],
+      canActivate:[AuthGuard],
     data: { 
       expectedRole: 'c-level'
     }  
@@ -118,7 +110,7 @@ const routes: Routes = [
   {
     path: "admin",
     component: AdmindashboardComponent,
-    // canActivate:[AuthGuard],
+     canActivate:[AuthGuard],
     data: { 
       expectedRole: 'admin'
     } 
@@ -127,7 +119,7 @@ const routes: Routes = [
     path: "accessdenied",
     component: AccessDeniedComponent,
     data: {},
-     canActivate:[AuthGuard]
+    
   },
   {
     path: "login",
@@ -179,7 +171,7 @@ const routes: Routes = [
        
       }
     ],
-    // canActivate:[AuthGuard],
+     canActivate:[AuthGuard],
     data:{
         expectedRole:"admin"
     }

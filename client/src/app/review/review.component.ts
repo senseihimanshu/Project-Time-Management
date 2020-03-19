@@ -1,6 +1,9 @@
+import { SendHttpRequestService } from './../send-http-request.service';
+// import { SendHttpRequestService } from './../services/send-http-request.service';
+import { IResponse } from './../models/response.model';
 import { Router } from "@angular/router";
 import { Component, OnInit, OnChanges } from "@angular/core";
-
+import swal from 'sweetalert2';
 @Component({
   selector: "app-review",
   templateUrl: "./review.component.html",
@@ -9,7 +12,8 @@ import { Component, OnInit, OnChanges } from "@angular/core";
 export class ReviewComponent implements OnInit, OnChanges {
   message: String;
   constructor(
-    private router: Router
+    private router: Router,
+    private _service:SendHttpRequestService
   ) {}
   usersArray: any;
   reviews() {
@@ -51,5 +55,70 @@ var s=year + "-" + month + "-" + dt;
   ngOnChanges() {
     this.reviews();
   }
-
-}
+   accept(data) {
+    console.log(data);
+    let obj = {
+      _id: data,
+      status: "Approved"
+    };;
+    this.sendReq(obj);
+  }
+      
+  reject(data) {
+    let obj = {
+      _id: data,
+      status: "Declined"
+    };
+    this.sendReq(obj);
+  }
+  sendReq(data) {
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Confirm review!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        let obj = this._service.reviewRequest(data).subscribe((res:IResponse) => {
+          this.usersArray = res;
+          this.message = res.payload.message;
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+        });
+         swalWithBootstrapButtons.fire(
+          'Reviewed!',
+          'data.status',
+          'success'
+        )
+        this.usersArray = this.usersArray.filter(
+          item => item._id !=data._id
+        );
+      } else if (
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Review request has been cancelled:)',
+          'error'
+        )
+      }
+    }) 
+    
+  }
+    // let obj = this._service.reviewRequest(data).subscribe(res => {
+    //   this.usersArray = res;
+    //   alert(data.status);
+    // });
+  }

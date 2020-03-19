@@ -1,4 +1,5 @@
-import { Observable } from "rxjs";
+import { IResponse } from './../models/response.model';
+import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import {
   HttpClient,
@@ -6,7 +7,6 @@ import {
   HttpParams
 } from "@angular/common/http";
 import { HOST } from '../config/host';
-
 import { IPagination } from '../models/pagination.model';
 const EMPLOYEE_API: string = `${HOST}/api/employee`;
 

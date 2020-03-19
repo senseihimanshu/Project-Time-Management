@@ -1,4 +1,5 @@
-import { Component, OnInit, Pipe} from "@angular/core";
+import { IResponse } from './../models/response.model';
+import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
@@ -141,7 +142,7 @@ export class ProjectFormComponent implements OnInit {
       this.projMembers = employeeArr;
     }
   }
-  formatter = (result: string) => result.toUpperCase();
+   formatter = (result: string) => result.toUpperCase();
  
     searchProjectMember = (text$: Observable<string>) =>
     text$.pipe(
@@ -149,7 +150,7 @@ export class ProjectFormComponent implements OnInit {
       distinctUntilChanged(),
       map(term => term.length < 2 ? this.empList
         : this.empList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    )
+    ) 
    
    
 
