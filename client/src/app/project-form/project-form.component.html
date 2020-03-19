@@ -6,7 +6,7 @@
       </div>
       
  <div class="app-main no-scrollbar-wrap"> 
-      <div class="custom-card col-10">
+      <div class="custom-card col-5">
         <div class="app-employee-form">
           <form
             class="form-body needs-validation project-card"
@@ -105,9 +105,7 @@
               <label for="manager" class="control-label"
                 >Project Manager:</label
               >
-             
               <mat-select
-             
                 class="browser-default custom-select"
                 name="manager"
                 [ngModel]="(project && project?.projectManager)"
@@ -115,21 +113,20 @@
                 [disabled]="formType === 'get'"
                 (ngModelChange)="addProjectManager($event)"
                 #projectManagerInput="ngModel"
-                required>
-                <i class="fa fa-search "></i>
-                <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
-                name="search"
-                [ngbTypeahead]="searchProjectManager"
-                [resultFormatter]="formatter"
-               
-                placeholder=" search"/>
-             
-               
-              <div >
-                <mat-option *ngFor="let emp of projectManagerList"[value]="emp._id">{{
-                  emp.name
-                }}</mat-option>
-              </div>
+                required
+              >
+              <i class="fa fa-search "></i>
+              <input id="typeahead-config" type="text" class="my-control"
+               [(ngModel)]="(project?.projectMember)[0]" 
+              name="search"
+              [ngbTypeahead]="searchProjectMember"
+              [resultFormatter]="formatter"
+               placeholder="search"/> 
+                <ng-template ngFor let-emp [ngForOf]="empList">
+                  <mat-option *ngIf="!projMembers.includes(emp._id)" [value]="emp._id">{{ emp.empId }}----{{
+                    emp.name
+                  }}</mat-option>
+                </ng-template>
               </mat-select>
               <p
                 *ngIf="
@@ -170,7 +167,8 @@
                 class="form-control"
                 placeholder="End Date"
                 [(ngModel)]="project && project.endDate"
-                 name="endDate"
+                (ngModelChange)="onKeyUp($event)"
+                name="endDate"
                 [disabled]="formType === 'get'"
                 #endDateInput="ngModel"
               />
@@ -218,20 +216,19 @@
                 #membersInput="ngModel"
                 required
                 multiple
-
               >
               <i class="fa fa-search "></i>
-              <input id="typeahead-config" type="text" class="my-control"
-               [(ngModel)]="(project?.projectMember)[0]" 
+              <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
               name="search"
-              [ngbTypeahead]="searchProjectMember"
+              [ngbTypeahead]="searchProjectManager"
               [resultFormatter]="formatter"
-               placeholder="search"/> 
-         
-                <mat-option *ngFor="let emp of projectMemberList" [value]="emp._id">{{
-                  emp.name
-                }}</mat-option>
-              
+             
+              placeholder=" search"/>
+                <ng-template ngFor let-emp [ngForOf]="empList">
+                  <mat-option *ngIf="projManager !== emp._id" [value]="emp._id">{{ emp.empId }}----{{
+                    emp.name
+                  }}</mat-option>
+                </ng-template>
               </mat-select>
               <p *ngIf="membersInput?.touched && membersInput?.invalid">
                 Project Members are required

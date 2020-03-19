@@ -9,7 +9,7 @@ require('dotenv').config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
    try{
-   console.log("deepanshu");
+   
     
      let testAccount = await nodemailer.createTestAccount();
 
@@ -30,7 +30,7 @@ require('dotenv').config();
      html: output // html body
    }
    transporter.sendMail(info,function(err,data){
-    debugger   
+      
      if(err){
           console.error("error occurs",err);
         }
@@ -127,27 +127,6 @@ class Employee {
     });
   }
    
-   async indexByRole(req, res) {
-    const projectManagerList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}},{role:"project-manager"}]},
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    ) ;
-    console.log(projectManagerList);
-    const projectMemberList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}},{role:"employee"}]},
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    ) ;
-    return res.status(200).send({
-      success: true,
-      payload: {
-        data: {
-           projectManagerList,
-           projectMemberList
-        },
-        message: "employees retrieved"
-      }
-    });
-  }
  
   async show(req, res) {
     const employee = await model.employee.get({ empId: req.params.id});
