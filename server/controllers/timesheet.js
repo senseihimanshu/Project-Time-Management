@@ -12,27 +12,30 @@ class Timesheet {
 
     //Adding timesheets of employees to projectManager and to employee
     if (timesheetFromDatabase.typeOfOperation === "create") {
-      await Promise.all(
-        timesheetToSave["week"].map(async week => {
-          if (week.projectId) {
-            const projectManager = (
-              await model.project.get(
-                { _id: week.projectId },
-                { projectManager: 1 }
-              )
-            ).projectManager;
+      // await Promise.all(
+      //   timesheetToSave["week"].map(async week => {
+      //     if (timesheetToSave['projectObjId']) {
+      //       const projectManager = (
+      //         await model.project.get(
+      //           { _id: week.projectId },
+      //           { projectManager: 1 }
+      //         )
+      //       ).projectManager;
 
-            await model.projectManager.update(
-              { managerId: projectManager },
-              { $push: { timesheetIds: timesheetFromDatabase.timesheet._id } }
-            );
-            await model.employee.update(
-              { _id: timesheetToSave.empObjId },
-              { $push: { timesheet: timesheetFromDatabase.timesheet._id } }
-            );
-          }
-        })
-      );
+      //       await model.projectManager.update(
+      //         { managerId: projectManager },
+      //         { $push: { timesheetIds: timesheetFromDatabase.timesheet._id } }
+      //       );
+      //       await model.employee.update(
+      //         { _id: timesheetToSave.empObjId },
+      //         { $push: { timesheet: timesheetFromDatabase.timesheet._id } }
+      //       );
+      //     }
+      //   })
+      // );
+
+      
+
     }
 
     res.send({
@@ -44,26 +47,13 @@ class Timesheet {
     });
   }
 
-  async show(req, res) {
-    const empObjId = req.query.empObjId;
-    var timesheet = [];
-    
-    if (empObjId) {
-      timesheet = req.paginatedResults.results;
-    } else {
-      return res.status(400).send({
-        success: false,
-        payload: {
-          message: "Employee doesn't exist"
-        }
-      });
-    }
-
-    if(req.query.type === 'week'){
-      timesheet = timesheet.map((timesheetWeek) => {
-        return { ...timesheetWeek.toObject(), week: undefined };
-      });
-    }
+  async index(req, res) {
+    var timesheet = req.paginatedResults.results;
+    console.log(timesheet);
+  
+    timesheet = timesheet.map((timesheetWeek) => {
+      return { ...timesheetWeek.toObject(), week: undefined };
+    });
 
     if (!timesheet) {
       return res.status(200).send({
@@ -87,7 +77,7 @@ class Timesheet {
     }
   }
 
-  async index(req, res) {
+  async show(req, res) {
     const { empId, startDate } = req.query;
 
     const filteredTimesheets = await model.timesheet.getTimesheetWeeks({ empObjId: empId, startDate: {

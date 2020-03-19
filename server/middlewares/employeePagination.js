@@ -1,10 +1,13 @@
-function paginator(model) {
+function Paginator(model) {
   return async (req, res, next) => {
+    if (req.query["empId"]) {
+      req.paginatedResults = await model.find();
+      next();
+      return;
+    }
     const criteria = JSON.parse(req.query.criteria);
-    const page = parseInt(req.query.page) || 0;
+    const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
-    const columns = JSON.parse(req.query.columns);
-    const sort = JSON.parse(req.query.sort);
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
@@ -31,9 +34,9 @@ function paginator(model) {
 
     try {
       results.results = await model
-        .find(criteria, columns)
-        .sort(sort)
-        .limit(limit === -1 ? dataSize : limit)
+        .find(criteria)
+        .sort({ name: JSON.parse(req.query.desc) ? 1 : -1 })
+        .limit(limit)
         .skip(startIndex);
 
       req.paginatedResults = results;
@@ -49,4 +52,4 @@ function paginator(model) {
   };
 }
 
-module.exports = paginator;
+module.exports = Paginator;

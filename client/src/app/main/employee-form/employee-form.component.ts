@@ -17,7 +17,6 @@ export class EmployeeFormComponent implements OnInit {
   employee: any;
   message: string;
   employeeForm: any;
-  dashboard:string= "Admin Dashboard"
   constructor(
    
     private employeeService: EmployeeService,
@@ -31,48 +30,6 @@ export class EmployeeFormComponent implements OnInit {
      
     });
   }
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
-  
   ngOnInit(): any {
     (function() {
       'use strict';
@@ -93,7 +50,6 @@ export class EmployeeFormComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          console.log(this.typeOfForm);
           this.typeOfForm = params.type;
           if (!params.type) {
             this.typeOfForm = "get";
@@ -102,13 +58,11 @@ export class EmployeeFormComponent implements OnInit {
           if (!params.empId) {
             return new Observable<IResponse>();
           }
-          console.log(this.typeOfForm);
           return this.employeeService.getEmployee(params.empId);
         })
       )
       .subscribe((response: IResponse) => {
         this.employee = response.payload.data.employee;
-        console.log(response.payload.data.employee);
       });
   }
   
@@ -120,7 +74,7 @@ export class EmployeeFormComponent implements OnInit {
         swal.fire({
           icon: 'success',
           text: this.message,
-          showConfirmButton: true
+          showConfirmButton: true,
         }) 
         form.reset();
 

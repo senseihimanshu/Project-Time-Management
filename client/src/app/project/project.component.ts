@@ -17,47 +17,6 @@ export class ProjectComponent implements OnInit {
   lastPage:number;
   pageSize = 10;
   items = [];
-  menus: IMenu[] = [{
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
-
   message: String;
   project:any;
   projectsArray: any;
@@ -76,7 +35,6 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   tabularData(criteria: any = {}) {
-    console.log(this.sortAccordingTo);
     this.projectService.showProjects({
         page: this.page.toString(), 
         limit: this.limit.toString(), 
@@ -144,7 +102,6 @@ export class ProjectComponent implements OnInit {
 
     this.sortAccordingTo = tempObj;
 
-    console.log('called!!');
     this.tabularData();
   }
 

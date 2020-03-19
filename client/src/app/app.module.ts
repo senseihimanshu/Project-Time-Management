@@ -67,7 +67,9 @@ import { RoleGuardService } from './guards/role-guard.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
+import { AuthGuard } from './auth.guard';
 //import { NgbdTablePagination } from "./admindashboard/admindashboard.component";
+
 @NgModule({
   declarations: [
     // NewwComponent,
@@ -116,6 +118,7 @@ import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-wee
     ClevelDashboardModule,
     ChartsModule,
     //Third Party
+   
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
     WavesModule,
@@ -140,7 +143,7 @@ import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-wee
     BrowserAnimationsModule,
     MatCheckboxModule
   ],
-  providers: [ServicesService, AuthGuardService, RoleGuardService],
+  providers: [ServicesService, AuthGuardService, RoleGuardService,AuthGuard],
 entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]

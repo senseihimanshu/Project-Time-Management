@@ -31,9 +31,8 @@ export class EmployeeService {
 
     return this.http.get<IResponse>(`${HOST}/api/employee` , { ...this.httpOptions, params }); 
   }
-
   employeeCreateOrUpdate(obj: any, type: any): Observable<IResponse> {
-    console.log(obj, type, 'I was here');
+
     if (type === "create")
       return this.http.post<IResponse>(EMPLOYEE_API, obj, this.httpOptions);
 
@@ -48,8 +47,6 @@ export class EmployeeService {
     return this.http.get<IResponse>(`${EMPLOYEE_API}/${empId}`, { ...this.httpOptions });
   }
   
-  
-
   deleteEmployee(empId: string): Observable<IResponse>{
     return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empId}`, { ...this.httpOptions });
   }
