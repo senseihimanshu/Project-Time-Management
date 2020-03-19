@@ -62,8 +62,8 @@ const routes: Routes = [
   {
     path: "myProfile",
     component: MyprofileComponent,
-     canActivate:[AuthGuard],
-    /* data:{
+    /* canActivate:[AuthGuard],
+     data:{
       expectedRole:'admin','project-manager'
       }     */
   },

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Pipe} from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
@@ -6,8 +6,10 @@ import { FormControl } from "@angular/forms";
 import { SendHttpRequestService } from "../send-http-request.service";
 import swal from "sweetalert2";
 import { ProjectService } from "../services/project.service";
-import { Observable } from "rxjs";
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import { Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged, map,filter} from 'rxjs/operators';
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: "app-project-form",
   templateUrl: "./project-form.component.html",
@@ -23,8 +25,8 @@ export class ProjectFormComponent implements OnInit {
   project: any;
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings = {};
-  empList: any;
+  
+  empList: string[];
   projManager: string;
   projMembers: string[] = [];
   message: string;
@@ -70,7 +72,7 @@ export class ProjectFormComponent implements OnInit {
         false
       );
     })();
-
+    
     this.getemployees();
     this.route.params.subscribe((data: Params) => {
     });
@@ -146,10 +148,11 @@ export class ProjectFormComponent implements OnInit {
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(term => term.length < 2 ? []
+      map(term => term.length < 2 ? this.empList
         : this.empList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
-
+   
+   
 
 
 }

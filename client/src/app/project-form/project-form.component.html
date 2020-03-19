@@ -117,11 +117,12 @@
               >
               <i class="fa fa-search "></i>
               <input id="typeahead-config" type="text" class="my-control"
-               [(ngModel)]="(project?.projectMember)[0]" 
-              name="search"
-              [ngbTypeahead]="searchProjectMember"
-              [resultFormatter]="formatter"
-               placeholder="search"/> 
+                    [(ngModel)]="model" 
+                    name="search"
+                    [ngbTypeahead]="searchProjectMember"
+                    [resultFormatter]="formatter"
+                    placeholder="search"/>  
+              
                 <ng-template ngFor let-emp [ngForOf]="empList">
                   <mat-option *ngIf="!projMembers.includes(emp._id)" [value]="emp._id">{{ emp.empId }}----{{
                     emp.name
