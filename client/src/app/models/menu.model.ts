@@ -1,4 +1,4 @@
-export interface IMenu{
+ interface IMenu{
     title: String;
     icon: String;
     active: Boolean;

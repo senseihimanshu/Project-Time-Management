@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { ProjectService } from '../services/project.service';
 import swal from 'sweetalert2';
-import { IMenu } from '../models/menu.model';
+
 import { isRegExp } from 'util';
 
 @Component({

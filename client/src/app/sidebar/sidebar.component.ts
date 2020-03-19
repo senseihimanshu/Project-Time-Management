@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { IMenu } from '../models/menu.model';
+
 import { EmployeeService } from '../services/employee.service';
 import { jsonDecoder } from '../utils/json.util';
 import { SidebarService } from './sidebar.service';
