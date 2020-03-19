@@ -1,5 +1,3 @@
-
-
 const jsonDecoder = (token: string = localStorage.getItem('Authorization')) => {
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
