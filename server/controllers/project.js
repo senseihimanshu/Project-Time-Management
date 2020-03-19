@@ -66,42 +66,11 @@ class Project {
         }
       });
     }
-
-    const newProjectId = (
-      await model.project.save({
-        ...projectObj
-      })
-    )._id;
-
-    await Promise.all(
-      projectObj.empObjectIdArray.map(async staff => {
-        await model.projectManager.save({
-          managerId: projectObj.projectManager,
-          staffId: staff,
-          projectObjId: newProjectId
-        });
-      })
-    );
-
-    return res.status(201).send({
-      success: true,
-      payload: {
-        message: "Project created successfully"
-      }
-    });
-   }catch(error){
-    
-    res.status(400).send({
-      success: false,
-      payload: {
-        message: err.message
-      }
-    });
-   }
+  }
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
-    
+
     await Promise.all(
       projectList.map(async (project, index) => {
         const manager = await model.employee.get(
@@ -115,15 +84,18 @@ class Project {
           { managerId: project.projectManager },
           { staffId: 1, _id: 0 }
         );
-    
+
         const staffIds = projectManagerStaffObjs.map(employeeId => {
           return employeeId.staffId;
         });
 
         const memberNames = await Promise.all(
           staffIds.map(async employee => {
-            const employeeObj = await model.employee.get({ _id: employee }, { name: 1, _id: 0 });
-            if(employeeObj){
+            const employeeObj = await model.employee.get(
+              { _id: employee },
+              { name: 1, _id: 0 }
+            );
+            if (employeeObj) {
               return employeeObj.name;
             }
           })
@@ -200,22 +172,6 @@ class Project {
       );
       const staffIdsStoredStringArray = projectManagerDocumentArray.map(
         document => document.staffId.toString()
-      );
-      
-      if(projectManagerDocumentArray[0] && projectManagerDocumentArray[0].managerId !== projectToBeUpdatedObj.projectManager)
-        await model.projectManager.updateAll({
-          projectObjId
-        }, { managerId: projectToBeUpdatedObj.projectManager });
-
-      await Promise.all(
-        projectToBeUpdatedObj.empObjectIdArray.map(async employee => {
-          if(!staffIdsStoredStringArray.includes(employee))
-            (await model.projectManager.save({
-              projectObjId,
-              managerId: projectToBeUpdatedObj.projectManager,
-              staffId: employee
-            }));
-        })
       );
 
       if (

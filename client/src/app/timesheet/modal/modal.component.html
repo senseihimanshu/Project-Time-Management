@@ -3,7 +3,6 @@
     <h4 class="modal-title" id="modal-basic-title">{{ (modalType === "update")? 'Update Timesheet' : 'New Timesheet' }}</h4>
   </div>
   <div class="modal-body">
-    <form #form="ngForm" (ngSubmit)="handleSave(form.value)" novalidate>
       <div class="form-group" *ngIf="modalType !== 'update'">
         <label for="date">Select the week</label>
         <div class="input-group">
@@ -35,10 +34,10 @@
           <mat-label>Project</mat-label>
           <mat-select
             name="projectObjId"
-            [ngModel]="response?.projectId?._id"
-            (ngModelChange)="handleProjectData(form.value)"
+            [ngModel]="project"
+            (ngModelChange)="handleProjectData($event)"
           >
-          <mat-option [value]="null">Choose Among These</mat-option>
+          <!-- <mat-option [value]="null" disabled>Choose Among These</mat-option> -->
             <mat-option
               *ngFor="let project of projectArray"
               [value]="project?._id"
@@ -59,7 +58,6 @@
           ><input type="text" name="endDate" [ngModel]="modalType === 'update'? (response && (response.endDate | date)) : endDate" readonly
         /></span>
       </div>
-    </form>
   
     <!-- Editable table -->
     <div class="card">
@@ -75,7 +73,7 @@
                 <th scope="col" class="text-center">Date</th>
                 <th scope="col" class="text-center">Hours</th>
                 <th scope="col" class="text-center">Billable</th>
-                <th scope="col" class="text-center">Status</th>
+                <!-- <th scope="col" class="text-center">Status</th> -->
               </tr>
 
               <tr *ngFor="let date of datesArray; let id = index">
@@ -114,13 +112,13 @@
                     ></mat-checkbox>
                   </span>
                 </td>
-                <td>
+                <!-- <td>
                   <span>-</span>
-                </td>
+                </td> -->
               </tr>
 
             </table>
-              {{ form.value | json }}
+              <!-- {{ form.value | json }} -->
 
             <div class="modal-footer">
               <button
@@ -139,6 +137,7 @@
                 Submit
               </button>
             </div>
+            <!-- {{ form.value | json }} -->
           </form>
         </div>
       </div>

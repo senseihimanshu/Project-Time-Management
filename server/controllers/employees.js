@@ -1,11 +1,10 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const model = require("../models");
 const schema = require("../schemas");
-const nodemailer=require('nodemailer');
-var generatePassword = require('password-generator');
+const nodemailer = require("nodemailer");
+var generatePassword = require("password-generator");
 
-
-require('dotenv').config();
+require("dotenv").config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
    try{
@@ -47,7 +46,6 @@ class Employee {
   constructor() {}
 
   async create(req, res) {
- 
     let {
       empId,
       email,
@@ -70,14 +68,14 @@ class Employee {
       role
     };
 
-    newEmployee.empId = newEmployee.empId.replace(/ /g,'');
+    newEmployee.empId = newEmployee.empId.replace(/ /g, "");
 
-    newEmployee.password = 'cyg-'+empId;
+    newEmployee.password = "cyg-" + empId;
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newEmployee.password, salt);
-    
-    newEmployee.password  = hashedPassword;
+
+    newEmployee.password = hashedPassword;
 
     try {
       await model.employee.save(newEmployee).then(() => {
@@ -96,7 +94,7 @@ class Employee {
         }
       });
     }
-    const output=`
+    const output = `
 
      <p>you have a new contact request</p>
      <p>Thanks again for 
@@ -112,8 +110,8 @@ class Employee {
       <li>joining:${newEmployee.joining}</li>
       </ul>
       <p>This is Computer Generated Email ,Don't reply back to it</p>
-      `
-      nodeMail(output,newEmployee);
+      `;
+    nodeMail(output, newEmployee);
   }
   async index(req, res) {
     return res.status(200).send({
@@ -129,16 +127,16 @@ class Employee {
    
  
   async show(req, res) {
-    const employee = await model.employee.get({ empId: req.params.id});
-   
+    const employee = await model.employee.get({ empId: req.params.id });
+
     if (!employee) {
-      return res.status(404).send({ 
+      return res.status(404).send({
         payload: {
           data: {
             employee
           }
         },
-        message:"Employee does not exists!"
+        message: "Employee does not exists!"
       });
     }
 
@@ -148,10 +146,10 @@ class Employee {
           employee
         }
       },
-      message:"Employee retrieved successfully"
+      message: "Employee retrieved successfully"
     });
   }
-  
+
   async update(req, res) {
     const empId = req.params.id;
     const {
@@ -180,17 +178,21 @@ class Employee {
     };
 
     //discarding keys with undefined
-    Object.keys(patchedEmployee).forEach(key => patchedEmployee[key] === undefined && delete patchedEmployee[key])
+    Object.keys(patchedEmployee).forEach(
+      key => patchedEmployee[key] === undefined && delete patchedEmployee[key]
+    );
 
     try {
-      await model.employee.update({ empId: empId }, patchedEmployee).then(() => {
-        res.status(200).send({
-          success: true,
-          payload: {
-            message: "Employee updated successfully"
-          }
+      await model.employee
+        .update({ empId: empId }, patchedEmployee)
+        .then(() => {
+          res.status(200).send({
+            success: true,
+            payload: {
+              message: "Employee updated successfully"
+            }
+          });
         });
-      });
     } catch (err) {
       res.status(400).send({
         success: false,
@@ -203,12 +205,12 @@ class Employee {
 
   async delete(req, res) {
     const employee = await model.employee.delete({ empId: req.params.id });
-   
+
     res.send({
       success: true,
       payload: {
         employee,
-        message: 'Employee Deleted Successfully'
+        message: "Employee Deleted Successfully"
       }
     });
   }

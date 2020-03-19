@@ -1,12 +1,11 @@
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { Component, OnInit, Input } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SidebarService } from './sidebar.service';
-import { SendHttpRequestService } from './../send-http-request.service';
-import { RouterLink } from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { IMenu } from '../models/menu.model';
 import { EmployeeService } from '../services/employee.service';
-import { Routes, RouterModule } from "@angular/router";
 import { jsonDecoder } from '../utils/json.util';
+import { SidebarService } from './sidebar.service';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -21,7 +20,7 @@ import { jsonDecoder } from '../utils/json.util';
 })
 export class SidebarComponent implements OnInit {
   @Input()
-  menus = [];
+  menus: IMenu[] = [];
   constructor(public sidebarservice: SidebarService, private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute) {
