@@ -1,3 +1,4 @@
+import { IResponse } from './../models/response.model';
 import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";

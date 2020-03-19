@@ -29,7 +29,6 @@ const nodeMail = async function(output, newEmployee) {
     if (err) {
       console.error("error occurs", err);
     } else {
-      //console.log("email sent successfully");
     }
   });
 };
