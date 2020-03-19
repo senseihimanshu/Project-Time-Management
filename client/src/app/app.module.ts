@@ -83,6 +83,8 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
     HttpClientModule,
     ClevelDashboardModule,
     ChartsModule,
+    MatSelectModule,
+    
     //Third Party
    
     MDBBootstrapModule.forRoot(),
