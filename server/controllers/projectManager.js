@@ -24,10 +24,6 @@ class ProjectManager {
           )]
         })
       );
-      
-
-      console.log(projects, projectObjIds, 'Projects');
-
       return res.send({
         success: true,
         payload: {

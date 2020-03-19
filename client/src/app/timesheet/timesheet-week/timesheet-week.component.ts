@@ -120,7 +120,15 @@ export class TimesheetWeekComponent {
   }
 
   tabularData() {
-    this.empObjId = jsonDecoder(localStorage.getItem("Authorization"))._id;
+    this.empObjId = jsonDecoder(
+      localStorage.getItem("Authorization")
+    )._id;
+
+      if(this.role === "Admin"){
+        this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
+        });
+        return;
+      }
 
     if(this.role === "admin"){
       this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), sort: JSON.stringify(this.sortAccordingTo), criteria: JSON.stringify({}), columns: JSON.stringify({})}).subscribe((res) => {

@@ -38,8 +38,6 @@ class Timesheet {
 
   async index(req, res) {
     var timesheet = req.paginatedResults.results;
-    //console.log(timesheet);
-
     timesheet = await Promise.all(timesheet.map(async timesheetWeek => {
       const employeeName = (await model.employee.get({ _id: timesheetWeek.empObjId })).name;
       const projectName = (await model.project.get({ _id: timesheetWeek.projectObjId })).projectName;

@@ -14,14 +14,12 @@ generateToken = async (req, res) => {
       }
     });
 
-  const isPassword = await bcrypt.compare(password, employee.password);
-  // const isPassword = (password === employee.password);
-  if (!isPassword)
-    return res.status(401).send({
-      success: false,
-      payload: {
-        message: "Invalid email or password"
-      }
+    const isPassword = await bcrypt.compare(password, employee.password);
+    if(!isPassword) return res.status(401).send({
+        success: false,
+        payload: {
+            message: 'Invalid email or password' 
+        }
     });
 
   const token = jwt.sign(
@@ -33,17 +31,16 @@ generateToken = async (req, res) => {
     },
     config.get("jwtPrivateKey")
   );
-  //console.log(token);
 
-  res.send({
-    success: true,
-    payload: {
-      data: {
-        "x-auth-token": token
-      }
-    },
-    message: "Signed Up Successfully! LoggedIn"
-  });
-};
+    res.send({
+        success: true,
+        payload: {
+            data: {
+                'x-auth-token': token
+            }
+        },
+        message: 'Logged in successfully!!'
+    });
+}));
 
 module.exports = generateToken;
