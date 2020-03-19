@@ -6,7 +6,6 @@ import { TimesheetModal } from "./modal/modal.component";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { RoleGuardService } from "./../guards/role-guard.service";
-import { AuthGuardService } from "./../guards/auth-guard.service";
 import { TimesheetWeekComponent } from './timesheet-week/timesheet-week.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
@@ -18,6 +17,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   ],
   imports: [FormsModule, CommonModule, NgbDate, MatCheckboxModule],
   exports: [TimesheetComponent, TimesheetModal, TimesheetWeekComponent],
-  providers: [ServicesService, AuthGuardService, RoleGuardService]
+  providers: [ServicesService, RoleGuardService]
 })
 export class TimesheetModule {}

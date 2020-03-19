@@ -14,7 +14,6 @@ generateToken = ((async (req, res) => {
     });
 
     const isPassword = await bcrypt.compare(password, employee.password);
-    // const isPassword = (password === employee.password);
     if(!isPassword) return res.status(401).send({
         success: false,
         payload: {
@@ -31,7 +30,7 @@ generateToken = ((async (req, res) => {
                 'x-auth-token': token
             }
         },
-        message: 'Signed Up Successfully! LoggedIn'
+        message: 'Logged in successfully!!'
     });
 }));
 

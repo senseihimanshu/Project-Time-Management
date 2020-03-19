@@ -3,7 +3,6 @@ const model = require('../models');
 class ProjectManager{
     async getProjects(req, res){
       const staffId = req.params.staffid;
-      console.log(staffId);
       try{
       const projectObjIds = await model.projectManager.log({ staffId }, { projectObjId: 1 });
 
@@ -13,8 +12,6 @@ class ProjectManager{
           projects.push(await model.project.get({ _id: projectObjId }, { projectId: 1, projectManager: 1, projectName: 1, clientName: 1 }));
         }));
       }
-
-      console.log(projects, 'Projects');
     
       return res.send({
         success: true,

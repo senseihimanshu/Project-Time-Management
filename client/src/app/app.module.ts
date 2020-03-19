@@ -69,7 +69,7 @@ import { EmployeedashboardComponent } from './employeedashboard/employeedashboar
 import { ReviewRowComponent } from './review/reviewrow/reviewrow.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { RoleGuardService } from './guards/role-guard.service';
-import { AuthGuardService } from './guards/auth-guard.service';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 import { AuthGuard } from './auth.guard';
@@ -150,7 +150,7 @@ import { AuthGuard } from './auth.guard';
     BrowserAnimationsModule,
     MatCheckboxModule
   ],
-  providers: [ServicesService, AuthGuardService, RoleGuardService,AuthGuard],
+  providers: [ServicesService, RoleGuardService,AuthGuard],
   exports: [MatAutocompleteModule],
 entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
