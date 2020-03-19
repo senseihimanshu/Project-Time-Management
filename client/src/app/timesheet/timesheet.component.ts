@@ -37,19 +37,20 @@ export class TimesheetComponent implements OnInit {
   timesheetList: any;
   closeResult: string;
 
+  role: string;
+
   empObjId: string;
   name = "Angular";
   page = 1;
   pageSize = 10;
   items = [];
-  dashboard: string = "Admin Dashboard";
+  // dashboard: string = "Admin Dashboard";
   response: any;
 
   openDialog() {
     const dialogRef = this.dialog.open(TimesheetModal);
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -97,7 +98,6 @@ export class TimesheetComponent implements OnInit {
       this.timesheetService
         .getTimesheetUsingRouteParams(timesheetId)
         .subscribe(res => {
-          console.log(res);
           this.response = [res.payload.data.timesheet];
         });
       return;
@@ -117,7 +117,7 @@ export class TimesheetComponent implements OnInit {
   }
 
   ngOnInit() {
-    let role = jsonDecoder(
+    this.role = jsonDecoder(
       localStorage.getItem("Authorization")
     ).role;
     this.tabularData();

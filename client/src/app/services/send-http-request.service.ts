@@ -50,6 +50,5 @@ export class SendHttpRequestService {
     };
   }
   private log(message: string) {
-    //console.log(message);
   }
 }

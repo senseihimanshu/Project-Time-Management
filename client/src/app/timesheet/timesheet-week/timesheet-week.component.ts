@@ -94,7 +94,7 @@ export class TimesheetWeekComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(`Dialog result: ${result}`);
+    
     });
   }
 
@@ -124,7 +124,6 @@ export class TimesheetWeekComponent {
 
     if(this.role === "admin"){
       this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), sort: JSON.stringify(this.sortAccordingTo), criteria: JSON.stringify({}), columns: JSON.stringify({})}).subscribe((res) => {
-        console.log(res, 'Inside Admin Role');
         this.timesheet = res.payload.data.result;
         this.dataSize = res.payload.data.result.dataSize;
       });
@@ -140,7 +139,6 @@ export class TimesheetWeekComponent {
         sort: JSON.stringify(this.sortAccordingTo)
       })
       .subscribe((res: IResponse) => {
-        console.log(res, 'Shivani Bansal');
         this.timesheet = res.payload.data.result;
         this.dataSize = res.payload.data.result.dataSize;
       });
@@ -168,7 +166,6 @@ export class TimesheetWeekComponent {
         sort: JSON.stringify(this.sortAccordingTo)
       })
       .subscribe(res => {
-        console.log(res);
         this.timesheet = res.payload.data.result;
       });
   }
@@ -176,7 +173,6 @@ export class TimesheetWeekComponent {
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
     this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
-    console.log(this.isSortDecreasing, this.sortAccordingTo);
     this.tabularData();
   }
 

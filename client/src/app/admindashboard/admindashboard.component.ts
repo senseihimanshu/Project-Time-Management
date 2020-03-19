@@ -64,7 +64,6 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   deleteEmployee(empId: string) {
-    //console.log(empId, "EMPLOYEE ID");
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",

@@ -19,7 +19,6 @@ export class ServicesService {
   constructor(private http: HttpClient) {}
 
   private log(message: string) {
-    //console.log(message);
   }
 
   header_token: HttpHeaders = new HttpHeaders().set(

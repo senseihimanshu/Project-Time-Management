@@ -84,8 +84,6 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(userObj).subscribe(
       res => {
-        //console.log(res);
-
         if (res != null) {
           window.localStorage.setItem(
             "Authorization",
@@ -95,9 +93,7 @@ export class LoginComponent implements OnInit {
           const token = localStorage.getItem("Authorization");
 
           const decodeToken = jsonDecoder(token);
-          //console.log(decodeToken);
           if (!decodeToken) {
-            //console.log("Invalid token");
           } else {
             const role = decodeToken.role;
             if (role == "Employee" || role == "employee") {
@@ -113,7 +109,6 @@ export class LoginComponent implements OnInit {
         }
       },
       err => {
-        //console.log(err);
         this.isMessage = true;
         swal.fire({
           icon: "warning",

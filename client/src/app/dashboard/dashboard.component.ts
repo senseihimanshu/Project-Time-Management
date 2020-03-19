@@ -10,67 +10,66 @@ import { Router, RouterLink } from "@angular/router";
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
 })
-export class DashboardComponent implements OnInit, OnChanges {
-  dashboard: string = "C Level Dashboard";
+export class DashboardComponent {
+  // dashboard: string = "C Level Dashboard";
   graphicaldata: Boolean = true;
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
+  // menus: any = [
+  //   {
+  //     title: "Employees",
+  //     icon: "fa fa-users",
+  //     active: false,
+  //     type: "dropdown",
 
-      submenus: [
-        {
-          title: "Show All Employees",
-          route: "/admin"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
+  //     submenus: [
+  //       {
+  //         title: "Show All Employees",
+  //         route: "/admin"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: "Timesheets",
+  //     icon: "fa fa-calendar",
+  //     active: false,
+  //     type: "dropdown",
 
-      submenus: [
-        {
-          title: "Create New Timesheet",
-          route: "/timesheetweek"
-        },
-        {
-          title: "Show All Timesheets",
-          route: "/timesheetweek"
-        },
-        {
-          title: "Review All Timesheets",
-          route: "/review"
-        }
-      ]
-    }
-  ];
+  //     submenus: [
+  //       {
+  //         title: "Create New Timesheet",
+  //         route: "/timesheetweek"
+  //       },
+  //       {
+  //         title: "Show All Timesheets",
+  //         route: "/timesheetweek"
+  //       },
+  //       {
+  //         title: "Review All Timesheets",
+  //         route: "/review"
+  //       }
+  //     ]
+  //   }
+  // ];
 
   loading = false;
   //  users: User[] = [];
 
-  constructor(
-    private httpService: HttpClient,
-  graphicaldata:Boolean=true;
-  loading = false;
+  // constructor(
+  //   private httpService: HttpClient,
+  // graphicaldata:Boolean=true;
+  // loading = false;
   
-    constructor(private httpService: HttpClient,
-    private _service: SendHttpRequestService,
-    private router: Router,
-    private employeeService: EmployeeService
-  ) {}
-  pieChartOptions = {
-    responsive: true
-  };
-  // CHART CLICK EVENT.
-  onChartClick(event) {
-    //console.log(event);
-  }
-  projectpieChartLabels = ["COMPLETED", "DISCARDED", "IN-PROGRESS"];
+  //   constructor(private httpService: HttpClient,
+  //   private _service: SendHttpRequestService,
+  //   private router: Router,
+  //   private employeeService: EmployeeService
+  // ) {}
+  // pieChartOptions = {
+  //   responsive: true
+  // };
+  // // CHART CLICK EVENT.
+  // onChartClick(event) {
+  // }
+  // projectpieChartLabels = ["COMPLETED", "DISCARDED", "IN-PROGRESS"];
 
   // CHART COLOR.
   projectpieChartColor: any = [
@@ -88,7 +87,7 @@ export class DashboardComponent implements OnInit, OnChanges {
       data: []
     }
   ];
-  timesheetpieChartLabels = ["APPROVED", "DECLINED", "PENDING"];
+  // timesheetpieChartLabels = ["APPROVED", "DECLINED", "PENDING"];
 
   // CHART COLOR.
   timesheetpieChartColor: any = [
@@ -100,47 +99,17 @@ export class DashboardComponent implements OnInit, OnChanges {
       ]
     }
   ];
-  timesheetpieChartData: any = [
-    {
-      data: []
-    }
-<<<<<<< HEAD
-  ];
-  ngOnInit() {
-    this.clevelDataProjects(this.graphicaldata);
-    this.clevelDataTimesheets(this.graphicaldata);
-    this.loading = true;
-  }
-  clevelDataProjects(graphicaldata) {
-    //console.log("running");
-    let obj = this._service.clevelDataProjects(graphicaldata).subscribe(res => {
-      this.projectpieChartData = res;
-      //console.log(this.projectpieChartData,"projects data");
-    });
-  }
-  clevelDataTimesheets(graphicaldata) {
-    let obj = this._service
-      .clevelDataTimesheets(graphicaldata)
-      .subscribe(res => {
-        this.timesheetpieChartData = res;
-        //console.log(this.timesheetpieChartData,"timesheets data");
-      });
-  }
-=======
-   clevelDataProjects(graphicaldata) {
-    let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
-      this.projectpieChartData=res;
-    });
-  }
-  clevelDataTimesheets(graphicaldata) {
-   let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
-     this.timesheetpieChartData=res;
+  // timesheetpieChartData: any = [
+  //   {
+  //     data: []
+  //   }
+  //  clevelDataProjects(graphicaldata) {
+  //   let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
+  //     this.projectpieChartData=res;
+  //   });
+  // }
 
-   });
- }
+  //  ngOnChanges(){}
 
-   ngOnChanges(){}
->>>>>>> 5b30508c2a5c420fc6cde5231eaa773b96c357fc
-
-  ngOnChanges() {}
+  // ngOnChanges() {}
 }

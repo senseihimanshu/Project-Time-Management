@@ -16,7 +16,7 @@ export class EmployeeFormComponent implements OnInit {
   employee: any;
   message: string;
   employeeForm: any;
-  dashboard: string = "Admin Dashboard";
+  // dashboard: string = "Admin Dashboard";
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
@@ -28,47 +28,47 @@ export class EmployeeFormComponent implements OnInit {
       name: ["", Validators.required, Validators.minLength(2)]
     });
   }
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
+  // menus: any = [
+  //   {
+  //     title: "Employees",
+  //     icon: "fa fa-users",
+  //     active: false,
+  //     type: "dropdown",
 
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
+  //     submenus: [
+  //       {
+  //         title: "Add New Employee"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: "Projects",
+  //     icon: "fa fa-book",
+  //     active: false,
+  //     type: "dropdown",
 
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
+  //     submenus: [
+  //       {
+  //         title: "Add New Project"
+  //       },
+  //       {
+  //         title: "Show All Projects"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: "Timesheets",
+  //     icon: "fa fa-calendar",
+  //     active: false,
+  //     type: "dropdown",
 
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
+  //     submenus: [
+  //       {
+  //         title: "Show All Timesheets"
+  //       }
+  //     ]
+  //   }
+  // ];
 
   ngOnInit(): any {
     (function() {
@@ -98,7 +98,6 @@ export class EmployeeFormComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          //console.log(this.typeOfForm);
           this.typeOfForm = params.type;
           if (!params.type) {
             this.typeOfForm = "get";
@@ -107,7 +106,6 @@ export class EmployeeFormComponent implements OnInit {
           if (!params.empId) {
             return new Observable<IResponse>();
           }
-          //console.log(this.typeOfForm);
           return this.employeeService.getEmployee(params.empId);
         })
       )

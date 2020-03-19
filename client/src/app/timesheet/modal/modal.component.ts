@@ -92,7 +92,6 @@ export class TimesheetModal implements OnInit {
     this.projectManagerService
       .getProjectsForCurrentStaffId(this.empObjId)
       .subscribe(response => {
-        console.log(response);
         this.projectArray = response.payload.data.projects.map(project => {
           return {
             _id: project._id,
@@ -105,9 +104,7 @@ export class TimesheetModal implements OnInit {
 
         if(this.data && this.data.timesheetId){
               this.modalType = 'update';
-              console.log(this.data.timesheetId);
             this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
-              // console.log(res.payload, 'Inside this.data');
               this.response = res.payload.data.timesheet;
               this.project = res.payload.data.timesheet.projectObjId;
               this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
@@ -157,7 +154,6 @@ export class TimesheetModal implements OnInit {
         Swal.fire(response.payload.message);
       });
 
-      console.log(timesheetData, 'Shivani Bansal');
   }
 
   convertDate(selectedDate: string) {
@@ -181,7 +177,6 @@ export class TimesheetModal implements OnInit {
             .format("YYYY-MM-DD")
         : this.endDate;
     this.timesheetService.getSpecificTimesheet(this.startDate).subscribe((res: IResponse) => {
-      console.log(res, 'Response');
       if(res.payload.data.timesheet){
         this.response = res.payload.data.timesheet;
         this.project = res.payload.data.timesheet.projectObjId;
@@ -209,7 +204,6 @@ export class TimesheetModal implements OnInit {
   }
 
   handleProjectData(project: any) {
-    console.log(project);
     this.project = project;
   }
 
