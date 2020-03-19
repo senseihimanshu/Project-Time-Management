@@ -3,7 +3,6 @@ const config = require('config');
 
 authenticator = (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ','');
-    console.log(token);
 
     if(!token) return res.status(401).send(
         {

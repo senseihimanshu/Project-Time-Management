@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 module.exports = {
     projectObjId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'project',
-        unique: true
+        ref: 'project'
     },
     managerId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -12,8 +11,7 @@ module.exports = {
     },
     staffId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'employee',
-        unique: true 
+        ref: 'employee'
     },
     staffTimesheetIds: [{
         type: mongoose.Schema.Types.ObjectId,

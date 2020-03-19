@@ -8,38 +8,6 @@ import { SendHttpRequestService } from "./../send-http-request.service";
   styleUrls: ["./review.component.scss"]
 })
 export class ReviewComponent implements OnInit, OnChanges {
-  dashboard: string = "Manager Dashboard";
-  
-  menus: any = [
-   
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
   message: String;
   constructor(
     private _service: SendHttpRequestService,

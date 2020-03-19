@@ -48,7 +48,7 @@ class Employee {
 
   async create(req, res) {
  
-    const {
+    let {
       empId,
       email,
       name,
@@ -70,8 +70,9 @@ class Employee {
       role
     };
 
+    newEmployee.empId = newEmployee.empId.replace(/ /g,'');
+
     newEmployee.password = 'cyg-'+empId;
-     let pass=newEmployee.password
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newEmployee.password, salt);
@@ -115,13 +116,6 @@ class Employee {
       nodeMail(output,newEmployee);
   }
   async index(req, res) {
-    const employeeList = await model.employee.log(
-      { $and: [ { "_id":{ $ne:req.employee._id }} ] },
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    );
-
-    console.log(employeeList, 'List of Employees');
-
     return res.status(200).send({
       success: true,
       payload: {

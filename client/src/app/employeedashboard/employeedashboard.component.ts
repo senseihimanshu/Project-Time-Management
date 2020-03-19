@@ -9,29 +9,7 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./employeedashboard.component.scss']
 })
 export class EmployeedashboardComponent implements OnInit,OnChanges {
-  dashboard: string = "Employee Dashboard";
-
-  menus: any = [
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Create New Timesheet",
-          route: "/timesheetweek"
-        },
-        {
-          title: "Show All Timesheets",
-          route: "/timesheetweek"
-        }
-
-      ]
-    }
-  ];
-
+ 
   constructor(
     private _service: SendHttpRequestService,
     private router: Router,

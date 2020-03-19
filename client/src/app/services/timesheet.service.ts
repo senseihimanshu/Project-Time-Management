@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HOST } from '../config/host';
+import { IPagination } from '../models/pagination.model';
 
-const TIMESHEET_API: string = "http://localhost:3000/api/timesheet";
+const TIMESHEET_API: string = `${HOST}/api/timesheet`;
 
 @Injectable({
   providedIn: "root"
@@ -36,10 +38,10 @@ export class TimesheetService {
   projectService(): any {
     this.http.get("/api/project");
   }
-  getTimesheet(empObjId: any, type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
-    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type).set("page", page).set("limit", limit).set("desc", desc);
+  getTimesheet(paginationObj: IPagination): Observable<IResponse> {
+    const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
 
-    return this.http.get("http://localhost:3000/timesheet", {
+    return this.http.get<IResponse>(`${TIMESHEET_API}`, {
       ...this.httpOptions,
       params
     });

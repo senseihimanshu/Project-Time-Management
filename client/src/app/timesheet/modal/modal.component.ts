@@ -18,6 +18,8 @@ import { SendHttpRequestService } from "../../services/send-http-request.service
 import { TimesheetService } from "./../../services/timesheet.service";
 
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { ProjectManagerService } from 'src/app/services/projectmanager.service';
+import { jsonDecoder } from 'src/app/utils/json.util';
 
 export interface ITaskType {
   key: string;
@@ -81,36 +83,38 @@ export class TimesheetModal implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private timesheetService: TimesheetService,
-    private httpService: SendHttpRequestService,
+    private projectManagerService: ProjectManagerService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
-    let empId = this.httpService.jsonDecoder(
+    let empId = jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data.empId;
-    this.empObjId = this.httpService.jsonDecoder(
+    ).empId;
+    this.empObjId = jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data._id;
+    )._id;
 
     //subscribing to observable for getting the employee
-    this.employeeService.getEmployee(empId).subscribe(response => {
-      this.projectArray = response.payload.data.employee.projectId.map(project => {
-        return {
-          _id: project._id,
-          projectName: project.projectName,
-          projectManager: project.projectManager,
-          clientName: project.clientName
-        };
-      });
+    this.projectManagerService.getProjectsForCurrentStaffId(this.empObjId).subscribe(response => {
+      console.log(response);
+      
+      // this.projectArray = response.payload.data.employee.projectId.map(project => {
+      //   return {
+      //     _id: project._id,
+      //     projectName: project.projectName,
+      //     projectManager: project.projectManager,
+      //     clientName: project.clientName
+      //   };
+      // });
 
-      if(this.data.timesheetId){
-            this.modalType = 'update';
-          this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
-            this.response = res.payload.data.timesheet[0];
-            this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
-          });
-      }      
+      // if(this.data.timesheetId){
+      //       this.modalType = 'update';
+      //     this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
+      //       this.response = res.payload.data.timesheet[0];
+      //       this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
+      //     });
+      // }      
     });
   }
 
@@ -204,7 +208,6 @@ export class TimesheetModal implements OnInit {
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
-     
       //Getting empId from token
     }
 

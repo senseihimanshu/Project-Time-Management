@@ -1,18 +1,13 @@
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
-  constructor() {
-    
-  }
+  constructor() {}
 
   async create(req, res) {
-    
-   try{
-
     let projectObj = {
       projectId: req.body.projectId,
       projectName: req.body.projectName,
-      projectManager: req.body.managers,
+      projectManager: req.body.manager,
       clientName: req.body.clientName,
       status: req.body.status,
       startDate: req.body.startDate,
@@ -20,10 +15,15 @@ class Project {
       empObjectIdArray: req.body.members,
       status: req.body.status
     };
-    // const empObjArr = [empObj._id];
-    // projectObj.empObjectIdArray = empObjArr;
-    // projectObj.projectManager = projectManagerIdObj._id;
 
+    if (+new Date(projectObj.startDate) > +new Date(projectObj.endDate)) {
+      return res.status(400).send({
+        success: false,
+        payload: {
+          message: "Start Date must be less than End Date"
+        }
+      });
+    }
 
     if (await model.project.get({ projectId: projectObj.projectId }))
       return res.status(400).send({
@@ -32,51 +32,62 @@ class Project {
           message: "Project Id already exists"
         }
       });
-    const empObjectIdArray = [];
 
-    const generateProjectPromise = async () => {
-      await Promise.all(
-        projectObj.empObjectIdArray.map(async empId => {
-          const { _id } = await model.employee.get({}, { empId });
-          empObjectIdArray.push(_id);
+    try {
+      const newProjectId = (
+        await model.project.save({
+          ...projectObj
         })
-      );
+      )._id;
 
-      const newProject = await model.project.save({
-        ...projectObj,
-        empObjectIdArray
+      console.log(projectObj, "Abha Rana");
+
+      if (projectObj.empObjectIdArray) {
+        await Promise.all(
+          projectObj.empObjectIdArray.map(async staff => {
+            await model.projectManager.save({
+              managerId: projectObj.projectManager,
+              staffId: staff,
+              projectObjId: newProjectId
+            });
+          })
+        );
+      }
+
+      return res.status(201).send({
+        success: true,
+        payload: {
+          message: "Project created successfully"
+        }
       });
-
-      return newProject;
-    };
-
-
-    const newProjectId = (await generateProjectPromise())._id;
-    const employeesUpdatePromise = async () => {
-      await Promise.all(
-        empObjectIdArray.map(async empObjectId => {
-          await model.employee.update(
-            { _id: empObjectId },
-            { $push: { projectId: newProjectId } }
-          );
-        })
-      );
-    };
-
-    await employeesUpdatePromise();
-
-    const projectManagerId = (
-      await model.employee.get({ _id: projectObj.projectManager })
+    } catch (error) {
+      res.status(500).send({
+        success: false,
+        payload: {
+          message: error.message
+        }
+      });
+    }
+  
+    const newProjectId = (
+      await model.project.save({
+        ...projectObj
+      })
     )._id;
-    model.projectManager.save({
-      managerId: projectManagerId,
-      employeeId: empObjectIdArray,
-      projectId: newProjectId
-    });
 
-    res.status(201).send({
+    await Promise.all(
+      projectObj.empObjectIdArray.map(async staff => {
+        await model.projectManager.save({
+          managerId: projectObj.projectManager,
+          staffId: staff,
+          projectObjId: newProjectId
+        });
+      })
+    );
+
+    return res.status(201).send({
       success: true,
-       payload: {
+      payload: {
         message: "Project created successfully"
       }
     });
@@ -89,150 +100,199 @@ class Project {
       }
     });
    }
-}
 
   async index(req, res) {
-  const projectList = req.paginatedResults.results;
-    const tempList = [];
-   await Promise.all(
-    projectList.map(async(project) => {
+    const projectList = req.paginatedResults.results;
+    
+    await Promise.all(
+      projectList.map(async (project, index) => {
         const manager = await model.employee.get(
           { _id: project.projectManager },
           { name: 1, _id: 0 }
         );
 
-        let member;
-        if(project.empObjectIdArray){
-        member = await Promise.all(project.empObjectIdArray.map(async(employee) => {
-          return ((await model.employee.get(
-            { _id: employee },
-            { name: 1, _id: 0 }
-          )).name);
-        }));}
+        const managerName = manager && manager.name;
 
-      tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member});
-      })
-    );  
-
-    console.log(tempList[0], tempList[1], tempList[2]);
+        const projectManagerStaffObjs = await model.projectManager.log(
+          { managerId: project.projectManager },
+          { staffId: 1, _id: 0 }
+        );
     
+        const staffIds = projectManagerStaffObjs.map(employeeId => {
+          return employeeId.staffId;
+        });
+        console.log(staffIds);
+
+        const memberNames = await Promise.all(
+          staffIds.map(async employee => {
+            const employeeObj = await model.employee.get({ _id: employee }, { name: 1, _id: 0 });
+            if(employeeObj){
+              return employeeObj.name;
+            }
+          })
+        );
+
+        projectList[index] = {
+          ...project.toObject(),
+          managerName,
+          memberNames: memberNames
+        };
+      })
+    );
+
+    req.paginatedResults.results = projectList;
+
     return res.status(200).send({
       success: true,
       payload: {
         data: {
-          tempList,
           result: req.paginatedResults
         },
-        message: "projects retrieved"
+        message: "Projects Retrieved"
       }
     });
   }
 
   async show(req, res) {
-    const projectList =await model.project.get({ _id: req.query.projectId });
-   
-    res.send(projectList);
-  }
-  async update(req, res) {
-     try{
-    const projectManager=await  model.projectManager.get({managerName:req.body.managers});
-    let projectUpdatedObj = {
-     
-      projectName: req.body.projectName,
-      projectManager: req.body.managers,
-      clientName: req.body.clientName,
-      status: req.body.status,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      empObjectIdArray: req.body.members,
-      status: req.body.status
-    };
-    //Expecting that req.body will have required details with same keys!!! (Just to save time)
-      
-                           
-    const projectObjId = (await model.project.get({ projectId: req.body.projectId }))._id;
-    const project = await model.project.update(
-      { _id: projectObjId },
-      projectUpdatedObj
+    const project = await model.project.get({ projectId: req.params.id });
+
+    const projectManagerStaffObjs = await model.projectManager.log(
+      { managerId: project.projectManager },
+      { staffId: 1, _id: 0 }
     );
+
+    const staffIds = projectManagerStaffObjs.map(employeeId => {
+      return employeeId.staffId;
+    });
+
+    const projectDetails = { ...project.toObject(), memberIds: staffIds };
+
     res.send({
       success: true,
       payload: {
-        data: project,
-        message:"project updated successfully"
+        data: {
+          projectDetails
+        },
+        message: "Project Data Retrieved Successfully"
       }
     });
-     }catch(error){
+  }
+
+  async update(req, res) {
+    const projectId = req.params.id;
+
+    try {
+      let projectToBeUpdatedObj = {
+        projectName: req.body.projectName,
+        projectManager: req.body.manager,
+        clientName: req.body.clientName,
+        status: req.body.status,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        empObjectIdArray: req.body.members,
+        status: req.body.status
+      };
+
+      const projectObjId = (await model.project.get({ projectId }))._id;
+
+      await model.project.update({ projectId }, projectToBeUpdatedObj);
+
+      const projectManagerDocumentArray = await model.projectManager.log(
+        { projectObjId },
+        { staffId: 1, managerId: 1 }
+      );
+      const staffIdsStoredStringArray = projectManagerDocumentArray.map(
+        document => document.staffId.toString()
+      );
+
+      console.log(projectToBeUpdatedObj.empObjectIdArray, "New");
+      console.log(staffIdsStoredStringArray, "Old");
+      
+      if(projectManagerDocumentArray[0] && projectManagerDocumentArray[0].managerId !== projectToBeUpdatedObj.projectManager)
+        await model.projectManager.updateAll({
+          projectObjId
+        }, { managerId: projectToBeUpdatedObj.projectManager });
+
+      await Promise.all(
+        projectToBeUpdatedObj.empObjectIdArray.map(async employee => {
+          if(!staffIdsStoredStringArray.includes(employee))
+            (await model.projectManager.save({
+              projectObjId,
+              managerId: projectToBeUpdatedObj.projectManager,
+              staffId: employee
+            }));
+        })
+      );
+
+      if (
+        projectManagerDocumentArray[0] &&
+        projectManagerDocumentArray[0].managerId !==
+          projectToBeUpdatedObj.projectManager
+      )
+        await model.projectManager.updateMany(
+          {
+            projectObjId
+          },
+          { managerId: projectToBeUpdatedObj.projectManager }
+        );
+
+      if (projectToBeUpdatedObj.empObjectIdArray.length === 0) {
+        await model.projectManager.deleteMany({
+          projectObjId
+        });
+      } else {
+        await Promise.all(
+          projectToBeUpdatedObj.empObjectIdArray.map(async employee => {
+            !staffIdsStoredStringArray.includes(employee) &&
+              (await model.projectManager.save({
+                projectObjId,
+                managerId: projectToBeUpdatedObj.projectManager,
+                staffId: employee
+              }));
+          })
+        );
+
+        await Promise.all(
+          staffIdsStoredStringArray.map(async employee => {
+            !projectToBeUpdatedObj.empObjectIdArray.includes(employee) &&
+              (await model.projectManager.delete({
+                projectObjId,
+                staffId: employee
+              }));
+          })
+        );
+      }
+      res.send({
+        success: true,
+        payload: {
+          message: "Project Updated Successfully"
+        }
+      });
+    } catch (error) {
       res.status(400).send({
         success: false,
         payload: {
-          message: err.message
+          message: error.message
         }
       });
-     }
+    }
   }
 
-  async searchProject(req, res){
-   
-    let query=req.query.projectName;
-    query = query.toLowerCase().trim()
-    const projects = await model.project.getforsearch({projectName: { $regex:`^${query}`, $options: 'i'}},{});
-    const tempList = [];
-    await Promise.all(
-     projects.map(async(project) => {
-         const manager = await model.employee.get(
-           { _id: project.projectManager },
-           { name: 1, _id: 0 }
-         );
-         const member = await model.employee.get(
-           { _id: project.empObjectIdArray },
-           { name: 1, _id: 0 }
-         );
-       tempList.push({ project:project, projectManagerName: manager && manager.name ,memberName:member && member.name});
-       })
-     );  
-     
-     return res.status(200).send({
-       success: true,
-       payload: {
-         data: {
-           tempList,
-           result: req.paginatedResults
-         },
-         message: "projects retrieved"
-       }
-     });
-
-}
   async delete(req, res) {
-    const project = await model.project.delete({ _id: req.query.id });
+    const projectObjId = (
+      await model.project.get({ projectId: req.params.id }, { _id: 1 })
+    )._id;
+
+    await model.project.delete({ _id: projectObjId });
+    await model.projectManager.model.deleteMany({ projectObjId });
+
     res.send({
       success: true,
       payload: {
-        employee,
         message: "Project Deleted Successfully"
       }
     });
   }
-  
-  async indexP(req,res){
-    const projectList = await model.project.gets();
-   // get page from query params or default to first page
-   const page = parseInt(req.query.page) || 1;
-
-   // get pager object for specified page
-   const pageSize = 6;
-   
-   const pager = await pagination.paginate(projectList.length, page, pageSize);
-
-   // get page of items from items array
-   const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
-   
-
-   // return pager object and current page of items
-   return res.json({ pager, pageOfItems });
-   
-}
 }
 
 module.exports = new Project();
