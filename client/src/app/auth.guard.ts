@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     const token=localStorage.getItem('Authorization');
     
     const expectedRole = next.data.expectedRole;
-    console.log(token);
+   
    
     // decode the token to get its payload
    
