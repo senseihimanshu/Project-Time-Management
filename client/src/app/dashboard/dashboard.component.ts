@@ -27,7 +27,7 @@ export class DashboardComponent {
   // // CHART CLICK EVENT.
   // onChartClick(event) {
   // }
-  // projectpieChartLabels = ["COMPLETED", "DISCARDED", "IN-PROGRESS"];
+   projectpieChartLabels = ["COMPLETED", "DISCARDED", "IN-PROGRESS"];
 
   // CHART COLOR.
   projectpieChartColor: any = [
