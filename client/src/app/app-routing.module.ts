@@ -59,7 +59,7 @@ const routes: Routes = [
     component: ReviewComponent,
     canActivate:[AuthGuard],
     data: { 
-      expectedRole: 'project manager'
+      expectedRole: 'project-manager'
     } 
   },
   {
@@ -67,7 +67,7 @@ const routes: Routes = [
     component: ReviewComponent,
      canActivate:[AuthGuard],
     data: { 
-      expectedRole: 'project manager'
+      expectedRole: 'project-manager'
     } 
   },
   {
@@ -75,7 +75,7 @@ const routes: Routes = [
     component: ProjectManagerComponent,
      canActivate:[AuthGuard],
     data: { 
-      expectedRole: 'project manager'
+      expectedRole: 'project-manager'
     } 
   },
   {
