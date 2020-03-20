@@ -8,7 +8,6 @@ class Timesheet {
     //Expecting correct data type and values
     const timesheetToSave = req.body;
     timesheetToSave.empObjId = req.employee._id;
-
     //Creating a new timesheet
     const timesheetFromDatabase = await model.timesheet.save(timesheetToSave);
     const timesheetObjId =

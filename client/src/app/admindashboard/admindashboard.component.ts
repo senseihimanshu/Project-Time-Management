@@ -29,7 +29,7 @@ export class AdmindashboardComponent implements OnInit {
 
   isSortDecreasing: boolean = false;
 
-  columns: any = {};
+  columns: any = { password: 0 };
 
   sortAccordingTo: any = { name: this.isSortDecreasing ? 1 : -1 };
 
