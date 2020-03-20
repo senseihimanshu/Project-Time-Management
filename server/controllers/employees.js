@@ -24,8 +24,8 @@ require("dotenv").config();
   let info ={
      from: '"balanideepanshu92@gmail.com"', // sender address
      to:newEmployee.email, // list of receivers
-     subject: "Node Contact Request", // Subject line
-     text: "Hello world?", // plain text body
+     subject: "Project Portal  Contact Request", // Subject line
+     text: "Welcome to Project Portal", // plain text body
      html: output // html body
    }
    transporter.sendMail(info,function(err,data){
@@ -71,12 +71,12 @@ class Employee {
     newEmployee.empId = newEmployee.empId.replace(/ /g, "");
 
     newEmployee.password = "cyg-" + empId;
-
+   const pass=newEmployee.password;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newEmployee.password, salt);
 
     newEmployee.password = hashedPassword;
-
+     
     try {
       await model.employee.save(newEmployee).then(() => {
         res.status(201).send({
@@ -95,21 +95,47 @@ class Employee {
       });
     }
     const output = `
-
-     <p>you have a new contact request</p>
-     <p>Thanks again for 
-      <h3>your details</h3>
-      <ul>
-      <li>Name:${newEmployee.name}</li>
-      <li>Email:${newEmployee.email}</li>
-      <li>Designation:${newEmployee.designation}</li>
-      <li>Role:${newEmployee.role}</li>
-      <li>Phone:${newEmployee.phone}</li>
-      <li>Password:${pass}</li>
-      <li>Address:${newEmployee.address}</li>
-      <li>joining:${newEmployee.joining}</li>
-      </ul>
-      <p>This is Computer Generated Email ,Don't reply back to it</p>
+        <style>
+            .bottom{
+              color:grey;
+              font-size:0.8rem;
+               }
+        </style>
+     <p>Congratulations,you are registered on our CyberGroup Project-Portal</p>
+        <h3>Thanks again for your details</h3>
+      <table>
+      <tr>
+        <td>Name:</td>
+        <td>${newEmployee.name}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>${newEmployee.email}</td>
+      <tr>
+      <td>Designation:</td>
+      <td>${newEmployee.designation}</td>
+      </tr>
+      <tr>
+      <td>Role:</td>
+       <td>${newEmployee.role}</td>
+      <tr>
+       <td>Phone:
+       <td>${newEmployee.phone}</td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td>${pass}</td>
+      </tr>
+        <td>Address:</td>
+        <td>${newEmployee.address}</td>
+      </tr>
+      <tr>
+       <td>joining:</td>
+       <td>${newEmployee.joining}</td>
+    </table>
+      <p>Login on our portal with above credentials</p>
+      <a href="http://localhost:4200/login">
+      <p class="bottom">This is Computer Generated Email ,Don't reply back to it</p>
       `;
     nodeMail(output, newEmployee);
   }
