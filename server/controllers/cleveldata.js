@@ -9,8 +9,14 @@ class Cleveldata{
           const discardedProjects=await model.project.count({status:"discarded"});
           const InProgressProjects=await model.project.count({status:"in-progress"});
           const data=[completedProjects,discardedProjects,InProgressProjects];
-         
-            res.send([{data}]);
+          res.status(200).send({
+            success: true,
+            payload: {
+              message: "Projects data retrieved  successfully",
+              data:[{data}]
+            }
+          });
+            
           }    
        }catch(error){
         console.error(error);
@@ -34,9 +40,15 @@ class Cleveldata{
           });
           }
             data=[approvedTimesheets,declinedTimesheets,pendingTimesheets];
-
-             res.send([{data}]);
-              }
+             res.status(200).send({
+               success: true,
+               payload: {
+                 message: "Timesheet data retrieved  successfully",
+                 data:[{data}]
+               }
+             });
+           
+          }
         }catch(error){
          console.error(error);
        }

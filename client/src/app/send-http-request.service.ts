@@ -105,15 +105,7 @@ export class SendHttpRequestService {
         catchError(this.handleError<any>("Some Error Occurred"))
       );
   }
-  clevelDataProjects(graphicaldata: any): Observable<any> {
-    const params = new HttpParams().set("graphicaldata", graphicaldata);
-    return this.http
-      .get("http://localhost:3000/project/graphicaldata", { params})
-      .pipe(
-        tap(_ => this.log("projects data")),
-        catchError(this.handleError<any>("Some Error Occurred"))
-      );
-  }
+  
   clevelDataTimesheets(graphicaldata: any): Observable<any> {
     const params = new HttpParams().set("graphicaldata", graphicaldata);
     return this.http

@@ -2,9 +2,10 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmployeeService } from "../services/employee.service";
-import { SendHttpRequestService } from "./../send-http-request.service";
-import { Router, RouterLink } from "@angular/router";
 
+import { Router, RouterLink } from "@angular/router";
+import{ProjectService} from '../services/project.service'
+import{TimesheetService} from'../services/timesheet.service'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -56,7 +57,8 @@ menus: any = [
   //  users: User[] = [];
   
     constructor(private httpService: HttpClient,
-      private _service: SendHttpRequestService,
+      private projectService: ProjectService,
+      private timesheetService:TimesheetService,
     private router: Router,
     private employeeService: EmployeeService) { }
     pieChartOptions = {
@@ -111,14 +113,14 @@ onChartClick(event) {
     }
    clevelDataProjects(graphicaldata) {
      
-    let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
-      this.projectpieChartData=res;
+    let obj=this.projectService.clevelDataProjects(graphicaldata).subscribe(res => {
+      this.projectpieChartData=res.payload.data;
       
     });
   }
   clevelDataTimesheets(graphicaldata) {
-   let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
-     this.timesheetpieChartData=res;
+   let obj=this.timesheetService.clevelDataTimesheets(graphicaldata).subscribe(res => {
+     this.timesheetpieChartData=res.payload.data;
     
    });
  }

@@ -52,4 +52,10 @@ export class TimesheetService {
       ...this.httpOptions
     });
   }
+  clevelDataTimesheets(graphicaldata: any): Observable<any> {
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+    return this.http
+      .get("http://localhost:3000/timesheet/graphicaldata", {...this.httpOptions, params });
+     
+  }
 }
