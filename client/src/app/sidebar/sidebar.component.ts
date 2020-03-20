@@ -97,8 +97,12 @@ export class SidebarComponent implements OnInit {
   
         submenus: [
           {
-            title: "Create/Show Timesheet",
+            title: "Create Timesheet",
             route: "/timesheetweek"
+          },
+          {
+            title: "Review Timesheets",
+            route: "/manager"
           }
         ]
       });

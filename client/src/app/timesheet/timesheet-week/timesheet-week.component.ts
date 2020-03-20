@@ -94,7 +94,7 @@ export class TimesheetWeekComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-    
+      this.tabularData();
     });
   }
 
@@ -105,6 +105,7 @@ export class TimesheetWeekComponent {
       },
       reason => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this.tabularData();
       }
     );
   }

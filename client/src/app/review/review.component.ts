@@ -1,124 +1,79 @@
-import { SendHttpRequestService } from './../send-http-request.service';
-// import { SendHttpRequestService } from './../services/send-http-request.service';
-import { IResponse } from './../models/response.model';
-import { Router } from "@angular/router";
 import { Component, OnInit, OnChanges } from "@angular/core";
-import swal from 'sweetalert2';
+import { TimesheetService } from '../services/timesheet.service';
+import { jsonDecoder } from '../utils/json.util';
+import swal from "sweetalert2";
+import { IResponse } from '../models/response.model';
+
+
 @Component({
   selector: "app-review",
   templateUrl: "./review.component.html",
   styleUrls: ["./review.component.scss"]
 })
-export class ReviewComponent implements OnInit, OnChanges {
+export class ReviewComponent implements OnInit {
   message: String;
   constructor(
-    private router: Router,
-    private _service:SendHttpRequestService
+    private timesheetService: TimesheetService
   ) {}
-  usersArray: any;
+  timesheetArray: any;
+
+  page: number = 1;
+  limit: number = 5;
+  dataSize: number;
+
+  isSortDecreasing: boolean = false;
+  sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
+
   reviews() {
-    // let obj = this._service.showReviews().subscribe(res => {
-    //   this.usersArray = res;
-    // });
-    var date = new Date("2013-08-03T02:00:00Z");
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var dt = date.getDate();
-    var d =new Date();
-    var d = new Date("2020-02-02T00:00:00Z");
-    var n = d.toISOString();
-    var first = d.getDate() - d.getDay() + 1; // First day is the day of the month - the day of the week
-    var last = first + 4; // last day is the first day + 6
-
-    var firstday = new Date(d.setDate(first)).toUTCString();
-    var lastday = new Date(d.setDate(last)).toUTCString();
-    var secondday = new Date(d.setDate(first + 1)).toUTCString();
-
-var s=year + "-" + month + "-" + dt;
-    var curr = new Date(); // get current date
-    var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-    var last = first + 4; // last day is the first day + 6
-
-    var firstday = new Date(curr.setDate(first)).toUTCString();
-    var lastday = new Date(curr.setDate(last)).toUTCString();
-    var secondday = new Date(curr.setDate(first + 1)).toUTCString();
-    firstday;
-    "Sun, 06 Mar 2011 12:25:40 GMT";
-    lastday;
-    "Sat, 12 Mar 2011 12:25:40 GMT";
+    this.timesheetService.getStaffTimesheets(
+      {
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        criteria: JSON.stringify({ managerId: jsonDecoder()._id }),
+        columns: JSON.stringify({}),
+        sort: JSON.stringify({})
+      }
+    ).subscribe(res => {
+      this.timesheetArray = res.payload.data.result.results;
+      this.dataSize = res.payload.data.result.dataSize;
+    });
   }
 
   ngOnInit() {
     this.reviews();
   }
 
-  ngOnChanges() {
-    this.reviews();
+  updateStatus(status: boolean, timesheetId: string){
+    this.timesheetService.updateStatus(status, timesheetId).subscribe((res: IResponse) => {
+      swal.fire({
+        icon: "success",
+        title: status? "Timesheet Approved" : "Timesheet Declined" 
+      });
+
+      this.reviews();
+
+    });
   }
-   accept(data) {
-    console.log(data);
-    let obj = {
-      _id: data,
-      status: "Approved"
-    };;
-    this.sendReq(obj);
-  }
-      
-  reject(data) {
-    let obj = {
-      _id: data,
-      status: "Declined"
-    };
-    this.sendReq(obj);
-  }
-  sendReq(data) {
-    const swalWithBootstrapButtons = swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    })
-    
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, Confirm review!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.value) {
-        let obj = this._service.reviewRequest(data).subscribe((res:IResponse) => {
-          this.usersArray = res;
-          this.message = res.payload.message;
-          setTimeout(() => {
-            this.message = null;
-          }, 5000);
-        });
-         swalWithBootstrapButtons.fire(
-          'Reviewed!',
-          'data.status',
-          'success'
-        )
-        this.usersArray = this.usersArray.filter(
-          item => item._id !=data._id
-        );
-      } else if (
-        result.dismiss === swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Review request has been cancelled:)',
-          'error'
-        )
+
+  handlePaginationResult(type: string) {
+    if (type === "prev") {
+      if (this.page > 1) {
+        this.page--;
+        this.reviews();
       }
-    }) 
-    
+    }
+    if (type === "next") {
+      if (this.dataSize > this.page * this.limit) {
+        this.page++;
+        this.reviews();
+      }
+    }
   }
-    // let obj = this._service.reviewRequest(data).subscribe(res => {
-    //   this.usersArray = res;
-    //   alert(data.status);
-    // });
-  }
+
+  // sortList() {
+  //   this.isSortDecreasing = !this.isSortDecreasing;
+  //   this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
+  //   this.reviews();
+  // }
+
+}
