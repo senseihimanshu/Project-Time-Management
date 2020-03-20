@@ -27,7 +27,7 @@ module.exports = (app) => {
 	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
 	//clevel graphs API
 	app.get("/project/graphicaldata",authenticator,controller.cleveldata.projectsStatusData);
-	 app.get("/timesheet/graphicaldata",controller.cleveldata.timesheetsStatusData);
+	 app.get("/timesheet/graphicaldata",authenticator,controller.cleveldata.timesheetsStatusData);
    // Timesheet
 	app.post('/api/timesheet', authenticator, controller.timesheet.create);
 	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
