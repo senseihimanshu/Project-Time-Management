@@ -1,3 +1,4 @@
+import { IResponse } from './../../models/response.model';
 import { Component, OnInit, Inject } from "@angular/core";
 
 //3rd party

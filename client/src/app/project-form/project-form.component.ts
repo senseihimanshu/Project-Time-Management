@@ -1,3 +1,4 @@
+import { IResponse } from './../models/response.model';
 import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
@@ -5,7 +6,9 @@ import { switchMap } from "rxjs/operators";
 import { FormControl } from "@angular/forms";
 import swal from "sweetalert2";
 import { ProjectService } from "../services/project.service";
-import { Observable } from "rxjs";
+import { Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged, map,filter} from 'rxjs/operators';
+
 
 @Component({
   selector: "app-project-form",
@@ -22,8 +25,8 @@ export class ProjectFormComponent implements OnInit {
   project: any;
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings = {};
-  empList: any;
+  
+  empList: string[];
   projManager: string;
   projMembers: string[] = [];
   message: string;
@@ -69,7 +72,7 @@ export class ProjectFormComponent implements OnInit {
         false
       );
     })();
-
+    
     this.getemployees();
     this.route.params.subscribe((data: Params) => {
     });
@@ -139,4 +142,17 @@ export class ProjectFormComponent implements OnInit {
       this.projMembers = employeeArr;
     }
   }
+   formatter = (result: string) => result.toUpperCase();
+ 
+    searchProjectMember = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? this.empList
+        : this.empList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    ) 
+   
+   
+
+
 }

@@ -1,11 +1,12 @@
+import { IResponse } from './../../models/response.model';
 import { Component, OnInit } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Observable } from "rxjs";
-import { FormBuilder, Validators } from "@angular/forms";
-import swal from "sweetalert2";
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { SendHttpRequestService } from "../../send-http-request.service"
+import swal from'sweetalert2';
 @Component({
   selector: "app-employee-form",
   styleUrls: ["./employee-form.component.scss", "../main.component.scss"],

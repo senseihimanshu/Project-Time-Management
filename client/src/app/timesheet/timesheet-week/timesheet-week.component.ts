@@ -1,7 +1,7 @@
+import { IResponse } from './../../models/response.model';
 import { Component } from "@angular/core";
 
 import { TimesheetService } from "../../services/timesheet.service";
-
 //3rd party
 import {
   NgbModal,

@@ -1,4 +1,4 @@
-const controller = require('../controllers');
+ const controller = require('../controllers');
 const paginator = require('../middlewares/pagination');
 const authenticator = require('../middlewares/authentication');
 const model = require('../models');
@@ -21,8 +21,19 @@ module.exports = (app) => {
 	app.put('/api/project/:id', authenticator, controller.project.update);
 	app.delete('/api/project/:id', authenticator, controller.project.delete);
 
+	//Review
+	app.put('/api/review',controller.timesheet.modify);
 	//Project Manager
 	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
+	//clevel graphs API
+	app.get("/project/graphicaldata", authenticator,controller.cleveldata.projectsStatusData);
+	 app.get("/timesheet/graphicaldata", authenticator,controller.cleveldata.timesheetsStatusData);
+   // Timesheet
+	app.post('/api/timesheet', authenticator, controller.timesheet.create);
+	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
+	app.get('/api/timesheet', [authenticator, paginator(model.timesheet.model)], controller.timesheet.index);
+	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
+	app.get('/api/timesheet/review/:id', controller.timesheet.updateStatus);
 
 
 	// Timesheet

@@ -6,33 +6,41 @@ var generatePassword = require("password-generator");
 
 require("dotenv").config();
 // node function which sends email to new user create
-const nodeMail = async function(output, newEmployee) {
-  let testAccount = await nodemailer.createTestAccount();
+ const nodeMail=async function(output,newEmployee){
+   try{
+   
+    
+     let testAccount = await nodemailer.createTestAccount();
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD
-    }
-  });
+     // create reusable transporter object using the default SMTP transport
+         let transporter = nodemailer.createTransport({
+         service:'gmail',
+          auth:{
+           user:process.env.EMAIL,
+           pass:process.env.PASSWORD
+         }
+      });
   // send mail with defined transport object
-  let info = {
-    from: '"balanideepanshu92@gmail.com"', // sender address
-    to: newEmployee.email, // list of receivers
-    subject: "Node Contact Request", // Subject line
-    text: "Hello world?", // plain text body
-    html: output // html body
-  };
-  transporter.sendMail(info, function(err, data) {
-    if (err) {
-      console.error("error occurs", err);
-    } else {
+  let info ={
+     from: '"balanideepanshu92@gmail.com"', // sender address
+     to:newEmployee.email, // list of receivers
+     subject: "Node Contact Request", // Subject line
+     text: "Hello world?", // plain text body
+     html: output // html body
+   }
+   transporter.sendMail(info,function(err,data){
       
-    }
-  });
-};
+     if(err){
+          console.error("error occurs",err);
+        }
+        else{
+          console.log("email sent successfully");
+        }
+   });
+  }catch(error){
+    console.error(error);
+  }
+}
 
 class Employee {
   constructor() {}
@@ -92,14 +100,14 @@ class Employee {
      <p>Thanks again for 
       <h3>your details</h3>
       <ul>
-      <li>Name:${name}</li>
-      <li>Email:${email}</li>
-      <li>Designation:${designation}</li>
-      <li>Role:${role}</li>
-      <li>Phone:${phone}</li>
-      <li>Password:${password}</li>
-      <li>Address:${address}</li>
-      <li>joining:${joining}</li>
+      <li>Name:${newEmployee.name}</li>
+      <li>Email:${newEmployee.email}</li>
+      <li>Designation:${newEmployee.designation}</li>
+      <li>Role:${newEmployee.role}</li>
+      <li>Phone:${newEmployee.phone}</li>
+      <li>Password:${pass}</li>
+      <li>Address:${newEmployee.address}</li>
+      <li>joining:${newEmployee.joining}</li>
       </ul>
       <p>This is Computer Generated Email ,Don't reply back to it</p>
       `;
@@ -117,26 +125,6 @@ class Employee {
     });
   }
    
-   async indexByRole(req, res) {
-    const projectManagerList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}},{role:"Project Manager"}]},
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    ) ;
-    const projectMemberList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}},{role:"Employee"}]},
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    ) ;
-    return res.status(200).send({
-      success: true,
-      payload: {
-        data: {
-           projectManagerList,
-           projectMemberList
-        },
-        message: "employees retrieved"
-      }
-    });
-  }
  
   async show(req, res) {
     const employee = await model.employee.get({ empId: req.params.id });
