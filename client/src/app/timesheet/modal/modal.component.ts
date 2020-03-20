@@ -107,8 +107,10 @@ export class TimesheetModal implements OnInit {
               this.modalType = 'update';
             this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
               this.response = res.payload.data.timesheet;
-              this.project = res.payload.data.timesheet.projectObjId;
+              this.project =  this.response.projectObjId;
+              this.startDate = this.response.startDate;
               this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
+              console.log(this.startDate, this.project);
             });
         }
       });

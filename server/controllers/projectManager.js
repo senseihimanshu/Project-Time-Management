@@ -3,7 +3,6 @@ const model = require("../models");
 class ProjectManager {
   async getProjects(req, res) {
     const staffId = req.params.staffid;
-    console.log(staffId);
     try {
       const projectObjIds = await model.projectManager.log(
         { staffId },

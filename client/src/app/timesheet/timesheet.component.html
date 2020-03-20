@@ -8,7 +8,7 @@
       <div class="custom-card">
       <h6 class="card-header text-center font-weight-bold text-uppercase">
         Timesheets
-            <mdb-icon *ngIf="role !== 'admin'" fas icon="plus" class="add-icon text-success" size="2x" (click)="openDialog()"></mdb-icon>
+            <mdb-icon *ngIf="response?.empObjId === empObjId" fas icon="plus" class="add-icon text-success" size="2x" (click)="openDialog()"></mdb-icon>
       </h6>
           <table
             class="table table-striped table-fixed" id="myTable"
@@ -31,7 +31,7 @@
                   <td class="text-center">{{ response.week[id].date | date }}</td>
                   <td class="text-center">{{ response.week[id].hours }}</td>
                   <td class="text-center">{{ response.week[id].billable }}</td>
-                  <td class="text-center">{{ response.week[id].status }}</td>
+                  <td class="text-center">{{ response.status }}</td>
                 </ng-template>
               </tr>
             </ng-template>

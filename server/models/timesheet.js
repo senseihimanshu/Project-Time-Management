@@ -12,7 +12,7 @@ class Timesheet{
       return this.model.findOne(criteria, columns);
    }
 
-   async getTimesheetWeeks(criteria = {}, columns = {}){
+   async log(criteria = {}, columns = {}){
     return this.model.find(criteria, columns);
   }
 
