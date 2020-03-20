@@ -115,7 +115,7 @@
                 required
               >
               <i class="fa fa-search "></i>
-              <input id="typeahead-config" type="text" class="my-control"
+              <input id="typeahead-config" type="search" class="my-control"
                     [(ngModel)]="model" 
                     name="search"
                     [ngbTypeahead]="searchProjectMember"
@@ -218,7 +218,7 @@
                 multiple
               >
               <i class="fa fa-search "></i>
-              <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
+              <input id="typeahead-config" type="search" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
               name="search"
               [ngbTypeahead]="searchProjectMember"
               [resultFormatter]="formatter"
