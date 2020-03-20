@@ -27,25 +27,17 @@ class Cleveldata{
 
         try{
         if(req.query.graphicaldata==='true'){
-          let approvedTimesheets = 0;
-          let declinedTimesheets = 0; 
-          let pendingTimesheets = 0; 
-
-        for(let day=0;day<5;day++){
-          const timesheet = await model.timesheet.model.find({}, {"week": 1});
-          let newArr = timesheet.filter((cur) => {
-            if(cur.week[day].status === "pending") pendingTimesheets++;
-            if(cur.week[day].status === "approved") approvedTimesheets++;
-            if(cur.week[day].status === "declined") declinedTimesheets++;
-          });
-          }
+          const approvedTimesheets  =await model.timesheet.count({status:"approved"});
+          const declinedTimesheets=await model.timesheet.count({status:"declined"});
+          const pendingTimesheets=await model.timesheet.count({status:"pending"});
+        
             data=[approvedTimesheets,declinedTimesheets,pendingTimesheets];
              res.status(200).send({
                success: true,
-               payload: {
-                 message: "Timesheet data retrieved  successfully",
-                 data:[{data}]
-               }
+                payload: {
+                  message: "Timesheet data retrieved  successfully",
+                  data:[{data}]
+                }
              });
            
           }
