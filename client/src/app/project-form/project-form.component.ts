@@ -97,6 +97,14 @@ export class ProjectFormComponent implements OnInit {
       });
   }
   projectCreateOrUpdate(obj, formType): any {
+    if (obj.startDate >= obj.endDate) {
+      swal.fire({
+        icon: "error",
+        title: "Warning!",
+        text: "Start Date must be less than End Date!" 
+      });
+      return;
+    }
     this.projectService.projectCreateOrUpdate(obj, formType, this.projectId).subscribe(
       (res: IResponse) => {
         this.message = res.payload.message;
