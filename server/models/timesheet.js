@@ -50,9 +50,13 @@ class Timesheet{
     const timesheetCount = await this.model.find().count(criteria);
     return timesheetCount;
   }
-  //delete the timesheet data as per criteria
+  
   async delete(criteria = {}) {
     return this.model.deleteOne(criteria);
+  }
+
+  async deleteMany(criteria = {}) {
+    return this.model.deleteMany(criteria);
   }
 
   async getforsearch(criteria = {}, columns = {}) {
@@ -63,19 +67,6 @@ class Timesheet{
   }
   async update(criteria = {}, updatedEmployeeObj) {
     return this.model.updateOne(criteria, updatedEmployeeObj);
-  }
-  async modify(req, res) {
-    const timesheet = await model.timesheet.update(
-      { _id: req.body._id },
-      { $set: { status: req.body.status } }
-    );
-    res.send({
-      success: true,
-      payload: {
-       review,
-       message:'Review request completed'
-      }
-    });
   }
 }
 

@@ -110,7 +110,6 @@ export class TimesheetModal implements OnInit {
               this.project =  this.response.projectObjId;
               this.startDate = this.response.startDate;
               this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
-              console.log(this.startDate, this.project);
             });
         }
       });

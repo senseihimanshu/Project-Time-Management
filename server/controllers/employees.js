@@ -1,8 +1,6 @@
 const bcrypt = require("bcrypt");
 const model = require("../models");
-const schema = require("../schemas");
 const nodemailer = require("nodemailer");
-var generatePassword = require("password-generator");
 
 require("dotenv").config();
 // node function which sends email to new user create
@@ -34,7 +32,6 @@ require("dotenv").config();
           console.error("error occurs",err);
         }
         else{
-          console.log("email sent successfully");
         }
    });
   }catch(error){
@@ -204,7 +201,12 @@ class Employee {
   }
 
   async delete(req, res) {
-    const employee = await model.employee.delete({ empId: req.params.id });
+    const employee = await model.employee.delete({ _id: req.params.id });
+    
+    await model.timesheet.deleteMany({ empObjId: req.params.id });
+
+    await model.projectManager.deleteMany({ staffId: req.params.id });
+    await model.projectManager.deleteMany({ managerId: req.params.id });
 
     res.send({
       success: true,

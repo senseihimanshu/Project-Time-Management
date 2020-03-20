@@ -61,8 +61,8 @@ export class EmployeeService {
     });
   }
 
-  deleteEmployee(empId: string): Observable<IResponse> {
-    return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empId}`, {
+  deleteEmployee(empObjId: string): Observable<IResponse> {
+    return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empObjId}`, {
       ...this.httpOptions
     });
   }

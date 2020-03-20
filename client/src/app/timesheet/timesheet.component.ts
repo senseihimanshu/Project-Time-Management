@@ -20,6 +20,9 @@ import { RouterLink } from "@angular/router";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { jsonDecoder } from '../utils/json.util';
+
+import Swal from 'sweetalert2';
+
 @Component({
   selector: "table-editable",
   templateUrl: "./timesheet.component.html",
@@ -97,7 +100,14 @@ export class TimesheetComponent implements OnInit {
       this.timesheetService
         .getTimesheetUsingRouteParams(timesheetId)
         .subscribe(res => {
-          this.response = [res.payload.data.timesheet];
+          if(res.success === false){
+            Swal.fire({
+              title: 'You are unauthorized to view this page' 
+            });
+          }
+          if(res.payload.data){
+            this.response = [res.payload.data.timesheet];
+          }
         });
       return;
     }

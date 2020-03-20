@@ -118,6 +118,7 @@ th {
   margin-right: 1.5rem;
   background-color: whitesmoke;
   display: inline-block;
+  position: relative;
 }
 
 #myInput:active {
@@ -194,4 +195,12 @@ background-color: white;
   &:hover{
       opacity: 0.4;
   }
+}
+
+.no-data{
+  width: 100%;
+    text-align: center;
+    position: absolute;
+    font-size: 2rem;
+    color: grey;
 }

@@ -52,10 +52,10 @@ export class AdmindashboardComponent implements OnInit {
   ngOnInit() {
     this.tabularData();
 
-    this.empObjId = jsonDecoder().empId;
+    this.empObjId = jsonDecoder()._id;
   }
 
-  deleteEmployee(empId: string) {
+  deleteEmployee(empObjId: string) {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -76,14 +76,14 @@ export class AdmindashboardComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.employeeService.deleteEmployee(empId).subscribe(res => {
+          this.employeeService.deleteEmployee(empObjId).subscribe(res => {
             this.tabularData();
             this.message = res.payload.message;
             setTimeout(() => {
               this.message = null;
             }, 5000);
             this.usersArray = this.usersArray.filter(
-              item => item.empId != empId
+              item => item._id != empObjId
             );
           });
           swalWithBootstrapButtons.fire(
