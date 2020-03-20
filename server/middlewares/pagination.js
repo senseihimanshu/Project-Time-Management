@@ -1,5 +1,6 @@
 function paginator(model) {
   return async (req, res, next) => {
+
     const criteria = JSON.parse(req.query.criteria);
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit);

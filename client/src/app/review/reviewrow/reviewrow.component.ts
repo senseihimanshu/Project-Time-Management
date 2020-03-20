@@ -6,34 +6,30 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   template: `
     <tr class="review-row">
       <td>
-        {{ employee.empId }}
+        {{ timesheet.employeeName }}
       </td>
       <td>
-        {{ employee.week.projectId }}
+        {{ timesheet.projectName }}
       </td>
       <td>
-        {{ employee.customerName }}
+        {{ timesheet.clientName }}
       </td>
       <td>
-        {{ employee.billable }}
-      </td>
-      <td>
-        {{ employee.startDate | date }}
-      </td>
-      <td>
-        {{ employee.week[0].hours }}
+        <a class="view-btn" [routerLink]="['/timesheet', timesheet._id]"
+        ><i class="fas fa-eye">
+        </i></a>
       </td>
       <td>
         <a
           class="btn btn-primary text-white"
           role="button"
-          (click)="accept(employee._id)"
+          (click)="accept(timesheet._id)"
           >Accept</a
         >
         <a
           class="btn btn-primary ml-1 text-white"
           role="button"
-          (click)="reject(employee._id)"
+          (click)="reject(timesheet._id)"
           >Reject</a
         >
       </td>
@@ -43,12 +39,12 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 export class ReviewRowComponent {
   constructor() {}
   @Input()
-  employee: any;
+  timesheet: any;
 
   @Output()
   deleteEmp: EventEmitter<any> = new EventEmitter();
 
-  deleteEmployee(empId: string) {
+  deleteTimesheet(empId: string) {
     this.deleteEmp.emit(empId);
   }
   usersArray: any;
