@@ -1,6 +1,66 @@
-.project-card{
-    margin-top:-4.4rem;
-   padding:20px;
+.main{
+    
+    display:flex;
+    flex-wrap: nowrap;
+}
+h2{
+    align-items:center ;
+    font-weight: bolder;
+  }
+p{
+   color:red;
+   font-size:0.8rem;
+   padding:-5px;
+   text-align:left;
+}
+.app-main{
+   padding: 0.8rem 4rem;
+margin: 0 auto;
+}
+.message{
+   font-size: 9px;
+   color: red;
+   transition: all 2s;
+}
+help-block{
+   color:red!important;
+}
+.form-body{
+   background-color:whitesmoke;
+   padding:26px;
+   height:fit-content;
+   min-width:70vh;
+   border:5px solid #2f8fe9b4;
+}
+h6{
+   text-align:left;
+   font-weight:bolder;
+   font-size:0.8rem;
+   margin:0;
+   padding:0;
+   max-height:15rem;
+}
+
+.custom-card {
+   box-shadow: 1px 1px 1px 1px rgba(50, 50, 50, 0.1);
+   background:white;
+   padding: 0;
+   margin: 0 auto;
+   margin-top:1.2rem;
+}
+
+.form-control,.custom-select
+{
+   display: block;
+   width:70%;
+   float:right;
+   font-size:12px;
+  max-height:9rem;
+  padding:-15px;
+}
+
+.h4{
+   font-size:2px;
 }
 .form-group{
     text-align:left;
@@ -13,38 +73,40 @@
    text-align:left;
 }
 .control-label{
-    font-size:11px;
-    padding:0;
+   font-size:12px;
+   padding:0;
+  max-height:10px;
+   
 }
+
 .error{
-  font-size: 1rem;
-  color: red;
+ font-size: 1rem;
+ color: red;
 }
 .btn{
-    width:30%;
-   margin-left:40%;
-    outline-color: #0183FF;
-    outline-style: auto;
-    font-size:9px;
-    
+   
+  margin-left:40%;
+   outline-color: #0183FF;
+   outline-style: auto;
+   font-size:9px;
+   
 }
 .button-parent{
-    min-width:40px;
-    margin-top:-15px;
-
-    & > *{
-        white-space: nowrap;
-        text-align: center;
-        padding-left: 0;
-        padding-right: 0;
-    }  
+   width: 100%;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
 }
 
-mat-select{
-    text-align: left;
+mat-select {
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   background: #fff right center no-repeat;
+   padding-right: 20px;
 }
 
-label, mat-label{
-    text-align: left;
-    width: 25%;
+.mandatory{
+   &::before{
+       content: '* ';
+   }
 }

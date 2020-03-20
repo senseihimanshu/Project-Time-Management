@@ -5,8 +5,7 @@
         <app-sidebar></app-sidebar>
       </div>
       
- <div class="app-main no-scrollbar-wrap"> 
-      <div class="custom-card col-5">
+      <div class="custom-card col-6">
         <div class="app-employee-form">
           <form
             class="form-body needs-validation project-card"
@@ -27,10 +26,10 @@
                   ? "Create New Project"
                   : "Update Project"
               }}
-              <span><h6>*&nbsp;Required fields</h6></span>
+              <span *ngIf="formType !== 'get'"><h6>*&nbsp;Required fields</h6></span>
             </div>
             <div
-              class="h5 mb-4  form-group"
+              class="h4 mb-4  form-group"
               [class.has-error]="projectId?.touched && projectId?.invalid"
             >
               <label class="control-label" for="projectId">*Project ID:</label>
@@ -49,7 +48,7 @@
               />
             </div>
             <div
-              class="h5 mb-4 form-group"
+              class="h4 mb-4 form-group"
               [class.has-error]="
                 projectNameInput?.touched && projectNameInput?.invalid
               "
@@ -73,7 +72,7 @@
               </p>
             </div>
             <div
-              class="h5 mb-4  form-group"
+              class="h4 mb-4  form-group"
               [class.has-error]="
                 clientNameInput?.touched && clientNameInput?.invalid
               "
@@ -97,7 +96,7 @@
               </p>
             </div>
             <div
-              class="h5 mb-4 form-group"
+              class="h4 mb-4 form-group"
               [class.has-error]="
                 projectManagerInput?.touched && projectManagerInput?.invalid
               "
@@ -138,7 +137,7 @@
               </p>
             </div>
             <div
-              class="h5 mb-4 form-group "
+              class="h4 mb-4 form-group "
               [class.has-error]="StartDateInput?.touched"
             >
               <label for="start" class="control-label">*Start Date:</label>
@@ -158,7 +157,7 @@
               </p>
             </div>
             <div
-              class="h5 mb-4 form-group "
+              class="h4 mb-4 form-group "
               [class.has-error]="endDateInput?.touched"
             >
               <label class="control-label" for="end">*End Date:</label>
@@ -179,7 +178,7 @@
             </div>
 
             <div
-              class="h5 mb-4 form-group"
+              class="h4 mb-4 form-group"
               [class.has-error]="statusInput?.touched"
             >
               <label class="control-label" for="status">Status:</label>
@@ -202,7 +201,7 @@
               </p>
             </div>
             <div
-              class="h5 mb-4 form-group"
+              class="h4 mb-4 form-group"
               [class.has-error]="membersInput?.touched && membersInput?.invalid"
             >
               <label class="control-label" for="members"
@@ -238,18 +237,18 @@
             <div class="button-parent" *ngIf="formType !== 'get'">
               <button
                 mdbBtn
-                class=" btn btn-outline-primary  text-center text-yellow m-4 btnsstyle"
+                class=" btn btn-outline-primary  text-center text-yellow m-4 btnsstyle "
                 mdbWavesEffect
                 type="submit"
               >
                 {{
-                  formType === "create" ? "Add New Project" : "Update Project"
+                  formType === "create" ? "Add New Project" : "Update"
                 }}
               </button>
               <button
                 type="button"
                 mdbBtn
-                class="btn btn-outline-primary  text-center text-yellow m-4 btnsstyle"
+                class="btn btn-outline-primary  text-center text-yellow m-4 btnsstyle "
                 mdbWavesEffect
                 [routerLink]="['/project']"
               >
@@ -260,7 +259,7 @@
               <button
                 type="button"
                 mdbBtn
-                class="btn btn-outline-primary  text-center m-2 btncancel"
+                class="btn btn-outline-primary  text-center m-2 btncancel btnsstyle "
                 mdbWavesEffect
                 [routerLink]="['/project']"
               >
@@ -269,7 +268,6 @@
             </div>
           </form>
          </div> 
-      </div>
       </div>
     </div>
   </div>
