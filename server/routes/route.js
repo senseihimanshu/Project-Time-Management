@@ -22,7 +22,7 @@ module.exports = (app) => {
 	app.delete('/api/project/:id', authenticator, controller.project.delete);
 
 	//Review
-	app.put('/api/review',controller.timesheet.modify);
+	//app.put('/api/review',controller.timesheet.modify);
 	//Project Manager
 	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
 	//clevel graphs API
