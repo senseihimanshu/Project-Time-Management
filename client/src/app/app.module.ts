@@ -1,3 +1,4 @@
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -39,6 +40,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { TimesheetModal } from './timesheet/modal/modal.component';
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
     ProjectManagerComponent,
     TimesheetModal,
     NavbarComponent,
-    TimesheetWeekComponent
+    TimesheetWeekComponent,
+    ResetpasswordComponent,
+    ConfirmEqualValidatorDirective
    
   ],
   imports: [PerfectScrollbarModule ,

@@ -178,6 +178,7 @@ class Employee {
 
   async update(req, res) {
     const empId = req.params.id;
+   
     const {
       email,
       name,
@@ -187,10 +188,20 @@ class Employee {
       address,
       password,
       projectId,
-      role
+      role,
+      oldPassword
+     
     } = req.body;
-
     const employeeToUpdate = await model.employee.get({ empId });
+    const isPassword = await bcrypt.compare(oldPassword, employeeToUpdate.password);
+    if (!isPassword){
+      return res.status(401).send({
+        success: false,
+        payload: {
+          message: "Incorrect password"
+        }
+      });
+    } 
     const patchedEmployee = {
       email: employeeToUpdate.email !== email ? email : undefined,
       name,
@@ -207,8 +218,13 @@ class Employee {
     Object.keys(patchedEmployee).forEach(
       key => patchedEmployee[key] === undefined && delete patchedEmployee[key]
     );
-
+   
     try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(patchedEmployee.password, salt);
+        
+      patchedEmployee.password = hashedPassword;
+       
       await model.employee
         .update({ empId: empId }, patchedEmployee)
         .then(() => {

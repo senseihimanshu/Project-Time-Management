@@ -171,4 +171,5 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('Authorization');
     this.router.navigate(["/login"]);
   }
+ 
 }

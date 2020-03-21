@@ -5,10 +5,10 @@ class Cleveldata{
         try{
          
           if(req.query.graphicaldata==='true'){
-         const  completedProjects=await model.project.count({status:"completed"});
-          const discardedProjects=await model.project.count({status:"discarded"});
-          const InProgressProjects=await model.project.count({status:"in-progress"});
-          const data=[completedProjects,discardedProjects,InProgressProjects];
+           const  completedProjects=await model.project.count({status:"completed"});
+           const discardedProjects=await model.project.count({status:"discarded"});
+           const InProgressProjects=await model.project.count({status:"in-progress"});
+           const data=[completedProjects,discardedProjects,InProgressProjects];
             res.status(200).send({
             success: true,
             payload: {
