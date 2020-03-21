@@ -1,26 +1,13 @@
-import { IResponse } from './../../models/response.model';
-import { Component, OnInit, Inject } from "@angular/core";
-
-//3rd party
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbDate
-} from "@ng-bootstrap/ng-bootstrap";
-
-import Swal from "sweetalert2";
-
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
-
-import { EmployeeService } from "../../services/employee.service";
-import { SendHttpRequestService } from "../../services/send-http-request.service";
-import { TimesheetService } from "./../../services/timesheet.service";
-
-import { MAT_DIALOG_DATA } from "@angular/material";
 import { ProjectManagerService } from "src/app/services/projectmanager.service";
 import { jsonDecoder } from "src/app/utils/json.util";
+import Swal from "sweetalert2";
+import { IResponse } from './../../models/response.model';
+import { TimesheetService } from "./../../services/timesheet.service";
+
 
 export interface ITaskType {
   key: string;
@@ -83,6 +70,7 @@ export class TimesheetModal implements OnInit {
   constructor(
     private timesheetService: TimesheetService,
     private projectManagerService: ProjectManagerService,
+    public dialogRef: MatDialogRef<TimesheetModal>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -104,7 +92,7 @@ export class TimesheetModal implements OnInit {
         });
 
         if(this.data && this.data.timesheetId){
-              this.modalType = 'update';
+            this.modalType = 'update';
             this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
               this.response = res.payload.data.timesheet;
               this.project =  this.response.projectObjId;
@@ -149,11 +137,12 @@ export class TimesheetModal implements OnInit {
     }
 
     const dataToSave = this.formatData(timesheetData);
-
+    
     this.timesheetService
       .createTimesheet(dataToSave)
       .subscribe((response: IResponse) => {
         Swal.fire(response.payload.message);
+        this.dialogRef.close();
       });
 
   }
