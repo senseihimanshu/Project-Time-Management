@@ -1,4 +1,4 @@
-import { IResponse } from './../models/response.model';
+import { IResponse } from "./../models/response.model";
 import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
@@ -6,9 +6,13 @@ import { switchMap } from "rxjs/operators";
 import { FormControl } from "@angular/forms";
 import swal from "sweetalert2";
 import { ProjectService } from "../services/project.service";
-import { Observable} from "rxjs";
-import {debounceTime, distinctUntilChanged, map,filter} from 'rxjs/operators';
-
+import { Observable } from "rxjs";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  filter
+} from "rxjs/operators";
 
 @Component({
   selector: "app-project-form",
@@ -25,7 +29,7 @@ export class ProjectFormComponent implements OnInit {
   project: any;
   dropdownList = [];
   selectedItems = [];
-  
+
   empList: string[];
   projManager: string;
   projMembers: string[] = [];
@@ -46,7 +50,6 @@ export class ProjectFormComponent implements OnInit {
   loading = false;
 
   ngOnInit(): any {
-
     (function() {
       "use strict";
       window.addEventListener(
@@ -72,10 +75,9 @@ export class ProjectFormComponent implements OnInit {
         false
       );
     })();
-    
+
     this.getemployees();
-    this.route.params.subscribe((data: Params) => {
-    });
+    this.route.params.subscribe((data: Params) => {});
 
     this.route.params
       .pipe(
@@ -96,23 +98,44 @@ export class ProjectFormComponent implements OnInit {
         return (this.project = response.payload.data.projectDetails);
       });
   }
+  formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
   projectCreateOrUpdate(obj, formType): any {
     if (obj.startDate >= obj.endDate) {
       swal.fire({
         icon: "error",
         title: "Warning!",
-        text: "Start Date must be less than End Date!" 
+        text: "Start Date must be less than End Date!"
       });
       return;
     }
-    this.projectService.projectCreateOrUpdate(obj, formType, this.projectId).subscribe(
-      (res: IResponse) => {
-        this.message = res.payload.message;
-        swal.fire({
-          icon: "success",
-          title: this.message,
-          showConfirmButton: true
-        });
+    var currdate = new Date();
+    var date = this.formatDate(currdate);
+    // var date=new Date();
+    if (obj.endDate <= date) {
+      obj.status = "completed";
+    } else if (obj.endDate > date) {
+      obj.status = "in-progress";
+    }
+    this.projectService
+      .projectCreateOrUpdate(obj, formType, this.projectId)
+      .subscribe(
+        (res: IResponse) => {
+          this.message = res.payload.message;
+          swal.fire({
+            icon: "success",
+            title: this.message,
+            showConfirmButton: true
+          });
 
           this.router.navigate(["/project"]);
         },
@@ -150,17 +173,18 @@ export class ProjectFormComponent implements OnInit {
       this.projMembers = employeeArr;
     }
   }
-   formatter = (result: string) => result.toUpperCase();
- 
-    searchProjectMember = (text$: Observable<string>) =>
+  formatter = (result: string) => result.toUpperCase();
+
+  searchProjectMember = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(term => term.length < 2 ? this.empList
-        : this.empList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    ) 
-   
-   
-
-
+      map(term =>
+        term.length < 2
+          ? this.empList
+          : this.empList
+              .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
+              .slice(0, 10)
+      )
+    );
 }
