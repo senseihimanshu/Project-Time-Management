@@ -38,9 +38,10 @@ export class AdmindashboardComponent implements OnInit {
       .showAllEmployees({
         page: this.page.toString(),
         limit: this.limit.toString(),
-        criteria: JSON.stringify(criteria),
-        columns: JSON.stringify(this.columns),
-        sort: JSON.stringify(this.sortAccordingTo)
+        searchInput: criteria.input || "",
+        columns: "password",
+        sort: "name",
+        isSortDecreasing: this.sortAccordingTo.name.toString()
       })
       .subscribe(res => {
         this.usersArray = res.payload.data.result.results;
@@ -126,14 +127,9 @@ export class AdmindashboardComponent implements OnInit {
     }
   }
 
-  handleSearch(value: string) {
-    var input: string;
-    input = value;
+  handleSearch(input: string) {
     this.tabularData({
-      $or: [
-        { name: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } },
-        { role: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } }
-      ]
+      input    
     });
   }
 }
