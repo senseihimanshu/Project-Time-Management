@@ -59,6 +59,8 @@
             <th class="text-center">View</th>
             <th class="text-center" *ngIf="role !== 'admin'">Edit</th>
           </thead>
+          <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available For This User</div>
+
           <tr *ngFor="let response of timesheet">
             <td class="text-center" *ngIf="role === 'admin'">{{ response.employeeName }}</td>
             <td class="text-center">{{ response.projectName }}</td>
@@ -92,6 +94,7 @@
             ><i class="fas fa-arrow-circle-right"></i>{{ page + 1 }}</a
           >
         </div>
+        <div id="closeModal"></div>
       </div>
     </div>
   </div>

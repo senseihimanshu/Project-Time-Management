@@ -2,7 +2,17 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 authenticator = (req, res, next) => {
-  const token = req.header('Authorization').replace('Bearer ','');
+  let token;
+  try{
+    token = req.header('Authorization').replace('Bearer ','');
+  }catch(error){
+    return res.status(500).send({
+      success: false,
+      payload: {
+        message: 'You are not authorized to view this page'
+      }
+    });
+  }
 
   if (!token)
     return res.status(401).send({

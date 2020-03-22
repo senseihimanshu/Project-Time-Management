@@ -21,26 +21,18 @@ module.exports = (app) => {
 	app.put('/api/project/:id', authenticator, controller.project.update);
 	app.delete('/api/project/:id', authenticator, controller.project.delete);
 
-	//Review
-	app.put('/api/review',controller.timesheet.modify);
 	//Project Manager
 	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
-	//clevel graphs API
-	app.get("/project/graphicaldata", authenticator,controller.cleveldata.projectsStatusData);
-	 app.get("/timesheet/graphicaldata", authenticator,controller.cleveldata.timesheetsStatusData);
-   // Timesheet
-	app.post('/api/timesheet', authenticator, controller.timesheet.create);
-	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
-	app.get('/api/timesheet', [authenticator, paginator(model.timesheet.model)], controller.timesheet.index);
-	app.get('/api/timesheet/:id', controller.timesheet.getTimesheetUsingRouteParams);
-	app.get('/api/timesheet/review/:id', controller.timesheet.updateStatus);
-
 
 	// Timesheet
 	app.post('/api/timesheet', authenticator, controller.timesheet.create);
 	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
 	app.get('/api/timesheet', [authenticator, paginator(model.timesheet.model)], controller.timesheet.index);
-	app.get('/api/timesheet/staff', [authenticator, paginator(model.projectManager.model)], controller.timesheet.retrieveTimesheetsOfStaff);
+	// app.get('/api/timesheet/staff', [authenticator, paginator(model.projectManager.model)], controller.timesheet.retrieveTimesheetsOfStaff);
 	app.get('/api/timesheet/:id', authenticator, controller.timesheet.getTimesheetUsingRouteParams);
 	app.patch('/api/timesheet/review/:id', authenticator, controller.timesheet.updateStatus);
+
+	//Clevel graphs API
+	app.get("/project/graphicaldata", authenticator,controller.cleveldata.projectsStatusData);
+	app.get("/timesheet/graphicaldata", authenticator,controller.cleveldata.timesheetsStatusData);
 }
