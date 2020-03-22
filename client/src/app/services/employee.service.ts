@@ -25,13 +25,14 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) {}
 
-  showAllEmployees(paginationObj: IPagination): Observable<IResponse> {
+  showAllEmployees(paginationObj): Observable<IResponse> {
     const params: HttpParams = new HttpParams()
       .set("page", paginationObj.page)
       .set("limit", paginationObj.limit)
-      .set("criteria", paginationObj.criteria)
+      .set("searchInput", paginationObj.searchInput)
       .set("columns", paginationObj.columns)
-      .set("sort", paginationObj.sort);
+      .set("sort", paginationObj.sort)
+      .set("isSortDecreasing", paginationObj.isSortDecreasing);
 
     return this.http.get<IResponse>(`${HOST}/api/employee`, {
       ...this.httpOptions,
@@ -61,8 +62,8 @@ export class EmployeeService {
     });
   }
 
-  deleteEmployee(empId: string): Observable<IResponse> {
-    return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empId}`, {
+  deleteEmployee(empObjId: string): Observable<IResponse> {
+    return this.http.delete<IResponse>(`${EMPLOYEE_API}/${empObjId}`, {
       ...this.httpOptions
     });
   }
