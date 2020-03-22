@@ -38,9 +38,10 @@ export class AdmindashboardComponent implements OnInit {
       .showAllEmployees({
         page: this.page.toString(),
         limit: this.limit.toString(),
-        criteria: JSON.stringify(criteria),
-        columns: JSON.stringify(this.columns),
-        sort: JSON.stringify(this.sortAccordingTo)
+        searchInput: criteria.input || "",
+        columns: "password",
+        sort: "name",
+        isSortDecreasing: this.sortAccordingTo.name.toString()
       })
       .subscribe(res => {
         this.usersArray = res.payload.data.result.results;
@@ -52,10 +53,10 @@ export class AdmindashboardComponent implements OnInit {
   ngOnInit() {
     this.tabularData();
 
-    this.empObjId = jsonDecoder().empId;
+    this.empObjId = jsonDecoder()._id;
   }
 
-  deleteEmployee(empId: string) {
+  deleteEmployee(empObjId: string) {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -76,14 +77,14 @@ export class AdmindashboardComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.employeeService.deleteEmployee(empId).subscribe(res => {
+          this.employeeService.deleteEmployee(empObjId).subscribe(res => {
             this.tabularData();
             this.message = res.payload.message;
             setTimeout(() => {
               this.message = null;
             }, 5000);
             this.usersArray = this.usersArray.filter(
-              item => item.empId != empId
+              item => item._id != empObjId
             );
           });
           swalWithBootstrapButtons.fire(
@@ -126,14 +127,9 @@ export class AdmindashboardComponent implements OnInit {
     }
   }
 
-  handleSearch(value: string) {
-    var input: string;
-    input = value;
+  handleSearch(input: string) {
     this.tabularData({
-      $or: [
-        { name: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } },
-        { role: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } }
-      ]
+      input    
     });
   }
 }

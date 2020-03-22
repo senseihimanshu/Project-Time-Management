@@ -77,7 +77,7 @@ export class ProjectFormComponent implements OnInit {
     })();
 
     this.getemployees();
-    this.route.params.subscribe((data: Params) => {});
+    //this.route.params.subscribe((data: Params) => {});
 
     this.route.params
       .pipe(
