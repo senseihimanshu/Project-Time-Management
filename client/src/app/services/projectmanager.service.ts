@@ -1,8 +1,8 @@
+import { IResponse } from './../models/response.model';
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HOST } from '../config/host';
-
 const PROJECTMANAGER_API = `${HOST}/api/projectmanager`
 
 @Injectable({

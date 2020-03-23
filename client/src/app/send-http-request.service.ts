@@ -46,11 +46,11 @@ export class SendHttpRequestService {
         .join("")
     );
     return JSON.parse(jsonPayload);
+
   };
 
   showEmployees(): Observable<any> {
     const token = localStorage.getItem("Authorization");
-
     // //Decode JWT and return the Payload in JSON Format
     const decodeToken = this.jsonDecoder(token);
     const empId = decodeToken.data.empId;
@@ -82,9 +82,9 @@ export class SendHttpRequestService {
   }
   reviewRequest(obj: any): Observable<any> {
     return this.http
-      .put("http://localhost:3000/review", obj, { headers: this.header_token })
+      .put("http://localhost:3000/api/review", obj, { headers: this.header_token })
       .pipe(
-        tap(_ => this.log("Log In")),
+        tap(_ => this.log("Review  Completed")),
         catchError(this.handleError<any>("Some Error Occurred"))
       );
   }

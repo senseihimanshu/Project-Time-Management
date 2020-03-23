@@ -1,35 +1,58 @@
 <div>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-font ">
-      <a class="navbar-brand"><img height="40" src="https://avatars3.githubusercontent.com/u/24821935?s=400&u=b312743ee48dc9cfbb15cf74c1da359c301823b0&v=4"/>{{dashboard}}</a>
-      <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-          <i class="fas fa-bars custom-toggler-lines"></i>
-        </span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="dropdown d-lg-none custom-dropdown-container" *ngFor="let menu of menus">
-            <a class="dropdown-toggle custom-dropdown" data-toggle="dropdown" role="button"><a ><i [class]="menu.icon"></i></a>{{ menu.title }}<span class="caret"></span></a>
-            <ul class="dropdown-menu multi-level custom-multi-level" role="menu" aria-labelledby="dropdownMenu" *ngFor="let submenu of menu.submenus">
-              <li>
-                <a [routerLink]="submenu.route">{{ submenu.title }}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <span class="profile"  [routerLink]="['/myProfile']">My Profile</span>
-          <button type="button" class="logout text-center m-2"
-          (click)="logout()">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-font ">
+    <a class="navbar-brand" (click)="home(dashboard)"
+      ><img
+        height="40"
+        src="https://avatars3.githubusercontent.com/u/24821935?s=400&u=b312743ee48dc9cfbb15cf74c1da359c301823b0&v=4"
+      />{{ dashboard }}</a
+    >
+    <button
+      class="navbar-toggler custom-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars custom-toggler-lines"></i>
+      </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li
+          class="dropdown d-lg-none custom-dropdown-container"
+          *ngFor="let menu of menus"
+        >
+          <a
+            class="dropdown-toggle custom-dropdown"
+            data-toggle="dropdown"
+            role="button"
+            ><a><i [class]="menu.icon"></i></a>{{ menu.title
+            }}<span class="caret"></span
+          ></a>
+          <ul
+            class="dropdown-menu multi-level custom-multi-level"
+            role="menu"
+            aria-labelledby="dropdownMenu"
+            *ngFor="let submenu of menu.submenus"
+          >
+            <li>
+              <a [routerLink]="submenu.route">{{ submenu.title }}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <span class="profile" [routerLink]="['/myProfile']">My Profile</span>
+        <button type="button" class="logout text-center m-2" (click)="logout()">
           <i class="fa fa-power-off"></i>
         </button>
-        </form>
-      </div>
-    </nav>
-
-    <div class="row" style="margin-top: 60px;">
-
+      </form>
     </div>
+  </nav>
 
-    </div>
+  <div class="row" style="margin-top: 60px;"></div>
+</div>

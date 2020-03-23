@@ -28,6 +28,7 @@
     border-color: black;
     border-radius: 10px;
     background: white;
+    font-size: medium;
   }
 
   input:focus {
@@ -68,6 +69,7 @@ td {
   font-weight: 400;
   // height: 50px !important;
 }
+
 th {
   font-size: 16px;
   line-height: 1.4;
@@ -79,12 +81,16 @@ th {
   color: white;
  }
 
-//  @media (min-width: 1200px){
- 
-// }
-
 .table{
   margin-top: 2%;
+  table-layout: fixed;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+  cursor: default;
 }
 
 .input-group{
@@ -92,13 +98,19 @@ th {
   align-items: center;
   justify-content: flex-end;
 }
+
 .input-group > .form-control
-{ border-style: ridge;
-  border-radius: unset;
-  border-color: rgb(134, 142, 156);
+{ border-style: none;
+  border-radius: 2rem;
+  border-color: #868e9c;
   margin-bottom: 0.5rem;
   border-width: thin;
-
+  margin-left: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  font-size: medium;
 }
 .custom-card{
   margin-top: 1rem;
@@ -106,11 +118,9 @@ th {
   margin-right: 1.5rem;
   background-color: whitesmoke;
   display: inline-block;
+  position: relative;
 }
-.form-control {
-  float: right !important;
-  border: ridge;
-}
+
 #myInput:active {
   background-color: white;
 }
@@ -185,4 +195,12 @@ background-color: white;
   &:hover{
       opacity: 0.4;
   }
+}
+
+.no-data{
+  width: 100%;
+    text-align: center;
+    position: absolute;
+    font-size: 2rem;
+    color: grey;
 }

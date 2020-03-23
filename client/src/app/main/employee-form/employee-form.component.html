@@ -1,8 +1,8 @@
 <div class="wrapper">
-  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class="custom-card col-6">
       <div class="app-employee-form">
@@ -230,7 +230,6 @@
            
           </div>
         </form>
-        <!-- {{ form.value | json }} -->
       </div>
     </div>
   </div>

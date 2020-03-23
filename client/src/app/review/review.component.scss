@@ -1,28 +1,24 @@
-.add-icon{
-  position: absolute;
-  top:0;
-  right: 0;
+.pagination-div {
+  display: flex !important;
+  justify-content: flex-end;
+
+  & > *{
+    font-size: 1.4rem;
+    padding-right: 1px;
+  }
 }
 
-h6{
-  position: relative;
-}   
-//  .deletebutton {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   flex-wrap: nowrap;
-//  }
-//  .show {
-//   margin-left: 43% !important;
-//  }
-//  .empTable{
-//   // width: 100vw;
-//   color: black;
-//   font-size: large;
-//   font-weight: 800;
-//   // padding-left: 5rem;
-//  }
+.pagination {
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    align-items: center;
+
+  }
+  .pagination:active{
+    background-color: #0183FF;
+  }
+ 
   input {
     width: 100%;
     max-width: 240px;
@@ -109,7 +105,7 @@ th {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   background-color: whitesmoke;
-  // display: inline-block;
+  display: inline-block;
 }
 .form-control {
   float: right !important;
@@ -129,4 +125,32 @@ th {
 #myInput:active
 {
 background-color: white;
+}
+
+.pagination-div {
+  display: flex !important;
+  justify-content: flex-end;
+
+  & > *{
+    font-size: 1.4rem;
+    padding-right: 1px;
+  }
+}
+
+
+.pagination {
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  align-items: center;
+}
+.pagination:active {
+  background-color: #0183ff;
+}
+
+.disabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
 }

@@ -1,16 +1,8 @@
-import { SendHttpRequestService } from "./../send-http-request.service";
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  ViewChild,
-  ElementRef
-} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
-import { EmployeeService } from "../services/employee.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import swal from "sweetalert2";
-
+import { EmployeeService } from "../services/employee.service";
 import { jsonDecoder } from "../utils/json.util";
+
 
 @Component({
   selector: "app-admindashboard",
@@ -24,53 +16,6 @@ export class AdmindashboardComponent implements OnInit {
   page: number = 1;
   lastPage: number;
   items = [];
-  dashboard: string = "Admin Dashboard";
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee",
-          route: "/employee/create"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project",
-          route: "/project/create"
-        },
-        {
-          title: "Show All Projects",
-          route: "/project"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets",
-          route: "/timesheetweek"
-        }
-      ]
-    }
-  ];
-
   message: String;
 
   constructor(private employeeService: EmployeeService) {}
@@ -84,18 +29,19 @@ export class AdmindashboardComponent implements OnInit {
 
   isSortDecreasing: boolean = false;
 
-  columns: any = {};
+  columns: any = { password: 0 };
 
-  sortAccordingTo: any = { name: (this.isSortDecreasing? 1 : -1) };
+  sortAccordingTo: any = { name: this.isSortDecreasing ? 1 : -1 };
 
   tabularData(criteria: any = {}) {
     this.employeeService
       .showAllEmployees({
         page: this.page.toString(),
         limit: this.limit.toString(),
-        criteria: JSON.stringify(criteria),
-        columns: JSON.stringify(this.columns),
-        sort: JSON.stringify(this.sortAccordingTo)
+        searchInput: criteria.input || "",
+        columns: "password",
+        sort: "name",
+        isSortDecreasing: this.sortAccordingTo.name.toString()
       })
       .subscribe(res => {
         this.usersArray = res.payload.data.result.results;
@@ -107,11 +53,10 @@ export class AdmindashboardComponent implements OnInit {
   ngOnInit() {
     this.tabularData();
 
-    this.empObjId = jsonDecoder().empId;
+    this.empObjId = jsonDecoder()._id;
   }
 
-  deleteEmployee(empId: string) {
-    console.log(empId, "EMPLOYEE ID");
+  deleteEmployee(empObjId: string) {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -132,14 +77,14 @@ export class AdmindashboardComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.employeeService.deleteEmployee(empId).subscribe(res => {
+          this.employeeService.deleteEmployee(empObjId).subscribe(res => {
             this.tabularData();
             this.message = res.payload.message;
             setTimeout(() => {
               this.message = null;
             }, 5000);
             this.usersArray = this.usersArray.filter(
-              item => item.empId != empId
+              item => item._id != empObjId
             );
           });
           swalWithBootstrapButtons.fire(
@@ -162,7 +107,7 @@ export class AdmindashboardComponent implements OnInit {
 
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
-    this.sortAccordingTo = { name: (this.isSortDecreasing? 1 : -1) };
+    this.sortAccordingTo = { name: this.isSortDecreasing ? 1 : -1 };
 
     this.tabularData();
   }
@@ -182,14 +127,9 @@ export class AdmindashboardComponent implements OnInit {
     }
   }
 
-  handleSearch(value: string) {
-    var input: string;
-    input = value;
+  handleSearch(input: string) {
     this.tabularData({
-      $or: [
-        { name: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } },
-        { role: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } }
-      ]
+      input    
     });
   }
 }

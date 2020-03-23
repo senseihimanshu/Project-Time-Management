@@ -1,9 +1,10 @@
+import { IResponse } from './../models/response.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SendHttpRequestService } from './../send-http-request.service';
 import { ProjectService } from '../services/project.service';
 import swal from 'sweetalert2';
-import { IMenu } from '../models/menu.model';
+
 import { isRegExp } from 'util';
 
 @Component({
@@ -13,80 +14,39 @@ import { isRegExp } from 'util';
 })
 export class ProjectComponent implements OnInit {
   name = "Angular";
-  page :number = 1;
-  lastPage:number;
+  page: number = 1;
+  lastPage: number;
   pageSize = 10;
   items = [];
-  menus: IMenu[] = [{
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
 
   message: String;
-  project:any;
+  project: any;
   projectsArray: any;
-  membersObj:any=[];
-  projManager:any=[];
+  membersObj: any = [];
+  projManager: any = [];
   limit: number = 5;
   dataSize: number;
   empObjId: string;
   isSortDecreasing: boolean = false;
-  sortAccordingTo: any = { startDate: (this.isSortDecreasing? 1 : -1) };
+  sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
 
   constructor(
-    private _service: SendHttpRequestService,
-    private router: Router,
     private projectService: ProjectService
   ) {}
 
   tabularData(criteria: any = {}) {
-    console.log(this.sortAccordingTo);
     this.projectService.showProjects({
-        page: this.page.toString(), 
-        limit: this.limit.toString(), 
-        criteria: JSON.stringify(criteria),
-        columns: JSON.stringify({}),
-        sort: JSON.stringify(this.sortAccordingTo)
-      }).subscribe(res => {
-      this.projectsArray = res.payload.data.result.results;
-     this.dataSize = res.payload.data.result.dataSize;
-    });
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        searchInput: criteria.input || "",
+        columns: "",
+        sort: "startDate",
+        isSortDecreasing: this.sortAccordingTo.startDate.toString()
+      })
+      .subscribe(res => {
+        this.projectsArray = res.payload.data.result.results;
+        this.dataSize = res.payload.data.result.dataSize;
+      });
   }
 
   ngOnInit() {
@@ -96,80 +56,75 @@ export class ProjectComponent implements OnInit {
   deleteProject(id: any) {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
       },
       buttonsStyling: false
-    })
-    
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.value) {
-        this.projectService.deleteProject(id).subscribe((res: IResponse) => {
-          this.message = res.payload.message;
-          setTimeout(() => {
-            this.message = null;
-          }, 5000);
-          this.tabularData();
-        });
-         swalWithBootstrapButtons.fire(
-          'Deleted!',
-          'Your project data has been deleted.',
-          'success'
-        )
-      } else if (
-        result.dismiss === swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Your projectdata is safe :)',
-          'error'
-        )
-      }
-    }) 
-    
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+      })
+      .then(result => {
+        if (result.value) {
+          this.projectService.deleteProject(id).subscribe((res: IResponse) => {
+            this.message = res.payload.message;
+            setTimeout(() => {
+              this.message = null;
+            }, 5000);
+            this.tabularData();
+          });
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your project data has been deleted.",
+            "success"
+          );
+        } else if (result.dismiss === swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your projectdata is safe :)",
+            "error"
+          );
+        }
+      });
   }
- 
+
   sortList(sortBy: string) {
     const tempObj = {};
     this.isSortDecreasing = !this.isSortDecreasing;
-    tempObj[sortBy] = (this.isSortDecreasing? 1 : -1);
+    tempObj[sortBy] = this.isSortDecreasing ? 1 : -1;
 
     this.sortAccordingTo = tempObj;
 
-    console.log('called!!');
     this.tabularData();
   }
 
-  handlePaginationResult(type: string){
-    if(type === 'prev'){
-        if(this.page > 1){
-            this.page--;
-            this.tabularData();
-        }
+  handlePaginationResult(type: string) {
+    if (type === "prev") {
+      if (this.page > 1) {
+        this.page--;
+        this.tabularData();
+      }
     }
-    if(type === 'next'){
-        if(this.dataSize > this.page * this.limit){
-            this.page++;
-            this.tabularData();
-        }
+    if (type === "next") {
+      if (this.dataSize > this.page * this.limit) {
+        this.page++;
+        this.tabularData();
+      }
     }
   }
   handleSearch(value: string) {
     var input: string;
     input = value;
     this.tabularData({
-      $or: [
-        { projectName: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" } }
-      ]
+      input  
     });
   }
-  
 }

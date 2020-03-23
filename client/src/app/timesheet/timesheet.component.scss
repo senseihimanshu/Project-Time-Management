@@ -10,6 +10,14 @@ h6{
 
 .table{
   margin-top: 2%;
+  table-layout: fixed;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+  cursor: default;
 }
 
 thead{
@@ -59,4 +67,12 @@ tbody:nth-child(odd) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   background-color: whitesmoke;
+}
+
+.no-data{
+  width: 100%;
+    text-align: center;
+    position: absolute;
+    font-size: 2rem;
+    color: grey;
 }

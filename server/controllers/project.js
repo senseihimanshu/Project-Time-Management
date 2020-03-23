@@ -1,10 +1,10 @@
+
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
   constructor() {}
 
   async create(req, res) {
-    
     let projectObj = {
       projectId: req.body.projectId,
       projectName: req.body.projectName,
@@ -41,8 +41,6 @@ class Project {
         })
       )._id;
 
-      console.log(projectObj, "Abha Rana");
-
       if (projectObj.empObjectIdArray) {
         await Promise.all(
           projectObj.empObjectIdArray.map(async staff => {
@@ -73,7 +71,7 @@ class Project {
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
-    
+
     await Promise.all(
       projectList.map(async (project, index) => {
         const manager = await model.employee.get(
@@ -84,24 +82,25 @@ class Project {
         const managerName = manager && manager.name;
 
         const projectManagerStaffObjs = await model.projectManager.log(
-          { managerId: project.projectManager },
+          { managerId: project.projectManager, projectObjId: project._id },
           { staffId: 1, _id: 0 }
         );
-    
+
         const staffIds = projectManagerStaffObjs.map(employeeId => {
           return employeeId.staffId;
         });
-        console.log(staffIds);
 
         const memberNames = await Promise.all(
           staffIds.map(async employee => {
-            const employeeObj = await model.employee.get({ _id: employee }, { name: 1, _id: 0 });
-            if(employeeObj){
+            const employeeObj = await model.employee.get(
+              { _id: employee },
+              { name: 1, _id: 0 }
+            );
+            if (employeeObj) {
               return employeeObj.name;
             }
           })
         );
-        console.log(managerName, memberNames, "Abha Rana");
 
         projectList[index] = {
           ...project.toObject(),
@@ -128,7 +127,7 @@ class Project {
     const project = await model.project.get({ projectId: req.params.id });
 
     const projectManagerStaffObjs = await model.projectManager.log(
-      { managerId: project.projectManager },
+      { projectObjId: project._id },
       { staffId: 1, _id: 0 }
     );
 
@@ -175,9 +174,6 @@ class Project {
       const staffIdsStoredStringArray = projectManagerDocumentArray.map(
         document => document.staffId.toString()
       );
-
-      console.log(projectToBeUpdatedObj.empObjectIdArray, "New");
-      console.log(staffIdsStoredStringArray, "Old");
 
       if (
         projectManagerDocumentArray[0] &&
@@ -240,6 +236,7 @@ class Project {
 
     await model.project.delete({ _id: projectObjId });
     await model.projectManager.model.deleteMany({ projectObjId });
+    await model.timesheet.deleteMany({ projectObjId });
 
     res.send({
       success: true,
@@ -249,5 +246,4 @@ class Project {
     });
   }
 }
-
 module.exports = new Project();
