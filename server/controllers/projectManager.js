@@ -9,10 +9,11 @@ class ProjectManager {
         { projectObjId: 1 }
       );
 
+
       let projects = [];
-      await Promise.all(
+      projects = await Promise.all(
         projectObjIds.map(async projectObjId => {
-          projects = [...projects, await model.project.get(
+          return (await model.project.get(
             { _id: projectObjId.projectObjId },
             {
               projectId: 1,
@@ -20,9 +21,10 @@ class ProjectManager {
               projectName: 1,
               clientName: 1
             }
-          )]
+          ));
         })
       );
+
       return res.send({
         success: true,
         payload: {
