@@ -46,6 +46,7 @@
         </thead>
         <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available For This User</div>
         <tbody *ngFor="let project of projectsArray">
+<!--           <div class="bolder container content-design" *ngIf="projectsArray.length==0">NO RECORDS FOUND</div> -->
           <tr>
             <td>
              {{project.projectName}}
