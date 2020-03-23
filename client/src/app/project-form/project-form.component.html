@@ -116,12 +116,12 @@
                 required
               >
               <i class="fa fa-search "></i>
-              <input id="typeahead-config" type="text" class="my-control"
+              <!-- <input id="typeahead-config" type="text" class="my-control"
                     [(ngModel)]="model" 
                     name="search"
                     [ngbTypeahead]="searchProjectMember"
                     [resultFormatter]="formatter"
-                    placeholder="search"/>  
+                    placeholder="search"/>   -->
               
                 <ng-template ngFor let-emp [ngForOf]="empList">
                   <mat-option *ngIf="!projMembers.includes(emp._id)" [value]="emp._id">{{ emp.empId }}----{{
@@ -219,10 +219,10 @@
                 multiple
               >
               <i class="fa fa-search "></i>
-              <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
+              <!-- <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
               name="search"
               [ngbTypeahead]="searchProjectMember"
-              [resultFormatter]="formatter"
+              [resultFormatter]="formatter" -->
              
               placeholder=" search"/>
                 <ng-template ngFor let-emp [ngForOf]="empList">

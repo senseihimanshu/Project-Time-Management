@@ -7,7 +7,7 @@ class Project {
   async create(req, res) {
     let projectObj = {
       projectId: req.body.projectId,
-      projectName: req.body.projectName,
+      projectName: req.body.projectName && req.body.projectName.toLowerCase(),
       projectManager: req.body.manager,
       clientName: req.body.clientName,
       status: req.body.status,
@@ -153,7 +153,7 @@ class Project {
 
     try {
       let projectToBeUpdatedObj = {
-        projectName: req.body.projectName,
+        projectName: req.body.projectName && req.body.projectName.toLowerCase(),
         projectManager: req.body.manager,
         clientName: req.body.clientName,
         status: req.body.status,

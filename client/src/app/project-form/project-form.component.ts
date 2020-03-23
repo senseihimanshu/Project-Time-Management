@@ -119,11 +119,11 @@ export class ProjectFormComponent implements OnInit {
   getemployees() {
     this.employeeService
       .showAllEmployees({
-        page: this.page.toString(),
-        limit: "-1",
-        criteria: JSON.stringify({}),
-        columns: JSON.stringify({ empId: 1, name: 1 }),
-        sort: JSON.stringify({})
+        searchInput: "",
+        criteria: "",
+        columns: "password",
+        sort: "name",
+        isSortDecreasing: "1"
       })
       .subscribe(res => {
         this.empList = res.payload.data.result.results;

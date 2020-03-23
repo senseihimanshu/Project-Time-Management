@@ -10,13 +10,13 @@ module.exports = (app) => {
 	
 	//Employee
 	app.post('/api/employee', [authenticator], controller.employee.create);
-	app.get('/api/employee', [authenticator, employeePaginator(model.employee.model,employee)], controller.employee.index);
+	app.get('/api/employee', [authenticator, employeePaginator(model.employee.model,'employee')], controller.employee.index);
 	app.get('/api/employee/:id', authenticator, controller.employee.show);
 	app.put('/api/employee/:id', authenticator, controller.employee.update);	
 	app.delete('/api/employee/:id', authenticator, controller.employee.delete);	
 
 	//Project
-	app.get('/api/project', [authenticator, employeePaginator(model.project.model,project)], controller.project.index);
+	app.get('/api/project', [authenticator, employeePaginator(model.project.model,'project')], controller.project.index);
 	app.post('/api/project', authenticator, controller.project.create);
 	app.get('/api/project/:id', authenticator, controller.project.show);
 	app.put('/api/project/:id', authenticator, controller.project.update);
