@@ -47,7 +47,6 @@ function Paginator(model, type) {
     const criteria = createCriteria(type, input);
 
     const dataSize = await model.find(criteria).count({});
-    console.log(criteria, type, sort, isSortDecreasing,  'Himanshu');
 
     if (endIndex < dataSize) {
       results.next = {

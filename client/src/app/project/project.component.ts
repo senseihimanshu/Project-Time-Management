@@ -100,7 +100,6 @@ export class ProjectComponent implements OnInit {
     const tempObj = {};
     this.isSortDecreasing = !this.isSortDecreasing;
     tempObj[sortBy] = this.isSortDecreasing ? 1 : -1;
-    console.log(sortBy, tempObj, 'sortBy');
     this.sortAccordingTo = tempObj;
 
     this.tabularData({}, sortBy);

@@ -8,7 +8,7 @@ class ProjectManager {
         { staffId },
         { projectObjId: 1 }
       );
-      console.log(projectObjIds, 'projectObjIds');
+
 
       let projects = [];
       projects = await Promise.all(
@@ -24,7 +24,7 @@ class ProjectManager {
           ));
         })
       );
-      console.log(projects, 'projects');
+
       return res.send({
         success: true,
         payload: {
