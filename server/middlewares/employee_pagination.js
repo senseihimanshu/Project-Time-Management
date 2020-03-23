@@ -1,4 +1,4 @@
-function createCriteria(type) {
+function createCriteria(type, input) {
   if (type === "employee") {
     return input === ""
       ? {}
@@ -32,9 +32,9 @@ function createCriteria(type) {
 
 function Paginator(model, type) {
   return async (req, res, next) => {
-    const input = req.query.searchInput;
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
+    const input = req.query.searchInput || "";
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || -1;
     const columns = req.query.columns;
     const sort = req.query.sort;
     const isSortDecreasing = parseInt(req.query.isSortDecreasing);
@@ -44,7 +44,7 @@ function Paginator(model, type) {
 
     const results = {};
 
-    const criteria = createCriteria(type);
+    const criteria = createCriteria(type, input);
 
     const dataSize = await model.find(criteria).count({});
 
@@ -68,7 +68,7 @@ function Paginator(model, type) {
       results.results = await model
         .find(criteria, { [columns]: 0 })
         .sort({ [sort]: isSortDecreasing })
-        .limit(limit)
+        .limit(limit !== -1 && limit )
         .skip(startIndex);
 
       req.paginatedResults = results;

@@ -34,14 +34,14 @@ export class ProjectComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
-  tabularData(criteria: any = {}) {
+  tabularData(criteria: any = {}, sortBy: string = null) {
     this.projectService.showProjects({
         page: this.page.toString(),
         limit: this.limit.toString(),
         searchInput: criteria.input || "",
         columns: "",
-        sort: "startDate",
-        isSortDecreasing: this.sortAccordingTo.startDate.toString()
+        sort: sortBy,
+        isSortDecreasing: this.isSortDecreasing ? '1' : '-1'
       })
       .subscribe(res => {
         this.projectsArray = res.payload.data.result.results;
@@ -100,10 +100,9 @@ export class ProjectComponent implements OnInit {
     const tempObj = {};
     this.isSortDecreasing = !this.isSortDecreasing;
     tempObj[sortBy] = this.isSortDecreasing ? 1 : -1;
-
     this.sortAccordingTo = tempObj;
 
-    this.tabularData();
+    this.tabularData({}, sortBy);
   }
 
   handlePaginationResult(type: string) {
