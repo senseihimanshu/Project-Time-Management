@@ -10,7 +10,7 @@ import { Token } from "@angular/compiler/src/ml_parser/lexer";
 export class SendHttpRequestService {
   constructor(private http: HttpClient) {}
 
-  // //Decode JWT and return the Payload in JSON Format
+  //Decode JWT and return the Payload in JSON Format
   jsonDecoder = token => {
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -31,7 +31,6 @@ export class SendHttpRequestService {
     );
   }
 
-  //header_token: HttpHeaders = new HttpHeaders().set("token", localStorage.getItem('Authorization'));
   logMeIn(obj): Observable<any> {
     return this.http.post("http://localhost:3000/login", obj, {
       responseType: "json"

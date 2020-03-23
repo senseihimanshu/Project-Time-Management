@@ -53,7 +53,6 @@ export class ReviewRowComponent {
       _id: data,
       status: "Approved"
     };
-    // this.sendReq(obj);
   }
 
   reject(data) {
@@ -61,12 +60,5 @@ export class ReviewRowComponent {
       _id: data,
       status: "Declined"
     };
-    // this.sendReq(obj);
   }
-  // sendReq(data) {
-  //   let obj = this._service.reviewRequest(data).subscribe(res => {
-  //     this.usersArray = res;
-  //     alert(data.status);
-  //   });
-  // }
 }

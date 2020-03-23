@@ -13,48 +13,8 @@ import{TimesheetService} from'../services/timesheet.service'
 })
 export class DashboardComponent implements OnInit, OnChanges {
 
-  dashboard:string= "C Level Dashboard"
   graphicaldata:Boolean=true;
-menus: any = [
-  {
-    title: "Employees",
-    icon: "fa fa-users",
-    active: false,
-    type: "dropdown",
-
-    submenus: [
-      {
-        title: "Show All Employees",
-        route: '/admin'
-      }
-    ]
-  },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Create New Timesheet",
-          route: '/timesheetweek'
-        },
-        {
-          title: "Show All Timesheets",
-          route: '/timesheetweek'
-        },
-        {
-          title: "Review All Timesheets",
-          route: '/review'
-
-        }
-      ]
-    }
-  ];
-
   loading = false;
-  //  users: User[] = [];
   
     constructor(private httpService: HttpClient,
       private projectService: ProjectService,

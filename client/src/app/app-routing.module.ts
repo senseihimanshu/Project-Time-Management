@@ -11,7 +11,6 @@ import { LoginComponent } from "./login/login.component";
 import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
 import { ProjectFormComponent } from "./project-form/project-form.component";
-import { ProjectManagerComponent } from "./project-manager/project-manager.component";
 import { ProjectComponent } from "./project/project.component";
 import { ReviewComponent } from "./review/review.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
@@ -51,32 +50,23 @@ const routes: Routes = [
   {
     path: "sidebar",
     component: SidebarComponent,
-    // canActivate:[AuthGuard]
   },
   {
     path: "myProfile",
     component: MyprofileComponent,
-    // canActivate:[AuthGuard]
   },
   {
     path: "review",
     component: ReviewComponent,
     canActivate:[AuthGuard],
     data: { 
-      expectedRole: 'project-manager'
+      expectedRole: 'project-manager',
+      expectedRole1: 'c-level'
     } 
   },
   {
     path: "manager",
     component: ReviewComponent,
-     canActivate:[AuthGuard],
-    data: { 
-      expectedRole: 'project-manager'
-    } 
-  },
-  {
-    path: "projectmanager",
-    component: ProjectManagerComponent,
      canActivate:[AuthGuard],
     data: { 
       expectedRole: 'project-manager'
@@ -90,10 +80,6 @@ const routes: Routes = [
     data: { 
       expectedRole: 'admin'
     } 
-
-    
-
-   
   },
   {
     path: "employee",

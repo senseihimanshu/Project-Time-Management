@@ -54,16 +54,7 @@ export class ResetpasswordComponent implements OnInit {
   navigation(){
     if (!this.tokenPayload) {
     } else {
-      const role = this.tokenPayload.role;
-      if (role == "Employee" || role == "employee") {
-        this.router.navigate(["/timesheetweek"]);
-      } else if (role == "Admin" || role == "admin") {
-        this.router.navigate(["/admin"]);
-      } else if (role == "C Level Manager" || role == "c-level") {
-        this.router.navigate(["/clevel"]);
-      } else if (role == "Project Manager" || role == "project-manager") {
-        this.router.navigate(["/manager"]);
-      } else this.router.navigate(["/accessdenied"]);
+      this.router.navigate(["/myProfile"]);
     }
   }
 }

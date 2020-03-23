@@ -11,19 +11,20 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):  boolean{
-     // this will be passed from the route config
-    // on the data property
+     // this will be passed from the route config on the data property
     const token=localStorage.getItem('Authorization');
-    
     const expectedRole = next.data.expectedRole;
+    const expectedRole1 = next.data.expectedRole1;
    // decode the token to get its payload
      const now = Date.now().valueOf() / 1000
-         if(token!=null){
-         if(jsonDecoder().role==expectedRole)
+         if(token!=null)
+         {
+            if(jsonDecoder().role==expectedRole || (expectedRole1 && jsonDecoder().role==expectedRole1))
              return true
-          else
+            else
           this.router.navigate(['/404']);
-       }else{
+          }
+          else{
           this.router.navigate(['/login']);
       }
   }
