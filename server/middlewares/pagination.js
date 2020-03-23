@@ -37,7 +37,6 @@ function paginator(model) {
         .skip(startIndex);
 
       req.paginatedResults = results;
-      console.log(results, 'results');
       next();
     } catch (e) {
       res.status(500).send({
