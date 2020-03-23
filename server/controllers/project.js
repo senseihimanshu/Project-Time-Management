@@ -81,7 +81,7 @@ class Project {
         const managerName = manager && manager.name;
 
         const projectManagerStaffObjs = await model.projectManager.log(
-          { managerId: project.projectManager },
+          { managerId: project.projectManager, projectObjId: project._id },
           { staffId: 1, _id: 0 }
         );
 
@@ -126,7 +126,7 @@ class Project {
     const project = await model.project.get({ projectId: req.params.id });
 
     const projectManagerStaffObjs = await model.projectManager.log(
-      { managerId: project.projectManager },
+      { projectObjId: project._id },
       { staffId: 1, _id: 0 }
     );
 
@@ -246,6 +246,7 @@ class Project {
 
     await model.project.delete({ _id: projectObjId });
     await model.projectManager.model.deleteMany({ projectObjId });
+    await model.timesheet.deleteMany({ projectObjId });
 
     res.send({
       success: true,

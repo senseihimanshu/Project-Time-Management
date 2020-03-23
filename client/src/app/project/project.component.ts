@@ -36,11 +36,12 @@ export class ProjectComponent implements OnInit {
 
   tabularData(criteria: any = {}) {
     this.projectService.showProjects({
-        page: this.page.toString(), 
-        limit: this.limit.toString(), 
-        criteria: JSON.stringify(criteria),
-        columns: JSON.stringify({}),
-        sort: JSON.stringify(this.sortAccordingTo)
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        searchInput: criteria.input || "",
+        columns: "",
+        sort: "startDate",
+        isSortDecreasing: this.sortAccordingTo.startDate.toString()
       })
       .subscribe(res => {
         this.projectsArray = res.payload.data.result.results;
@@ -123,14 +124,7 @@ export class ProjectComponent implements OnInit {
     var input: string;
     input = value;
     this.tabularData({
-      $or: [
-        {
-          projectName: {
-            $regex: `^${input.toLowerCase().trim()}`,
-            $options: "i"
-          }
-        }
-      ]
+      input  
     });
   }
 }

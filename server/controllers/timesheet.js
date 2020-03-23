@@ -35,13 +35,64 @@ class Timesheet {
   }
 
   async index(req, res) {
-    var timesheet = req.paginatedResults.results;
+    if(req.query.criteria.managerId){
+      let staffTimesheetIds = [];
 
+      staffTimesheetIds = req.paginatedResults.results.map( (staffTimesheetIds) => staffTimesheetIds.staffTimesheetIds );
+
+      staffTimesheetIds = [].concat.apply([], staffTimesheetIds);
+      
+      const staffTimesheets = await Promise.all(
+        staffTimesheetIds.map(async(timesheetId) => {
+          const timesheet = await model.timesheet.get({ _id: timesheetId });
+
+          const employeeName = (
+            await model.employee.get({ _id: timesheet.empObjId })
+          ).name;
+          const startDate = (
+            await model.timesheet.get({ _id: timesheetId })
+          ).startDate;
+          const projectName = (
+            await model.project.get({ _id: timesheet.projectObjId })
+          ).projectName;
+          const clientName = (
+            await model.project.get({ _id: timesheet.projectObjId })
+          ).clientName;
+      
+          return {
+            ...timesheet.toObject(),
+            week: undefined,
+            employeeName,
+            projectName,
+            clientName,
+            startDate
+          };
+        })
+      );
+
+      staffTimesheets.sort((a, b) => (+new Date(b.startDate) - +new Date(a.startDate)));
+
+      req.paginatedResults.results = staffTimesheets;
+      req.paginatedResults.dataSize = staffTimesheets.length;
+
+      return res.send({
+        success: true,
+        payload: {
+          data: {
+            result: req.paginatedResults
+          }
+        }
+      });
+    }
+
+    var timesheet = req.paginatedResults.results;
+    
     timesheet = await Promise.all(
       timesheet.map(async timesheetWeek => {
         const employeeName = (
           await model.employee.get({ _id: timesheetWeek.empObjId })
         ).name;
+
         const projectName = (
           await model.project.get({ _id: timesheetWeek.projectObjId })
         ).projectName;
@@ -110,22 +161,34 @@ class Timesheet {
   async getTimesheetUsingRouteParams(req, res) {
     const timesheetId = req.params.id;
 
-    let timesheet = await model.timesheet.get({ _id: timesheetId });
+    const { projectObjId, empObjId } = await model.timesheet.get({ _id: timesheetId });
+    const { projectManager } = await model.project.get({ _id: projectObjId });
 
-    const employeeName = (await model.employee.get({ _id: timesheet.empObjId }))
-      .name;
-    const projectName = (
-      await model.project.get({ _id: timesheet.projectObjId })
-    ).projectName;
+    if((req.employee._id == empObjId) || (req.employee._id == projectManager) || (req.employee.role === 'admin')){
+      let timesheet = await model.timesheet.get({ _id: timesheetId });
 
-    timesheet = { ...timesheet.toObject(), employeeName, projectName };
+      const employeeName = (await model.employee.get({ _id: timesheet.empObjId }))
+        .name;
+      const projectName = (
+        await model.project.get({ _id: timesheet.projectObjId })
+      ).projectName;
+
+      timesheet = { ...timesheet.toObject(), employeeName, projectName };
+
+      return res.send({
+        success: true,
+        payload: {
+          data: {
+            timesheet
+          }
+        }
+      });
+    }
 
     return res.send({
-      success: true,
+      success: false,
       payload: {
-        data: {
-          timesheet
-        }
+        message: 'You are not authorized to view this timesheet'
       }
     });
   }
