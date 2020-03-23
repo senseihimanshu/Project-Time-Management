@@ -51,12 +51,10 @@ const routes: Routes = [
   {
     path: "sidebar",
     component: SidebarComponent,
-    // canActivate:[AuthGuard]
   },
   {
     path: "myProfile",
     component: MyprofileComponent,
-    // canActivate:[AuthGuard]
   },
   {
     path: "review",

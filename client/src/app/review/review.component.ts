@@ -70,10 +70,4 @@ export class ReviewComponent implements OnInit {
     }
   }
 
-  // sortList() {
-  //   this.isSortDecreasing = !this.isSortDecreasing;
-  //   this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
-  //   this.reviews();
-  // }
-
 }

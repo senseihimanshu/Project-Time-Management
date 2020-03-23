@@ -54,7 +54,6 @@ menus: any = [
   ];
 
   loading = false;
-  //  users: User[] = [];
   
     constructor(private httpService: HttpClient,
       private projectService: ProjectService,

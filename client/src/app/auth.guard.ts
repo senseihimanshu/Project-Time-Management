@@ -11,8 +11,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):  boolean{
-     // this will be passed from the route config
-    // on the data property
+     // this will be passed from the route config on the data property
     const token=localStorage.getItem('Authorization');
     
     const expectedRole = next.data.expectedRole;

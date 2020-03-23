@@ -101,7 +101,6 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     FormsModule,
     HttpClientModule,
     TableModule,
-    //Third Party
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
     WavesModule,
