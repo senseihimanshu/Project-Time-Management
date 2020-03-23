@@ -78,7 +78,7 @@ export class TimesheetWeekComponent {
     if (!date) {
       date = { year: 2000, month: 1, day: 1 };
     }
-    date = `${date.year}-${date.month}-${date.day}`;
+    date = new Date(`${date.year}-${date.month}-${date.day}`);
 
     this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
 
