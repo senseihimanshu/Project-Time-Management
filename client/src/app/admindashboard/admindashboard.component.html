@@ -15,7 +15,7 @@
             class="form-control"
             id="myInput"
             (keyup)="handleSearch($event.target.value)"
-            placeholder="Search by employee name or role"
+            placeholder="Search by name or role"
           />
         </div>
 
@@ -41,7 +41,6 @@
             *ngFor="
               let employee of usersArray"
           >
-<!--           <div class="bolder container content-design" *ngIf="usersArray.length==0">NO RECORDS FOUND</div> -->
             <tr>
               <td>
                 {{ employee.empId }}

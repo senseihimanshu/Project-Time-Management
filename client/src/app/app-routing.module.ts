@@ -11,7 +11,6 @@ import { LoginComponent } from "./login/login.component";
 import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
 import { ProjectFormComponent } from "./project-form/project-form.component";
-import { ProjectManagerComponent } from "./project-manager/project-manager.component";
 import { ProjectComponent } from "./project/project.component";
 import { ReviewComponent } from "./review/review.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
@@ -72,14 +71,14 @@ const routes: Routes = [
       expectedRole: 'project-manager'
     } 
   },
-  {
-    path: "projectmanager",
-    component: ProjectManagerComponent,
-     canActivate:[AuthGuard],
-    data: { 
-      expectedRole: 'project-manager'
-    } 
-  },
+  // {
+  //   path: "projectmanager",
+  //   component: ProjectManagerComponent,
+  //    canActivate:[AuthGuard],
+  //   data: { 
+  //     expectedRole: 'project-manager'
+  //   } 
+  // },
   {
     path: "projects",
     component: ProjectComponent,

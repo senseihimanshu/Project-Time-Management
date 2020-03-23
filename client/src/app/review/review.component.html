@@ -7,28 +7,30 @@
 
     <div class="col-10">
       <div class="custom-card">
-        <div class="input-group">
-          <!-- <span class="input-group-addon">
+        <!-- <div class="input-group">
+          <span class="input-group-addon">
             <i class="fa fa-search"></i>
           </span> -->
 
           <!-- <input type="text" class="form-control" id="myInput" (keyup)="handleSearch($event.target.value)"
-            placeholder='Search By Employee Name' /> -->
-        </div>
-        <table class="table table-striped" id="myTable">
+            placeholder='Search By Employee Name' />
+        </div> -->
+        <table class="table table-striped table-fixed" id="myTable">
           <thead>
             <tr>
-              <th>Employee Name</th>
-              <th>Project Name</th>
-              <th>Client</th>
+              <th scope="col">Employee Name</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Client</th>
               <th scope="col">
                 Start Date
               </th>
-              <th>View</th>
-              <th>Status</th>
+              <th scope="col">View</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
-          <tbody style="height: 10px !important; overflow: auto" id="adminTable" *ngFor="
+          <div class="no-data" *ngIf="timesheetArray?.length === 0">No Data Available For This User</div>
+          <tbody style="height: 10px !important; overflow: auto" *ngFor="
           let timesheet of timesheetArray">
             <tr>
               <td>

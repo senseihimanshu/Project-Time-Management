@@ -30,7 +30,6 @@ import { MainComponent } from "./main/main.component";
 import { MyprofileComponent } from "./myprofile/myprofile.component";
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProjectFormComponent } from "./project-form/project-form.component";
-import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { ProjectComponent } from "./project/project.component";
 import { ProjectRowComponent } from './project/projectrow/projectrow.component';
 import { ReviewComponent } from "./review/review.component";
@@ -64,7 +63,6 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     EmployeedashboardComponent,
     TimesheetComponent,
     ReviewRowComponent,
-    ProjectManagerComponent,
     TimesheetModal,
     NavbarComponent,
     TimesheetWeekComponent,
