@@ -52,11 +52,16 @@ export class TimesheetService {
       ...this.httpOptions
     });
   }
+  clevelDataTimesheets(graphicaldata: any): Observable<any> {
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+    return this.http
+      .get("http://localhost:3000/timesheet/graphicaldata", {...this.httpOptions, params });
+  }   
 
   getStaffTimesheets(paginationObj: IPagination): Observable<IResponse>{
     const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
 
-    return this.http.get<IResponse>(`${TIMESHEET_API}`, { params, ...this.httpOptions });
+    return this.http.get<IResponse>(`${TIMESHEET_API}/staff`, { params, ...this.httpOptions });
   }
 
   updateStatus(status: Boolean, timesheetId: string): Observable<IResponse>{

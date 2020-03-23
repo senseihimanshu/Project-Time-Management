@@ -1,4 +1,4 @@
- const controller = require('../controllers');
+const controller = require('../controllers');
 const paginator = require('../middlewares/pagination');
 const employeePaginator  = require('../middlewares/employee_pagination')
 const authenticator = require('../middlewares/authentication');
@@ -29,7 +29,7 @@ module.exports = (app) => {
 	app.post('/api/timesheet', authenticator, controller.timesheet.create);
 	app.get('/api/timesheet/selectedweek', authenticator, controller.timesheet.getTimesheetUsingStartDate);
 	app.get('/api/timesheet', [authenticator, paginator(model.timesheet.model)], controller.timesheet.index);
-	// app.get('/api/timesheet/staff', [authenticator, paginator(model.projectManager.model)], controller.timesheet.retrieveTimesheetsOfStaff);
+	app.get('/api/timesheet/staff', [authenticator, paginator(model.projectManager.model)], controller.timesheet.retrieveTimesheetsOfStaff);
 	app.get('/api/timesheet/:id', authenticator, controller.timesheet.getTimesheetUsingRouteParams);
 	app.patch('/api/timesheet/review/:id', authenticator, controller.timesheet.updateStatus);
 
