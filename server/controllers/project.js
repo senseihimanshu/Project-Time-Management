@@ -1,4 +1,3 @@
-
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
@@ -163,6 +162,17 @@ class Project {
         status: req.body.status
       };
 
+      if (
+        +new Date(projectToBeUpdatedObj.startDate) >
+        +new Date(projectToBeUpdatedObj.endDate)
+      ) {
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: "Start Date must be less than End Date"
+          }
+        });
+      }
       const projectObjId = (await model.project.get({ projectId }))._id;
 
       await model.project.update({ projectId }, projectToBeUpdatedObj);
