@@ -1,4 +1,4 @@
- const controller = require('../controllers');
+const controller = require('../controllers');
 const paginator = require('../middlewares/pagination');
 const employeePaginator  = require('../middlewares/employee_pagination')
 const authenticator = require('../middlewares/authentication');

@@ -17,12 +17,16 @@ import { ReviewComponent } from "./review/review.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 import { TimesheetComponent } from "./timesheet/timesheet.component";
-
+import {ResetpasswordComponent} from './resetpassword/resetpassword.component' 
 const routes: Routes = [
   {
     path: "",
     redirectTo: "login",
     pathMatch: "full"
+  },
+  {
+    path:"resetpassword",
+    component:ResetpasswordComponent
   },
   {
     path: "timesheet",
@@ -176,11 +180,13 @@ const routes: Routes = [
         expectedRole:"admin"
     }
   },
+ 
   {
     path: "**",
     component: NotFoundComponent,
     
-  }
+  },
+ 
 ];
 
 

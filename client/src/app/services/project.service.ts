@@ -44,6 +44,11 @@ export class ProjectService {
         this.httpOptions
       );
   }
+  clevelDataProjects(graphicaldata: any): Observable<any> {
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+    return this.http
+      .get("http://localhost:3000/project/graphicaldata", {...this.httpOptions, params});
+     }
 
   showProjects(paginationObj): Observable<IResponse> {
     const params: HttpParams = new HttpParams()
