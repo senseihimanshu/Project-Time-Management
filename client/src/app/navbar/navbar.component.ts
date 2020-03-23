@@ -161,7 +161,7 @@ export class NavbarComponent implements OnInit {
     else if(title=='Manager Dashboard')
     this.router.navigate(['/manager']);
     else  if(title=='Employee Dashboard')
-    this.router.navigate(['/employee']);
+    this.router.navigate(['/timesheetweek']);
     else if(title=='C-level Manager Dashboard')
     this.router.navigate(['/clevel']);
     else
