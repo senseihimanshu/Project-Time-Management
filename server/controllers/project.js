@@ -1,4 +1,3 @@
-
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
@@ -7,7 +6,7 @@ class Project {
   async create(req, res) {
     let projectObj = {
       projectId: req.body.projectId,
-      projectName: req.body.projectName,
+      projectName: req.body.projectName && req.body.projectName.toLowerCase(),
       projectManager: req.body.manager,
       clientName: req.body.clientName,
       status: req.body.status,
@@ -82,7 +81,7 @@ class Project {
         const managerName = manager && manager.name;
 
         const projectManagerStaffObjs = await model.projectManager.log(
-          { managerId: project.projectManager },
+          { managerId: project.projectManager, projectObjId: project._id },
           { staffId: 1, _id: 0 }
         );
 
@@ -127,7 +126,7 @@ class Project {
     const project = await model.project.get({ projectId: req.params.id });
 
     const projectManagerStaffObjs = await model.projectManager.log(
-      { managerId: project.projectManager },
+      { projectObjId: project._id },
       { staffId: 1, _id: 0 }
     );
 
@@ -153,7 +152,7 @@ class Project {
 
     try {
       let projectToBeUpdatedObj = {
-        projectName: req.body.projectName,
+        projectName: req.body.projectName && req.body.projectName.toLowerCase(),
         projectManager: req.body.manager,
         clientName: req.body.clientName,
         status: req.body.status,
@@ -163,6 +162,17 @@ class Project {
         status: req.body.status
       };
 
+      if (
+        +new Date(projectToBeUpdatedObj.startDate) >
+        +new Date(projectToBeUpdatedObj.endDate)
+      ) {
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: "Start Date must be less than End Date"
+          }
+        });
+      }
       const projectObjId = (await model.project.get({ projectId }))._id;
 
       await model.project.update({ projectId }, projectToBeUpdatedObj);
@@ -236,6 +246,7 @@ class Project {
 
     await model.project.delete({ _id: projectObjId });
     await model.projectManager.model.deleteMany({ projectObjId });
+    await model.timesheet.deleteMany({ projectObjId });
 
     res.send({
       success: true,
@@ -245,5 +256,4 @@ class Project {
     });
   }
 }
-
 module.exports = new Project();

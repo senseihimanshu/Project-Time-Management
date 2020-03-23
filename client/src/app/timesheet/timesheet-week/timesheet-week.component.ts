@@ -1,20 +1,11 @@
-import { IResponse } from './../../models/response.model';
 import { Component } from "@angular/core";
-
-import { TimesheetService } from "../../services/timesheet.service";
+import { MatDialog } from "@angular/material/dialog";
 //3rd party
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbDate
-} from "@ng-bootstrap/ng-bootstrap";
-
+import { jsonDecoder } from "src/app/utils/json.util";
+import { TimesheetService } from "../../services/timesheet.service";
+import { IResponse } from './../../models/response.model';
 import { TimesheetModal } from "./../modal/modal.component";
 
-import { MatDialog } from "@angular/material/dialog";
-import { SendHttpRequestService } from "../../services/send-http-request.service";
-import * as moment from "moment";
-import { jsonDecoder } from "src/app/utils/json.util";
 
 @Component({
   selector: "app-timesheet-week",
@@ -24,7 +15,6 @@ import { jsonDecoder } from "src/app/utils/json.util";
 export class TimesheetWeekComponent {
   constructor(
     private timesheetService: TimesheetService,
-    private modalService: NgbModal,
     public dialog: MatDialog
   ) {}
   editField: string;
@@ -96,28 +86,6 @@ export class TimesheetWeekComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.tabularData();
     });
-  }
-
-  open(content) {
-    this.modalService.open(content).result.then(
-      result => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      reason => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        this.tabularData();
-      }
-    );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
   tabularData() {

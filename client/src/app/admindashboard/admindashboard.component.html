@@ -34,12 +34,14 @@
               <th scope="col">Delete</th>
             </tr>
           </thead>
+          <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available For This User</div>
           <tbody
             style="height: 10px !important; overflow: auto"
             id="adminTable"
             *ngFor="
               let employee of usersArray"
           >
+<!--           <div class="bolder container content-design" *ngIf="usersArray.length==0">NO RECORDS FOUND</div> -->
             <tr>
               <td>
                 {{ employee.empId }}
@@ -66,7 +68,7 @@
               </td>
               <td style="width: 4.8rem;">
                 <a
-                [ngClass]="{'disabled': empObjId === employee.empId}"
+                [ngClass]="{'disabled': empObjId === employee._id}"
                   class="edit"
                   [routerLink]="['/employee', 'update', employee.empId]"
                 >
@@ -74,7 +76,7 @@
                 </a>
               </td>
               <td style="width: 4.5rem;">
-                <a class="delete" [ngClass]="{'disabled': empObjId === employee.empId}" (click)="deleteEmployee(employee.empId)"
+                <a class="delete" [ngClass]="{'disabled': empObjId === employee._id}" (click)="deleteEmployee(employee._id)"
                   ><i class="fas fa-trash"></i
                 ></a>
               </td>

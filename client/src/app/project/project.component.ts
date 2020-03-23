@@ -34,13 +34,14 @@ export class ProjectComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
-  tabularData(criteria: any = {}) {
+  tabularData(criteria: any = {}, sortBy: string = null) {
     this.projectService.showProjects({
-        page: this.page.toString(), 
-        limit: this.limit.toString(), 
-        criteria: JSON.stringify(criteria),
-        columns: JSON.stringify({}),
-        sort: JSON.stringify(this.sortAccordingTo)
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        searchInput: criteria.input || "",
+        columns: "",
+        sort: sortBy,
+        isSortDecreasing: this.isSortDecreasing ? '1' : '-1'
       })
       .subscribe(res => {
         this.projectsArray = res.payload.data.result.results;
@@ -99,10 +100,9 @@ export class ProjectComponent implements OnInit {
     const tempObj = {};
     this.isSortDecreasing = !this.isSortDecreasing;
     tempObj[sortBy] = this.isSortDecreasing ? 1 : -1;
-
     this.sortAccordingTo = tempObj;
 
-    this.tabularData();
+    this.tabularData({}, sortBy);
   }
 
   handlePaginationResult(type: string) {
@@ -123,14 +123,7 @@ export class ProjectComponent implements OnInit {
     var input: string;
     input = value;
     this.tabularData({
-      $or: [
-        {
-          projectName: {
-            $regex: `^${input.toLowerCase().trim()}`,
-            $options: "i"
-          }
-        }
-      ]
+      input  
     });
   }
 }

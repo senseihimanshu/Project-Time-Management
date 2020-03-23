@@ -2,12 +2,12 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatDialogModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, MatToolbarModule } from "@angular/material";
+import { MatDialogModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, MatToolbarModule, MatDialogRef } from "@angular/material";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from "@angular/material/select";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ButtonsModule, CardsModule, CheckboxModule, IconsModule, InputsModule, MDBBootstrapModule, TableModule, WavesModule } from "angular-bootstrap-md";
 import { ChartsModule } from 'ng2-charts';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -113,7 +113,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     BrowserAnimationsModule,
     MatCheckboxModule
   ],
-  providers: [ServicesService, RoleGuardService,AuthGuard],
+  providers: [ServicesService, RoleGuardService,AuthGuard, NgbActiveModal],
 entryComponents: [TimesheetModal],
   bootstrap: [AppComponent]
   // entryComponents: [TimesheetComponent]
