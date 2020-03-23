@@ -104,7 +104,6 @@ export class SidebarComponent implements OnInit {
             title: "Review Timesheets",
             route: "/manager"
           }
-        
         ]
       });
     }
@@ -131,16 +130,12 @@ export class SidebarComponent implements OnInit {
       
             submenus: [
               {
-                title: "Create New Timesheet",
-                route: '/timesheetweek'
-              },
-              {
-                title: "Show All Timesheets",
+                title: "Create/Show Timesheets",
                 route: '/timesheetweek'
               },
               {
                 title: "Review All Timesheets",
-                route: '/review'
+                route: '/manager'
       
               }
             ]
@@ -157,12 +152,8 @@ export class SidebarComponent implements OnInit {
     
           submenus: [
             {
-              title: "Create New Timesheet",
-              route: "/timesheetweek"
-            },
-            {
               title: "Show All Timesheets",
-              route: "/timesheetweek"
+              route: "/timesheet"
             }
     
           ]
