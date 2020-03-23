@@ -1,4 +1,3 @@
-
 const model = require("../models");
 const schema = require("../schemas");
 class Project {
@@ -162,7 +161,11 @@ class Project {
         empObjectIdArray: req.body.members,
         status: req.body.status
       };
-      if (+new Date(projectToBeUpdatedObj.startDate) > +new Date(projectToBeUpdatedObj.endDate)) {
+
+      if (
+        +new Date(projectToBeUpdatedObj.startDate) >
+        +new Date(projectToBeUpdatedObj.endDate)
+      ) {
         return res.status(400).send({
           success: false,
           payload: {
@@ -252,5 +255,4 @@ class Project {
     });
   }
 }
-
 module.exports = new Project();
