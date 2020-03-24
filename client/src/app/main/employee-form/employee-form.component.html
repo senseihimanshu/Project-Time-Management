@@ -4,19 +4,9 @@
     <div class="col-2 d-none d-lg-block">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="custom-card col-6">
-      <div class="app-employee-form">
-        <form
-          class="form-body needs-validation"
-          #form="ngForm"
-          (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
-          novalidate
-        >
-          <div
-            class="h4 mb-4
-               d-flex justify-content-between font-weight-bold"
-            style="font-size: 1.1rem;"
-          >
+    <div class="col-10">
+      <div style="margin:4rem; margin-top: 2rem;">
+        <div class="text-center" style="font-size: 1rem;">
             {{
               typeOfForm === "get"
                 ? "Employee Data for " + employee?.empId
@@ -26,8 +16,13 @@
             }}
             <span *ngIf="typeOfForm !== 'get'"><h6>*&nbsp;Required fields</h6></span>
           </div>
-
-          <div class="h4 mb-4">
+          <form 
+        class="custom-card form-body needs-validation" 
+        #form="ngForm" 
+        (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
+        style="padding:1.5rem; padding-bottom: 0.5rem;"
+        novalidate>   
+          <div class="h4 mb-2">
             <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="empId">Employee ID: </label>
 
             <input
@@ -44,13 +39,13 @@
               #empId="ngModel"
             />
             <div class="invalid-feedback"><i class="fa fa-error"></i></div>
-            <p *ngIf="empId.invalid && empId.touched">
+            <p [style.visibility]="(empId.invalid && empId.touched) ? 'visible':'hidden'">
               *Employee Id is required
             </p>
           </div>
 
           <div
-            class="form-group h4 mb-4"
+            class="form-group h4 mb-2"
             [class.has-error]="email.invalid && email.touched"
           >
             <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="email">Email Id: </label>
@@ -69,11 +64,11 @@
               #email="ngModel"
             />
 
-            <p *ngIf="email.invalid && email.touched">*Email is required</p>
+            <p [style.visibility]="(email.invalid && email.touched) ? 'visible':'hidden'">*Email is required</p>
           </div>
 
           <div
-            class="h4 mb-4 form-group"
+            class="h4 mb-2 form-group"
             [class.has-error]="empName.invalid && empName.touched"
           >
             <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="name">Name: </label>
@@ -91,11 +86,11 @@
               [disabled]="typeOfForm === 'get'"
               #empName="ngModel"
             />
-            <p *ngIf="empName.touched && empName.invalid">Required</p>
+            <p [style.visibility]="(empName.invalid && empName.touched) ? 'visible':'hidden'">Required</p>
           </div>
 
           <div
-            class="form-group h4 mb-4"
+            class="form-group h4 mb-2"
             [class.has-error]="addressInput.invalid && addressInput.touched"
           >
             <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="address">Address: </label>
@@ -113,13 +108,13 @@
               [disabled]="typeOfForm === 'get'"
               #addressInput="ngModel"
             />
-            <p *ngIf="addressInput.invalid && addressInput.touched">
+            <p [style.visibility]="(addressInput.invalid && addressInput.touched) ? 'visible':'hidden'">
               Address is required
             </p>
           </div>
 
           <div
-            class=" form-group h4 mb-4"
+            class=" form-group h4 mb-2"
             [class.has-error]="phoneInput.invalid && phoneInput.touched"
           >
             <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" for="phone" class="control-label">Phone: </label>
@@ -137,12 +132,12 @@
               [disabled]="typeOfForm === 'get'"
               #phoneInput="ngModel"
             />
-            <p *ngIf="phoneInput.invalid && phoneInput.touched">
+            <p [style.visibility]="(phoneInput.invalid && phoneInput.touched) ? 'visible':'hidden'">
               phoneNo is required
             </p>
           </div>
           <div
-            class="h5 mb-4 form-group"
+            class="h5 mb-2 form-group"
             [class.has-error]="joiningInput.touched"
           >
             <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" for="start" class="control-label">Joining:</label>
@@ -157,12 +152,12 @@
               [readonly]="typeOfForm === 'get'"
               #joiningInput="ngModel"
             />
-            <p *ngIf="joiningInput.touched && joiningInput.invalid">
+            <p [style.visibility]="(joiningInput.invalid && joiningInput.touched) ? 'visible':'hidden'">
               Joining Date is required
             </p>
           </div>
           <div
-            class="form-group h4 mb-4"
+            class="form-group h4 mb-2"
             [class.has-error]="designationInput.touched"
           >
             <mat-label for="designation" class="control-label"
@@ -183,18 +178,18 @@
               <mat-option value="consultant-1">Consultant 1</mat-option>
               <mat-option value="intern">Intern</mat-option>
             </mat-select>
-            <p *ngIf="designationInput.touched && designationInput.invalid">
+            <p [style.visibility]="(designationInput.invalid && designationInput.touched) ? 'visible':'hidden'">
               Designation is required
             </p>
           </div>
 
-          <div class="h4 mb-4 form-group" [class.has-error]="roleInput.touched">
+          <div class="h4 mb-2 form-group" [class.has-error]="roleInput.touched">
             <mat-label for="role" class="control-label">Role: </mat-label>
 
             <mat-select
               placeholder="Choose a Role"
               required
-              class="browser-default custom-select mb-4"
+              class="browser-default custom-select mb-2"
               name="role"
               [(ngModel)]="employee && employee.role"
               [disabled]="typeOfForm === 'get'"
@@ -204,14 +199,14 @@
               <mat-option value="project-manager">Project Manager</mat-option>
               <mat-option value="c-level">C Level Manager</mat-option>
             </mat-select>
-            <p *ngIf="roleInput.touched && roleInput.invalid">
+            <p [style.visibility]="(roleInput.invalid && roleInput.touched) ? 'visible':'hidden'">
               Role is required
             </p>
           </div>
           <div class="button-parent" *ngIf="formType !== 'get'">
             <button *ngIf="typeOfForm !== 'get'"
               mdbBtn
-              class=" btn logout text-center m-4"
+              class=" btn logout text-center m-2"
               mdbWavesEffect
               type="submit"
             >
@@ -221,7 +216,7 @@
             <button
               type="button"
               mdbBtn
-              class=" btn logout text-center m-4"
+              class=" btn logout text-center m-2"
               mdbWavesEffect
               [routerLink]="['/admin']"
             >

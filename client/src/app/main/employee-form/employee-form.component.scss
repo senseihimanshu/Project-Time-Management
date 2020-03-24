@@ -27,10 +27,10 @@ help-block{
 }
 .form-body{
     background-color:whitesmoke;
-    padding:26px;
+    // padding:26px;
     height:fit-content;
     min-width:70vh;
-    border:5px solid #2f8fe9b4;
+    // border:5px solid #2f8fe9b4;
 }
 h6{
     text-align:left;
@@ -43,10 +43,9 @@ h6{
 
 .custom-card {
     box-shadow: 1px 1px 1px 1px rgba(50, 50, 50, 0.1);
-    background:white;
     padding: 0;
     margin: 0 auto;
-    margin-top:1.2rem;
+    margin-top:1rem;
 }
 
 .form-control,.custom-select
@@ -66,6 +65,8 @@ h6{
     font-size:12px;
     padding:0;
    max-height:10px;
+   color:black;
+    font-weight: 300;
     
 }
 
