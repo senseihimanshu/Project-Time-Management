@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 8vh;
+  min-height: fit-content;
   position: fixed;
   top: 0;
   width: 100%;
@@ -13,7 +13,7 @@
   &__logo-container {
     background: url("../../assets/images/Cyber-Group_logos-02.png");
     width: 30%;
-    min-height: inherit;
+    min-height: 2rem;
     background-size: contain;
     background-repeat: no-repeat;
     background-position-y: 50%;
