@@ -59,7 +59,7 @@
             <th class="text-center">View</th>
             <th class="text-center" *ngIf="role !== 'admin'">Edit</th>
           </thead>
-          <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available For This User</div>
+          <div class="no-data" *ngIf="timesheet?.length === 0">No Data Available</div>
 
           <tr *ngFor="let response of timesheet">
             <td class="text-center" *ngIf="role === 'admin'">{{ response.employeeName }}</td>
@@ -80,7 +80,7 @@
           </tr>
         </table>
 
-        <div class="pagination-div">
+        <div class="pagination-div" [style.visibility]="(dataSize==0) ? 'visible':'hidden'">
           <a
             class="move-left"
             [ngClass]="{ disabled: page === 1 }"

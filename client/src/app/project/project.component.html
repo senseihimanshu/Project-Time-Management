@@ -44,9 +44,8 @@
           </tr>
 
         </thead>
-        <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available For This User</div>
+        <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available</div>
         <tbody *ngFor="let project of projectsArray">
-<!--           <div class="bolder container content-design" *ngIf="projectsArray.length==0">NO RECORDS FOUND</div> -->
           <tr>
             <td>
              {{project.projectName}}
@@ -84,7 +83,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="pagination-div">
+      <div class="pagination-div" [style.visibility]="(dataSize==0) ? 'visible':'hidden'">
         <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page-1 !== 0 ? page-1 : ''}}<i class="fas fa-arrow-circle-left"></i></a>
         <a class="move-right" [ngClass]="{'disabled': page * limit >= dataSize}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page+1}}</a>
         </div>   
