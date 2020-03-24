@@ -70,7 +70,7 @@ class Project {
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
-    console.log(projectList);
+    
     await Promise.all(
       projectList.map(async (project, index) => {
         const manager = await model.employee.get(

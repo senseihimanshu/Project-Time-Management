@@ -60,8 +60,6 @@ function Paginator(model, type) {
 
     results.dataSize = dataSize;
 
-    console.log(req.query, 'Iwa s here');
-
     try {
       results.results = await model
         .find(criteria)

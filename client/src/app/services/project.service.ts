@@ -65,14 +65,12 @@ export class ProjectService {
       .set("isSortDecreasing", paginationObj.isSortDecreasing);
 
     if (paginationObj.sort) {
-      console.log("I was here");
       params = httpParamsObj
         .set("page", paginationObj.page)
         .set("limit", paginationObj.limit)
         .set("searchInput", paginationObj.searchInput)
         .set("isSortDecreasing", paginationObj.isSortDecreasing)
         .set("sort", paginationObj.sort);
-      console.log(params);
     }
     return this.http.get<IResponse>(PROJECT_API, {
       ...this.httpOptions,
