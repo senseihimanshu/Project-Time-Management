@@ -2,6 +2,7 @@ const controller = require('../controllers');
 const paginator = require('../middlewares/pagination');
 const employeePaginator  = require('../middlewares/employee_pagination')
 const authenticator = require('../middlewares/authentication');
+const checkAdmin = require('../middlewares/isAdmin');
 const model = require('../models');
 
 module.exports = (app) => {
@@ -9,18 +10,18 @@ module.exports = (app) => {
 	app.post('/api/login', controller.login);
 	
 	//Employee
-	app.post('/api/employee', [authenticator], controller.employee.create);
-	app.get('/api/employee', [authenticator, employeePaginator(model.employee.model,'employee')], controller.employee.index);
-	app.get('/api/employee/:id', authenticator, controller.employee.show);
-	app.put('/api/employee/:id', authenticator, controller.employee.update);	
-	app.delete('/api/employee/:id', authenticator, controller.employee.delete);	
+	app.post('/api/employee', [authenticator, checkAdmin], controller.employee.create);
+	app.get('/api/employee', [authenticator, checkAdmin, employeePaginator(model.employee.model,'employee')], controller.employee.index);
+	app.get('/api/employee/:id', [authenticator], controller.employee.show);
+	app.put('/api/employee/:id', [authenticator, checkAdmin], controller.employee.update);	
+	app.delete('/api/employee/:id', [authenticator, checkAdmin], controller.employee.delete);	
 
 	//Project
 	app.get('/api/project', [authenticator, employeePaginator(model.project.model,'project')], controller.project.index);
-	app.post('/api/project', authenticator, controller.project.create);
-	app.get('/api/project/:id', authenticator, controller.project.show);
-	app.put('/api/project/:id', authenticator, controller.project.update);
-	app.delete('/api/project/:id', authenticator, controller.project.delete);
+	app.post('/api/project', authenticator, checkAdmin, controller.project.create);
+	app.get('/api/project/:id', authenticator, checkAdmin, controller.project.show);
+	app.put('/api/project/:id', authenticator, checkAdmin, controller.project.update);
+	app.delete('/api/project/:id', authenticator, checkAdmin, controller.project.delete);
 
 	//Project Manager
 	app.get('/api/projectmanager/project/:staffid', authenticator, controller.projectManager.getProjects);
