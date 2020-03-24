@@ -61,14 +61,20 @@ export class ProjectService {
     let params: HttpParams = httpParamsObj
       .set("page", paginationObj.page)
       .set("limit", paginationObj.limit)
-      .set("searchInput", paginationObj.searchInput)
       .set("isSortDecreasing", paginationObj.isSortDecreasing);
+
+    if (paginationObj.searchInput) {
+      params = httpParamsObj
+        .set("page", paginationObj.page)
+        .set("limit", paginationObj.limit)
+        .set("searchInput", paginationObj.searchInput)
+        .set("isSortDecreasing", paginationObj.isSortDecreasing);
+    }
 
     if (paginationObj.sort) {
       params = httpParamsObj
         .set("page", paginationObj.page)
         .set("limit", paginationObj.limit)
-        .set("searchInput", paginationObj.searchInput)
         .set("isSortDecreasing", paginationObj.isSortDecreasing)
         .set("sort", paginationObj.sort);
     }
