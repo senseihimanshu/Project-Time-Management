@@ -5,9 +5,10 @@
         <app-sidebar></app-sidebar>
       </div>
       
-      <div class="custom-card col-6">
-        <div class="app-employee-form">
-          <form
+      <div class="col-10">
+        <div style="margin:4rem; margin-top: 2rem;">
+          <div class="text-center" style="font-size: 1rem;">
+          <!-- <form
             class="form-body needs-validation project-card"
             #form="ngForm"
             (ngSubmit)="projectCreateOrUpdate(form.value, formType)"
@@ -18,7 +19,7 @@
               class="h4 mb-4
                 d-flex justify-content-between font-weight-bold"
               style="font-size: 1.1rem;"
-            >
+            > -->
               {{
                 formType === "get"
                   ? "Project Data"
@@ -28,8 +29,13 @@
               }}
               <span *ngIf="formType !== 'get'"><h6>*&nbsp;Required fields</h6></span>
             </div>
-            <div
-              class="h4 mb-4  form-group"
+            <form
+            class="custom-card form-body needs-validation project-card"
+            #form="ngForm"
+            (ngSubmit)="projectCreateOrUpdate(form.value, formType)"
+            style="padding:1.5rem; padding-bottom: 0.5rem;"
+            novalidate>
+            <div class="h4 mb-2  form-group"
               [class.has-error]="projectId?.touched && projectId?.invalid"
             >
               <label class="control-label" for="projectId">*Project ID:</label>
@@ -48,7 +54,7 @@
               />
             </div>
             <div
-              class="h4 mb-4 form-group"
+              class="h4 mb-2 form-group"
               [class.has-error]="
                 projectNameInput?.touched && projectNameInput?.invalid
               "
@@ -67,12 +73,12 @@
                 #projectNameInput="ngModel"
               />
 
-              <p *ngIf="projectNameInput?.touched && projectNameInput?.invalid">
+              <p [style.visibility]="(projectNameInput?.touched && projectNameInput?.invalid) ? 'visible':'hidden'">
                 Project Name is required
               </p>
             </div>
             <div
-              class="h4 mb-4  form-group"
+              class="h4 mb-2  form-group"
               [class.has-error]="
                 clientNameInput?.touched && clientNameInput?.invalid
               "
@@ -91,12 +97,12 @@
                 [disabled]="formType === 'get'"
                 #clientNameInput="ngModel"
               />
-              <p *ngIf="clientNameInput?.touched && clientNameInput?.invalid">
+              <p [style.visibility]="(clientNameInput?.touched && clientNameInput?.invalid) ? 'visible':'hidden'">
                 Client Name is required
               </p>
             </div>
             <div
-              class="h4 mb-4 form-group"
+              class="h4 mb-2 form-group"
               [class.has-error]="
                 projectManagerInput?.touched && projectManagerInput?.invalid
               "
@@ -129,16 +135,13 @@
                   }}</mat-option>
                 </ng-template>
               </mat-select>
-              <p
-                *ngIf="
-                  projectManagerInput?.touched && projectManagerInput?.invalid
-                "
+              <p [style.visibility]="(projectManagerInput?.touched && projectManagerInput?.invalid) ? 'visible':'hidden'"
               >
                 Project Manager is required
               </p>
             </div>
             <div
-              class="h4 mb-4 form-group "
+              class="h4 mb-2 form-group "
               [class.has-error]="StartDateInput?.touched"
             >
               <label for="start" class="control-label">*Start Date:</label>
@@ -153,12 +156,12 @@
                 [disabled]="formType === 'get'"
                 #startDateInput="ngModel"
               />
-              <p *ngIf="startDateInput?.invalid && startDateInput?.touched">
+              <p [style.visibility]="(startDateInput?.invalid && startDateInput?.touched) ? 'visible':'hidden'">
                 Start Date is required
               </p>
             </div>
             <div
-              class="h4 mb-4 form-group "
+              class="h4 mb-2 form-group "
               [class.has-error]="endDateInput?.touched"
             >
               <label class="control-label" for="end">*End Date:</label>
@@ -173,7 +176,7 @@
                 [disabled]="formType === 'get'"
                 #endDateInput="ngModel"
               />
-              <p *ngIf="endDateInput?.touched && endDateInput?.invalid">
+              <p [style.visibility]="(endDateInput?.touched && endDateInput?.invalid) ? 'visible':'hidden'">
                 End Date is required
               </p>
             </div>
@@ -202,7 +205,7 @@
               </p>
             </div> -->
             <div
-              class="h4 mb-4 form-group"
+              class="h4 mb-2 form-group"
               [class.has-error]="membersInput?.touched && membersInput?.invalid"
             >
               <label class="control-label" for="members"
@@ -231,14 +234,14 @@
                   }}</mat-option>
                 </ng-template>
               </mat-select>
-              <p *ngIf="membersInput?.touched && membersInput?.invalid">
+              <p [style.visibility]="(membersInput?.touched && membersInput?.invalid) ? 'visible':'hidden'">
                 Project Members are required
               </p>
             </div>
             <div class="button-parent" *ngIf="formType !== 'get'">
               <button
                 mdbBtn
-                class=" btn btn-outline-primary  text-center text-yellow m-4 btnsstyle "
+                class=" btn logout text-center m-4 "
                 mdbWavesEffect
                 type="submit"
               >
@@ -249,7 +252,7 @@
               <button
                 type="button"
                 mdbBtn
-                class="btn btn-outline-primary  text-center text-yellow m-4 btnsstyle "
+                class=" btn logout text-center m-4"
                 mdbWavesEffect
                 [routerLink]="['/project']"
               >
@@ -260,7 +263,7 @@
               <button
                 type="button"
                 mdbBtn
-                class="btn btn-outline-primary  text-center m-2 btncancel btnsstyle "
+                class="btn logout text-center m-4"
                 mdbWavesEffect
                 [routerLink]="['/project']"
               >
