@@ -32,7 +32,6 @@ export class ResetpasswordComponent implements OnInit {
       'update').subscribe(
       (res: any) => {
         this.message = res.payload.message;
-        console.log(this.message);
         swal.fire({
           icon: "success",
           text: this.message,
