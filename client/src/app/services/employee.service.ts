@@ -40,7 +40,7 @@ export class EmployeeService {
         .set("isSortDecreasing", paginationObj.isSortDecreasing);
     }
 
-    if (paginationObj.sort) {
+    else if (paginationObj.sort) {
       params = httpParamsObj
         .set("page", paginationObj.page)
         .set("limit", paginationObj.limit)
