@@ -48,7 +48,7 @@
               <th scope="col">Status</th>
             </thead>
   
-            <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available For This User</div>
+            <div class="no-data" *ngIf="response.week?.length === 0">No Data Available</div>
 
             <ng-template ngFor let-response [ngForOf]="response">
               <tr *ngFor="let week of response.week; let id=index;">
