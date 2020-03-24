@@ -27,9 +27,11 @@ generateToken = async (req, res) => {
       _id: employee._id,
       empId: employee.empId,
       name: employee.name,
-      role: employee.role
+      role: employee.role,
+      
     },
-    config.get("jwtPrivateKey")
+    config.get("jwtPrivateKey"),
+    { expiresIn: 86400 }
   );
 
   res.send({
