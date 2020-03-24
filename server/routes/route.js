@@ -17,7 +17,7 @@ module.exports = (app) => {
 	app.delete('/api/employee/:id', [authenticator, checkAdmin], controller.employee.delete);	
 
 	//Project
-	app.get('/api/project', [authenticator, employeePaginator(model.project.model,'project')], controller.project.index);
+	app.get('/api/project', [authenticator, employeePaginator(model.project.model, 'project')], controller.project.index);
 	app.post('/api/project', authenticator, checkAdmin, controller.project.create);
 	app.get('/api/project/:id', authenticator, checkAdmin, controller.project.show);
 	app.put('/api/project/:id', authenticator, checkAdmin, controller.project.update);

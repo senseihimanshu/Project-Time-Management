@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit, OnChanges {
     }
     // CHART CLICK EVENT.
 onChartClick(event) {
-  console.log(event);
 }
   projectpieChartLabels =  ['COMPLETED','DISCARDED','IN-PROGRESS'];
   
