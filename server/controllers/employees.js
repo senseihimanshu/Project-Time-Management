@@ -131,7 +131,6 @@ class Employee {
        <td>${newEmployee.joining}</td>
     </table>
       <p>Login on our portal with above credentials</p>
-      <a href="http://localhost:4200/login">
       <p class="bottom">This is Computer Generated Email ,Don't reply back to it</p>
       `;
     nodeMail(output, newEmployee);
@@ -189,16 +188,20 @@ class Employee {
       oldPassword
      
     } = req.body;
+  
     const employeeToUpdate = await model.employee.get({ empId });
-    const isPassword = await bcrypt.compare(oldPassword, employeeToUpdate.password);
-    if (!isPassword){
+     
+    if(oldPassword!=null){
+     const isPassword = await bcrypt.compare(oldPassword, employeeToUpdate.password);
+   if (!isPassword){
       return res.status(401).send({
         success: false,
         payload: {
           message: "Incorrect password"
         }
       });
-    } 
+    }
+  }  
     const patchedEmployee = {
       email: employeeToUpdate.email !== email ? email : undefined,
       name,
@@ -217,11 +220,12 @@ class Employee {
     );
    
     try {
+      if(oldPassword!=null){
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(patchedEmployee.password, salt);
         
       patchedEmployee.password = hashedPassword;
-       
+      }  
       await model.employee
         .update({ empId: empId }, patchedEmployee)
         .then(() => {
