@@ -35,7 +35,6 @@ function Paginator(model, type) {
     const input = req.query.searchInput || "";
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || -1;
-    const columns = req.query.columns || {};
     const sort = req.query.sort;
     const isSortDecreasing = parseInt(req.query.isSortDecreasing);
 
@@ -47,6 +46,7 @@ function Paginator(model, type) {
     const criteria = createCriteria(type, input);
 
     const dataSize = await model.find(criteria).count({});
+
 
     if (endIndex < dataSize) {
       results.next = {
@@ -66,10 +66,11 @@ function Paginator(model, type) {
 
     try {
       results.results = await model
-        .find(criteria, columns)
+        .find(criteria)
         .sort({ [sort]: isSortDecreasing })
         .limit(limit !== -1 && limit )
-        .skip(startIndex);
+        .skip(startIndex)
+        .select('-password');
 
       req.paginatedResults = results;
       next();
