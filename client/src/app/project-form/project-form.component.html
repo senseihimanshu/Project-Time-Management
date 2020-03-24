@@ -8,18 +8,7 @@
       <div class="col-10">
         <div style="margin:4rem; margin-top: 2rem;">
           <div class="text-center" style="font-size: 1rem;">
-          <!-- <form
-            class="form-body needs-validation project-card"
-            #form="ngForm"
-            (ngSubmit)="projectCreateOrUpdate(form.value, formType)"
-            novalidate
-          >
-         
-            <div
-              class="h4 mb-4
-                d-flex justify-content-between font-weight-bold"
-              style="font-size: 1.1rem;"
-            > -->
+
               {{
                 formType === "get"
                   ? "Project Data"
@@ -181,29 +170,6 @@
               </p>
             </div>
 
-            <!-- <div
-              class="h4 mb-4 form-group"
-              [class.has-error]="statusInput?.touched"
-            >
-              <label class="control-label" for="status">Status:</label>
-              <mat-select
-                class="browser-default
-                    custom-select"
-                name="status"
-                [(ngModel)]="project && project.status"
-                [disabled]="formType === 'get'"
-                #statusInput="ngModel"
-                required
-              >
-                <mat-option value="" disabled>Choose option</mat-option>
-                <mat-option value="in-progress" selected>In Progress</mat-option>
-                <mat-option value="completed">Completed</mat-option>
-                <mat-option value="discarded">Discarded</mat-option>
-              </mat-select>
-              <p *ngIf="statusInput?.touched && statusInput?.invalid">
-                Status is required
-              </p>
-            </div> -->
             <div
               class="h4 mb-2 form-group"
               [class.has-error]="membersInput?.touched && membersInput?.invalid"
@@ -222,11 +188,7 @@
                 multiple
               >
               <i class="fa fa-search "></i>
-              <!-- <input id="typeahead-config" type="text" class="my-control" [(ngModel)]="(project?.projectManager)[0]" 
-              name="search"
-              [ngbTypeahead]="searchProjectMember"
-              [resultFormatter]="formatter" -->
-             
+      
               placeholder=" search"/>
                 <ng-template ngFor let-emp [ngForOf]="empList">
                   <mat-option *ngIf="projManager !== emp._id" [value]="emp._id">{{ emp.empId }}----{{
