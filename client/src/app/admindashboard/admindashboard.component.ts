@@ -38,7 +38,7 @@ export class AdmindashboardComponent implements OnInit {
       .showAllEmployees({
         page: this.page.toString(),
         limit: this.limit.toString(),
-        searchInput: (criteria.input.trim() === "") ? undefined : criteria.input,
+        searchInput: !criteria.input? "" : criteria.input,
         sort: "name",
         isSortDecreasing: this.sortAccordingTo.name.toString()
       })
