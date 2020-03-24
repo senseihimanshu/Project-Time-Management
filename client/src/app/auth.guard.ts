@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     const expectedRole1 = next.data.expectedRole1;
    // decode the token to get its payload
      const now = Date.now().valueOf() / 1000
-         if(token!=null)
+         if(token!=null && now<=jsonDecoder().exp )
          {
             if(jsonDecoder().role==expectedRole || (expectedRole1 && jsonDecoder().role==expectedRole1))
              return true
