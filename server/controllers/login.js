@@ -5,7 +5,7 @@ const Employee = require("../models/employee");
 
 generateToken = async (req, res) => {
   const { email, password } = req.body;
-  let employee = await Employee.get({ email });
+  let employee = await Employee.model.findOne({ email });
   if (!employee)
     return res.status(401).send({
       success: false,
@@ -13,7 +13,6 @@ generateToken = async (req, res) => {
         message: "Invalid email or password"
       }
     });
-
   const isPassword = await bcrypt.compare(password, employee.password);
   if (!isPassword)
     return res.status(401).send({
