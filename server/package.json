@@ -22,7 +22,7 @@
     "jwt-handler": "^1.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.9.2",
-    "nodemailer": "^6.4.4",
+    "nodemailer": "^6.4.6",
     "password-generator": "^2.2.3"
   }
 }

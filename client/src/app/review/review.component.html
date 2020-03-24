@@ -20,7 +20,6 @@
             <tr>
               <th scope="col">Employee Name</th>
               <th scope="col">Project Name</th>
-              <th scope="col">Project Name</th>
               <th scope="col">Client</th>
               <th scope="col">
                 Start Date
@@ -50,7 +49,7 @@
                 ><i class="fas fa-eye"></i
                 ></a>
               </td>
-              <td>
+              <td class="btn-parent">
                 {{ timesheet.status !== "pending"? timesheet.status: "" }}
                 <a class="btn btn-primary text-white" role="button" *ngIf="timesheet.status === 'pending'" (click)="updateStatus(true, timesheet._id)">Approve</a>
                 <a class="btn btn-danger ml-1 text-white" role="button" *ngIf="timesheet.status === 'pending'" (click)="updateStatus(false, timesheet._id)">Decline</a>
