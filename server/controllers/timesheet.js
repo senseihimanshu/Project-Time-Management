@@ -13,7 +13,6 @@ class Timesheet {
     const timesheetObjId =
       timesheetFromDatabase.timesheet && timesheetFromDatabase.timesheet._id;
 
-
     //Adding timesheets of employees to projectManager
     if (timesheetFromDatabase.typeOfOperation === "create") {
       model.projectManager.update(
@@ -35,30 +34,31 @@ class Timesheet {
   }
 
   async index(req, res) {
-    if(req.query.criteria.managerId){
+    if (req.query.criteria.managerId) {
       let staffTimesheetIds = [];
 
-      staffTimesheetIds = req.paginatedResults.results.map( (staffTimesheetIds) => staffTimesheetIds.staffTimesheetIds );
+      staffTimesheetIds = req.paginatedResults.results.map(
+        staffTimesheetIds => staffTimesheetIds.staffTimesheetIds
+      );
 
       staffTimesheetIds = [].concat.apply([], staffTimesheetIds);
-      
+
       const staffTimesheets = await Promise.all(
-        staffTimesheetIds.map(async(timesheetId) => {
+        staffTimesheetIds.map(async timesheetId => {
           const timesheet = await model.timesheet.get({ _id: timesheetId });
 
           const employeeName = (
             await model.employee.get({ _id: timesheet.empObjId })
           ).name;
-          const startDate = (
-            await model.timesheet.get({ _id: timesheetId })
-          ).startDate;
+          const startDate = (await model.timesheet.get({ _id: timesheetId }))
+            .startDate;
           const projectName = (
             await model.project.get({ _id: timesheet.projectObjId })
           ).projectName;
           const clientName = (
             await model.project.get({ _id: timesheet.projectObjId })
           ).clientName;
-      
+
           return {
             ...timesheet.toObject(),
             week: undefined,
@@ -70,7 +70,9 @@ class Timesheet {
         })
       );
 
-      staffTimesheets.sort((a, b) => (+new Date(b.startDate) - +new Date(a.startDate)));
+      staffTimesheets.sort(
+        (a, b) => +new Date(b.startDate) - +new Date(a.startDate)
+      );
 
       req.paginatedResults.results = staffTimesheets;
       req.paginatedResults.dataSize = staffTimesheets.length;
@@ -86,7 +88,7 @@ class Timesheet {
     }
 
     var timesheet = req.paginatedResults.results;
-    
+
     timesheet = await Promise.all(
       timesheet.map(async timesheetWeek => {
         const employeeName = (
@@ -161,14 +163,21 @@ class Timesheet {
   async getTimesheetUsingRouteParams(req, res) {
     const timesheetId = req.params.id;
 
-    const { projectObjId, empObjId } = await model.timesheet.get({ _id: timesheetId });
+    const { projectObjId, empObjId } = await model.timesheet.get({
+      _id: timesheetId
+    });
     const { projectManager } = await model.project.get({ _id: projectObjId });
 
-    if((req.employee._id == empObjId) || (req.employee._id == projectManager) || (req.employee.role === 'admin')){
+    if (
+      req.employee._id == empObjId ||
+      req.employee._id == projectManager ||
+      req.employee.role === "admin"
+    ) {
       let timesheet = await model.timesheet.get({ _id: timesheetId });
 
-      const employeeName = (await model.employee.get({ _id: timesheet.empObjId }))
-        .name;
+      const employeeName = (
+        await model.employee.get({ _id: timesheet.empObjId })
+      ).name;
       const projectName = (
         await model.project.get({ _id: timesheet.projectObjId })
       ).projectName;
@@ -188,7 +197,7 @@ class Timesheet {
     return res.send({
       success: false,
       payload: {
-        message: 'You are not authorized to view this timesheet'
+        message: "You are not authorized to view this timesheet"
       }
     });
   }
@@ -224,30 +233,31 @@ class Timesheet {
     });
   }
 
-  async retrieveTimesheetsOfStaff(req, res){
+  async retrieveTimesheetsOfStaff(req, res) {
     let staffTimesheetIds = [];
 
-    staffTimesheetIds = req.paginatedResults.results.map( (staffTimesheetIds) => staffTimesheetIds.staffTimesheetIds );
+    staffTimesheetIds = req.paginatedResults.results.map(
+      staffTimesheetIds => staffTimesheetIds.staffTimesheetIds
+    );
 
     staffTimesheetIds = [].concat.apply([], staffTimesheetIds);
-    
+
     const staffTimesheets = await Promise.all(
-      staffTimesheetIds.map(async(timesheetId) => {
+      staffTimesheetIds.map(async timesheetId => {
         const timesheet = await model.timesheet.get({ _id: timesheetId });
 
         const employeeName = (
           await model.employee.get({ _id: timesheet.empObjId })
         ).name;
-        const startDate = (
-          await model.timesheet.get({ _id: timesheetId })
-        ).startDate;
+        const startDate = (await model.timesheet.get({ _id: timesheetId }))
+          .startDate;
         const projectName = (
           await model.project.get({ _id: timesheet.projectObjId })
         ).projectName;
         const clientName = (
           await model.project.get({ _id: timesheet.projectObjId })
         ).clientName;
-    
+
         return {
           ...timesheet.toObject(),
           week: undefined,
@@ -259,7 +269,9 @@ class Timesheet {
       })
     );
 
-    staffTimesheets.sort((a, b) => (+new Date(b.startDate) - +new Date(a.startDate)));
+    staffTimesheets.sort(
+      (a, b) => +new Date(b.startDate) - +new Date(a.startDate)
+    );
 
     req.paginatedResults.results = staffTimesheets;
     req.paginatedResults.dataSize = staffTimesheets.length;
@@ -276,27 +288,47 @@ class Timesheet {
 
   async updateStatus(req, res) {
     const timesheetId = req.params.id;
-    
-    const status = Boolean(req.body.status);
-    
-    try {
-      if(status){
-        await model.timesheet.update({ _id: timesheetId }, { status: 'approved' });
-      }else{
-        await model.timesheet.update({ _id: timesheetId }, { status: 'declined' });
-      }
 
-      res.send({
-        success: true,
-        payload: {
-          message: timesheetId + ": status of Timesheet Updated Successfully"
+    const { projectObjId, empObjId } = await model.timesheet.get({
+      _id: timesheetId
+    });
+    const { projectManager } = await model.project.get({ _id: projectObjId });
+
+    const status = Boolean(req.body.status);
+
+    if (req.employee._id == projectManager) {
+      try {
+        if (status) {
+          await model.timesheet.update(
+            { _id: timesheetId },
+            { status: "approved" }
+          );
+        } else {
+          await model.timesheet.update(
+            { _id: timesheetId },
+            { status: "declined" }
+          );
         }
-      });
-    } catch (error) {
-      res.send({
+
+        res.send({
+          success: true,
+          payload: {
+            message: timesheetId + ": status of Timesheet Updated Successfully"
+          }
+        });
+      } catch (error) {
+        res.send({
+          success: false,
+          payload: {
+            message: error.message
+          }
+        });
+      }
+    } else {
+      res.status(403).send({
         success: false,
         payload: {
-          message: error.message
+          message: "You have no right to update the status"
         }
       });
     }

@@ -6,8 +6,6 @@ require("dotenv").config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
    try{
-   
-    
      let testAccount = await nodemailer.createTestAccount();
 
      // create reusable transporter object using the default SMTP transport
@@ -151,25 +149,27 @@ class Employee {
   async show(req, res) {
     const employee = await model.employee.get({ empId: req.params.id });
 
-    if (!employee) {
-      return res.status(404).send({
+    if((employee._id == req.employee._id) || (req.employee.role == 'admin')) {
+      if (!employee) {
+        return res.status(404).send({
+          payload: {
+            data: {
+              employee
+            }
+          },
+          message: "Employee does not exists!"
+        });
+      }
+
+      res.status(200).send({
         payload: {
           data: {
             employee
           }
         },
-        message: "Employee does not exists!"
+        message: "Employee retrieved successfully"
       });
-    }
-
-    res.status(200).send({
-      payload: {
-        data: {
-          employee
-        }
-      },
-      message: "Employee retrieved successfully"
-    });
+    }  
   }
 
   async update(req, res) {

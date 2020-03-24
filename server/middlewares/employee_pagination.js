@@ -35,7 +35,7 @@ function Paginator(model, type) {
     const input = req.query.searchInput || "";
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || -1;
-    const columns = req.query.columns;
+    const columns = req.query.columns || {};
     const sort = req.query.sort;
     const isSortDecreasing = parseInt(req.query.isSortDecreasing);
 
@@ -66,7 +66,7 @@ function Paginator(model, type) {
 
     try {
       results.results = await model
-        .find(criteria, { [columns]: 0 })
+        .find(criteria, columns)
         .sort({ [sort]: isSortDecreasing })
         .limit(limit !== -1 && limit )
         .skip(startIndex);

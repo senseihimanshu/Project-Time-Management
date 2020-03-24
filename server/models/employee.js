@@ -8,10 +8,10 @@ class Employee{
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
-      return this.model.findOne(criteria,columns);
+      return this.model.findOne(criteria,columns).select('-password');
    }
    async gets(criteria={}, columns={}){
-    return this.model.find(criteria, columns);
+    return this.model.find(criteria, columns).select('-password');
 }
 
   async save(employeeObj){
@@ -27,7 +27,7 @@ class Employee{
     }
     
     async log(criteria={},columns={}){
-      return this.model.find(criteria, columns);
+      return this.model.find(criteria, columns).select('-password');
     }
     async getEmp(criteria={}, columns={}){
        const empObj= await this.model.find(criteria,columns).sort({"name": 1 });
