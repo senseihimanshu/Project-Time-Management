@@ -20,10 +20,7 @@ function createCriteria(type, input) {
       : {
           $or: [
             {
-              projectName: {
-                $regex: `^${input.toLowerCase().trim()}`,
-                $options: "i"
-              }
+              projectName: { $regex: `^${input.toLowerCase().trim()}`, $options: "i" }
             }
           ]
         };
@@ -35,7 +32,7 @@ function Paginator(model, type) {
     const input = req.query.searchInput || "";
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || -1;
-    const sort = req.query.sort;
+    const sort = req.query.sort || "";
     const isSortDecreasing = parseInt(req.query.isSortDecreasing);
 
     const startIndex = (page - 1) * limit;
@@ -46,8 +43,7 @@ function Paginator(model, type) {
     const criteria = createCriteria(type, input);
 
     const dataSize = await model.find(criteria).count({});
-
-
+    
     if (endIndex < dataSize) {
       results.next = {
         page: page + 1,
@@ -64,10 +60,12 @@ function Paginator(model, type) {
 
     results.dataSize = dataSize;
 
+    console.log(req.query, 'Iwa s here');
+
     try {
       results.results = await model
         .find(criteria)
-        .sort({ [sort]: isSortDecreasing })
+        .sort((sort !== "" && { [sort]: isSortDecreasing }))
         .limit(limit !== -1 && limit )
         .skip(startIndex)
         .select('-password');

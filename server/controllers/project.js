@@ -70,12 +70,11 @@ class Project {
 
   async index(req, res) {
     const projectList = req.paginatedResults.results;
-
+    console.log(projectList);
     await Promise.all(
       projectList.map(async (project, index) => {
         const manager = await model.employee.get(
-          { _id: project.projectManager },
-          { name: 1, _id: 0 }
+          { _id: project.projectManager }
         );
 
         const managerName = manager && manager.name;
@@ -92,8 +91,7 @@ class Project {
         const memberNames = await Promise.all(
           staffIds.map(async employee => {
             const employeeObj = await model.employee.get(
-              { _id: employee },
-              { name: 1, _id: 0 }
+              { _id: employee }
             );
             if (employeeObj) {
               return employeeObj.name;

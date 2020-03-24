@@ -38,8 +38,7 @@ export class ProjectComponent implements OnInit {
     this.projectService.showProjects({
         page: this.page.toString(),
         limit: this.limit.toString(),
-        searchInput: criteria.input || "",
-        columns: "",
+        searchInput: !criteria.input? "" : criteria.input,
         sort: sortBy,
         isSortDecreasing: this.isSortDecreasing ? '1' : '-1'
       })
