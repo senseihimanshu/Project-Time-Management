@@ -26,13 +26,27 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   showAllEmployees(paginationObj): Observable<IResponse> {
-    const params: HttpParams = new HttpParams()
+    const httpParamsObj = new HttpParams();
+    let params: HttpParams = httpParamsObj
       .set("page", paginationObj.page)
       .set("limit", paginationObj.limit)
-      .set("searchInput", paginationObj.searchInput)
-      .set("columns", paginationObj.columns)
-      .set("sort", paginationObj.sort)
       .set("isSortDecreasing", paginationObj.isSortDecreasing);
+
+    if (paginationObj.searchInput) {
+      params = httpParamsObj
+        .set("page", paginationObj.page)
+        .set("limit", paginationObj.limit)
+        .set("searchInput", paginationObj.searchInput)
+        .set("isSortDecreasing", paginationObj.isSortDecreasing);
+    }
+
+    if (paginationObj.sort) {
+      params = httpParamsObj
+        .set("page", paginationObj.page)
+        .set("limit", paginationObj.limit)
+        .set("isSortDecreasing", paginationObj.isSortDecreasing)
+        .set("sort", paginationObj.sort);
+    }
 
     return this.http.get<IResponse>(`${HOST}/api/employee`, {
       ...this.httpOptions,
