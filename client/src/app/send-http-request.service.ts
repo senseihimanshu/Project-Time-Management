@@ -33,7 +33,7 @@ export class SendHttpRequestService {
     localStorage.getItem("Authorization")
   );
 
-  // //Decode JWT and return the Payload in JSON Format
+  //Decode JWT and return the Payload in JSON Format
   jsonDecoder = token => {
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -51,7 +51,7 @@ export class SendHttpRequestService {
 
   showEmployees(): Observable<any> {
     const token = localStorage.getItem("Authorization");
-    // //Decode JWT and return the Payload in JSON Format
+    //Decode JWT and return the Payload in JSON Format
     const decodeToken = this.jsonDecoder(token);
     const empId = decodeToken.data.empId;
     const params = new HttpParams().set("empId", empId);

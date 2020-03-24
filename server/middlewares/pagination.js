@@ -27,6 +27,10 @@ function paginator(model) {
       };
     }
 
+    if(req.employee.role === 'admin'){
+      delete criteria.empObjId;
+    }
+
     results.dataSize = dataSize;
 
     try {

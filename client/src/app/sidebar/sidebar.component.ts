@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
      if(title=='Add New Employee')
    this.router.navigate(['/employee/create']);
    if(title=='Show All Employees')
-   this.router.navigate(['/admindashboard']);
+   this.router.navigate(['/admin']);
    if(title=='Add New Project')
    this.router.navigate(['/project/create']);
    if(title=='Show All Projects')
@@ -109,19 +109,6 @@ export class SidebarComponent implements OnInit {
     }
     else if(decodeToken.role == "C Level Manager"||decodeToken.role == "c-level"){
       this.menus.push(
-        {
-          title: "Employees",
-          icon: "fa fa-users",
-          active: false,
-          type: "dropdown",
-      
-          submenus: [
-            {
-              title: "Show All Employees",
-              route: '/admin'
-            }
-          ]
-        },
           {
             title: "Timesheets",
             icon: "fa fa-calendar",
@@ -135,7 +122,7 @@ export class SidebarComponent implements OnInit {
               },
               {
                 title: "Review All Timesheets",
-                route: '/manager'
+                route: '/review'
       
               }
             ]

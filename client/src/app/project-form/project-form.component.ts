@@ -77,7 +77,6 @@ export class ProjectFormComponent implements OnInit {
     })();
 
     this.getemployees();
-    //this.route.params.subscribe((data: Params) => {});
 
     this.route.params
       .pipe(
@@ -120,7 +119,6 @@ export class ProjectFormComponent implements OnInit {
     }
     var currdate = new Date();
     var date = this.formatDate(currdate);
-    // var date=new Date();
     if (obj.endDate <= date) {
       obj.status = "completed";
     } else if (obj.endDate > date) {

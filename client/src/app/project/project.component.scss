@@ -72,8 +72,6 @@
     line-height: 1.4;
     text-align: center;
     font-weight: 400;
-    // padding-top: 5px;
-    // height: 50px !important;
   }
 
   th {
@@ -89,10 +87,8 @@
 
   @media (min-width: 1200px) {
     .container {
-      // max-width: 1700px;
       margin-left:20rem;
       margin-right: 1rem;
-      // margin-top: 4rem;
     }
   }
   
@@ -110,12 +106,12 @@
 
 @media (min-width: 1200px) {
   //  .container {
-  //      //max-width: 1500px;
-  //     // margin-top:1rem;
-  //     // margin-left: 1rem;
-  //     // margin-right: 3rem;
-  //     // padding-left: 2rem;
-  //     // padding-right: 2rem;
+       //max-width: 1500px;
+      // margin-top:1rem;
+      // margin-left: 1rem;
+      // margin-right: 3rem;
+      // padding-left: 2rem;
+      // padding-right: 2rem;
   //  }
 }
   
@@ -194,6 +190,3 @@
       font-size: 2rem;
       color: grey;
   }
-//   .content-design{
-//     margin-left: 100%;
-//   }

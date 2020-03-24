@@ -39,12 +39,17 @@ export class TimesheetComponent implements OnInit {
   editField: string;
   timesheetList: any;
   closeResult: string;
-
+  page:number = 1;
+  limit: number = 5;
+  isSortDecreasing: boolean = false;
   role: string;
+
+  sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
+  timesheet: any;
 
   empObjId: string;
   name = "Angular";
-  page = 1;
+  
   pageSize = 10;
   items = [];
   response: any;
@@ -130,5 +135,26 @@ export class TimesheetComponent implements OnInit {
       localStorage.getItem("Authorization")
     ).role;
     this.tabularData();
+  }
+
+  filterList(date: any) {
+    if (!date) {
+      date = { year: 2000, month: 1, day: 1 };
+    }
+    date = `${date.year}-${date.month}-${date.day}`;
+
+    this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
+
+    this.timesheetService
+      .getTimesheet({
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        criteria: JSON.stringify({ empObjId: this.empObjId,  startDate: {$gte: date} }),
+        columns: JSON.stringify({}),
+        sort: JSON.stringify(this.sortAccordingTo)
+      })
+      .subscribe(res => {
+        this.timesheet = res.payload.data.result;
+      });
   }
 }

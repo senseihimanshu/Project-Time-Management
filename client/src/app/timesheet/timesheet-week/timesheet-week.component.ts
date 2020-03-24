@@ -20,11 +20,9 @@ export class TimesheetWeekComponent {
   editField: string;
   timesheetList: any;
   closeResult: string;
-
   page: number = 1;
   limit: number = 5;
   dataSize: number;
-
   empObjId: string;
 
   isSortDecreasing: boolean = false;
@@ -34,48 +32,6 @@ export class TimesheetWeekComponent {
   role: string;
 
   sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
-
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
   openDialog(timesheetId: string) {
     const dialogRef = this.dialog.open(TimesheetModal, {
       data: {
@@ -122,7 +78,7 @@ export class TimesheetWeekComponent {
     if (!date) {
       date = { year: 2000, month: 1, day: 1 };
     }
-    date = `${date.year}-${date.month}-${date.day}`;
+    date = new Date(`${date.year}-${date.month}-${date.day}`);
 
     this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
 
