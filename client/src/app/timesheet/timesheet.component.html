@@ -1,15 +1,40 @@
 <div>
-  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class="col-10">
       <div class="custom-card">
       <h6 class="card-header text-center font-weight-bold text-uppercase">
         Timesheets
-            <mdb-icon fas icon="plus" class="add-icon text-success" size="2x" (click)="openDialog()"></mdb-icon>
+            <mdb-icon *ngIf="response?.empObjId === empObjId" fas icon="plus" class="add-icon text-success" size="2x" (click)="openDialog()"></mdb-icon>
       </h6>
+      <div class="input-box">
+        <label for="date" class="labelDate" title="Filter Dates above of entered!">
+          <i class="fas fa-filter"></i>
+          Filter By date
+        </label>
+        <input
+          id="date"
+          class="form-control date-input"
+          onfocus="this.placeholder = ''"
+          name="selectedDate"
+          [ngModel]="selectedDate?.value"
+          (ngModelChange)="filterList(selectedDate.value)"
+          ngbDatepicker
+          [markDisabled]="isDisabled"
+          #dp="ngbDatepicker"
+          #selectedDate="ngModel"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline fas fa-calendar"
+            (click)="dp.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
           <table
             class="table table-striped table-fixed" id="myTable"
           >
@@ -22,19 +47,21 @@
               <th scope="col">Billable</th>
               <th scope="col">Status</th>
             </thead>
-            
+  
+            <div class="no-data" *ngIf="response.week?.length === 0">No Data Available</div>
+
             <ng-template ngFor let-response [ngForOf]="response">
               <tr *ngFor="let week of response.week; let id=index;">
-                <ng-template [ngIf]="response.week[id].projectId">
-                  <td class="text-center">{{ response.empObjId.name }}</td>
-                  <td class="text-center">{{ response.week[id].projectId?.projectName }}</td>
+                <ng-template [ngIf]="response.week[id].hours">
+                  <td class="text-center">{{ response.employeeName }}</td>
+                  <td class="text-center">{{ response.projectName }}</td>
                   <td class="text-center">{{ response.week[id].taskType }}</td>
                   <td class="text-center">{{ response.week[id].date | date }}</td>
                   <td class="text-center">{{ response.week[id].hours }}</td>
                   <td class="text-center">{{ response.week[id].billable }}</td>
-                  <td class="text-center">{{ response.week[id].status }}</td>
+                  <td class="text-center">{{ response.status }}</td>
                 </ng-template>
-                </tr>
+              </tr>
             </ng-template>
           </table>
         </div>

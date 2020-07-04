@@ -1,23 +1,13 @@
-import { Component, OnInit, Inject } from "@angular/core";
-
-//3rd party
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbDate
-} from "@ng-bootstrap/ng-bootstrap";
-
-import Swal from 'sweetalert2'
-
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
-
-import { EmployeeService } from "../../services/employee.service";
-import { SendHttpRequestService } from "../../services/send-http-request.service";
+import { ProjectManagerService } from "src/app/services/projectmanager.service";
+import { jsonDecoder } from "src/app/utils/json.util";
+import Swal from "sweetalert2";
+import { IResponse } from './../../models/response.model';
 import { TimesheetService } from "./../../services/timesheet.service";
 
-import { MAT_DIALOG_DATA } from '@angular/material';
 
 export interface ITaskType {
   key: string;
@@ -34,8 +24,7 @@ export class TimesheetModal implements OnInit {
     moment(`${date.year}-${date.month}-${date.day}`).day() === 0 ||
     moment(`${date.year}-${date.month}-${date.day}`).day() === 6;
 
-
-    response: any;
+  response: any;
 
   startDate: string;
   endDate: string;
@@ -43,7 +32,7 @@ export class TimesheetModal implements OnInit {
   datesArray: string[];
   empObjId: string;
 
-    modalType: string = null;
+  modalType: string = null;
 
   isOpen: boolean = false;
 
@@ -79,39 +68,39 @@ export class TimesheetModal implements OnInit {
   ];
 
   constructor(
-    private employeeService: EmployeeService,
     private timesheetService: TimesheetService,
-    private httpService: SendHttpRequestService,
+    private projectManagerService: ProjectManagerService,
+    public dialogRef: MatDialogRef<TimesheetModal>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
-    let empId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.empId;
-    this.empObjId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data._id;
+    this.empObjId = jsonDecoder(localStorage.getItem("Authorization"))._id;
 
     //subscribing to observable for getting the employee
-    this.employeeService.getEmployee(empId).subscribe(response => {
-      this.projectArray = response.employee.projectId.map(project => {
-        return {
-          _id: project._id,
-          projectName: project.projectName,
-          projectManager: project.projectManager,
-          clientName: project.clientName
-        };
-      });
+    this.projectManagerService
+      .getProjectsForCurrentStaffId(this.empObjId)
+      .subscribe(response => {
+        this.projectArray = response.payload.data.projects.map(project => {
+          return {
+            _id: project._id,
+            projectId: project.projectId,
+            projectName: project.projectName,
+            projectManager: project.projectManager,
+            clientName: project.clientName
+          };
+        });
 
-      if(this.data.timesheetId){
+        if(this.data && this.data.timesheetId){
             this.modalType = 'update';
-          this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
-            this.response = res.payload.data.timesheet[0];
-            this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
-          });
-      }      
-    });
+            this.timesheetService.getTimesheetUsingRouteParams(this.data.timesheetId).subscribe((res) => {
+              this.response = res.payload.data.timesheet;
+              this.project =  this.response.projectObjId;
+              this.startDate = this.response.startDate;
+              this.calculateNumberOfDays(this.response.startDate, this.response.endDate);
+            });
+        }
+      });
   }
 
   formatData(data: any) {
@@ -119,8 +108,6 @@ export class TimesheetModal implements OnInit {
 
     for (let dayOfWeek = 0; dayOfWeek < 5; dayOfWeek++) {
       weekObjArray.push({
-        projectId:
-          data[`project-${dayOfWeek}`],
         date: data[`date-${dayOfWeek}`],
         hours: data[`hours-${dayOfWeek}`],
         taskType: data[`task-type-${dayOfWeek}`],
@@ -132,19 +119,32 @@ export class TimesheetModal implements OnInit {
       empObjId: this.empObjId,
       startDate: this.startDate || this.response.startDate,
       endDate: this.endDate || this.response.endDate,
-      
+      projectObjId: this.project,
+
       week: weekObjArray
     };
   }
 
   handleSave(timesheetData: any) {
-    const dataToSave = this.formatData(timesheetData);
+    if(!this.project){
+      Swal.fire('Choose Project before Submitting');
+      return;
+    }
 
+    if(!this.startDate){
+      Swal.fire('Choose Date before Submitting');
+      return;
+    }
+
+    const dataToSave = this.formatData(timesheetData);
+    
     this.timesheetService
       .createTimesheet(dataToSave)
-      .subscribe((response: any) => {
+      .subscribe((response: IResponse) => {
         Swal.fire(response.payload.message);
+        this.dialogRef.close();
       });
+
   }
 
   convertDate(selectedDate: string) {
@@ -167,28 +167,26 @@ export class TimesheetModal implements OnInit {
             .endOf("month")
             .format("YYYY-MM-DD")
         : this.endDate;
-
+    this.timesheetService.getSpecificTimesheet(this.startDate).subscribe((res: IResponse) => {
+      if(res.payload.data.timesheet){
+        this.response = res.payload.data.timesheet;
+        this.project = res.payload.data.timesheet.projectObjId;
+      }
+      
+    });
     this.calculateNumberOfDays(this.startDate, this.endDate);
-
   }
 
-  calculateNumberOfDays(startDate: string, endDate: string){
+  calculateNumberOfDays(startDate: string, endDate: string) {
     this.numberOfDays =
       Number(moment(endDate).format("DD")) -
-      Number(
-        moment(
-          startDate
-        ).format("DD")
-      ) +
+      Number(moment(startDate).format("DD")) +
       1;
-
 
     this.datesArray = [];
     for (let i = 1; i <= this.numberOfDays; i++) {
       this.datesArray.push(
-        moment(
-          startDate
-        )
+        moment(startDate)
           .day(i)
           .format("YYYY-MM-DD")
           .toString()
@@ -204,16 +202,15 @@ export class TimesheetModal implements OnInit {
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
-      console.log("Inside fillProjectDropdown()");
       //Getting empId from token
     }
 
     this.handleProjectData(form);
   }
 
-  returnClient(projectId: string){
-    return this.projectArray.filter((project) => {
-        return project._id === projectId;
+  returnClient(projectId: string) {
+    return this.projectArray.filter(project => {
+      return project._id === projectId;
     }).clientName;
   }
 }

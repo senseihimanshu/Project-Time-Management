@@ -1,13 +1,15 @@
 <div>
-  <app-navbar [dashboard]="dashboard" [menus]="menus"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class="col-10">
-                <div class="col-md-6 projectchart">
-                    <h2>Projects Status </h2>
-                    <canvas
+         <div class="container-fluid">
+             <div class="row">
+              <div class="col-md-5 projectchart">
+                <h2>Projects Status </h2>
+                   <canvas
                       baseChart
                       [chartType]="'pie'"
                       [datasets]="projectpieChartData"
@@ -20,7 +22,7 @@
                   </canvas>
                 
              </div>  
-              <div class="col-md-6 timesheetchart">
+              <div class="col-md-5 timesheetchart">
                 <h2>Timesheets Status </h2>
                  <canvas
                     baseChart
@@ -34,6 +36,8 @@
                  >
              </canvas>  
              </div>
-</div>
-</div>
+          </div> 
+      </div>     
+   </div>
+ </div>
 </div>

@@ -1,10 +1,11 @@
+import { IResponse } from './../models/response.model';
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
-import { Token } from "@angular/compiler/src/ml_parser/lexer";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HOST } from "../config/host";
+import { IPagination } from "../models/pagination.model";
 
-const TIMESHEET_API: string = "http://localhost:3000/api/timesheet";
+const TIMESHEET_API: string = `${HOST}/api/timesheet`;
 
 @Injectable({
   providedIn: "root"
@@ -14,77 +15,57 @@ export class TimesheetService {
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': '*',
-      token: localStorage.getItem("Authorization")
+      "Authorization": localStorage.getItem("Authorization")
     })
   };
 
-  jsonDecoder = token => {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function(c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-    return JSON.parse(jsonPayload);
-  };
+  getTimesheet(paginationObj: IPagination): Observable<IResponse> {
+    const params: HttpParams = new HttpParams()
+      .set("criteria", paginationObj.criteria)
+      .set("columns", paginationObj.columns)
+      .set("page", paginationObj.page)
+      .set("limit", paginationObj.limit)
+      .set("sort", paginationObj.sort);
 
-  payload: any = this.jsonDecoder(localStorage.getItem("Authorization"));
-
-  projectService(): any {
-    this.http.get("/api/project");
-  }
-  getTimesheet(empObjId: any, type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
-    const params: HttpParams = new HttpParams().set("empObjId", empObjId).set("type", type).set("page", page).set("limit", limit).set("desc", desc);
-
-    return this.http.get("http://localhost:3000/timesheet", {
+    return this.http.get<IResponse>(`${TIMESHEET_API}`, {
       ...this.httpOptions,
       params
     });
   }
 
-  getTimesheetUsingRouteParams(timesheetId: string): Observable<any>{
-    return this.http.get(`http://localhost:3000/api/timesheet/${timesheetId}`);
+  getTimesheetUsingRouteParams(timesheetId: string): Observable<any> {
+    return this.http.get(`${TIMESHEET_API}/${timesheetId}`, this.httpOptions);
   }
 
-  createTimesheet(timesheet: any): Observable<any> {
-    return this.http.post(
-      TIMESHEET_API,
-      timesheet,
-      this.httpOptions)
+  createTimesheet(timesheet: any): Observable<IResponse> {
+    return this.http.post<IResponse>(TIMESHEET_API, timesheet, this.httpOptions);
   }
 
-  getAllTimesheet(type: string = null, page: string = null, limit: string = null, desc: string = null): Observable<any> {
-    const params: HttpParams = new HttpParams().set("type", type).set("page", page).set("limit", limit).set("desc", desc);
-
-    return this.http.get("http://localhost:3000/timesheet", {
-      ...this.httpOptions,
-      params
+  getSpecificTimesheet(startDate: any): Observable<IResponse> {
+    const params: HttpParams = new HttpParams()
+      .set(
+        "startDate",
+        `${startDate}`
+      );
+    return this.http.get<IResponse>(`${TIMESHEET_API}/selectedweek`, {
+      params,
+      ...this.httpOptions
     });
   }
+  clevelDataTimesheets(graphicaldata: any): Observable<any> {
+    const params = new HttpParams().set("graphicaldata", graphicaldata);
+    return this.http
+      .get("http://localhost:3000/timesheet/graphicaldata", {...this.httpOptions, params });
+  }   
 
-  private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+  getStaffTimesheets(paginationObj: IPagination): Observable<IResponse>{
+    const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    console.log(message);
+    return this.http.get<IResponse>(`${TIMESHEET_API}/staff`, { params, ...this.httpOptions });
   }
 
-  getSpecificTimesheets(empId: string, startDate: any): Observable<any>{
-    const params: HttpParams = new HttpParams().set('empId', empId).set('startDate', `${startDate.year}-${startDate.month}-${startDate.day}`);
-    return this.http.get(`${TIMESHEET_API}/filter`, { params, ...this.httpOptions });
+  updateStatus(status: Boolean, timesheetId: string): Observable<IResponse>{
+
+    return this.http.patch<IResponse>(`${TIMESHEET_API}/review/${timesheetId}`, {status}, { ...this.httpOptions });
   }
 }

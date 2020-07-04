@@ -1,15 +1,11 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const model = require("../models");
-const schema = require("../schemas");
-const nodemailer=require('nodemailer');
-var generator = require('generate-password');
-const saltRounds = 10;
-var generatePassword = require('password-generator');
+const nodemailer = require("nodemailer");
 
-
-require('dotenv').config();
+require("dotenv").config();
 // node function which sends email to new user create
  const nodeMail=async function(output,newEmployee){
+   try{
      let testAccount = await nodemailer.createTestAccount();
 
      // create reusable transporter object using the default SMTP transport
@@ -24,37 +20,28 @@ require('dotenv').config();
   let info ={
      from: '"balanideepanshu92@gmail.com"', // sender address
      to:newEmployee.email, // list of receivers
-     subject: "Node Contact Request", // Subject line
-     text: "Hello world?", // plain text body
+     subject: "Project Portal  Contact Request", // Subject line
+     text: "Welcome to Project Portal", // plain text body
      html: output // html body
    }
    transporter.sendMail(info,function(err,data){
-        if(err){
+      
+     if(err){
           console.error("error occurs",err);
         }
         else{
-          console.log("email sent successfully");
         }
    });
+  }catch(error){
+    console.error(error);
+  }
 }
-const isUnique = async function(empId, email) {
-  const employeeWithEmpId = await model.employee.get({ empId });
-  const employeeWithEmail = await model.employee.get({ email });
-
-  if (employeeWithEmpId)
-    return { status: false, message: "EmployeeId already exists" };
-  if (employeeWithEmail)
-    return { status: false, message: "Email already exists" };
-
-  return { status: true };
-};
 
 class Employee {
   constructor() {}
 
   async create(req, res) {
- 
-    const {
+    let {
       empId,
       email,
       name,
@@ -76,22 +63,15 @@ class Employee {
       role
     };
 
-    var date=Date.now();
-    var password = generatePassword(12, false, /\d/, 'cyg-'+(date));
-    newEmployee.password = password;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-   newEmployee.password=hashedPassword;
-  const resultAfterIsUnique = await isUnique(empId, email);
-    if (!resultAfterIsUnique.status) {
-      return res.status(401).send({
-        success: false,
-        payload: {
-          message: resultAfterIsUnique.message
-        }
-      });
-    }
+    newEmployee.empId = newEmployee.empId.replace(/ /g, "");
 
+    newEmployee.password = "cyg-" + empId;
+   const pass=newEmployee.password;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newEmployee.password, salt);
+
+    newEmployee.password = hashedPassword;
+     
     try {
       await model.employee.save(newEmployee).then(() => {
         res.status(201).send({
@@ -109,61 +89,93 @@ class Employee {
         }
       });
     }
-    const output=`
-
-     <p>you have a new contact request</p>
-     <p>Thanks again for 
-      <h3>your details</h3>
-      <ul>
-      <li>Name:${name}</li>
-      <li>Email:${email}</li>
-      <li>Designation:${designation}</li>
-      <li>Role:${role}</li>
-      <li>Phone:${phone}</li>
-      <li>Password:${password}</li>
-      <li>Address:${address}</li>
-      <li>joining:${joining}</li>
-      </ul>
-      <p>This is Computer Generated Email ,Don't reply back to it</p>
-      `
-      nodeMail(output,newEmployee);
+    const output = `
+        <style>
+            .bottom{
+              color:grey;
+              font-size:0.8rem;
+               }
+        </style>
+     <p>Congratulations,you are registered on our CyberGroup Project-Portal</p>
+        <h3>Thanks again for your details</h3>
+      <table>
+      <tr>
+        <td>Name:</td>
+        <td>${newEmployee.name}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>${newEmployee.email}</td>
+      <tr>
+      <td>Designation:</td>
+      <td>${newEmployee.designation}</td>
+      </tr>
+      <tr>
+      <td>Role:</td>
+       <td>${newEmployee.role}</td>
+      <tr>
+       <td>Phone:
+       <td>${newEmployee.phone}</td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td>${pass}</td>
+      </tr>
+        <td>Address:</td>
+        <td>${newEmployee.address}</td>
+      </tr>
+      <tr>
+       <td>joining:</td>
+       <td>${newEmployee.joining}</td>
+    </table>
+      <p>Login on our portal with above credentials</p>
+      <p class="bottom">This is Computer Generated Email ,Don't reply back to it</p>
+      `;
+    nodeMail(output, newEmployee);
   }
-
   async index(req, res) {
-    const employeeList = await model.employee.log(
-      {$and:[{"_id":{$ne:"5e6338721abe492c4080f558" }},{"empId":{$ne:req.query.empId}}]},
-      { name: 1, designation: 1, role: 1, email: 1, phone: 1, empId: 1 }
-    ) ;
     return res.status(200).send({
       success: true,
       payload: {
         data: {
-          employeeList,
           result: req.paginatedResults
         },
         message: "employees retrieved"
       }
     });
   }
-
-  async show(req, res) {
-    const employee = await model.employee.get({ empId:req.query.empId});
    
-    if (!employee) {
-      return res.status(404).send({ employee,
-        message:"Employee does not exists!"
-      });
-    }
+ 
+  async show(req, res) {
+    const employee = await model.employee.get({ empId: req.params.id });
 
-    res.status(200).send({
-      employee,
-      message:"Employee retrieved successfully"
-    });
+    if((employee._id == req.employee._id) || (req.employee.role == 'admin')) {
+      if (!employee) {
+        return res.status(404).send({
+          payload: {
+            data: {
+              employee
+            }
+          },
+          message: "Employee does not exists!"
+        });
+      }
+
+      res.status(200).send({
+        payload: {
+          data: {
+            employee
+          }
+        },
+        message: "Employee retrieved successfully"
+      });
+    }  
   }
-  
+
   async update(req, res) {
+    const empId = req.params.id;
+   
     const {
-      empId,
       email,
       name,
       designation,
@@ -172,11 +184,24 @@ class Employee {
       address,
       password,
       projectId,
-      role
+      role,
+      oldPassword
+     
     } = req.body;
-
-
+  
     const employeeToUpdate = await model.employee.get({ empId });
+     
+    if(oldPassword!=null){
+     const isPassword = await bcrypt.compare(oldPassword, employeeToUpdate.password);
+   if (!isPassword){
+      return res.status(401).send({
+        success: false,
+        payload: {
+          message: "Incorrect password"
+        }
+      });
+    }
+  }  
     const patchedEmployee = {
       email: employeeToUpdate.email !== email ? email : undefined,
       name,
@@ -189,19 +214,28 @@ class Employee {
       role
     };
 
-    
     //discarding keys with undefined
-    Object.keys(patchedEmployee).forEach(key => patchedEmployee[key] === undefined && delete patchedEmployee[key])
-
+    Object.keys(patchedEmployee).forEach(
+      key => patchedEmployee[key] === undefined && delete patchedEmployee[key]
+    );
+   
     try {
-      await model.employee.update({ empId: empId }, patchedEmployee).then(() => {
-        res.status(200).send({
-          success: true,
-          payload: {
-            message: "Employee updated successfully"
-          }
+      if(oldPassword!=null){
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(patchedEmployee.password, salt);
+        
+      patchedEmployee.password = hashedPassword;
+      }  
+      await model.employee
+        .update({ empId: empId }, patchedEmployee)
+        .then(() => {
+          res.status(200).send({
+            success: true,
+            payload: {
+              message: "Employee updated successfully"
+            }
+          });
         });
-      });
     } catch (err) {
       res.status(400).send({
         success: false,
@@ -213,47 +247,20 @@ class Employee {
   }
 
   async delete(req, res) {
-    const employee = await model.employee.delete({ empId: req.query.empId });
-   
+    const employee = await model.employee.delete({ _id: req.params.id });
+    
+    await model.timesheet.deleteMany({ empObjId: req.params.id });
+
+    await model.projectManager.deleteMany({ staffId: req.params.id });
+    await model.projectManager.deleteMany({ managerId: req.params.id });
+
     res.send({
       success: true,
       payload: {
         employee,
-        message: 'Employee Deleted Successfully'
+        message: "Employee Deleted Successfully"
       }
     });
   }
-
-
-
-  
-  async indexP(req,res){
-         const employeeList = await model.employee.gets();
-        // get page from query params or default to first page
-        const page = parseInt(req.query.page) || 1;
-
-        // get pager object for specified page
-        const pageSize = 6;
-        
-        const pager = await pagination.paginate(employeeList.length, page, pageSize);
-
-        // get page of items from items array
-        const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
-        
-
-        // return pager object and current page of items
-        return res.json({ pager, pageOfItems });
-        
-    }
-    async searchEmployee(req, res){
-   
-      let query=req.query.name;
-      query = query.toLowerCase().trim()
-      const employees = await model.employee.getforsearch({name: { $regex:`^${query}`, $options: 'i'}},{});
-    
-      res.status(200).send(employees);
-    }
-  
-
 }
 module.exports = new Employee();

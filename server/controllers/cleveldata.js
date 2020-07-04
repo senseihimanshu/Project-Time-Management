@@ -5,12 +5,18 @@ class Cleveldata{
         try{
          
           if(req.query.graphicaldata==='true'){
-         const  completedProjects=await model.project.count({status:"Completed"});
-          const discardedProjects=await model.project.count({status:"Discarded"});
-          const InProgressProjects=await model.project.count({status:"In Progress"});
-          const data=[completedProjects,discardedProjects,InProgressProjects];
-         
-            res.send([{data}]);
+           const  completedProjects=await model.project.count({status:"completed"});
+           const discardedProjects=await model.project.count({status:"discarded"});
+           const InProgressProjects=await model.project.count({status:"in-progress"});
+           const data=[completedProjects,discardedProjects,InProgressProjects];
+            res.status(200).send({
+            success: true,
+            payload: {
+              message: "Projects data retrieved  successfully",
+              data:[{data}]
+            }
+          });
+            
           }    
        }catch(error){
         console.error(error);
@@ -21,22 +27,20 @@ class Cleveldata{
 
         try{
         if(req.query.graphicaldata==='true'){
-          let approvedTimesheets = 0;
-          let declinedTimesheets = 0; 
-          let pendingTimesheets = 0; 
-
-        for(let day=0;day<5;day++){
-          const timesheet = await model.timesheet.model.find({}, {"week": 1});
-          let newArr = timesheet.filter((cur) => {
-            if(cur.week[day].status === "pending") pendingTimesheets++;
-            if(cur.week[day].status === "approved") approvedTimesheets++;
-            if(cur.week[day].status === "declined") declinedTimesheets++;
-          });
-          }
+          const approvedTimesheets  =await model.timesheet.count({status:"approved"});
+          const declinedTimesheets=await model.timesheet.count({status:"declined"});
+          const pendingTimesheets=await model.timesheet.count({status:"pending"});
+        
             data=[approvedTimesheets,declinedTimesheets,pendingTimesheets];
-
-             res.send([{data}]);
-              }
+             res.status(200).send({
+               success: true,
+                payload: {
+                  message: "Timesheet data retrieved  successfully",
+                  data:[{data}]
+                }
+             });
+           
+          }
         }catch(error){
          console.error(error);
        }

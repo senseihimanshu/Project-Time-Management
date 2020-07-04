@@ -1,14 +1,11 @@
-const employeeDb=require('./employee');
-const leaveDb = require('./leave');
-const  projectDb=require('./project');
-const timesheetDb=require('./timesheet');
-const projectManagerDb = require('./projectmanager');
-const review=require('./review')
+const employeeModel = require("./employee");
+const projectModel = require("./project");
+const timesheetModel = require("./timesheet");
+const projectManagerModel = require("./projectmanager");
 
-module.exports={
-    employee: employeeDb,
-    leave: leaveDb,
-    project: projectDb,
-    timesheet:timesheetDb,
-    projectManager: projectManagerDb
-}
+module.exports = {
+  employee: employeeModel,
+  project: projectModel,
+  timesheet: timesheetModel,
+  projectManager: projectManagerModel
+};

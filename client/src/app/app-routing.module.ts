@@ -1,32 +1,22 @@
-import { ServicesService } from "./services.service";
-import { AuthGuardService } from "./guards/auth-guard.service";
-import { TimesheetComponent } from "./timesheet/timesheet.component";
-import { ReviewRowComponent } from "./review/reviewrow/reviewrow.component";
-import { ProjectRowComponent } from "./project/projectrow/projectrow.component";
-import { TableRowComponent } from "./admindashboard/tablerow/tablerow.component";
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { NotFoundComponent } from "./404/notfound.component";
+import { AccessDeniedComponent } from "./access-denied/access-denied.component";
+import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
+import { AuthGuard } from './auth.guard';
+import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EmployeedashboardComponent } from "./employeedashboard/employeedashboard.component";
-import { SidebarComponent } from "./sidebar/sidebar.component";
-import { MatToolbarModule } from "@angular/material/toolbar";
+import { LoginComponent } from "./login/login.component";
+import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
+import { MyprofileComponent } from "./myprofile/myprofile.component";
 import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ProjectComponent } from "./project/project.component";
-import { MyprofileComponent } from "./myprofile/myprofile.component";
-import { EmployeeFormComponent } from "./main/employee-form/employee-form.component";
-import { LoginComponent } from "./login/login.component";
-import { AccessDeniedComponent } from "./access-denied/access-denied.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ReviewComponent } from "./review/review.component";
-import { HomeComponent } from "./home/home.component";
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Routes, RouterModule } from "@angular/router";
-import { AdmindashboardComponent } from "./admindashboard/admindashboard.component";
-import { NotFoundComponent } from "./404/notfound.component";
-//import { AuthorizationGuard } from './authorization.guard';
-import { from } from "rxjs";
-import { RoleGuardService } from "./guards/role-guard.service";
-import { ProjectManagerComponent } from "./project-manager/project-manager.component";
+import { SidebarComponent } from "./sidebar/sidebar.component";
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
-
+import { TimesheetComponent } from "./timesheet/timesheet.component";
+import {ResetpasswordComponent} from './resetpassword/resetpassword.component' 
 const routes: Routes = [
   {
     path: "",
@@ -34,107 +24,155 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
+    path:"resetpassword",
+    component:ResetpasswordComponent
+  },
+  {
     path: "timesheet",
     children: [
       {
         path: '',
         component: TimesheetComponent,
-        pathMatch: 'full' 
+        pathMatch: 'full'
       },
       {
         path: ':timesheetId',
         component: TimesheetComponent 
+      
       }
     ]
   },
   {
     path: "timesheetweek",
-    component: TimesheetWeekComponent
+    component: TimesheetWeekComponent,
+   
   },
   {
     path: "sidebar",
-    component: SidebarComponent
+    component: SidebarComponent,
   },
   {
     path: "myProfile",
-    component: MyprofileComponent
+    component: MyprofileComponent,
   },
   {
     path: "review",
-    component: ReviewComponent
+    component: ReviewComponent,
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project-manager',
+      expectedRole1: 'c-level'
+    } 
   },
-  { path: "", component: LoginComponent },
   {
     path: "manager",
-    component: ReviewComponent
-  },
-  {
-    path: "projectmanager",
-    component: ProjectManagerComponent
+    component: ReviewComponent,
+     canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'project-manager'
+    } 
   },
   {
     path: "projects",
-    component: ProjectComponent
+    component: ProjectComponent,
+
+    canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'admin'
+    } 
   },
   {
     path: "employee",
-    component: EmployeedashboardComponent
+    component: EmployeedashboardComponent,
+     canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'employee'
+    } 
   },
   {
     path: "clevel",
-    component: DashboardComponent
+    component: DashboardComponent,
+      canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'c-level'
+    }  
   },
   {
     path: "admin",
-    component: AdmindashboardComponent
+    component: AdmindashboardComponent,
+     canActivate:[AuthGuard],
+    data: { 
+      expectedRole: 'admin'
+    } 
   },
   {
     path: "accessdenied",
     component: AccessDeniedComponent,
-    data: {}
+    data: {},
+    
   },
   {
     path: "login",
     component: LoginComponent
   },
   {
-    path: "employeeform",
+    path: "employee",
     children: [
       {
         path: ":type",
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
+        
+        
       },
       {
         path: "details/:empId",
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
+        
       },
       {
         path: ":type/:empId",
-        component: EmployeeFormComponent
+        component: EmployeeFormComponent,
       }
-    ]
+    ],
+     canActivate:[AuthGuard],
+        data: { 
+          expectedRole: 'admin'
+        } 
   },
   {
-    path: "projectform",
+    path: "project",
     children: [
       {
-        path: "create/:type",
+        path: "",
+        component: ProjectComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: ":type",
+        component: ProjectFormComponent
+      },
+      {
+        path: "details/:projectId",
         component: ProjectFormComponent
       },
       {
         path: ":type/:projectId",
-        component: ProjectFormComponent
-      },
-      {
-        path: ":type/:projectId",
-        component: ProjectFormComponent
+        component: ProjectFormComponent,
+       
       }
-    ]
+    ],
+     canActivate:[AuthGuard],
+    data:{
+        expectedRole:"admin"
+    }
   },
+ 
   {
     path: "**",
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+    
+  },
+ 
 ];
 
 

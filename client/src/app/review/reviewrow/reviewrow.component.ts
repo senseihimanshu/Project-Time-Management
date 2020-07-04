@@ -1,39 +1,35 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import {SendHttpRequestService } from "./../../send-http-request.service";
+
 @Component({
   selector: "review-row",
   styleUrls: ["./reviewrow.component.scss", "../review.component.scss"],
   template: `
     <tr class="review-row">
       <td>
-        {{ employee.empId }}
+        {{ timesheet.employeeName }}
       </td>
       <td>
-        {{ employee.week.projectId }}
+        {{ timesheet.projectName }}
       </td>
       <td>
-        {{ employee.customerName }}
+        {{ timesheet.clientName }}
       </td>
       <td>
-        {{ employee.billable }}
+        <a class="view-btn" [routerLink]="['/timesheet', timesheet._id]"
+        ><i class="fas fa-eye">
+        </i></a>
       </td>
       <td>
-        {{ employee.startDate | date }}
-      </td>
-      <td>
-        {{ employee.week[0].hours }}
-      </td>
-      <td>
-      <a
+        <a
           class="btn btn-primary text-white"
           role="button"
-          (click)="accept(employee._id)"
+          (click)="accept(timesheet._id)"
           >Accept</a
         >
         <a
-          class="btn btn-primary ml-1 text-white" 
+          class="btn btn-primary ml-1 text-white"
           role="button"
-          (click)="reject(employee._id)"
+          (click)="reject(timesheet._id)"
           >Reject</a
         >
       </td>
@@ -41,43 +37,28 @@ import {SendHttpRequestService } from "./../../send-http-request.service";
   `
 })
 export class ReviewRowComponent {
-  constructor(private _service:SendHttpRequestService)
-  {}
+  constructor() {}
   @Input()
-  employee: any;
+  timesheet: any;
 
   @Output()
   deleteEmp: EventEmitter<any> = new EventEmitter();
 
-  deleteEmployee(empId: string) {
+  deleteTimesheet(empId: string) {
     this.deleteEmp.emit(empId);
   }
-  usersArray:any;
+  usersArray: any;
   accept(data) {
-    console.log(data);
     let obj = {
       _id: data,
       status: "Approved"
     };
-    console.log(obj._id,"status");
-    console.log("Kar rha hu accept");
-    console.log(obj._id);
-    this.sendReq(obj);
   }
-      
+
   reject(data) {
     let obj = {
       _id: data,
       status: "Declined"
     };
-    console.log(obj,"status data");
-    this.sendReq(obj);
-  }
-  sendReq(data) {
-    let obj = this._service.reviewRequest(data).subscribe(res => {
-      this.usersArray = res;
-      console.log(res);
-      alert(data.status);
-    });
   }
 }

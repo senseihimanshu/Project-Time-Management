@@ -2,9 +2,10 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmployeeService } from "../services/employee.service";
-import { SendHttpRequestService } from "./../send-http-request.service";
-import { Router, RouterLink } from "@angular/router";
 
+import { Router, RouterLink } from "@angular/router";
+import{ProjectService} from '../services/project.service'
+import{TimesheetService} from'../services/timesheet.service'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,51 +13,12 @@ import { Router, RouterLink } from "@angular/router";
 })
 export class DashboardComponent implements OnInit, OnChanges {
 
-  dashboard:string= "C Level Dashboard"
   graphicaldata:Boolean=true;
-menus: any = [
-  {
-    title: "Employees",
-    icon: "fa fa-users",
-    active: false,
-    type: "dropdown",
-
-    submenus: [
-      {
-        title: "Show All Employees",
-        route: '/admin'
-      }
-    ]
-  },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Create New Timesheet",
-          route: '/timesheetweek'
-        },
-        {
-          title: "Show All Timesheets",
-          route: '/timesheetweek'
-        },
-        {
-          title: "Review All Timesheets",
-          route: '/review'
-
-        }
-      ]
-    }
-  ];
-
   loading = false;
-  //  users: User[] = [];
   
     constructor(private httpService: HttpClient,
-      private _service: SendHttpRequestService,
+      private projectService: ProjectService,
+      private timesheetService:TimesheetService,
     private router: Router,
     private employeeService: EmployeeService) { }
     pieChartOptions = {
@@ -64,7 +26,6 @@ menus: any = [
     }
     // CHART CLICK EVENT.
 onChartClick(event) {
-  console.log(event);
 }
   projectpieChartLabels =  ['COMPLETED','DISCARDED','IN-PROGRESS'];
   
@@ -110,21 +71,19 @@ onChartClick(event) {
        
     }
    clevelDataProjects(graphicaldata) {
-     console.log("running");
-    let obj=this._service.clevelDataProjects(graphicaldata).subscribe(res => {
-      this.projectpieChartData=res;
-      console.log(this.projectpieChartData,"projects data");
+     
+    let obj=this.projectService.clevelDataProjects(graphicaldata).subscribe(res => {
+      this.projectpieChartData=res.payload.data;
+      
     });
   }
   clevelDataTimesheets(graphicaldata) {
-   let obj=this._service.clevelDataTimesheets(graphicaldata).subscribe(res => {
-     this.timesheetpieChartData=res;
-     console.log(this.timesheetpieChartData,"timesheets data");
+   let obj=this.timesheetService.clevelDataTimesheets(graphicaldata).subscribe(res => {
+     this.timesheetpieChartData=res.payload.data;
+    
    });
  }
 
    ngOnChanges(){}
 
 }
-
-

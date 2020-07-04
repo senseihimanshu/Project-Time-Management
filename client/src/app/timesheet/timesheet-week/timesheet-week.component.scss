@@ -64,7 +64,15 @@ h6 {
 }
 
 .table {
-  margin-top: 1%;
+  margin-top: 2%;
+  table-layout: fixed;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+  cursor: default;
 }
 
 thead {
@@ -126,4 +134,20 @@ tbody:nth-child(odd) {
       opacity: 0.4;
       background-color: #ffffffe3;
   }
+}
+
+.no-data{
+  width: 100%;
+    text-align: center;
+    position: absolute;
+    font-size: 1rem;
+    margin-top: 2rem;
+    color: grey;
+}
+
+.btn{
+  margin-left: 0.2rem;
+  padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+  outline-width: thin;
+  outline-style: solid;
 }

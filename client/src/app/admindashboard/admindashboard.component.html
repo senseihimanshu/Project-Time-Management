@@ -1,8 +1,8 @@
  <div>
-  <app-navbar [menus]="menus" [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class="col-10">
       <div class="custom-card">
@@ -11,11 +11,11 @@
             <i class="fa fa-search"></i>
           </span>
           <input
-            type="text"
+            type="search"
             class="form-control"
             id="myInput"
-            (keyup)="myFunction()"
-            placeholder="Search by Member Name"
+            (keyup)="handleSearch($event.target.value)"
+            placeholder="Search by name or role"
           />
         </div>
 
@@ -23,8 +23,8 @@
           <thead>
             <tr>
               <th scope="col">Employee Id</th>
-              <th scope="col" class="clickable" (click)="sortList()">
-                Name<i class="fas fa-sort" ></i>
+              <th scope="col">Name
+                <i class="fas fa-sort clickable" (click)="sortList()"></i>
               </th>
               <th scope="col">Email</th>
               <th scope="col">Designation</th>
@@ -34,6 +34,7 @@
               <th scope="col">Delete</th>
             </tr>
           </thead>
+          <div class="no-data" *ngIf="usersArray?.length === 0">No Data Available</div>
           <tbody
             style="height: 10px !important; overflow: auto"
             id="adminTable"
@@ -59,7 +60,7 @@
               <td>
                 <a
                   [ngClass]="{'disabled': empObjId === employee._id}"
-                  [routerLink]="['/employeeform/details', employee.empId]"
+                  [routerLink]="['/employee/details', employee.empId]"
                 >
                   <i class="fas fa-eye"></i>
                 </a>
@@ -68,22 +69,22 @@
                 <a
                 [ngClass]="{'disabled': empObjId === employee._id}"
                   class="edit"
-                  [routerLink]="['/employeeform', 'update', employee.empId]"
+                  [routerLink]="['/employee', 'update', employee.empId]"
                 >
                   <i class="fas fa-pencil-alt"></i>
                 </a>
               </td>
               <td>
-                <a class="delete" [ngClass]="{'disabled': empObjId === employee._id}" (click)="deleteEmployee(employee.empId)"
+                <a class="delete" [ngClass]="{'disabled': empObjId === employee._id}" (click)="deleteEmployee(employee._id)"
                   ><i class="fas fa-trash"></i
                 ></a>
               </td>
             </tr>
           </tbody>
         </table>
-        <div class="pagination-div">
-          <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')">{{page-1 !== 0 ? page-1 : ''}}<i class="fas fa-arrow-circle-left"></i></a>
-          <a class="move-right" [ngClass]="{'disabled': page===lastPage}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i>{{page+1}}</a>
+        <div class="pagination-div" >
+          <a class="move-left" [ngClass]="{'disabled': page === 1}" (click)="handlePaginationResult('prev')"><span>{{spanage-1 !== 0 ? page-1 : ''}}</span><i class="fas fa-arrow-circle-left"></i></a>
+          <a class="move-right" [ngClass]="{'disabled': page*limit >= dataSize}" (click)="handlePaginationResult('next')"><i class="fas fa-arrow-circle-right"></i><span>{{page+1}}</span></a>
         </div>
       </div>
     </div>

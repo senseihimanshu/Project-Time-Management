@@ -13,7 +13,8 @@ body{
     line-height: 1.5;
     color: $color-text-primary;
     box-sizing: border-box;
-    overflow-x: hidden
+    overflow-x: hidden;
+    overflow-y:hidden;
 }
 
 //over riding bootstrap
@@ -76,10 +77,13 @@ body{
 }
 .custom-multi-level {
     padding: 10px;
-    // list-style-type: square;
 }
 
 .custom-multi-level>li>a {
     color:black !important;
     padding: 10px;
+}
+
+.swal2-popup{
+    font-size:0.7rem !important;
 }

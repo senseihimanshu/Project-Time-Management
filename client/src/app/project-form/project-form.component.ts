@@ -1,187 +1,188 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { IResponse } from "./../models/response.model";
+import { Component, OnInit, Input } from "@angular/core";
 import { EmployeeService } from "src/app/services/employee.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
-import { FormControl } from '@angular/forms';
-import { SendHttpRequestService } from "../send-http-request.service";
-import swal from'sweetalert2'
+import { FormControl } from "@angular/forms";
+import swal from "sweetalert2";
+import { ProjectService } from "../services/project.service";
+import { Observable } from "rxjs";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  filter
+} from "rxjs/operators";
+
 @Component({
-  selector: 'app-project-form',
-  templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss','../main/employee-form/employee-form.component.scss','../main/main.component.scss']
+  selector: "app-project-form",
+  templateUrl: "./project-form.component.html",
+  styleUrls: [
+    "./project-form.component.scss",
+    "../main/employee-form/employee-form.component.scss",
+    "../main/main.component.scss"
+  ]
 })
 export class ProjectFormComponent implements OnInit {
- 
-
   formType: string;
   employee: any;
-  project:any;
+  project: any;
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings = {};
+
   empList: string[];
-  projManager:string[]=[];
-  projMembers:string[]=[];
-  message:string;
+  projManager: string;
+  projMembers: string[] = [];
+  message: string;
   name = "Angular";
   page = 1;
-  pageSize = 6;
   items = [];
-  pager={};
+  pager = {};
+  dummyEmployeeArr: any = [];
+  projectId: string;
+
   constructor(
-    private _service: SendHttpRequestService,
+    private projectService: ProjectService,
     private employeeService: EmployeeService,
     private router: Router,
-    private route: ActivatedRoute) { }
-    @Input()
-    dashboard:string="Admin Dashboard";
-    menus: any = [
-      {
-        title: "Employees",
-        icon: "fa fa-users",
-        active: false,
-        type: "dropdown",
-  
-        submenus: [
-          {
-            title: "Add New Employee"
-          },
-          {
-            title: "Show All Employees"
-          }
-        ]
-      },
-      {
-        title: "Projects",
-        icon: "fa fa-book",
-        active: false,
-        type: "dropdown",
-  
-        submenus: [
-          {
-            title: "Add New Project"
-          },
-          {
-            title: "Show All Projects"
-          }
-        ]
-      },
-      {
-        title: "Timesheets",
-        icon: "fa fa-calendar",
-        active: false,
-        type: "dropdown",
-  
-        submenus: [
-          {
-            title: "Show All Timesheets"
-          }
-        ]
-      }
-    ];
-  
-    loading = false;
+    private route: ActivatedRoute
+  ) {}
+  loading = false;
 
-    
-
-  ngOnInit():any {
+  ngOnInit(): any {
     (function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
+      "use strict";
+      window.addEventListener(
+        "load",
+        function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName("needs-validation");
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener(
+              "submit",
+              function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+              },
+              false
+            );
+          });
+        },
+        false
+      );
     })();
 
-    
+    this.getemployees();
 
-     this.getemployees();
-    console.log("ngOnInit");
-    this.route.params.subscribe((data: Params) => {
-
-    });
     this.route.params
       .pipe(
         switchMap((params: Params) => {
           this.formType = params.type;
+          if (!params.type) {
+            this.formType = "get";
+          }
 
           if (!params.projectId) {
-            return this.employeeService.getProject(null);
+            return new Observable<IResponse>();
           }
-          console.log(this.formType);
-          return this.employeeService.getProject(params.projectId);
+          this.projectId = params.projectId;
+          return this.projectService.getProject(params.projectId);
         })
       )
       .subscribe((response: any) => {
-      
-        return (this.project = response);
+        return (this.project = response.payload.data.projectDetails);
       });
   }
+  formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
 
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
   projectCreateOrUpdate(obj, formType): any {
-    console.log(obj, formType);
-     this.employeeService
-       .projectCreateOrUpdate(obj, formType)
-       .subscribe((res: any) => {
-         this.message=res.payload.messsage;
-         console.log(res);
-         swal.fire({
-          icon: 'success',
-          title: this.message,
-          showConfirmButton: true,
-          timer: 3000
-        }) 
-
-        this.router.navigate(['/projects']);
-        
-    },  err => {
-      this.message = err.error.payload.messsage;
+    if (obj.startDate >= obj.endDate) {
       swal.fire({
-        icon: 'error',
-        title: this.message,
-        showConfirmButton: true,
-        timer: 3000
-      }) 
-      }
-    ); 
-}
-   getemployees() {
-
-    let obj = this._service.showEmployees().subscribe(res => {
-      this.empList = res.payload.data.employeeList;
-       console.log("employeelist",this.empList);
-
-    });
-  }
-  addProjectManager(employeeArr: any)
-  {
-    if(employeeArr){
-      employeeArr.map((employee) => {
-        this.projManager.push(employee._id);
+        icon: "error",
+        title: "Warning!",
+        text: "Start Date must be less than End Date!"
       });
-      console.log(this.projManager);
+      return;
     }
-    
+    var currdate = new Date();
+    var date = this.formatDate(currdate);
+    if (obj.endDate <= date) {
+      obj.status = "completed";
+    } else if (obj.endDate > date) {
+      obj.status = "in-progress";
+    }
+    this.projectService
+      .projectCreateOrUpdate(obj, formType, this.projectId)
+      .subscribe(
+        (res: IResponse) => {
+          this.message = res.payload.message;
+          swal.fire({
+            icon: "success",
+            title: this.message,
+            showConfirmButton: true
+          });
+
+          this.router.navigate(["/project"]);
+        },
+        err => {
+          this.message = err.error.payload.message;
+          swal.fire({
+            icon: "error",
+            title: this.message,
+            showConfirmButton: true
+          });
+        }
+      );
   }
-  addProjectMember(employeeArr: any)
-  {
-    if(employeeArr){
-      employeeArr.map((employee) => {
-        this.projMembers.push(employee._id);
+  getemployees() {
+    this.employeeService
+      .showAllEmployees({
+        searchInput: "",
+        criteria: "",
+        columns: "password",
+        sort: "name",
+        isSortDecreasing: "1"
+      })
+      .subscribe(res => {
+        this.empList = res.payload.data.result.results;
       });
-      console.log(this.projMembers);
-    }
-    
   }
 
+  addProjectManager(managerId: any) {
+    this.projManager = managerId;
+  }
+  addProjectMember(employeeArr: any) {
+    this.projMembers === [];
+
+    if (employeeArr) {
+      this.projMembers = employeeArr;
+    }
+  }
+  formatter = (result: string) => result.toUpperCase();
+
+  searchProjectMember = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term =>
+        term.length < 2
+          ? this.empList
+          : this.empList
+              .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
+              .slice(0, 10)
+      )
+    );
 }

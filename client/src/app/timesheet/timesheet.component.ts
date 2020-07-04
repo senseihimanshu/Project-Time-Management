@@ -1,3 +1,4 @@
+import { IResponse } from './../models/response.model';
 import { TimesheetService } from "./../services/timesheet.service";
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
 
@@ -15,9 +16,12 @@ import { TimesheetModal } from "./modal/modal.component";
 import { MatDialog } from "@angular/material/dialog";
 import { EmployeeService } from "../services/employee.service";
 import { SendHttpRequestService } from "../services/send-http-request.service";
-import {  RouterLink } from "@angular/router";
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { RouterLink } from "@angular/router";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { switchMap } from "rxjs/operators";
+import { jsonDecoder } from '../utils/json.util';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "table-editable",
@@ -29,69 +33,31 @@ export class TimesheetComponent implements OnInit {
     private timesheetService: TimesheetService,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    private httpService: SendHttpRequestService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
   editField: string;
   timesheetList: any;
   closeResult: string;
+  page:number = 1;
+  limit: number = 5;
+  isSortDecreasing: boolean = false;
+  role: string;
+
+  sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
+  timesheet: any;
 
   empObjId: string;
   name = "Angular";
-  page = 1;
+  
   pageSize = 10;
   items = [];
-  dashboard:string="Admin Dashboard";
   response: any;
-
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
 
   openDialog() {
     const dialogRef = this.dialog.open(TimesheetModal);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -118,14 +84,16 @@ export class TimesheetComponent implements OnInit {
     }
   }
 
-  tabularData() {
-    let empId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.empId;
-    this.empObjId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data._id;
+  empName: string = null;
 
+  tabularData() {
+    this.empObjId = jsonDecoder(
+      localStorage.getItem("Authorization")
+    )._id;
+
+    this.empName = jsonDecoder(
+      localStorage.getItem("Authorization")
+    ).name;
 
     let timesheetId: string = null;
 
@@ -133,23 +101,60 @@ export class TimesheetComponent implements OnInit {
       timesheetId = data.timesheetId;
     });
 
-    if(timesheetId){
-      this.timesheetService.getTimesheetUsingRouteParams(timesheetId).subscribe((res) => {
-        this.response = res.payload.data.timesheet;
-      });
+    if (timesheetId) {
+      this.timesheetService
+        .getTimesheetUsingRouteParams(timesheetId)
+        .subscribe(res => {
+          if(res.success === false){
+            Swal.fire({
+              title: 'You are unauthorized to view this page' 
+            });
+          }
+          if(res.payload.data){
+            this.response = [res.payload.data.timesheet];
+          }
+        });
       return;
     }
-    
-    this.timesheetService.getTimesheet(this.empObjId).subscribe(res => {
-      this.response = res.payload.data.timesheet;
-    });
-    
+
+    this.timesheetService
+      .getTimesheet({
+        criteria: JSON.stringify({ _id: timesheetId }),
+        columns: JSON.stringify({}),
+        page: String(1),
+        limit: String(-1),
+        sort: JSON.stringify({ date: -1 })
+      })
+      .subscribe((res: IResponse) => {
+        this.response = res.payload.data.timesheet;
+      });
   }
 
   ngOnInit() {
-    let role = this.httpService.jsonDecoder(
+    this.role = jsonDecoder(
       localStorage.getItem("Authorization")
-    ).data.role[0];
+    ).role;
     this.tabularData();
+  }
+
+  filterList(date: any) {
+    if (!date) {
+      date = { year: 2000, month: 1, day: 1 };
+    }
+    date = `${date.year}-${date.month}-${date.day}`;
+
+    this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
+
+    this.timesheetService
+      .getTimesheet({
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        criteria: JSON.stringify({ empObjId: this.empObjId,  startDate: {$gte: date} }),
+        columns: JSON.stringify({}),
+        sort: JSON.stringify(this.sortAccordingTo)
+      })
+      .subscribe(res => {
+        this.timesheet = res.payload.data.result;
+      });
   }
 }

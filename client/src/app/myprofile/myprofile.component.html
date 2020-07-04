@@ -1,8 +1,8 @@
 <div>
-  <app-navbar [menus]="menus"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class="container bootstrap snippet">
       <div class="panel-body inf-content">
@@ -78,7 +78,7 @@
                       </strong>
                     </td>
                     <td class="">
-                      {{ employee?.phoneNo }}
+                      {{ employee?.phone }}
                     </td>
                   </tr>
                   <tr>
@@ -103,11 +103,15 @@
                       {{ employee?.joining | date }}
                     </td>
                   </tr>
-                </tbody>
+               </tbody>
               </table>
             </div>
           </div>
         </div>
+      <button mdbBtn 
+      class=" btn info text-center"
+      mdbWavesEffect 
+      [routerLink]="['/resetpassword']">Reset Password</button>
       </div>
     </div>
   </div>

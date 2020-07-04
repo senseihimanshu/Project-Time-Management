@@ -1,27 +1,64 @@
-# project-portal
-This project creates a portal for timesheets management of all employees to be submitted weekly and monthly and reviewed accordingly by their respective Project Managers.
-Admin by itself creates  all the employees and assign different roles to them and also creates projects and assign to different project Managers and project members.
-Any employee who is doing login will be redirected to his/her dashboard as according to roles
-The project works differently for different roles of employees:-
+# Timesheet Management System
+A web portal to maintain the timesheets for employees working in an organization.
+
+### Getting started
+   * git clone `https://github.com/cybergroupdevs/project-portal.git`
+
+### Prerequisites
+Before the project setup, ensure to have the latest version of the following softwares on your system
+   * Angular
+   * NodeJS
+   * MongoDB
  
- 1.Admin:- 1) Admin can create new employees,update and delete,get data of any employee as he wishes to do.he can also 
-              view data of all the employees  in tabular form.
-           2) Admin can create new project,update and delete project and assign it to employees to whom he wishes.
-              That project will also be assigned to project manager to handle it.
-           3) Admin can view all the timesheets and their status whether they are approved,declined and pending.
+### Installation(Front-end)
+Run the following commands in the `client` directory of the project
+   ```npm install```
+   ```ng serve``` 
+This will start the project on the browser at `localhost:4200`
 
-2. Employee:- 1)An employee can only view and  create timesheets.he can view all his timeshhets which are 
-                approved,pending or declined.
+### Installation(Back-end)
+Run the following commands in the `server` directory of the project to start the server
+   ```npm install```
+   ```npm start```
 
-*****In the timesheet creation,employee has to fill details such as in which project he is enrolled in,client name,task type(which includes he is onshore,offshore) or he has taken some leave(sick leave,earned leave).he has to pick the startdate of timesheet to be filled,end date will automatically be picked wich will be 5 days ahead of startdate
-he has to fill no. of hours he worked on particular project.next whether the hours he worked are billable or not.
-if it is leave,it may not be bilable******
+### Tools used
+   * `Mediaquery` and `Bootstrap`- used to make web pages responsive for different screens
+   * `Nodemailer`- used to send emails to employees 
+   * `chartJS`- used for visualizations
 
-3.ProjectMananger:- 1)A projectmanger can only create his  timesheets and review timesheets of his/her project members.
+### About 
+   * This project facilitates a portal for timesheets management of all employees to be submitted weekly and reviewed accordingly by their respective Project Managers.
+ An employee can be assigned one these role : *admin* or *employee* or *project manager* or *c-level manager*. 
+ According to the assigned role, he/she will be redirected to a dashboard.
+ The project works differently for different roles of employees:-
+ 
+   #### Admin
+   * can add, update, delete and search employees and their relevant details
+   * can add, update, delete and search projects and their relevant details.
+   * can view all the submitted timesheets and their status.
 
-4.C-Level-Manager:- 1)A C-Level-Manager can view graphical data of all the projects(which are Completed,Discarded and 
-                      In Progress  ) and timesheets(which are Pending,Approved,Declined).
-                    2)A C-Level-Manager can also create his timesheet and review timesheet of memebers who belong to 
-                      his  project.
+   #### Employee
+   * can view all the submitted timesheets along with their status (approved or declined by their respective project manager).
+   * can create a new weekly timesheet or update a previous one(that is not already reviewed).
+
+   ** In the timesheet creation,employee has to fill details of the project he/she is deployed in, task type(onshore/offshore) or leave type(sick leave/earned leave), select the week and fill the working hours/day for the selected week. **
+
+   #### Project Mananger
+   * can create a new weekly timesheet or update a previous one(that is not already reviewed).
+   * can view all the submitted timesheets along with their status (approved or declined by their respective project manager).
+   * can review timesheets submitted to him/her, by the members of his projects.
+
+   #### C-Level-Manager
+      * can view the statistics of projects and timesheets through visualizations on his dashboard.
+      * can create a new weekly timesheet or update a previous one(that is not already reviewed).
+      * can review timesheets submitted to him/her, by the members of his projects.
+
+### Contributers
+   * Abha Rana
+   * Deepak Yadav 
+   * Deepanshu Balani  
+   * Himanshu Sharma
+   * Kritika Sachdeva
+ 
 
 

@@ -8,18 +8,15 @@ class Employee{
   }
    //getting the employee data as per criteria  
     async get(criteria={},columns={}){
-      const findDocument=await this.model.findOne(criteria,columns).populate('projectId');
-      return findDocument;
+      return this.model.findOne(criteria,columns).select('-password');
    }
    async gets(criteria={}, columns={}){
-    return this.model.find(criteria, columns);
+    return this.model.find(criteria, columns).select('-password');
 }
 
-   //saves the data of newly created employee
-    async save(employeeObj){
-      const employee = await this.model.create(employeeObj);
-       return employee;
-    }
+  async save(employeeObj){
+    return this.model.create(employeeObj);
+  }
     //update the employee data as per criteria and show updatedEmployeeObj
     async update(criteria={},updatedEmployeeObj){
        return this.model.updateOne(criteria,updatedEmployeeObj);
@@ -28,11 +25,9 @@ class Employee{
     async delete(criteria={}){
       return this.model.deleteOne(criteria);
     }
-    //getting the data of all the employees
+    
     async log(criteria={},columns={}){
-      let match=1;
-      let sort=2;
-      return this.model.find(criteria,columns);//.limit(match).skip(sort);
+      return this.model.find(criteria, columns).select('-password');
     }
     async getEmp(criteria={}, columns={}){
        const empObj= await this.model.find(criteria,columns).sort({"name": 1 });

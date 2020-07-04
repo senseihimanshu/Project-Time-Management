@@ -1,22 +1,12 @@
 <div class="wrapper">
-  <app-navbar [dashboard]="dashboard" [routerLink]="['/admin']"></app-navbar>
+  <app-navbar></app-navbar>
   <div class="row">
     <div class="col-2 d-none d-lg-block">
-      <app-sidebar [menus]="menus"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
-    <div class="custom-card col-6">
-      <div class="app-employee-form">
-        <form
-          class="form-body needs-validation"
-          #form="ngForm"
-          (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
-          novalidate
-        >
-          <div
-            class="h4 mb-4
-               d-flex justify-content-between font-weight-bold"
-            style="font-size: 1.1rem;"
-          >
+    <div class="col-10">
+      <div style="margin:4rem; margin-top:1rem;">
+        <div class="text-center" style="font-size: 1rem;">
             {{
               typeOfForm === "get"
                 ? "Employee Data for " + employee?.empId
@@ -24,11 +14,16 @@
                 ? "Create Employee"
                 : "Update Employee"
             }}
-            <span><h6>*&nbsp;Required fields</h6></span>
+            <span *ngIf="typeOfForm !== 'get'"><h6>*&nbsp;Required fields</h6></span>
           </div>
-
-          <div class="h4 mb-4">
-            <label class="control-label" for="empId">*Employee ID: </label>
+          <form 
+        class="custom-card form-body needs-validation" 
+        #form="ngForm" 
+        (ngSubmit)="employeeCreateOrUpdate(form.value, typeOfForm, form)"
+        style="padding:1.5rem; padding-bottom: 0.5rem;"
+        novalidate>   
+          <div class="h4 mb-2">
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="empId">Employee ID: </label>
 
             <input
               type="text"
@@ -44,16 +39,16 @@
               #empId="ngModel"
             />
             <div class="invalid-feedback"><i class="fa fa-error"></i></div>
-            <p *ngIf="empId.invalid && empId.touched">
+            <p [style.visibility]="(empId.invalid && empId.touched) ? 'visible':'hidden'">
               *Employee Id is required
             </p>
           </div>
 
           <div
-            class="form-group h4 mb-4"
+            class="form-group h4 mb-2"
             [class.has-error]="email.invalid && email.touched"
           >
-            <label class="control-label" for="email">*Email Id: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="email">Email Id: </label>
 
             <input
               type="text"
@@ -69,14 +64,14 @@
               #email="ngModel"
             />
 
-            <p *ngIf="email.invalid && email.touched">*Email is required</p>
+            <p [style.visibility]="(email.invalid && email.touched) ? 'visible':'hidden'">*Email is required</p>
           </div>
 
           <div
-            class="h4 mb-4 form-group"
+            class="h4 mb-2 form-group"
             [class.has-error]="empName.invalid && empName.touched"
           >
-            <label class="control-label" for="name">*Name: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="name">Name: </label>
 
             <input
               type="text"
@@ -91,14 +86,14 @@
               [disabled]="typeOfForm === 'get'"
               #empName="ngModel"
             />
-            <p *ngIf="empName.touched && empName.invalid">Required</p>
+            <p [style.visibility]="(empName.invalid && empName.touched) ? 'visible':'hidden'">Required</p>
           </div>
 
           <div
-            class="form-group h4 mb-4"
+            class="form-group h4 mb-2"
             [class.has-error]="addressInput.invalid && addressInput.touched"
           >
-            <label class="control-label" for="address">*Address: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" class="control-label" for="address">Address: </label>
 
             <input
               type="text"
@@ -113,16 +108,16 @@
               [disabled]="typeOfForm === 'get'"
               #addressInput="ngModel"
             />
-            <p *ngIf="addressInput.invalid && addressInput.touched">
+            <p [style.visibility]="(addressInput.invalid && addressInput.touched) ? 'visible':'hidden'">
               Address is required
             </p>
           </div>
 
           <div
-            class=" form-group h4 mb-4"
+            class=" form-group h4 mb-2"
             [class.has-error]="phoneInput.invalid && phoneInput.touched"
           >
-            <label for="phone" class="control-label">*Phone: </label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" for="phone" class="control-label">Phone: </label>
 
             <input
               type="text"
@@ -137,15 +132,15 @@
               [disabled]="typeOfForm === 'get'"
               #phoneInput="ngModel"
             />
-            <p *ngIf="phoneInput.invalid && phoneInput.touched">
+            <p [style.visibility]="(phoneInput.invalid && phoneInput.touched) ? 'visible':'hidden'">
               phoneNo is required
             </p>
           </div>
           <div
-            class="h5 mb-4 form-group"
+            class="h5 mb-2 form-group"
             [class.has-error]="joiningInput.touched"
           >
-            <label for="start" class="control-label">*Joining:</label>
+            <label [ngClass]="{'mandatory': (typeOfForm !== 'get')}" for="start" class="control-label">Joining:</label>
             <input
               type="date"
               id="joining"
@@ -157,63 +152,61 @@
               [readonly]="typeOfForm === 'get'"
               #joiningInput="ngModel"
             />
-            <p *ngIf="joiningInput.touched && joiningInput.invalid">
-              joiningDate is required
+            <p [style.visibility]="(joiningInput.invalid && joiningInput.touched) ? 'visible':'hidden'">
+              Joining Date is required
             </p>
           </div>
           <div
-            class="form-group h4 mb-4"
+            class="form-group h4 mb-2"
             [class.has-error]="designationInput.touched"
           >
-            <label for="designation" class="control-label"
-              >*Designation:
-            </label>
+            <mat-label for="designation" class="control-label"
+              >Designation:
+            </mat-label>
 
-            <select
+            <mat-select
+              placeholder="Choose a Designation"
               class="browser-default custom-select"
               name="designation"
               required
-              [(ngModel)]="employee && employee.designation[0]"
+              [(ngModel)]="employee && employee.designation"
               [disabled]="typeOfForm === 'get'"
               #designationInput="ngModel"
             >
-              <option value="" disabled>Choose option</option>
-              <option value="Associate" selected>Associate</option>
-              <option value="Consultant 2">Consultant 2</option>
-              <option value="Consultant 1">Consultant 1</option>
-              <option value="Intern">Intern</option>
-            </select>
-            <p *ngIf="designationInput.touched && designationInput.invalid">
+              <mat-option value="associate" selected>Associate</mat-option>
+              <mat-option value="consultant-2">Consultant 2</mat-option>
+              <mat-option value="consultant-1">Consultant 1</mat-option>
+              <mat-option value="intern">Intern</mat-option>
+            </mat-select>
+            <p [style.visibility]="(designationInput.invalid && designationInput.touched) ? 'visible':'hidden'">
               Designation is required
             </p>
           </div>
 
-          <div class="h4 mb-4 form-group" [class.has-error]="roleInput.touched">
-            <label for="role" class="control-label">*Role: </label>
+          <div class="h4 mb-2 form-group" [class.has-error]="roleInput.touched">
+            <mat-label for="role" class="control-label">Role: </mat-label>
 
-            <select
+            <mat-select
+              placeholder="Choose a Role"
               required
-              class="browser-default custom-select mb-4"
+              class="browser-default custom-select mb-2"
               name="role"
-              [(ngModel)]="employee && employee.role[0]"
+              [(ngModel)]="employee && employee.role"
               [disabled]="typeOfForm === 'get'"
               #roleInput="ngModel"
             >
-              <option value="choose option" hidden default selected
-                >Choose option</option
-              >
-              <option value="Employee">Employee</option>
-              <option value="Project Manager">Project Manager</option>
-              <option value="C Level Manager">C Level Manager</option>
-            </select>
-            <p *ngIf="roleInput.touched && roleInput.invalid">
+              <mat-option value="employee">Employee</mat-option>
+              <mat-option value="project-manager">Project Manager</mat-option>
+              <mat-option value="c-level">C Level Manager</mat-option>
+            </mat-select>
+            <p [style.visibility]="(roleInput.invalid && roleInput.touched) ? 'visible':'hidden'">
               Role is required
             </p>
           </div>
           <div class="button-parent" *ngIf="formType !== 'get'">
             <button *ngIf="typeOfForm !== 'get'"
               mdbBtn
-              class=" btn logout text-center m-4"
+              class=" btn logout text-center m-2"
               mdbWavesEffect
               type="submit"
             >
@@ -223,16 +216,15 @@
             <button
               type="button"
               mdbBtn
-              class=" btn logout text-center m-4"
+              class=" btn logout text-center m-2"
               mdbWavesEffect
               [routerLink]="['/admin']"
             >
               Cancel
             </button>
-            <!--   <div class="message">{{ this.message }}</div>  -->
+           
           </div>
         </form>
-        <!-- {{ form.value | json }} -->
       </div>
     </div>
   </div>

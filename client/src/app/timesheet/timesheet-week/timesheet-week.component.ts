@@ -1,19 +1,11 @@
 import { Component } from "@angular/core";
-
-import { TimesheetService } from "../../services/timesheet.service";
-
+import { MatDialog } from "@angular/material/dialog";
 //3rd party
-import {
-  NgbModal,
-  ModalDismissReasons,
-  NgbDate
-} from "@ng-bootstrap/ng-bootstrap";
-
+import { jsonDecoder } from "src/app/utils/json.util";
+import { TimesheetService } from "../../services/timesheet.service";
+import { IResponse } from './../../models/response.model';
 import { TimesheetModal } from "./../modal/modal.component";
 
-import { MatDialog } from "@angular/material/dialog";
-import { SendHttpRequestService } from "../../services/send-http-request.service";
-import * as moment from "moment";
 
 @Component({
   selector: "app-timesheet-week",
@@ -23,68 +15,23 @@ import * as moment from "moment";
 export class TimesheetWeekComponent {
   constructor(
     private timesheetService: TimesheetService,
-    private modalService: NgbModal,
-    public dialog: MatDialog,
-    private httpService: SendHttpRequestService
+    public dialog: MatDialog
   ) {}
   editField: string;
   timesheetList: any;
   closeResult: string;
-  
   page: number = 1;
   limit: number = 5;
   dataSize: number;
-
   empObjId: string;
 
   isSortDecreasing: boolean = false;
 
-  response: any;
+  timesheet: any;
 
   role: string;
 
-  menus: any = [
-    {
-      title: "Employees",
-      icon: "fa fa-users",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Employee"
-        }
-      ]
-    },
-    {
-      title: "Projects",
-      icon: "fa fa-book",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Add New Project"
-        },
-        {
-          title: "Show All Projects"
-        }
-      ]
-    },
-    {
-      title: "Timesheets",
-      icon: "fa fa-calendar",
-      active: false,
-      type: "dropdown",
-
-      submenus: [
-        {
-          title: "Show All Timesheets"
-        }
-      ]
-    }
-  ];
-
+  sortAccordingTo: any = { startDate: this.isSortDecreasing ? 1 : -1 };
   openDialog(timesheetId: string) {
     const dialogRef = this.dialog.open(TimesheetModal, {
       data: {
@@ -93,91 +40,79 @@ export class TimesheetWeekComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.tabularData();
     });
-  }
-
-  open(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
-      .result.then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        reason => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
   tabularData() {
-    let empId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.empId;
-    this.empObjId = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data._id;
+    this.empObjId = jsonDecoder(localStorage.getItem("Authorization"))._id;
 
-      if(this.role === "Admin"){
-        this.timesheetService.getAllTimesheet("week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe((res) => {
-          console.log(res);
-        });
-        return;
-      }
+    if(this.role === "admin"){
+      this.timesheetService.getTimesheet({page: this.page.toString(), limit: this.limit.toString(), sort: JSON.stringify(this.sortAccordingTo), criteria: JSON.stringify({}), columns: JSON.stringify({})}).subscribe((res) => {
+        this.timesheet = res.payload.data.result;
+        this.dataSize = res.payload.data.result.dataSize;
+      });
+      return;
+    }
 
-    this.timesheetService.getTimesheet(this.empObjId, "week", this.page.toString(), this.limit.toString(), this.isSortDecreasing.toString()).subscribe(res => {
-   
-      this.response = res.payload.data.timesheet;
-      this.dataSize = res.payload.data.result.dataSize;
-    });
+    this.timesheetService
+      .getTimesheet({
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        criteria: JSON.stringify({ empObjId: this.empObjId }),
+        columns: JSON.stringify({}),
+        sort: JSON.stringify(this.sortAccordingTo)
+      })
+      .subscribe((res: IResponse) => {
+        this.timesheet = res.payload.data.result;
+        this.dataSize = res.payload.data.result.dataSize;
+      });
   }
 
   ngOnInit() {
-    this.role = this.httpService.jsonDecoder(
-      localStorage.getItem("Authorization")
-    ).data.role[0];
+    this.role = jsonDecoder(localStorage.getItem("Authorization")).role;
     this.tabularData();
   }
 
   filterList(date: any) {
-    if(!date){
-        date = {year: 2000, month: 1, day: 1}
+    if (!date) {
+      date = { year: 2000, month: 1, day: 1 };
     }
+    date = new Date(`${date.year}-${date.month}-${date.day}`);
+
+    this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
+
     this.timesheetService
-      .getSpecificTimesheets(this.empObjId, date)
+      .getTimesheet({
+        page: this.page.toString(),
+        limit: this.limit.toString(),
+        criteria: JSON.stringify({ empObjId: this.empObjId,  startDate: {$gte: date} }),
+        columns: JSON.stringify({}),
+        sort: JSON.stringify(this.sortAccordingTo)
+      })
       .subscribe(res => {
-        this.response = res.payload.data.filteredTimesheets;
+        this.timesheet = res.payload.data.result;
       });
   }
 
   sortList() {
     this.isSortDecreasing = !this.isSortDecreasing;
-
+    this.sortAccordingTo = { startDate: this.isSortDecreasing ? 1 : -1 };
     this.tabularData();
   }
 
-  handlePaginationResult(type: string){
-    if(type === 'prev'){
-        if(this.page > 1){
-            this.page--;
-            this.tabularData();
-        }
+  handlePaginationResult(type: string) {
+    if (type === "prev") {
+      if (this.page > 1) {
+        this.page--;
+        this.tabularData();
+      }
     }
-    if(type === 'next'){
-        if(this.dataSize > this.page * this.limit){
-            this.page++;
-            this.tabularData();
-        }
+    if (type === "next") {
+      if (this.dataSize > this.page * this.limit) {
+        this.page++;
+        this.tabularData();
+      }
     }
   }
 }
