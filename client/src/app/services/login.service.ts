@@ -15,16 +15,16 @@ const LOGIN_API = `${config.HOST}/api/login`;
 @Injectable({
     providedIn: 'root'
 })
-export class LoginService{
+export class LoginService {
     private httpOptions = {
         headers: new HttpHeaders({
             "Content-Type": "application/json"
         })
     };
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient) { }
 
-    login(login: ILogin): Observable<IResponse>{
+    login(login: ILogin): Observable<IResponse> {
         return this.http.post<IResponse>(LOGIN_API, { ...login }, { ...this.httpOptions });
     }
 

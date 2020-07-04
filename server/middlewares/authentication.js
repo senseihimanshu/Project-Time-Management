@@ -3,9 +3,9 @@ const config = require("config");
 
 authenticator = (req, res, next) => {
   let token;
-  try{
-    token = req.header('Authorization').replace('Bearer ','');
-  }catch(error){
+  try {
+    token = req.header('Authorization').replace('Bearer ', '');
+  } catch (error) {
     return res.status(500).send({
       success: false,
       payload: {
@@ -24,6 +24,7 @@ authenticator = (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, config.get("jwtPrivateKey"));
+    console.log(payload, token);
     req.employee = payload;
     next();
   } catch (e) {

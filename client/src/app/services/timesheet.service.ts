@@ -11,7 +11,7 @@ const TIMESHEET_API: string = `${HOST}/api/timesheet`;
   providedIn: "root"
 })
 export class TimesheetService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -55,17 +55,17 @@ export class TimesheetService {
   clevelDataTimesheets(graphicaldata: any): Observable<any> {
     const params = new HttpParams().set("graphicaldata", graphicaldata);
     return this.http
-      .get("http://localhost:3000/timesheet/graphicaldata", {...this.httpOptions, params });
-  }   
+      .get("http://localhost:3000/timesheet/graphicaldata", { ...this.httpOptions, params });
+  }
 
-  getStaffTimesheets(paginationObj: IPagination): Observable<IResponse>{
+  getStaffTimesheets(paginationObj: IPagination): Observable<IResponse> {
     const params: HttpParams = new HttpParams().set("criteria", paginationObj.criteria).set("columns", paginationObj.columns).set("page", paginationObj.page).set("limit", paginationObj.limit).set("sort", paginationObj.sort);
 
     return this.http.get<IResponse>(`${TIMESHEET_API}/staff`, { params, ...this.httpOptions });
   }
 
-  updateStatus(status: Boolean, timesheetId: string): Observable<IResponse>{
+  updateStatus(status: Boolean, timesheetId: string): Observable<IResponse> {
 
-    return this.http.patch<IResponse>(`${TIMESHEET_API}/review/${timesheetId}`, {status}, { ...this.httpOptions });
+    return this.http.patch<IResponse>(`${TIMESHEET_API}/review/${timesheetId}`, { status }, { ...this.httpOptions });
   }
 }

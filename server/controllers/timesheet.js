@@ -2,7 +2,7 @@ const model = require("../models");
 const moment = require("moment");
 
 class Timesheet {
-  constructor() {}
+  constructor() { }
 
   async create(req, res) {
     //Expecting correct data type and values
@@ -295,7 +295,7 @@ class Timesheet {
     const { projectManager } = await model.project.get({ _id: projectObjId });
 
     const status = Boolean(req.body.status);
-
+    console.log(req.employee._id, projectManager, 'Console');
     if (req.employee._id == projectManager) {
       try {
         if (status) {

@@ -1,5 +1,5 @@
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDialogModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, MatToolbarModule, MatDialogRef } from "@angular/material";
@@ -40,6 +40,7 @@ import { TimesheetModal } from './timesheet/modal/modal.component';
 import { TimesheetWeekComponent } from './timesheet/timesheet-week/timesheet-week.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { HeaderInterceptorService } from './services/header-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -68,9 +69,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     TimesheetWeekComponent,
     ResetpasswordComponent,
     ConfirmEqualValidatorDirective
-   
+
   ],
-  imports: [PerfectScrollbarModule ,
+  imports: [PerfectScrollbarModule,
     NgbModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -86,9 +87,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     ClevelDashboardModule,
     ChartsModule,
     MatSelectModule,
-    
+
     //Third Party
-   
+
     MDBBootstrapModule.forRoot(),
     CheckboxModule,
     WavesModule,
@@ -110,9 +111,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     BrowserAnimationsModule,
     MatCheckboxModule
   ],
-  providers: [ServicesService, RoleGuardService,AuthGuard, NgbActiveModal],
-entryComponents: [TimesheetModal],
-  bootstrap: [AppComponent]
+  providers: [ServicesService, RoleGuardService, AuthGuard, NgbActiveModal, { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptorService, multi: true }],
+  entryComponents: [TimesheetModal],
+  bootstrap: [AppComponent],
   // entryComponents: [TimesheetComponent]
 })
-export class AppModule {}
+export class AppModule { }

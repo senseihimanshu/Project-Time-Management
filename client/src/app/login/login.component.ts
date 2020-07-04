@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private loginService: LoginService
-  ) {}
+  ) { }
 
   @ViewChild("email", { static: false }) email: ElementRef;
   @ViewChild("password", { static: false }) password: ElementRef;
@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
         }
       },
       err => {
+        console.log(err, 'Error');
         this.isMessage = true;
         swal.fire({
           icon: "warning",
